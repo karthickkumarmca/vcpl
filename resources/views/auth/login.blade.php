@@ -53,7 +53,7 @@
             <div class="login-logo">
                 <a href="/">
                     <span class="logo-lg">
-                        MRS Chains
+                        VCPL
                     </span>
                 </a>
             </div>

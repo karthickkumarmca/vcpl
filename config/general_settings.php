@@ -18,20 +18,20 @@ return [
         'ANDROID' => 1,
         'IOS' => 2,
     ],
-    'SEND_CONTACTUS_SUBJECT' => 'MRS Chains - Contact us Notifications',
-    'SEND_FORGOT_PASSWORD_OTP' => 'MRS Chains - Forgot Password OTP',
-    'SEND_RESET_PASSWORD' => 'MRS Chains - Reset Password',
+    'SEND_CONTACTUS_SUBJECT' => 'VCPL - Contact us Notifications',
+    'SEND_FORGOT_PASSWORD_OTP' => 'VCPL - Forgot Password OTP',
+    'SEND_RESET_PASSWORD' => 'VCPL - Reset Password',
 
-    'SEND_USER_LOGIN' => 'MRS Chains - User Logged In',
-    'SEND_USER_SIGNUP' => 'MRS Chains - User Registration',
+    'SEND_USER_LOGIN' => 'VCPL - User Logged In',
+    'SEND_USER_SIGNUP' => 'VCPL - User Registration',
 
-    'MAP_KEY' => 'AIzaSyB5DHd-sXcs0CVSOMdRoJjHRFFH2Wu6exI-xxx',
+    'MAP_KEY' => '',
 
     'error_maintainers' => [
         'dhineshmca.11@gmail.com'
     ],
 
-    'SEND_OTP_SUBJECT' => 'MRS Chains - Confirm Your Identity',
+    'SEND_OTP_SUBJECT' => 'VCPL - Confirm Your Identity',
 
     "site_captcha_key" => env('NOCAPTCHA_SITEKEY'),
 ];

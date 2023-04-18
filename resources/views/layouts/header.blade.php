@@ -15,7 +15,7 @@
 
     <a href="{{url('/')}}" class="logo" style="height: 50px;padding: 0 5px!important;background-color: #fff;">
         <!-- <img src="{{asset('images/logo.svg')}}" alt="Logo" style="max-width:100%;"> -->
-        <strong style="color: #007847;text-align: left;font-weight: 600;font-style: italic;font-family: Arial;">MRS Chains</strong>
+        <strong style="color: #007847;text-align: left;font-weight: 600;font-style: italic;font-family: Arial;">VCPL</strong>
     </a>
     <nav class="navbar navbar-expand-md fixed-top flex-md-nowrap p-0" style="background-color: #007847;">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
