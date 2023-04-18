@@ -1,0 +1,110 @@
+.qt_input {
+    border: none;
+    border-bottom: 1px solid;
+    text-align: center;
+}
+.date_span {
+    max-width: 100%;
+}
+.qt_box {
+    border: 1px solid !important;
+    border-top-color: black !important;
+}
+.qt_box_header {
+    border-bottom: 1px solid !important;
+    background: #f2f2f2 !important;
+    white-space: nowrap;
+}
+.error_border {
+    border: 1px solid #FF0000 !important;
+}
+.qt_input_group {
+    display: inline-grid;
+}
+.div_hidden_clone {
+    display: none;
+}
+.header_border_line {
+    border-top: 3px solid;
+}
+.signature_image {
+    height: 50px;
+    max-width: 100%;
+}
+
+.home_quarantine_order {
+    display: none;
+}
+/* #showImmigrant, #screening-form, #bubble_quarantine, #facility_quarantine, #tourist_quarantine,  
+#signature_bubble_quarantine, #signature_facility_quarantine, #signature_tourist_quarantine {
+    display: none;
+} */
+
+/* .profile span {
+    width: 25%;
+} */
+
+@media (max-width: 1024px){
+    .content-wrapper,
+    .main-footer {
+        margin-left: 0
+    }
+
+    .sidebar-open .content-wrapper,
+    .sidebar-open .main-footer {
+        -webkit-transform: translate(230px, 0);
+        -ms-transform: translate(230px, 0);
+        -o-transform: translate(230px, 0);
+        transform: translate(230px, 0)
+    }
+
+    .fixed .content-wrapper,
+    .fixed .right-side {
+        padding-top: 100px
+    }
+
+    .main-header .navbar-right {
+        float: none
+    }
+    .navbar-collapse .main-header .navbar-right {
+        margin: 7.5px -15px
+    }
+    .main-header .navbar-right>li {
+        color: inherit;
+        border: 0
+    }
+
+    .main-header {
+        position: relative
+    }
+    .main-header .logo,
+    .main-header .navbar {
+        width: 100%;
+        float: none
+    }
+    .main-header .navbar {
+        margin: 0
+    }
+    .main-header .navbar-custom-menu {
+        float: right
+    }
+
+    .main-sidebar {
+        padding-top: 100px
+    }
+
+    .main-sidebar {
+        -webkit-transform: translate(-230px, 0);
+        -ms-transform: translate(-230px, 0);
+        -o-transform: translate(-230px, 0);
+        transform: translate(-230px, 0)
+    }
+
+    .content-header {
+        margin: 2%;
+    }
+
+    .qt_order_header {
+        font-size: 1.8rem !important;
+    }
+}

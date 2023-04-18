@@ -1,0 +1,9 @@
+/* Form Validation */
+.validation_error {
+	font-weight: bold;
+	color: #e3342f;
+}
+
+.error_border {
+	border: 1px solid #FF0000;
+}
