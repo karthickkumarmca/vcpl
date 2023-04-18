@@ -1,0 +1,64 @@
+/**
+ - dataTable.css
+ - Custom Data Table
+ - Project: Texaco POS Admin Portal
+ **/
+ .pagination > li > a {
+ 	cursor: pointer;
+ }
+
+ .custom_datatable > thead > tr > th.sorting {
+ 	cursor: pointer;
+ }
+
+ .btn-search {
+ 	width: 100%;
+ }
+
+ .datatable_length {
+ 	text-align: right;
+ }
+
+ .datatable_label_length {
+ 	font-weight: normal;
+ 	text-align: right;
+ 	white-space: nowrap;
+ }
+
+ .custom_pagination {
+ 	float: right;
+ }
+
+ .custom_datatable_print_export {
+ 	margin-bottom: 5px;
+ }
+.checkboxes {
+    min-width: 17%;
+    padding-left: 1%;
+}
+.checkboxes input {
+    display: none;
+}
+.checkboxes input:checked ~ b::before {
+    font-family: FontAwesome;
+    content: "\f046";
+}
+.checkboxes > b::before {
+    font-family: FontAwesome;
+    content: "\f096";
+}
+.radio_buttons {
+    min-width: 17%;
+    padding-left: 1%;
+}
+.radio_buttons input {
+    display: none;
+}
+.radio_buttons input:checked ~ b::before {
+    font-family: FontAwesome;
+    content: "\f192";
+}
+.radio_buttons > b::before {
+    font-family: FontAwesome;
+    content: "\f1db";
+}

@@ -1,0 +1,245 @@
+@media (max-width: 1120px) {
+    .hero_area {
+        height: auto;
+    }
+
+    .slider_section {
+        padding: 50px 0;
+
+    }
+}
+
+@media (max-width: 992px) {
+    .custom_nav-container .nav_search-btn {
+        background-position: center;
+    }
+
+    .service_section .card-deck {
+
+        flex-direction: column;
+
+    }
+
+    .service_section .card-deck .card {
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .ai-logo{
+        max-width: 100%;
+        margin-top: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .main-info-socialist div a{
+        margin-top: 5px;
+    }
+
+    .mobile-input{
+        margin-left: 0rem;
+    }
+
+
+    .breathing-space {
+        padding: 0 1rem !important;
+    }
+
+    #statistics-section {
+        padding: 0;
+    }
+
+    .home-card{
+        margin:0 0 .5rem 0;
+    }
+
+
+    .about-card .card-body{
+        /*background-color:rgba(255,255,255,0)!important;*/
+        font-size: 1.5rem;
+    }
+
+
+
+    .q-and-a-card .card-body{
+        /*background-color:rgba(255,255,255,0)!important;*/
+        font-size: 1.5rem;
+    }
+
+    .q-and-a-card .card-body p{
+        /*background-color:rgba(255,255,255,0)!important;*/
+        /*font-size: .8rem;*/
+        /*margin-top: .5rem;*/
+    }
+
+
+    .q-and-a-card .card{
+        /*background-color:rgba(255,255,255,0)!important;*/
+        top: 40vh;
+    }
+
+
+
+
+    .how-to-protect-card .card-body{
+        /*background-color:rgba(255,255,255,0)!important;*/
+        font-size: 1.5rem;
+    }
+
+
+
+
+
+    .safety-measures-card .card-body {
+        /* background-color: rgba(0,0,0,.5); */
+        color: #fff;
+        font-size: 1.5rem;
+    }
+
+    .safety-measures-card .card-body h5{
+        /* background-color: rgba(0,0,0,.5); */
+        /*color: #fff;*/
+        font-size: 1.2rem;
+    }
+
+    .safety-measures-card .card{
+        /*background-color:rgba(255,255,255,0)!important;*/
+        top: 37vh;
+    }
+
+
+
+    .table-col table{
+        height: 28rem;
+    }
+
+
+    .about-corona-section{
+        padding: 7rem 0 !important;
+    }
+
+    .slider_img-box {
+
+        width: 85%;
+        margin: 65px auto;
+
+    }
+
+    .slider_section .custom_carousel-control {
+
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 105px;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .fruit_section .fruit_detail-box {
+
+        margin-bottom: 40px;
+        text-align: center;
+
+    }
+
+    .fruit_detail-box>div {
+
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .contact_section {
+        background-size: 105px;
+    }
+
+    .contact_section input {
+
+        background-color: transparent;
+
+    }
+
+    .info_section .col-md-3 {
+        text-align: center;
+    }
+
+    .info_section .col-md-3:not(:nth-last-child(1)) {
+
+        margin-bottom: 35px;
+    }
+
+    .tasty_section h2 {
+
+        font-size: 80px;
+    }
+
+    .dashboard-card {
+        padding-left: 2rem!important;
+    }
+
+    .dashboard-card .card{
+        margin: 1rem !important;
+        width: 18rem!important;
+    }
+
+    .dashboard-card .card img{
+        max-width: 25%;
+    }
+
+    .amber-logo img {
+        max-width: 35%;
+    }
+
+    .red-color {
+        color:red;
+        text-align: center;
+        max-width: 17%;
+    }
+
+    .img-max-width-5 {
+        max-width: 17% !important;
+    }
+
+    #map_drilldown_container {
+        min-width: 320px;
+        max-width: 800px;
+        height: auto;
+        margin: 1em auto;
+    }
+
+    .row_gender_analytics {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .slider_item-container .slider_item-detail {
+
+        text-align: center;
+
+    }
+
+    .slider_item-container .slider_item-detail .d-flex {
+
+        justify-content: center;
+
+    }
+}
+
+@media (max-width: 480px) {}
+
+@media (max-width: 400px) {}
+
+@media (max-width: 360px) {}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1170px;
+    }
+
+}
