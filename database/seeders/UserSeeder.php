@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Super admin',
             'phonenumber' => '9876543210',
             'email' => 'developer@example.com',
-            'password' => bcrypt('Qwerty22*'),
+            'password' => bcrypt('Qwerty23*'),
             'user_type' => 1,
             'status' => 1,
             'created_at' => date('Y-m-d H:i:s'),
