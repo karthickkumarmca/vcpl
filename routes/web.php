@@ -26,6 +26,6 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 require(__DIR__ . '/Admin/user.php');
 require(__DIR__ . '/Admin/customer.php');
-require(__DIR__ . '/Admin/hallmark.php');
+require(__DIR__ . '/Admin/units.php');
 require(__DIR__ . '/Admin/chain.php');
 require(__DIR__ . '/Admin/stock.php');

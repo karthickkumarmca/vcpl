@@ -4,8 +4,8 @@ return [
     //Super Admin
     'Super Admin' => [
         'dashboard' => 1,
-        'hallmark_management' =>1,
-        'hallmark_management_access' => [
+        'units_management' =>1,
+        'units_management_access' => [
             'create' => 1,
             'edit' => 1,
             'view' => 1,            

@@ -8,10 +8,10 @@
 				</a>
 			</li>
 			@endif
-			@if(config("roles.".Session::get('user_role').".hallmark_management"))
-			<li class="{{ Request::is('hallmark-list') ? 'active' : '' }} {{ Request::is('create-hallmark') ? 'active' : '' }} {{ Request::is('edit-hallmark/*') ? 'active' : '' }} {{ Request::is('view-hallmark/*') ? 'active' : '' }}">
-				<a href="{!! url(route('hallmark-list')) !!}">
-					<i class="fa fa-calendar"></i> <span>Hallmark Management</span>
+			@if(config("roles.".Session::get('user_role').".units_management"))
+			<li class="{{ Request::is('units-list') ? 'active' : '' }} {{ Request::is('create-units') ? 'active' : '' }} {{ Request::is('edit-hallmark/*') ? 'active' : '' }} {{ Request::is('view-hallmark/*') ? 'active' : '' }}">
+				<a href="{!! url(route('units-list')) !!}">
+					<i class="fa fa-calendar"></i> <span>Units Management</span>
 				</a>
 			</li>
 			@endif
