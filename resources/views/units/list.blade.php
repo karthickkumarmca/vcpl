@@ -21,7 +21,7 @@
                             @endisset
                         </div>
                     </div>
-                    <h3 class="box-title">Unitss List</h3>
+                    <h3 class="box-title">Units List</h3>
                 </div>
                 <div class="box-body">
                     <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
@@ -38,17 +38,17 @@
          * DataTable Properties
          */
          var table_properties = {
-            'name': 'Unitss-list',
+            'name': 'units-list',
             'columns': [
             {
-                "name" : "rate",
-                "label": "Rate",
+                "name" : "unit_name",
+                "label": "Unit Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "rate"
+                    "field" : "unit_name"
                 },
                 "search": {
                     "display" : 1,
@@ -92,8 +92,8 @@
                 }
             },
             ],
-            'api_url': 'Units-list',
-            'data_key': 'Unitss',
+            'api_url': 'units-list',
+            'data_key': 'units',
             'daterange_picker': {
                 'display' : false,
                 'default_days': 29

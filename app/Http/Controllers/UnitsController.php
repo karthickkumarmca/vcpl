@@ -36,11 +36,11 @@ class UnitsController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'rate'      => 'units.rate',
+                    'unit_name'      => 'units.unit_name',
                     'status'    => 'units.status',
                 ];
                 $sortField   = [
-                    'rate'     => 'units.rate',
+                    'unit_name'     => 'units.unit_name',
                     'status'  => 'units.status',
                     'date_created' => 'units.created_at'
                 ];

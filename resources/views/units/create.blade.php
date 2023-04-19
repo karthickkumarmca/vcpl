@@ -26,7 +26,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Rate <span class="text-danger"> *</span></label>
-								<input type="number" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Units" name="unit_name" value="{{old('unit_name')}}" data-rule="admin" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Units" name="unit_name" value="{{old('unit_name')}}" data-rule="admin" minlength="3" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('unit_name'))
 								<div class="error">{{ $errors->first('unit_name') }}</div>

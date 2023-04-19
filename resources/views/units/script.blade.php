@@ -5,9 +5,7 @@
 	* @param object rule
 	* @return object validation
 	*/
-	jQuery.validator.addMethod("dollarscent", function(value,element) {
-		return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/i.test(value);
-	}, "You must include Two Decimal Places");
+	
 	function gethallmarkValidationRules(rule) {
 		return validation = {
 			"admin" : {

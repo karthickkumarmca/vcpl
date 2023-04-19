@@ -31,13 +31,13 @@ class Units extends Model
     {
         return encrypt(env('APP_KEY') . $value);
     }
-    public static function getunitss($page, $offset, $sort, $search_filter)
+    public static function getunits($page, $offset, $sort, $search_filter)
     {
         $fields = [
             'units.id',
             'units.uuid',
             'units.id AS encryptid',
-            'units.rate',
+            'units.unit_name',
             'units.status as status_id',
             DB::raw('CASE WHEN units.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(units.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
