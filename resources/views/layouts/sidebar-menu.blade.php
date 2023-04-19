@@ -22,7 +22,7 @@
 				</a>
 			</li>
 			@endif
-			@if(config("roles.".Session::get('user_role').".user_management"))
+			@if(config("roles.".Session::get('user_role').".user_managements"))
 			<li class="{{ Request::is('user-list') ? 'active' : '' }} {{ Request::is('create-user') ? 'active' : '' }} {{ Request::is('edit-user/*') ? 'active' : '' }} {{ Request::is('view-user/*') ? 'active' : '' }} {{ Request::is('change-password/*') ? 'active' : '' }}">
 				<a href="{!! url(route('user-list')) !!}">
 					<i class="fa fa-user"></i> <span>Users </span>
