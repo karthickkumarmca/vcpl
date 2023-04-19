@@ -15,10 +15,10 @@
 				</a>
 			</li>
 			@endif
-			@if(config("roles.".Session::get('user_role').".chain_management"))
-			<li class="{{ Request::is('chain-list') ? 'active' : '' }} {{ Request::is('create-chain') ? 'active' : '' }} {{ Request::is('edit-chain/*') ? 'active' : '' }} {{ Request::is('view-chain/*') ? 'active' : '' }}">
-				<a href="{!! url(route('chain-list')) !!}">
-					<i class="fa fa-calendar"></i> <span>Chain Management</span>
+			@if(config("roles.".Session::get('user_role').".categories_management"))
+			<li class="{{ Request::is('categories-list') ? 'active' : '' }} {{ Request::is('create-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
+				<a href="{!! url(route('categories-list')) !!}">
+					<i class="fa fa-calendar"></i> <span>Categories Management</span>
 				</a>
 			</li>
 			@endif

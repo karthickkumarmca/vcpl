@@ -11,8 +11,8 @@ return [
             'view' => 1,            
             'change_status' => 1,
         ], 
-        'chain_management' =>1,
-        'chain_management_access' => [
+        'categories_management' =>1,
+        'categories_management_access' => [
             'create' => 1,
             'edit' => 1,
             'view' => 1,            
