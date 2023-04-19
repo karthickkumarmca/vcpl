@@ -17,7 +17,7 @@
 					<h3 class="box-title">Units Details</h3>
 				</div>
 				<div class="box-body">
-					@if($Units->status)
+					@if($units->status)
 					@php
 					$status = "Active";
 					$status_bg="bg-green";
@@ -32,9 +32,9 @@
 						<table class="table table-bordered">
 							<tr>
 								<th class="grey_header">
-									<label>Rate</label>
+									<label>Unit Name</label>
 								</th>
-								<td>{!! $Units->rate !!}</td>
+								<td>{!! $units->unit_name !!}</td>
 							</tr>
 							<tr>
 								<th class="grey_header">
@@ -42,17 +42,12 @@
 								</th>
 								<td><span class="badge {!! $status_bg !!}"> {!! $status !!}</span></td>
 							</tr>
-							{{--<tr>
-								<th class="grey_header">
-									<label>Created By</label>
-								</th>
-								<td>{!! $Units->CreatedBy['name'] !!}</td>
-							</tr>--}}
+							
 							<tr>
 								<th class="grey_header">
 									<label>Created At</label>
 								</th>
-								<td>{!! $Units->created_at !!}</td>
+								<td>{!! $units->created_at !!}</td>
 							</tr>
 						</table>
 					</div>

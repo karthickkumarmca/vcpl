@@ -76,21 +76,6 @@
                     'values'  : {!! json_encode($statuses) !!}
                 }
             },
-            {
-                "name" : "date_created",
-                "label": "Date Created",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "date_created"
-                },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
-                }
-            },
             ],
             'api_url': 'units-list',
             'data_key': 'units',
@@ -106,7 +91,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'Edit',
                         "url"       : function(data){
-                            return "edit-Units/"+data['uuid'];
+                            return "edit-units/"+data['uuid'];
                         },
                         "icon"      : "fa fa-pencil",
                         "method"    : "get",
@@ -123,7 +108,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'View',
                         "url"       : function(data){
-                            return "view-Units/"+data['uuid'];
+                            return "view-units/"+data['uuid'];
                         },
                         "icon"      : "fa fa-eye",
                         "method"    : "get",
@@ -140,7 +125,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "Units-update-status/"+data['uuid'];
+                            return "units-update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-check",
                         "method"    : "get",
@@ -155,14 +140,14 @@
                             'display' : true,
                             'title'   : "Are you sure?"
                         },
-                        "function_call" : "changeUnitsStatus"
+                        "function_call" : "changeunitsStatus"
                     },
                     {
                         "name"      : "In-Active",
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "Units-update-status/"+data['uuid'];
+                            return "units-update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-close",
                         "method"    : "get",
@@ -177,14 +162,14 @@
                             'display' : true,
                             'title'   : "Are you sure?"
                         },
-                        "function_call" : "changeUnitsStatus"
+                        "function_call" : "changeunitsStatus"
                     },
                     {
                         "name"      : "Delete",
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Delete',
                         "url"       : function(data){
-                            return "Units/delete/"+data['uuid'];
+                            return "units/delete/"+data['uuid'];
                         },
                         "icon"      : "fa fa-trash",
                         "method"    : "get",
