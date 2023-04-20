@@ -99,50 +99,7 @@
     </div>
     <script src="{{ URL('js/jquery.min.js') }}"></script>
     <script src="{{ URL('js/bootstrap.min.js') }}"></script>
-    <!-- <script src="{{asset('js/recaptcha.js')}}" async defer></script> -->
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-    <script type="text/javascript">
-        var siteCaptchaKey = "{{config('general_settings.site_captcha_key')}}";
-        var onloadCallback = function() {
-            grecaptcha.render('capcha-element', {
-                'sitekey': siteCaptchaKey
-            });
-        };
-    </script>
-    <script>
-        function scaleCaptcha() {
-            // Width of the reCAPTCHA element, in pixels
-            var reCaptchaWidth = 304;
-            var reCaptchaheight = 78;
-
-            // Get the containing element's width
-            var containerWidth = $('#recaptcha-box').width();
-
-            if (reCaptchaWidth != containerWidth) {
-                // Calculate the scale
-                var captchaScale = containerWidth / reCaptchaWidth;
-                // Apply the transformation
-                $('#capcha-element').css({
-                    'transform': 'scale(' + captchaScale + ')'
-                });
-                $('#capcha-element').css({
-                    '-webkit-transform': 'scale(' + captchaScale + ')'
-                });
-                $('#capcha-element').css({
-                    'transform-origin': '0 0'
-                });
-                $('#capcha-element').css({
-                    '-webkit-transform-origin': '0 0'
-                });
-
-                $('#recaptcha-box').height(reCaptchaheight * captchaScale);
-            }
-        }
-        $(window).resize(function() {
-            scaleCaptcha();
-        });
-        scaleCaptcha();
-    </script>
+   
 </body>
 
 </html>

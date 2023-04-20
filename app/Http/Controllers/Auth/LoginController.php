@@ -101,9 +101,7 @@ class LoginController extends Controller
             $this->username() => 'required|string',
             'password' => 'required|string',
         );
-        if (App::environment() != "local") {
-            $validation['g-recaptcha-response'] = 'required|captcha';
-        }
+       
         $request->validate($validation);
     }
 }
