@@ -28,4 +28,5 @@ require(__DIR__ . '/Admin/user.php');
 require(__DIR__ . '/Admin/customer.php');
 require(__DIR__ . '/Admin/units.php');
 require(__DIR__ . '/Admin/categories.php');
+require(__DIR__ . '/Admin/sub_categories.php');
 require(__DIR__ . '/Admin/stock.php');

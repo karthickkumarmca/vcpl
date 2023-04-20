@@ -22,6 +22,15 @@
 				</a>
 			</li>
 			@endif
+
+			@if(config("roles.".Session::get('user_role').".sub_categories_management"))
+			<li class="{{ Request::is('sub-categories-list') ? 'active' : '' }} {{ Request::is('create-sub-categories') ? 'active' : '' }} {{ Request::is('edit-sub-categories/*') ? 'active' : '' }} {{ Request::is('view-sub-categories/*') ? 'active' : '' }}">
+				<a href="{!! url(route('sub-categories-list')) !!}">
+					<i class="fa fa-calendar"></i> <span>Sub Categories Management</span>
+				</a>
+			</li>
+			@endif
+
 			@if(config("roles.".Session::get('user_role').".user_management"))
 			<li class="{{ Request::is('user-list') ? 'active' : '' }} {{ Request::is('create-user') ? 'active' : '' }} {{ Request::is('edit-user/*') ? 'active' : '' }} {{ Request::is('view-user/*') ? 'active' : '' }} {{ Request::is('change-password/*') ? 'active' : '' }}">
 				<a href="{!! url(route('user-list')) !!}">
