@@ -53,7 +53,7 @@
             <div class="login-logo">
                 <a href="/">
                     <span class="logo-lg">
-                        VCPL
+                        <img src="images/logonew.png">
                     </span>
                 </a>
             </div>
