@@ -136,9 +136,6 @@ class UnitsController extends Controller
                     'required','min:2','max:15'
                 ]
             ];
-            if (App::environment() != "local") {
-                $fieldValidation['g-recaptcha-response'] = ['required','captcha'];
-            }
 
             $errorMessages    = [
                 'unit_name.required'             => "Please enter the name",

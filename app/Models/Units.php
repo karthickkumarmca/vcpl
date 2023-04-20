@@ -89,7 +89,7 @@ class Units extends Model
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
-        if ($request->has('id')) {
+        if ($request->has('units_id')) {
             $units = self::where(['uuid' => $request->units_id])->first();
             $units->updated_by = Auth::id();
             if(isset($request->created_at))
@@ -100,10 +100,10 @@ class Units extends Model
             $units = new self();
             $units->created_by = Auth::id();
             $units->created_at = date('Y-m-d H:i:s');
+            $units->uuid = \Str::uuid()->toString();
+            $units->status = 1;
         }
-        $units->uuid = \Str::uuid()->toString();
         $units->unit_name = $request->unit_name;
-        $units->status = 1;
         $units->save();
 
         $response['status_code'] = '200';

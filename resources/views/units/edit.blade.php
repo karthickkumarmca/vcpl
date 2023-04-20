@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Unit Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate number_restrict" placeholder="Enter Unit" name="unit_name" value="{{old('unit_name') ? old('unit_name') : $units->unit_name}}" data-rule="admin" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Unit" name="unit_name" value="{{old('unit_name') ? old('unit_name') : $units->unit_name}}" data-rule="admin" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('unit_name'))
 								<div class="error">{{ $errors->first('unit_name') }}</div>

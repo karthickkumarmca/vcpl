@@ -89,7 +89,7 @@ class Categories extends Model
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
-        if ($request->has('id')) {
+        if ($request->has('categories_id')) {
             $categories = self::where(['uuid' => $request->categories_id])->first();
             $categories->updated_by = Auth::id();
             if(isset($request->created_at))
@@ -100,10 +100,12 @@ class Categories extends Model
             $categories = new self();
             $categories->created_by = Auth::id();
             $categories->created_at = date('Y-m-d H:i:s');
+            $categories->uuid = \Str::uuid()->toString();
+            $categories->status = 1;
         }
-        $categories->uuid = \Str::uuid()->toString();
+       
         $categories->category_name = $request->category_name;
-        $categories->status = 1;
+       
         $categories->save();
 
         $response['status_code'] = '200';

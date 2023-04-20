@@ -268,7 +268,7 @@
          * change Units status
          * @param Object current object
          */
-         function changeUnitsStatus(current) {
+         function changeunitsStatus(current) {
             var is_confirm = $(current).data('is_confirm');
             var method = $(current).data('method');
             var url = $(current).data('url');
