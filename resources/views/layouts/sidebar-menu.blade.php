@@ -52,6 +52,13 @@
 				</a>
 			</li> -->
 			@endif
+			@if(config("roles.".Session::get('user_role').".roles_management"))
+			<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">
+				<a href="{!! url(route('roles-list')) !!}">
+					<i class="fa fa-calendar"></i> <span>Roles Management</span>
+				</a>
+			</li>
+			@endif
 			<li>
 				<a title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();
 				swal('Are you sure want to logout?','','',{
@@ -72,6 +79,7 @@
 					@csrf
 				</form>
 			</li>
+			
 		</ul>
 	</section>
 </aside>
