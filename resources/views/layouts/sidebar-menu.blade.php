@@ -52,13 +52,28 @@
 				</a>
 			</li> -->
 			@endif
-			@if(config("roles.".Session::get('user_role').".roles_management"))
-			<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">
-				<a href="{!! url(route('roles-list')) !!}">
-					<i class="fa fa-calendar"></i> <span>Roles Management</span>
+        	<li class="active treeview-nav treeview menu-open">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>Master Settings</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
+				<ul class="treeview-menu">
+				    @if(config("roles.".Session::get('user_role').".roles_management"))
+						<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">
+						<a href="{!! url(route('roles-list')) !!}">
+							<i class="fa fa-circle-o"></i> <span>Roles Management</span>
+						</a>
+						</li>
+					@endif
+	          		@if(config("roles.".Session::get('user_role').".clients_management"))
+						<li class="{{ Request::is('clients-list') ? 'active' : '' }} {{ Request::is('create-clients') ? 'active' : '' }} {{ Request::is('edit-clients/*') ? 'active' : '' }} {{ Request::is('view-clients/*') ? 'active' : '' }}">
+						<a href="{!! url(route('clients-list')) !!}">
+							<i class="fa fa-circle-o"></i> <span>Clients Management</span>
+						</a>
+					</li>
+					@endif
+			    </ul>
 			</li>
-			@endif
 			<li>
 				<a title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();
 				swal('Are you sure want to logout?','','',{

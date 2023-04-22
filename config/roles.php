@@ -56,7 +56,14 @@ return [
             'edit' => 1,
             'view' => 1,            
             'change_status' => 1,
-        ], 
+        ],
+        'clients_management' =>1,
+        'clients_management_access' => [
+            'create' => 1,
+            'edit' => 1,
+            'view' => 1,            
+            'change_status' => 1,
+        ],
         'change_profile_password' => 1,
     ],
 ];
