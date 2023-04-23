@@ -10,25 +10,25 @@
 			@endif
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>Masters</span>
+				    <span>Masters</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>STAFF</span>
+				    <span>STAFF</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>STAFF GROUP</span>
+							 <span>STAFF GROUP</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>STAFF DETAILS </span>
+							<span>STAFF DETAILS </span>
 						</a>
 					</li>
 
@@ -38,29 +38,29 @@
 			</li>
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>SITE </span>
+				     <span>SITE </span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>SITE INFO</span>
+							<span>SITE INFO</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>CLIENT  INFO </span>
+							<span>CLIENT  INFO </span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>ARCHITECT INFO </span>
+							<span>ARCHITECT INFO </span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>SUPPLIER INFO</span>
+							<span>SUPPLIER INFO</span>
 						</a>
 					</li>
 
@@ -72,7 +72,7 @@
 			@if(config("roles.".Session::get('user_role').".units_management"))
 			<li class="{{ Request::is('units-list') ? 'active' : '' }} {{ Request::is('create-units') ? 'active' : '' }} {{ Request::is('edit-hallmark/*') ? 'active' : '' }} {{ Request::is('view-hallmark/*') ? 'active' : '' }}">
 				<a href="{!! url(route('units-list')) !!}">
-					<i class="fa fa-calendar"></i> <span>Units Management</span>
+					<span>Units Management</span>
 				</a>
 			</li>
 			@endif
@@ -82,14 +82,14 @@
 			@if(config("roles.".Session::get('user_role').".user_management"))
 			<li class="{{ Request::is('user-list') ? 'active' : '' }} {{ Request::is('create-user') ? 'active' : '' }} {{ Request::is('edit-user/*') ? 'active' : '' }} {{ Request::is('view-user/*') ? 'active' : '' }} {{ Request::is('change-password/*') ? 'active' : '' }}">
 				<a href="{!! url(route('user-list')) !!}">
-					<i class="fa fa-user"></i> <span>Users </span>
+					<span>Users </span>
 				</a>
 			</li>
 			@endif
 			@if(config("roles.".Session::get('user_role').".customer_management"))
 			<li class="{{ Request::is('customer-list') ? 'active' : '' }} {{ Request::is('create-customer') ? 'active' : '' }} {{ Request::is('edit-customer/*') ? 'active' : '' }} {{ Request::is('view-customer/*') ? 'active' : '' }}">
 				<a href="{!! url(route('customer-list')) !!}">
-					<i class="fa fa-users"></i> <span>Customers </span>
+					<span>Customers </span>
 				</a>
 			</li>
 			@endif
@@ -102,7 +102,7 @@
 			@endif
         	<li class="treeview-nav treeview">
 				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>Master Settings</span>
+				    <span>Master Settings</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
@@ -110,14 +110,14 @@
 				    @if(config("roles.".Session::get('user_role').".roles_management"))
 						<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">
 						<a href="{!! url(route('roles-list')) !!}">
-							<i class="fa fa-circle-o"></i> <span>Roles Management</span>
+							<span>Roles Management</span>
 						</a>
 						</li>
 					@endif
 	          		@if(config("roles.".Session::get('user_role').".clients_management"))
 						<li class="{{ Request::is('clients-list') ? 'active' : '' }} {{ Request::is('create-clients') ? 'active' : '' }} {{ Request::is('edit-clients/*') ? 'active' : '' }} {{ Request::is('view-clients/*') ? 'active' : '' }}">
 						<a href="{!! url(route('clients-list')) !!}">
-							<i class="fa fa-circle-o"></i> <span>Clients Management</span>
+							<span>Clients Management</span>
 						</a>
 					</li>
 					@endif
@@ -128,14 +128,14 @@
 			</li>
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>Product Settings</span>
+				    <span>Product Settings</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 					@if(config("roles.".Session::get('user_role').".categories_management"))
 					<li class="{{ Request::is('categories-list') ? 'active' : '' }} {{ Request::is('create-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('categories-list')) !!}">
-							<i class="fa fa-calendar"></i> <span>Categories</span>
+							<span>Categories</span>
 						</a>
 					</li>
 					@endif
@@ -143,19 +143,19 @@
 					@if(config("roles.".Session::get('user_role').".sub_categories_management"))
 					<li class="{{ Request::is('sub-categories-list') ? 'active' : '' }} {{ Request::is('create-sub-categories') ? 'active' : '' }} {{ Request::is('edit-sub-categories/*') ? 'active' : '' }} {{ Request::is('view-sub-categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('sub-categories-list')) !!}">
-							<i class="fa fa-calendar"></i> <span>Sub Categories</span>
+							<span>Sub Categories</span>
 						</a>
 					</li>
 					@endif
 
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>Product details</span>
+							<span>Product details</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>rental Rate/ Name change</span>
+							<span>rental Rate/ Name change</span>
 						</a>
 					</li>
 
@@ -169,34 +169,34 @@
 
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>Materials</span>
+				    <span>Materials</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>CENTERING MATERIALS</span>
+							 <span>CENTERING MATERIALS</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>LORRY MATERIALS</span>
+							 <span>LORRY MATERIALS</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>SHOP MATERIALS</span>
+							 <span>SHOP MATERIALS</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>TOOLS AND PLANTS</span>
+							 <span>TOOLS AND PLANTS</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>VEHICLE</span>
+							 <span>VEHICLE</span>
 						</a>
 					</li>
 
@@ -207,34 +207,34 @@
 
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>PROPERTY</span>
+				    <span>PROPERTY</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>OWNER SHIP</span>
+							 <span>OWNER SHIP</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>PROPERTY CATEGORY</span>
+							 <span>PROPERTY CATEGORY</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>PROPERTY NAME </span>
+							 <span>PROPERTY NAME </span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>TOOLS AND PLANTS</span>
+							 <span>TOOLS AND PLANTS</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>VEHICLE</span>
+							 <span>VEHICLE</span>
 						</a>
 					</li>
 
