@@ -13,7 +13,7 @@
         }
     </style>
 
-    <a href="{{url('/')}}" class="logo" style="height: 50px;padding: 0 5px!important;background-color: #fff;">
+    <a href="{{url('/')}}" class="logo" style="height: 55px;padding: 0 5px!important;background-color: #fff;">
         <img src="{{asset('images/logonew.png')}}" alt="Logo" style="max-width:100%;">
        
     </a>
@@ -25,21 +25,6 @@
             <div class="navbar-nav mr-auto">
             </div>
             <ul class="navbar-nav mt-2 mt-md-0 nav">
-                <!-- Notifications -->
-                <!-- <li class="dropdown notifications-menu">
-                    <a href="#" class="dropdown-toggle header-dropdown-toggle top" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-danger" id="notification-count">0</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">Notifications</li>
-                        <li>
-                            <ul class="menu" id="notification-list">
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="{{ url('quarantine-alerts') }}">View all</a></li>
-                    </ul>
-                </li> -->
 
                 <li class="user user-menu">
                     <a href="{{ url('change-user-password') }}">Change Password</a>
