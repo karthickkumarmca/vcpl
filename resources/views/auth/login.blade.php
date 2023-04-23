@@ -81,7 +81,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-block btn-flat" style="background-color: #68bb59;">
+                            <button type="submit" class="btn btn-block btn-flat" style="background-color: #a0ba0a;">
                                 <strong>Sign In</strong>
                             </button>
                         </div>
