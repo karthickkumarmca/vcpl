@@ -8,7 +8,12 @@
 				</a>
 			</li>
 			@endif
-			
+			<li class="treeview-nav treeview">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>Masters</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
 			<li class="treeview-nav treeview">
 				<a href="#">
 				    <i class="fa fa-universal-access"></i> <span>STAFF</span>
@@ -72,7 +77,7 @@
 			</li>
 			@endif
 
-			
+
 
 			@if(config("roles.".Session::get('user_role').".user_management"))
 			<li class="{{ Request::is('user-list') ? 'active' : '' }} {{ Request::is('create-user') ? 'active' : '' }} {{ Request::is('edit-user/*') ? 'active' : '' }} {{ Request::is('view-user/*') ? 'active' : '' }} {{ Request::is('change-password/*') ? 'active' : '' }}">
@@ -154,33 +159,13 @@
 						</a>
 					</li>
 
-			    </ul>
-
-
-			</li>
-
-			<li class="treeview-nav treeview">
-				<a href="#">
-				    <i class="fa fa-universal-access"></i> <span>Labour</span>
-				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-				</a>
-				<ul class="treeview-menu">
-
-					<li class="">
-						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>Categories</span>
-						</a>
-					</li>
-					<li class="">
-						<a href="javascript::">
-							<i class="fa fa-calendar"></i> <span>daily wages</span>
-						</a>
-					</li>
 
 			    </ul>
 
 
 			</li>
+
+			
 
 			<li class="treeview-nav treeview">
 				<a href="#">
@@ -254,6 +239,10 @@
 					</li>
 
 			    </ul>
+
+
+			</li>
+			 </ul>
 
 
 			</li>
