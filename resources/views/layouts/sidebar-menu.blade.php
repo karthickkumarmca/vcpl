@@ -8,6 +8,62 @@
 				</a>
 			</li>
 			@endif
+			
+			<li class="treeview-nav treeview">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>STAFF</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>STAFF GROUP</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>STAFF DETAILS </span>
+						</a>
+					</li>
+
+			    </ul>
+
+
+			</li>
+			<li class="treeview-nav treeview">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>SITE </span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>SITE INFO</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>CLIENT  INFO </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>ARCHITECT INFO </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>SUPPLIER INFO</span>
+						</a>
+					</li>
+
+			    </ul>
+
+
+			</li>
+
 			@if(config("roles.".Session::get('user_role').".units_management"))
 			<li class="{{ Request::is('units-list') ? 'active' : '' }} {{ Request::is('create-units') ? 'active' : '' }} {{ Request::is('edit-hallmark/*') ? 'active' : '' }} {{ Request::is('view-hallmark/*') ? 'active' : '' }}">
 				<a href="{!! url(route('units-list')) !!}">
@@ -15,21 +71,8 @@
 				</a>
 			</li>
 			@endif
-			@if(config("roles.".Session::get('user_role').".categories_management"))
-			<li class="{{ Request::is('categories-list') ? 'active' : '' }} {{ Request::is('create-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
-				<a href="{!! url(route('categories-list')) !!}">
-					<i class="fa fa-calendar"></i> <span>Categories Management</span>
-				</a>
-			</li>
-			@endif
 
-			@if(config("roles.".Session::get('user_role').".sub_categories_management"))
-			<li class="{{ Request::is('sub-categories-list') ? 'active' : '' }} {{ Request::is('create-sub-categories') ? 'active' : '' }} {{ Request::is('edit-sub-categories/*') ? 'active' : '' }} {{ Request::is('view-sub-categories/*') ? 'active' : '' }}">
-				<a href="{!! url(route('sub-categories-list')) !!}">
-					<i class="fa fa-calendar"></i> <span>Sub Categories Management</span>
-				</a>
-			</li>
-			@endif
+			
 
 			@if(config("roles.".Session::get('user_role').".user_management"))
 			<li class="{{ Request::is('user-list') ? 'active' : '' }} {{ Request::is('create-user') ? 'active' : '' }} {{ Request::is('edit-user/*') ? 'active' : '' }} {{ Request::is('view-user/*') ? 'active' : '' }} {{ Request::is('change-password/*') ? 'active' : '' }}">
@@ -52,12 +95,13 @@
 				</a>
 			</li> -->
 			@endif
-        	<li class="active treeview-nav treeview menu-open">
+        	<li class="treeview-nav treeview">
 				<a href="#">
 				    <i class="fa fa-universal-access"></i> <span>Master Settings</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
+					
 				    @if(config("roles.".Session::get('user_role').".roles_management"))
 						<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">
 						<a href="{!! url(route('roles-list')) !!}">
@@ -72,7 +116,146 @@
 						</a>
 					</li>
 					@endif
+
 			    </ul>
+
+
+			</li>
+			<li class="treeview-nav treeview">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>Product Settings</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+					@if(config("roles.".Session::get('user_role').".categories_management"))
+					<li class="{{ Request::is('categories-list') ? 'active' : '' }} {{ Request::is('create-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
+						<a href="{!! url(route('categories-list')) !!}">
+							<i class="fa fa-calendar"></i> <span>Categories</span>
+						</a>
+					</li>
+					@endif
+
+					@if(config("roles.".Session::get('user_role').".sub_categories_management"))
+					<li class="{{ Request::is('sub-categories-list') ? 'active' : '' }} {{ Request::is('create-sub-categories') ? 'active' : '' }} {{ Request::is('edit-sub-categories/*') ? 'active' : '' }} {{ Request::is('view-sub-categories/*') ? 'active' : '' }}">
+						<a href="{!! url(route('sub-categories-list')) !!}">
+							<i class="fa fa-calendar"></i> <span>Sub Categories</span>
+						</a>
+					</li>
+					@endif
+
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>Product details</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>rental Rate/ Name change</span>
+						</a>
+					</li>
+
+			    </ul>
+
+
+			</li>
+
+			<li class="treeview-nav treeview">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>Labour</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>Categories</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>daily wages</span>
+						</a>
+					</li>
+
+			    </ul>
+
+
+			</li>
+
+			<li class="treeview-nav treeview">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>Materials</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>CENTERING MATERIALS</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>LORRY MATERIALS</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>SHOP MATERIALS</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>TOOLS AND PLANTS</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>VEHICLE</span>
+						</a>
+					</li>
+
+			    </ul>
+
+
+			</li>
+
+			<li class="treeview-nav treeview">
+				<a href="#">
+				    <i class="fa fa-universal-access"></i> <span>PROPERTY</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>OWNER SHIP</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>PROPERTY CATEGORY</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>PROPERTY NAME </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>TOOLS AND PLANTS</span>
+						</a>
+					</li>
+					<li class="">
+						<a href="javascript::">
+							<i class="fa fa-calendar"></i> <span>VEHICLE</span>
+						</a>
+					</li>
+
+			    </ul>
+
+
 			</li>
 			<li>
 				<a title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,11 @@ require(__DIR__ . '/Admin/roles.php');
 require(__DIR__ . '/Admin/categories.php');
 require(__DIR__ . '/Admin/sub_categories.php');
 require(__DIR__ . '/Admin/stock.php');
+
+
+Route::get('/clear-cache', function () {
+   Artisan::call('cache:clear');
+   Artisan::call('route:clear');
+
+   return "Cache cleared successfully";
+});
