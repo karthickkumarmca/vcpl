@@ -16,7 +16,7 @@
             overflow-y: hidden;
             background-repeat: no-repeat;
             background-size: cover;
-            background:#007847;
+            background:#0078bf;
         }
 
         .login-box {

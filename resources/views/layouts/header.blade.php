@@ -1,11 +1,11 @@
 <header class="main-header">
     <style>
         .skin-red .sidebar-menu>li.active>a {
-            border-left-color: #007847;
+            border-left-color: #0078bf;
         }
 
         .sidebar-menu>li>a:hover {
-            background-color: #007847 !important;
+            background-color: #0078bf !important;
         }
 
         .skin-red .main-header .navbar .sidebar-toggle:hover {
@@ -17,7 +17,7 @@
         <img src="{{asset('images/logonew.png')}}" alt="Logo" style="max-width:100%;">
        
     </a>
-    <nav class="navbar navbar-expand-md fixed-top flex-md-nowrap p-0" style="background-color: #007847;">
+    <nav class="navbar navbar-expand-md fixed-top flex-md-nowrap p-0" style="background-color: #0078bf;">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
