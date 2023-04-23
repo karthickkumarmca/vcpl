@@ -10,7 +10,7 @@
 			@endif
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <span>Masters</span>
+				    <span>MASTERS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
@@ -72,7 +72,7 @@
 			@if(config("roles.".Session::get('user_role').".units_management"))
 			<li class="{{ Request::is('units-list') ? 'active' : '' }} {{ Request::is('create-units') ? 'active' : '' }} {{ Request::is('edit-hallmark/*') ? 'active' : '' }} {{ Request::is('view-hallmark/*') ? 'active' : '' }}">
 				<a href="{!! url(route('units-list')) !!}">
-					<span>Units Management</span>
+					<span>UNITS MANAGEMENT</span>
 				</a>
 			</li>
 			@endif
@@ -82,14 +82,14 @@
 			@if(config("roles.".Session::get('user_role').".user_management"))
 			<li class="{{ Request::is('user-list') ? 'active' : '' }} {{ Request::is('create-user') ? 'active' : '' }} {{ Request::is('edit-user/*') ? 'active' : '' }} {{ Request::is('view-user/*') ? 'active' : '' }} {{ Request::is('change-password/*') ? 'active' : '' }}">
 				<a href="{!! url(route('user-list')) !!}">
-					<span>Users </span>
+					<span>USERS </span>
 				</a>
 			</li>
 			@endif
 			@if(config("roles.".Session::get('user_role').".customer_management"))
 			<li class="{{ Request::is('customer-list') ? 'active' : '' }} {{ Request::is('create-customer') ? 'active' : '' }} {{ Request::is('edit-customer/*') ? 'active' : '' }} {{ Request::is('view-customer/*') ? 'active' : '' }}">
 				<a href="{!! url(route('customer-list')) !!}">
-					<span>Customers </span>
+					<span>CUSTOMERS </span>
 				</a>
 			</li>
 			@endif
@@ -102,7 +102,7 @@
 			@endif
         	<li class="treeview-nav treeview">
 				<a href="#">
-				    <span>Master Settings</span>
+				    <span>MASTER SETTINGS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
@@ -110,14 +110,14 @@
 				    @if(config("roles.".Session::get('user_role').".roles_management"))
 						<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">
 						<a href="{!! url(route('roles-list')) !!}">
-							<span>Roles Management</span>
+							<span>ROLES MANAGEMENT</span>
 						</a>
 						</li>
 					@endif
 	          		@if(config("roles.".Session::get('user_role').".clients_management"))
 						<li class="{{ Request::is('clients-list') ? 'active' : '' }} {{ Request::is('create-clients') ? 'active' : '' }} {{ Request::is('edit-clients/*') ? 'active' : '' }} {{ Request::is('view-clients/*') ? 'active' : '' }}">
 						<a href="{!! url(route('clients-list')) !!}">
-							<span>Clients Management</span>
+							<span>CLIENTS MANAGEMENT</span>
 						</a>
 					</li>
 					@endif
@@ -128,14 +128,14 @@
 			</li>
 			<li class="treeview-nav treeview">
 				<a href="#">
-				    <span>Product Settings</span>
+				    <span>PRODUCT SETTINGS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 					@if(config("roles.".Session::get('user_role').".categories_management"))
 					<li class="{{ Request::is('categories-list') ? 'active' : '' }} {{ Request::is('create-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('categories-list')) !!}">
-							<span>Categories</span>
+							<span>CATEGORIES</span>
 						</a>
 					</li>
 					@endif
@@ -143,19 +143,19 @@
 					@if(config("roles.".Session::get('user_role').".sub_categories_management"))
 					<li class="{{ Request::is('sub-categories-list') ? 'active' : '' }} {{ Request::is('create-sub-categories') ? 'active' : '' }} {{ Request::is('edit-sub-categories/*') ? 'active' : '' }} {{ Request::is('view-sub-categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('sub-categories-list')) !!}">
-							<span>Sub Categories</span>
+							<span>SUB CATEGORIES</span>
 						</a>
 					</li>
 					@endif
 
 					<li class="">
 						<a href="javascript::">
-							<span>Product details</span>
+							<span>PRODUCT DETAILS</span>
 						</a>
 					</li>
 					<li class="">
 						<a href="javascript::">
-							<span>rental Rate/ Name change</span>
+							<span>RENTAL RATE/ NAME CHANGE</span>
 						</a>
 					</li>
 
