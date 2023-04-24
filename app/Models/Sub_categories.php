@@ -39,9 +39,10 @@ class Sub_categories extends Model
             'subcategories.id AS encryptid',
             'subcategories.sub_category_name',
             'subcategories.status as status_id',
+            'categories.category_name',
             DB::raw('CASE WHEN subcategories.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(subcategories.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
-        $query = self::select($fields);
+        $query = self::select($fields)->leftjoin('categories','categories.id','subcategories.category_id');
 
         if ($search_filter) {
             $query->where($search_filter);

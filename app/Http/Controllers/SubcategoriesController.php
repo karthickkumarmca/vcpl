@@ -79,9 +79,9 @@ class SubcategoriesController extends Controller
                 $records = sub_categories::getsubcategories($page, $offset, $sort, $search_filter);
                 //print_r($records);exit;
 
-                if (!empty($records['sub_categories'])) {
+                if (!empty($records['subcategories'])) {
                     $statusCode = '200';
-                    $message    = "sub_categories are retrieved Successfully";
+                    $message    = "Sub categories are retrieved Successfully";
                     $data       = $records;
                 } else {
                     $statusCode = '400';

@@ -41,6 +41,21 @@
             'name': 'subcategories-list',
             'columns': [
             {
+                "name" : "category_name",
+                "label": "Category Name",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "category_name"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
+             {
                 "name" : "sub_category_name",
                 "label": "Sub category Name",
                 "badge": {
