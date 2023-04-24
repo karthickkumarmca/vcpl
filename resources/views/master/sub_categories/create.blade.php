@@ -25,8 +25,25 @@
 					<div class="box-body">
 						<div class="col-md-12">
 							<div class="form-group">
+								<label>Select category <span class="text-danger"> *</span></label>
+								<select name="category_id" class="form-control pos_validate" id="category_id">
+									<option value="">Select category</option>
+									@isset($categories)
+										@foreach($categories as $category)
+										<option value="{{$category['id']}}">{{$category['category_name']}}</option>
+										@endforeach
+									@endisset
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('category_id'))
+								<div class="error">{{ $errors->first('category_id') }}</div>
+								@endif
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
 								<label>Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter categories" name="sub_category_name" value="{{old('sub_category_name')}}" data-rule="admin" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="sub_category_name" value="{{old('sub_category_name')}}" data-rule="admin" minlength="3" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('sub_category_name'))
 								<div class="error">{{ $errors->first('sub_category_name') }}</div>

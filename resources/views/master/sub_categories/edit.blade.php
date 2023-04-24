@@ -5,32 +5,65 @@
 </style>
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Categories <small>Management</small>
+		Sub Categories <small>Management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('categories-list'))}}">Categories management</a></li>
-		<li>Edit Categories</li>
+		<li><a href="{{url(route('sub-categories-list'))}}">Sub Categories management</a></li>
+		<li>Edit Sub Categories</li>
 	</ol>
 </section>
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('categories/store')}}">
+			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('sub-categories/store')}}">
 				@csrf
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">Edit Categories</h3>
+						<h3 class="box-title">Edit Sub Categories</h3>
 					</div>
-
 					<div class="box-body">
+					<div class="col-md-12">
+							<div class="form-group">
+								<label>Select Category <span class="text-danger"> *</span></label>
+								<select name="category_id" class="form-control pos_validate" id="category_id">
+									<option value="">Select Category</option>
+									@isset($categories)
+										@foreach($categories as $category)
+											@if(old('category_id') != "")
+												@if(old('category_id') == $category['id'])
+													<option value="{{$category['id']}}" selected>{{$category['category_name']}}</option>
+												@else
+													<option value="{{$category['id']}}">{{$category['category_name']}}</option>
+												@endif
+											@else
+												@isset($sub_categories->category_id)
+													@if($sub_categories->category_id == $category['id'])
+														<option value="{{$category['id']}}" selected>{{$category['category_name']}}</option>
+													@else
+														<option value="{{$category['id']}}">{{$category['category_name']}}</option>
+													@endif
+												@else
+													<option value="{{$category['id']}}">{{$category['category_name']}}</option>
+												@endisset
+											@endif
+										@endforeach
+									@endisset
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('category_id'))
+								<div class="error">{{ $errors->first('category_id') }}</div>
+								@endif
+							</div>
+						</div>
+					
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Categories Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="category_name" value="{{old('category_name') ? old('category_name') : $categories->category_name}}" maxlength="128"/>
+								<label>Sub Categories Name <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="sub_category_name" value="{{old('sub_category_name') ? old('sub_category_name') : $sub_categories->sub_category_name}}" maxlength="128"/>
 								<span class="validation_error"></span>
-								@if($errors->has('category_name'))
-								<div class="error">{{ $errors->first('category_name') }}</div>
+								@if($errors->has('sub_category_name'))
+								<div class="error">{{ $errors->first('sub_category_name') }}</div>
 								@endif
 							</div>
 						</div>
@@ -42,13 +75,13 @@
 							<button type="submit" id="categories-submit" class="btn btn-success">
 								<strong>Save</strong>
 							</button>
-							<a href="{!! url(route('categories-list')) !!}" class="btn btn-default">
+							<a href="{!! url(route('sub-categories-list')) !!}" class="btn btn-default">
 								<strong>Back</strong>
 							</a>
 						</div>
 					</div>
 				</div>
-				<input type="hidden" name="categories_id" value="{!! $categories->uuid !!}" />
+				<input type="hidden" name="sub_categories_id" value="{!! $sub_categories->uuid !!}" />
 			</form>
 		</div>
 	</div>

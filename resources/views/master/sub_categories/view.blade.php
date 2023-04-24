@@ -2,11 +2,11 @@
 @section('content')
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Categories <small>management</small>
+		Sub Categories <small>management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('categories-list'))}}">Categories management</a></li>
+		<li><a href="{{url(route('sub-categories-list'))}}">Sub Categories management</a></li>
 	</ol>
 </section>
 <section class="content">
@@ -14,10 +14,10 @@
 		<div class="col-sm-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Categories Details</h3>
+					<h3 class="box-title">Sub Categories Details</h3>
 				</div>
 				<div class="box-body">
-					@if($categories->status)
+					@if($sub_categories->status)
 					@php
 					$status = "Active";
 					$status_bg="bg-green";
@@ -34,7 +34,21 @@
 								<th class="grey_header">
 									<label>Category Name</label>
 								</th>
-								<td>{!! $categories->category_name !!}</td>
+								<td>@isset($categories)
+										@foreach($categories as $category)
+											@isset($sub_categories->category_id)
+												@if($sub_categories->category_id == $category['id'])
+													{{$category['category_name']}}
+												@endif
+											@endisset
+										@endforeach
+									@endisset</td>
+							</tr>
+							<tr>
+								<th class="grey_header">
+									<label>Category Name</label>
+								</th>
+								<td>{!! $sub_categories->sub_category_name !!}</td>
 							</tr>
 							<tr>
 								<th class="grey_header">
@@ -47,14 +61,14 @@
 								<th class="grey_header">
 									<label>Created At</label>
 								</th>
-								<td>{!! $categories->created_at !!}</td>
+								<td>{!! $sub_categories->created_at !!}</td>
 							</tr>
 						</table>
 					</div>
 				</div>
 				<div class="box-footer">
 					<div class="pull-right">
-						<a href="{!! url('categories-list') !!}" class="btn btn-default">
+						<a href="{!! url('sub-categories-list') !!}" class="btn btn-default">
 							<strong>Back</strong>
 						</a>
 					</div>

@@ -82,18 +82,17 @@ class Sub_categories extends Model
     public static function storeRecords(Request $request)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.subcategories_management")) {
+        if (!config("roles.{$role}.sub_categories_management")) {
             abort(403);
         }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
-        if ($request->has('subcategories_id')) {
-            $subcategories = self::where(['uuid' => $request->subcategories_id])->first();
+        if ($request->has('sub_categories_id')) {
+            $subcategories = self::where(['uuid' => $request->sub_categories_id])->first();
             $subcategories->updated_by = Auth::id();
-            if(isset($request->created_at))
-            {
+            if(isset($request->created_at)) {
                 $subcategories->updated_at = $request->created_at; 
             }
         } else {
@@ -105,6 +104,7 @@ class Sub_categories extends Model
         }
        
         $subcategories->sub_category_name = $request->sub_category_name;
+        $subcategories->category_id = $request->category_id;
        
         $subcategories->save();
 
@@ -116,7 +116,7 @@ class Sub_categories extends Model
             $response['message'] = "subcategories has been created successfully";
         }
         $response['data'] = [
-            'redirect_url' => url(route('subcategories-list')),
+            'redirect_url' => url(route('sub-categories-list')),
         ];
 
         return $response;

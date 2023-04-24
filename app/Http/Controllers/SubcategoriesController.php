@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Admin;
+use App\Models\Categories;
 use App\Models\sub_categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Redirect;
 use Illuminate\Support\Facades\App;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Validator;
-use App\Helpers\Helper;
-use DB;
 
 class SubcategoriesController extends Controller
 {
@@ -120,7 +117,10 @@ class SubcategoriesController extends Controller
         if (!config("roles.{$role}.sub_categories_management_access.create")) {
             abort(403);
         } else {
-            return view('master.sub_categories.create');
+            $search = ['status' => 1];
+            $fields = ['id','category_name'];
+            $categories = Categories::getAll($fields,$search);
+            return view('master.sub_categories.create',compact('categories'));
         }
     }
     public function store(Request $request)
@@ -134,6 +134,9 @@ class SubcategoriesController extends Controller
             $fieldValidation = [
                 'sub_category_name'         => [
                     'required','min:2','max:50'
+                ],
+                 'category_id'         => [
+                    'required'
                 ]
             ];
            
@@ -164,8 +167,7 @@ class SubcategoriesController extends Controller
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
-
-            return redirect('sub_categories-list/'); 
+            return redirect('sub-categories-list/'); 
 
         }
     }
@@ -176,10 +178,15 @@ class SubcategoriesController extends Controller
         if (!config("roles.{$role}.sub_categories_management_access.view")) {
             abort(403);
         } else {
+
+            $search = ['status' => 1];
+            $fields = ['id','category_name'];
+            $categories = Categories::getAll($fields,$search);
             $sub_categories  = sub_categories::where(['uuid' => $id])->first();
             if ($sub_categories) {
                 $data = [
                     'sub_categories' => $sub_categories,
+                    'categories'     => $categories,
                 ];
 
                 return view('master.sub_categories.view', $data);
@@ -200,10 +207,14 @@ class SubcategoriesController extends Controller
             abort(403);
         } else {
             // $sub_categories  = sub_categories::find($id);
+            $search = ['status' => 1];
+            $fields = ['id','category_name'];
+            $categories = Categories::getAll($fields,$search);
             $sub_categories  = sub_categories::where(['uuid' => $id])->first();
             if ($sub_categories) {
                 $data = [
                     'sub_categories' => $sub_categories,
+                    'categories'     => $categories,
                 ];
 
                 return view('master.sub_categories.edit', $data);

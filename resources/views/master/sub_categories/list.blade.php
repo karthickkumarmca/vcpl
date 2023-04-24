@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('content')
 <section class="content-header">
-    <h1 class="col-lg-6 no-padding">Sub categories <small>Management</small></h1>
+    <h1 class="col-lg-6 no-padding">Sub Categories <small>Management</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Sub categories management</li>
+        <li>Sub Categories</li>
     </ol>
 </section>
 <section class="content">
@@ -16,7 +16,7 @@
                         <div class="btn-group">
                             @isset($create_access)
                             @if ($create_access == 1)
-                            <a href="{{ url(route('create-sub-categories')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create subcategories</a>
+                            <a href="{{ url(route('create-sub-categories')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Sub Categories</a>
                             @endif
                             @endisset
                         </div>
@@ -41,14 +41,14 @@
             'name': 'subcategories-list',
             'columns': [
             {
-                "name" : "category_name",
-                "label": "category Name",
+                "name" : "sub_category_name",
+                "label": "Sub category Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "category_name"
+                    "field" : "sub_category_name"
                 },
                 "search": {
                     "display" : 1,
@@ -91,7 +91,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'Edit',
                         "url"       : function(data){
-                            return "edit-subcategories/"+data['uuid'];
+                            return "edit-sub-categories/"+data['uuid'];
                         },
                         "icon"      : "fa fa-pencil",
                         "method"    : "get",
@@ -108,7 +108,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'View',
                         "url"       : function(data){
-                            return "view-subcategories/"+data['uuid'];
+                            return "view-sub-categories/"+data['uuid'];
                         },
                         "icon"      : "fa fa-eye",
                         "method"    : "get",
