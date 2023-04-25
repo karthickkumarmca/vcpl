@@ -142,11 +142,14 @@
 					</li>
 					@endif
 
-					<li class="">
-						<a href="javascript::">
+					@if(config("roles.".Session::get('user_role').".product_details_management"))
+					<li class="{{ Request::is('product-details-list') ? 'active' : '' }} {{ Request::is('create-product-details') ? 'active' : '' }} {{ Request::is('edit-product-details/*') ? 'active' : '' }} {{ Request::is('view-product-details/*') ? 'active' : '' }}">
+						<a href="{!! url(route('product-details-list')) !!}">
 							<span>PRODUCT DETAILS</span>
 						</a>
 					</li>
+					@endif
+					
 					<li class="">
 						<a href="javascript::">
 							<span>RENTAL RATE/ NAME CHANGE</span>

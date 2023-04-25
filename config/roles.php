@@ -25,6 +25,13 @@ return [
             'view' => 1,            
             'change_status' => 1,
         ], 
+        'product_details_management' =>1,
+        'product_details_management_access' => [
+            'create' => 1,
+            'edit' => 1,
+            'view' => 1,            
+            'change_status' => 1,
+        ], 
         'user_management' => 1,
         'user_management_access' => [
             'create' => 1,

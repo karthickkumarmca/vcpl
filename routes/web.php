@@ -46,6 +46,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'SubcategoriesController@updateStatus');
 	    $router->get('delete/{id}', 'SubcategoriesController@delete');
 	});
+
+	Route::group(['prefix' => 'product-details/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'ProductdetailsController@list')->name('product-details-list');
+	    $router->get('create', 'ProductdetailsController@create')->name('create-product-details');
+	    $router->post('store', 'ProductdetailsController@store')->name('save-product-details');
+	    $router->get('view/{id}', 'ProductdetailsController@view');
+	    $router->get('edit/{id}', 'ProductdetailsController@edit');
+	    $router->get('update-status/{id}', 'ProductdetailsController@updateStatus');
+	    $router->get('delete/{id}', 'ProductdetailsController@delete');
+	});
     
 });
 
