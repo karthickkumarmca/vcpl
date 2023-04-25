@@ -222,7 +222,7 @@
 
 			</li>
 
-			<li class="treeview-nav treeview">
+			<li class="treeview-nav treeview  @if(str_contains(url()->current(),'property-categories')) active @endif">
 				<a href="#">
 				    <span>PROPERTY</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -234,11 +234,13 @@
 							 <span>OWNER SHIP</span>
 						</a>
 					</li>
-					<li class="">
-						<a href="javascript::">
-							 <span>PROPERTY CATEGORY</span>
+					@if(config("roles.".Session::get('user_role').".property_categories_management"))
+					<li class="{{ Request::is('master/property-categories/*') ? 'active' : '' }}">
+						<a href="{!! url(route('property-categories-list')) !!}">
+							<span>CATEGORIES</span>
 						</a>
 					</li>
+					@endif
 					<li class="">
 						<a href="javascript::">
 							 <span>PROPERTY NAME </span>

@@ -67,6 +67,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'Labour_categoriesController@updateStatus');
 	    $router->get('delete/{id}', 'Labour_categoriesController@delete');
 	});
+
+	Route::group(['prefix' => 'property-categories/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Property_categoriesController@list')->name('property-categories-list');
+	    $router->get('create', 'Property_categoriesController@create')->name('create-property-categories');
+	    $router->post('store', 'Property_categoriesController@store')->name('save-property-categories');
+	    $router->get('view/{id}', 'Property_categoriesController@view');
+	    $router->get('edit/{id}', 'Property_categoriesController@edit');
+	    $router->get('update-status/{id}', 'Property_categoriesController@updateStatus');
+	    $router->get('delete/{id}', 'Property_categoriesController@delete');
+	});
     
 });
 
