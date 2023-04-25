@@ -4,7 +4,7 @@ namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Categories;
-use App\Models\sub_categories;
+use App\Models\Sub_categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +76,7 @@ class SubcategoriesController extends Controller
                     }
                 }
 
-                $records = sub_categories::getsubcategories($page, $offset, $sort, $search_filter);
+                $records = Sub_categories::getsubcategories($page, $offset, $sort, $search_filter);
                 //print_r($records);exit;
 
                 if (!empty($records['records'])) {
@@ -161,10 +161,10 @@ class SubcategoriesController extends Controller
 
             if($request->has('sub_categories_id')){
                 $request['created_at']=date('Y-m-d H:i:s');
-                $response   = sub_categories::storeRecords($request);
+                $response   = Sub_categories::storeRecords($request);
             }
             else{
-                $response   = sub_categories::storeRecords($request); 
+                $response   = Sub_categories::storeRecords($request); 
             }
 
             $statusCode = $response['status_code'];
@@ -187,7 +187,7 @@ class SubcategoriesController extends Controller
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            $sub_categories  = sub_categories::where(['uuid' => $id])->first();
+            $sub_categories  = Sub_categories::where(['uuid' => $id])->first();
             if ($sub_categories) {
                 $data = [
                     'sub_categories' => $sub_categories,
@@ -211,11 +211,11 @@ class SubcategoriesController extends Controller
         if (!config("roles.{$role}.sub_categories_management_access.edit")) {
             abort(403);
         } else {
-            // $sub_categories  = sub_categories::find($id);
+            // $sub_categories  = Sub_categories::find($id);
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            $sub_categories  = sub_categories::where(['uuid' => $id])->first();
+            $sub_categories  = Sub_categories::where(['uuid' => $id])->first();
             if ($sub_categories) {
                 $data = [
                     'sub_categories' => $sub_categories,
@@ -239,7 +239,7 @@ class SubcategoriesController extends Controller
         if (!config("roles.{$role}.sub_categories_management_access.edit")) {
             abort(403);
         } else {
-            $sub_categories  = sub_categories::where(['uuid' => $id])->first();
+            $sub_categories  = Sub_categories::where(['uuid' => $id])->first();
             $sub_categories->status = ($sub_categories->status) ? 0 : 1;
             $sub_categories->save();
 
@@ -265,7 +265,7 @@ class SubcategoriesController extends Controller
         if (!config("roles.{$role}.sub_categories_management_access.delete")) {
             abort(403);
         } else {
-            $result = sub_categories::where('uuid', $id)->delete();
+            $result = Sub_categories::where('uuid', $id)->delete();
 
             $data = [
                 'redirect_url' => url(route('sub_categories-list'))

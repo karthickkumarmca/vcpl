@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\master;
 
 use App\Admin;
-use App\Models\categories;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -79,7 +79,7 @@ class CategoriesController extends Controller
                     }
                 }
 
-                $records = categories::getcategories($page, $offset, $sort, $search_filter);
+                $records = Categories::getcategories($page, $offset, $sort, $search_filter);
                 //print_r($records);exit;
 
                 if (!empty($records['categories'])) {
@@ -163,11 +163,11 @@ class CategoriesController extends Controller
             if($request->has('categories_id'))
             {
                 $request['created_at']=date('Y-m-d H:i:s');
-                $response   = categories::storeRecords($request);
+                $response   = Categories::storeRecords($request);
             }
             else
             {
-                $response   = categories::storeRecords($request); 
+                $response   = Categories::storeRecords($request); 
             }
 
             $statusCode = $response['status_code'];
@@ -187,7 +187,7 @@ class CategoriesController extends Controller
         if (!config("roles.{$role}.categories_management_access.view")) {
             abort(403);
         } else {
-            $categories  = categories::where(['uuid' => $id])->first();
+            $categories  = Categories::where(['uuid' => $id])->first();
             if ($categories) {
                 $data = [
                     'categories' => $categories,
@@ -210,8 +210,8 @@ class CategoriesController extends Controller
         if (!config("roles.{$role}.categories_management_access.edit")) {
             abort(403);
         } else {
-            // $categories  = categories::find($id);
-            $categories  = categories::where(['uuid' => $id])->first();
+            // $categories  = Categories::find($id);
+            $categories  = Categories::where(['uuid' => $id])->first();
             if ($categories) {
                 $data = [
                     'categories' => $categories,
@@ -234,12 +234,12 @@ class CategoriesController extends Controller
         if (!config("roles.{$role}.categories_management_access.edit")) {
             abort(403);
         } else {
-            $categories  = categories::where(['uuid' => $id])->first();
+            $categories  = Categories::where(['uuid' => $id])->first();
             $categories->status = ($categories->status) ? 0 : 1;
             $categories->save();
 
             $data = [
-                'redirect_url' => url(route('master/categories/list'))
+                'redirect_url' => url(route('categories-list'))
             ];
 
             $statusCode = '200';
@@ -260,7 +260,7 @@ class CategoriesController extends Controller
         if (!config("roles.{$role}.categories_management_access.delete")) {
             abort(403);
         } else {
-            $result = categories::where('uuid', $id)->delete();
+            $result = Categories::where('uuid', $id)->delete();
 
             $data = [
                 'redirect_url' => url(route('categories-list'))

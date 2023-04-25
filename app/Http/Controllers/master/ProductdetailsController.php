@@ -82,7 +82,7 @@ class ProductdetailsController extends Controller
 
                 if (!empty($records['records'])) {
                     $statusCode = '200';
-                    $message    = "Sub categories are retrieved Successfully";
+                    $message    = "Product details are retrieved Successfully";
                     $data       = $records;
                 } else {
                     $statusCode = '400';
@@ -246,7 +246,7 @@ class ProductdetailsController extends Controller
                 $search1 = ['status' => 1,'id'=>$product_details->subcategory_id];
                 $fields1 = ['id','sub_category_name'];
                 $Sub_categories = Sub_categories::getAll($fields1,$search1);
-                
+
                 $data = [
                     'sub_categories'    => $Sub_categories,
                     'product_details' => $product_details,

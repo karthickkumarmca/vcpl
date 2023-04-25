@@ -14,7 +14,7 @@ class Categories extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'Categories';
+    protected $table = 'categories';
 
     protected $guarded = [];
     /**
