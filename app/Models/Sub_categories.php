@@ -66,7 +66,7 @@ class Sub_categories extends Model
         ->toArray();
 
         return [
-            'subcategories' => $records,
+            'records' => $records,
             'current_page' => $page + 1,
             'total_pages' => $totalPages,
             'total_items' => $totalItems,
@@ -116,9 +116,6 @@ class Sub_categories extends Model
         } else {
             $response['message'] = "subcategories has been created successfully";
         }
-        $response['data'] = [
-            'redirect_url' => url(route('sub-categories-list')),
-        ];
 
         return $response;
     }

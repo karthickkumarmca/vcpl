@@ -263,7 +263,7 @@ class CategoriesController extends Controller
             $result = categories::where('uuid', $id)->delete();
 
             $data = [
-                'redirect_url' => url(route('master/categories/list'))
+                'redirect_url' => url(route('categories-list'))
             ];
 
             $statusCode = '200';

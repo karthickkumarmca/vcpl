@@ -108,7 +108,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'View',
                         "url"       : function(data){
-                            return "view-categories/"+data['uuid'];
+                            return "view/"+data['uuid'];
                         },
                         "icon"      : "fa fa-eye",
                         "method"    : "get",
@@ -125,7 +125,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "categories-update-status/"+data['uuid'];
+                            return "update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-check",
                         "method"    : "get",
@@ -147,7 +147,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "categories-update-status/"+data['uuid'];
+                            return "update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-close",
                         "method"    : "get",

@@ -16,7 +16,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('sub-categories/store')}}">
+			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('master/sub-categories/store')}}">
 				@csrf
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -75,7 +75,7 @@
 							<button type="submit" id="categories-submit" class="btn btn-success">
 								<strong>Save</strong>
 							</button>
-							<a href="{!! url(route('sub-categories-list')) !!}" class="btn btn-default">
+							<a href="{{url(route('sub-categories-list'))}}" class="btn btn-default">
 								<strong>Back</strong>
 							</a>
 						</div>

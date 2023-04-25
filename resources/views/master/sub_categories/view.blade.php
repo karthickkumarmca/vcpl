@@ -68,7 +68,7 @@
 				</div>
 				<div class="box-footer">
 					<div class="pull-right">
-						<a href="{!! url('sub-categories-list') !!}" class="btn btn-default">
+						<a href="{{url(route('sub-categories-list'))}}" class="btn btn-default">
 							<strong>Back</strong>
 						</a>
 					</div>

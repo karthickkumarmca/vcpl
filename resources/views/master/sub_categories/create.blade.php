@@ -15,7 +15,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('sub-categories/store')}}">
+			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('master/sub-categories/store')}}">
 				@csrf
 				<div class="box box-primary">
 					<div class="box-header with-border">

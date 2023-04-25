@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Categories;
@@ -79,7 +79,7 @@ class SubcategoriesController extends Controller
                 $records = sub_categories::getsubcategories($page, $offset, $sort, $search_filter);
                 //print_r($records);exit;
 
-                if (!empty($records['subcategories'])) {
+                if (!empty($records['records'])) {
                     $statusCode = '200';
                     $message    = "Sub categories are retrieved Successfully";
                     $data       = $records;
@@ -130,15 +130,22 @@ class SubcategoriesController extends Controller
             abort(403);
         } else {
 
-            $validation = config('field_validation.admin');
-            $fieldValidation = [
+            if($request->has('sub_category_name')){
+                
+                $sub_category_name = $request->get('sub_category_name');
+                $fieldValidation = [
                 'sub_category_name'         => [
-                    'required','min:2','max:50'
-                ],
-                 'category_id'         => [
-                    'required'
+                    'required','min:2','max:50','unique:subcategories,sub_category_name,'.$sub_category_name.',uuid'
+                ]
+                ];
+            }
+            else{
+                 $fieldValidation = [
+                'sub_category_name'         => [
+                    'required','min:2','max:50','unique:subcategories,sub_category_name'
                 ]
             ];
+            }
            
 
             $errorMessages    = [
@@ -152,13 +159,11 @@ class SubcategoriesController extends Controller
                 return Redirect::back()->withInput($request->input())->withErrors($validator);
             }
 
-            if($request->has('sub_categories_id'))
-            {
+            if($request->has('sub_categories_id')){
                 $request['created_at']=date('Y-m-d H:i:s');
                 $response   = sub_categories::storeRecords($request);
             }
-            else
-            {
+            else{
                 $response   = sub_categories::storeRecords($request); 
             }
 
@@ -167,7 +172,7 @@ class SubcategoriesController extends Controller
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
-            return redirect('sub-categories-list/'); 
+            return redirect('master/sub-categories/list'); 
 
         }
     }
@@ -239,7 +244,7 @@ class SubcategoriesController extends Controller
             $sub_categories->save();
 
             $data = [
-                'redirect_url' => url(route('sub_categories-list'))
+                'redirect_url' => url(route('sub-categories-list'))
             ];
 
             $statusCode = '200';

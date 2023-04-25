@@ -92,8 +92,8 @@
                 }
             },
             ],
-            'api_url': 'sub-categories-list',
-            'data_key': 'subcategories',
+            'api_url': 'list',
+            'data_key': 'records',
             'daterange_picker': {
                 'display' : false,
                 'default_days': 29
@@ -106,7 +106,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'Edit',
                         "url"       : function(data){
-                            return "edit-sub-categories/"+data['uuid'];
+                            return "edit/"+data['uuid'];
                         },
                         "icon"      : "fa fa-pencil",
                         "method"    : "get",
@@ -123,7 +123,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'View',
                         "url"       : function(data){
-                            return "view-sub-categories/"+data['uuid'];
+                            return "view/"+data['uuid'];
                         },
                         "icon"      : "fa fa-eye",
                         "method"    : "get",
@@ -140,7 +140,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "subcategories-update-status/"+data['uuid'];
+                            return "update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-check",
                         "method"    : "get",
@@ -162,7 +162,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "subcategories-update-status/"+data['uuid'];
+                            return "update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-close",
                         "method"    : "get",

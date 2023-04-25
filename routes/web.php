@@ -36,6 +36,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'categoriesController@updateStatus');
 	    $router->get('delete/{id}', 'categoriesController@delete');
 	});
+
+	Route::group(['prefix' => 'sub-categories/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'SubcategoriesController@list')->name('sub-categories-list');
+	    $router->get('create', 'SubcategoriesController@create')->name('create-sub-categories');
+	    $router->post('store', 'SubcategoriesController@store')->name('save-sub-categories');
+	    $router->get('view/{id}', 'SubcategoriesController@view');
+	    $router->get('edit/{id}', 'SubcategoriesController@edit');
+	    $router->get('update-status/{id}', 'SubcategoriesController@updateStatus');
+	    $router->get('delete/{id}', 'SubcategoriesController@delete');
+	});
     
 });
 
@@ -45,7 +55,7 @@ require(__DIR__ . '/Admin/units.php');
 require(__DIR__ . '/Admin/clients.php');
 require(__DIR__ . '/Admin/roles.php');
 // require(__DIR__ . '/Admin/categories.php');
-require(__DIR__ . '/Admin/sub_categories.php');
+// require(__DIR__ . '/Admin/sub_categories.php');
 require(__DIR__ . '/Admin/stock.php');
 
 
