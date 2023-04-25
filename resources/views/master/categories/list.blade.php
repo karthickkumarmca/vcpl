@@ -164,31 +164,31 @@
                         },
                         "function_call" : "changecategoriesStatus"
                     },
-                    {
-                        "name"      : "Delete",
-                        "type"      : "dialog", //view,dialog,modal
-                        "title"     : 'Delete',
-                        "url"       : function(data){
-                            return "categories/delete/"+data['uuid'];
-                        },
-                        "icon"      : "fa fa-trash",
-                        "method"    : "get",
-                        /*"condition" : function(data){
-                            return (data['status_id'] == 1);
-                        },*/
-                        'confirmation' : {
-                            'display' : true,
-                            'title'   : "Are you sure?"
-                        },
-                        "function_call" : "categoriesDelete",
-                        condition: function(data) {
-                            var deleteaccess = "{{$delete_access}}";
-                            if (deleteaccess == 1) {
-                                return true;
-                            }
-                            return false;
-                        }
-                    },
+                    // {
+                    //     "name"      : "Delete",
+                    //     "type"      : "dialog", //view,dialog,modal
+                    //     "title"     : 'Delete',
+                    //     "url"       : function(data){
+                    //         return "categories/delete/"+data['uuid'];
+                    //     },
+                    //     "icon"      : "fa fa-trash",
+                    //     "method"    : "get",
+                    //     /*"condition" : function(data){
+                    //         return (data['status_id'] == 1);
+                    //     },*/
+                    //     'confirmation' : {
+                    //         'display' : true,
+                    //         'title'   : "Are you sure?"
+                    //     },
+                    //     "function_call" : "categoriesDelete",
+                    //     condition: function(data) {
+                    //         var deleteaccess = "{{$delete_access}}";
+                    //         if (deleteaccess == 1) {
+                    //             return true;
+                    //         }
+                    //         return false;
+                    //     }
+                    // },
 
                     ]
                 },

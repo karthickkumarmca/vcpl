@@ -169,11 +169,13 @@
 				</a>
 				<ul class="treeview-menu">
 
-					<li class="">
-						<a href="javascript::">
-							 <span>CATEGORIES  </span>
+					@if(config("roles.".Session::get('user_role').".labour_categories_management"))
+					<li class="{{ Request::is('labour-categories-list') ? 'active' : '' }} {{ Request::is('create-labour-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
+						<a href="{!! url(route('labour-categories-list')) !!}">
+							<span>CATEGORIES</span>
 						</a>
 					</li>
+					@endif
 					<li class="">
 						<a href="javascript::">
 							 <span>LABOUR DAILY WAGES</span>

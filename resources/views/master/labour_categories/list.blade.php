@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <section class="content-header">
-    <h1 class="col-lg-6 no-padding">categories <small>Management</small></h1>
+    <h1 class="col-lg-6 no-padding">Labour Categories <small>Management</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>categories management</li>
@@ -16,7 +16,7 @@
                         <div class="btn-group">
                             @isset($create_access)
                             @if ($create_access == 1)
-                            <a href="{{ url(route('create-categories')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create categories</a>
+                            <a href="{{ url(route('create-labour-categories')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create categories</a>
                             @endif
                             @endisset
                         </div>
@@ -77,7 +77,7 @@
                 }
             },
             ],
-            'api_url': 'categories-list',
+            'api_url': 'list',
             'data_key': 'categories',
             'daterange_picker': {
                 'display' : false,
@@ -91,7 +91,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'Edit',
                         "url"       : function(data){
-                            return "edit-categories/"+data['uuid'];
+                            return "edit/"+data['uuid'];
                         },
                         "icon"      : "fa fa-pencil",
                         "method"    : "get",
@@ -108,7 +108,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'View',
                         "url"       : function(data){
-                            return "view-categories/"+data['uuid'];
+                            return "view/"+data['uuid'];
                         },
                         "icon"      : "fa fa-eye",
                         "method"    : "get",
@@ -125,7 +125,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "categories-update-status/"+data['uuid'];
+                            return "update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-check",
                         "method"    : "get",
@@ -147,7 +147,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Change status',
                         "url"       : function(data){
-                            return "categories-update-status/"+data['uuid'];
+                            return "update-status/"+data['uuid'];
                         },
                         "icon"      : "fa fa-close",
                         "method"    : "get",
@@ -164,31 +164,31 @@
                         },
                         "function_call" : "changecategoriesStatus"
                     },
-                    {
-                        "name"      : "Delete",
-                        "type"      : "dialog", //view,dialog,modal
-                        "title"     : 'Delete',
-                        "url"       : function(data){
-                            return "categories/delete/"+data['uuid'];
-                        },
-                        "icon"      : "fa fa-trash",
-                        "method"    : "get",
-                        /*"condition" : function(data){
-                            return (data['status_id'] == 1);
-                        },*/
-                        'confirmation' : {
-                            'display' : true,
-                            'title'   : "Are you sure?"
-                        },
-                        "function_call" : "categoriesDelete",
-                        condition: function(data) {
-                            var deleteaccess = "{{$delete_access}}";
-                            if (deleteaccess == 1) {
-                                return true;
-                            }
-                            return false;
-                        }
-                    },
+                    // {
+                    //     "name"      : "Delete",
+                    //     "type"      : "dialog", //view,dialog,modal
+                    //     "title"     : 'Delete',
+                    //     "url"       : function(data){
+                    //         return "categories/delete/"+data['uuid'];
+                    //     },
+                    //     "icon"      : "fa fa-trash",
+                    //     "method"    : "get",
+                    //     /*"condition" : function(data){
+                    //         return (data['status_id'] == 1);
+                    //     },*/
+                    //     'confirmation' : {
+                    //         'display' : true,
+                    //         'title'   : "Are you sure?"
+                    //     },
+                    //     "function_call" : "categoriesDelete",
+                    //     condition: function(data) {
+                    //         var deleteaccess = "{{$delete_access}}";
+                    //         if (deleteaccess == 1) {
+                    //             return true;
+                    //         }
+                    //         return false;
+                    //     }
+                    // },
 
                     ]
                 },

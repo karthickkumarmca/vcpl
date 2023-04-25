@@ -2,11 +2,11 @@
 @section('content')
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Categories <small>management</small>
+		Labour Categories <small>management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('categories-list'))}}">Categories management</a></li>
+		<li><a href="{{url(route('labour-categories-list'))}}">Categories management</a></li>
 	</ol>
 </section>
 <section class="content">
@@ -54,7 +54,7 @@
 				</div>
 				<div class="box-footer">
 					<div class="pull-right">
-						<a href="{!! url('categories-list') !!}" class="btn btn-default">
+						<a href="{{url(route('labour-categories-list'))}}" class="btn btn-default">
 							<strong>Back</strong>
 						</a>
 					</div>

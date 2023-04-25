@@ -57,6 +57,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->post('get-sub-category', 'ProductdetailsController@getSubCategory');
 	    $router->get('delete/{id}', 'ProductdetailsController@delete');
 	});
+
+	Route::group(['prefix' => 'labour-categories/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Labour_categoriesController@list')->name('labour-categories-list');
+	    $router->get('create', 'Labour_categoriesController@create')->name('create-labour-categories');
+	    $router->post('store', 'Labour_categoriesController@store')->name('save-labour-categories');
+	    $router->get('view/{id}', 'Labour_categoriesController@view');
+	    $router->get('edit/{id}', 'Labour_categoriesController@edit');
+	    $router->get('update-status/{id}', 'Labour_categoriesController@updateStatus');
+	    $router->get('delete/{id}', 'Labour_categoriesController@delete');
+	});
     
 });
 
