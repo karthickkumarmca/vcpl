@@ -8,7 +8,7 @@
 				</a>
 			</li>
 			@endif
-			<li class="treeview-nav treeview">
+			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/')) active @endif">
 				<a href="#">
 				    <span>MASTERS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -120,14 +120,14 @@
 
 
 			</li>
-			<li class="treeview-nav treeview">
+			<li class="treeview-nav treeview  @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
 				<a href="#">
 				    <span>PRODUCT SETTINGS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 					@if(config("roles.".Session::get('user_role').".categories_management"))
-					<li class="{{ Request::is('categories-list') ? 'active' : '' }} {{ Request::is('create-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
+					<li class="{{ Request::is('master/categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('categories-list')) !!}">
 							<span>CATEGORIES</span>
 						</a>
@@ -135,7 +135,7 @@
 					@endif
 
 					@if(config("roles.".Session::get('user_role').".sub_categories_management"))
-					<li class="{{ Request::is('sub-categories-list') ? 'active' : '' }} {{ Request::is('create-sub-categories') ? 'active' : '' }} {{ Request::is('edit-sub-categories/*') ? 'active' : '' }} {{ Request::is('view-sub-categories/*') ? 'active' : '' }}">
+					<li class="{{ Request::is('master/sub-categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('sub-categories-list')) !!}">
 							<span>SUB CATEGORIES</span>
 						</a>
@@ -143,7 +143,7 @@
 					@endif
 
 					@if(config("roles.".Session::get('user_role').".product_details_management"))
-					<li class="{{ Request::is('product-details-list') ? 'active' : '' }} {{ Request::is('create-product-details') ? 'active' : '' }} {{ Request::is('edit-product-details/*') ? 'active' : '' }} {{ Request::is('view-product-details/*') ? 'active' : '' }}">
+					<li class="{{ Request::is('master/product-details-list/*') ? 'active' : '' }}">
 						<a href="{!! url(route('product-details-list')) !!}">
 							<span>PRODUCT DETAILS</span>
 						</a>
@@ -162,7 +162,7 @@
 
 			</li>
 
-			<li class="treeview-nav treeview">
+			<li class="treeview-nav treeview @if(str_contains(url()->current(),'labour-categories')) active @endif">
 				<a href="#">
 				    <span>LABOURS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -170,7 +170,7 @@
 				<ul class="treeview-menu">
 
 					@if(config("roles.".Session::get('user_role').".labour_categories_management"))
-					<li class="{{ Request::is('labour-categories-list') ? 'active' : '' }} {{ Request::is('create-labour-categories') ? 'active' : '' }} {{ Request::is('edit-categories/*') ? 'active' : '' }} {{ Request::is('view-categories/*') ? 'active' : '' }}">
+					<li class="{{ Request::is('master/labour-categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('labour-categories-list')) !!}">
 							<span>CATEGORIES</span>
 						</a>
