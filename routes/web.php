@@ -28,13 +28,13 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'], function () use ($router) {
 
 	Route::group(['prefix' => 'categories/','middleware' => 'auth'], function () use ($router) {
-		$router->get('list', 'categoriesController@list')->name('categories-list');
-	    $router->get('create', 'categoriesController@create')->name('create-categories');
-	    $router->post('store', 'categoriesController@store')->name('save-categories');
-	    $router->get('view/{id}', 'categoriesController@view');
-	    $router->get('edit/{id}', 'categoriesController@edit');
-	    $router->get('update-status/{id}', 'categoriesController@updateStatus');
-	    $router->get('delete/{id}', 'categoriesController@delete');
+		$router->get('list', 'CategoriesController@list')->name('categories-list');
+	    $router->get('create', 'CategoriesController@create')->name('create-categories');
+	    $router->post('store', 'CategoriesController@store')->name('save-categories');
+	    $router->get('view/{id}', 'CategoriesController@view');
+	    $router->get('edit/{id}', 'CategoriesController@edit');
+	    $router->get('update-status/{id}', 'CategoriesController@updateStatus');
+	    $router->get('delete/{id}', 'CategoriesController@delete');
 	});
 
 	Route::group(['prefix' => 'sub-categories/','middleware' => 'auth'], function () use ($router) {
