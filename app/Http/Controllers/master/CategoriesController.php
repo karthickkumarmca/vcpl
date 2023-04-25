@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\categories;
@@ -130,12 +130,23 @@ class CategoriesController extends Controller
             abort(403);
         } else {
 
-            $validation = config('field_validation.admin');
-            $fieldValidation = [
+           
+            if($request->has('categories_id')){
+                
+                $categories_id = $request->get('categories_id');
+                $fieldValidation = [
                 'category_name'         => [
-                    'required','min:2','max:50'
+                    'required','min:2','max:50','unique:categories,category_name,'.$categories_id.',uuid'
+                ]
+                ];
+            }
+            else{
+                 $fieldValidation = [
+                'category_name'         => [
+                    'required','min:2','max:50','unique:categories,category_name'
                 ]
             ];
+            }
            
 
             $errorMessages    = [
@@ -165,7 +176,7 @@ class CategoriesController extends Controller
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
 
-            return redirect('categories-list/'); 
+            return redirect('master/categories/list'); 
 
         }
     }
@@ -228,7 +239,7 @@ class CategoriesController extends Controller
             $categories->save();
 
             $data = [
-                'redirect_url' => url(route('categories-list'))
+                'redirect_url' => url(route('master/categories/list'))
             ];
 
             $statusCode = '200';
@@ -252,7 +263,7 @@ class CategoriesController extends Controller
             $result = categories::where('uuid', $id)->delete();
 
             $data = [
-                'redirect_url' => url(route('categories-list'))
+                'redirect_url' => url(route('master/categories/list'))
             ];
 
             $statusCode = '200';

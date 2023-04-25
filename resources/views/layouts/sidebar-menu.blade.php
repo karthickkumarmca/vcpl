@@ -93,13 +93,7 @@
 				</a>
 			</li>
 			@endif
-			@if(config("roles.".Session::get('user_role').".stock_management"))
-			<!-- <li class="{{ Request::is('stock-list') ? 'active' : '' }} {{ Request::is('create-stock') ? 'active' : '' }} {{ Request::is('edit-stock/*') ? 'active' : '' }} {{ Request::is('view-stock/*') ? 'active' : '' }}">
-				<a href="{!! url(route('stock-list')) !!}">
-					<i class="fa fa-stack-exchange"></i> <span>Stock Order </span>
-				</a>
-			</li> -->
-			@endif
+			
         	<li class="treeview-nav treeview">
 				<a href="#">
 				    <span>MASTER SETTINGS</span>

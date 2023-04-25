@@ -77,7 +77,7 @@
                 }
             },
             ],
-            'api_url': 'categories-list',
+            'api_url': 'list',
             'data_key': 'categories',
             'daterange_picker': {
                 'display' : false,
@@ -91,7 +91,7 @@
                         "type"      : "view", //view,dialog,modal
                         "title"     : 'Edit',
                         "url"       : function(data){
-                            return "edit-categories/"+data['uuid'];
+                            return "edit/"+data['uuid'];
                         },
                         "icon"      : "fa fa-pencil",
                         "method"    : "get",

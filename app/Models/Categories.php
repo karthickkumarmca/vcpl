@@ -115,9 +115,6 @@ class Categories extends Model
         } else {
             $response['message'] = "categories has been created successfully";
         }
-        $response['data'] = [
-            'redirect_url' => url(route('categories-list')),
-        ];
 
         return $response;
     }
