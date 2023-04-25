@@ -150,11 +150,11 @@
 					</li>
 					@endif
 					
-					<li class="">
+					<!-- <li class="">
 						<a href="javascript::">
 							<span>RENTAL RATE/ NAME CHANGE</span>
 						</a>
-					</li>
+					</li> -->
 
 
 			    </ul>
