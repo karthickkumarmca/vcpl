@@ -31,7 +31,7 @@ class Productdetails extends Model
     {
         return encrypt(env('APP_KEY') . $value);
     }
-    public static function getsubcategories($page, $offset, $sort, $search_filter)
+    public static function getlist($page, $offset, $sort, $search_filter)
     {
         $fields = [
             'product_details.id',
@@ -40,9 +40,11 @@ class Productdetails extends Model
             'product_details.product_name',
             'product_details.status as status_id',
             'categories.category_name',
+            'subcategories.sub_category_name',
             DB::raw('CASE WHEN product_details.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(product_details.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
-        $query = self::select($fields)->leftjoin('categories','categories.id','product_details.category_id');
+        $query = self::select($fields)->leftjoin('categories','categories.id','product_details.category_id')
+        ->leftjoin('subcategories','subcategories.id','product_details.subcategory_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -91,30 +93,31 @@ class Productdetails extends Model
         $response['status_code'] = config('response_code.Bad_Request');
 
         if ($request->has('product_details_id')) {
-            $subcategories = self::where(['uuid' => $request->product_details_id])->first();
-            $subcategories->updated_by = Auth::id();
+            $data = self::where(['uuid' => $request->product_details_id])->first();
+            $data->updated_by = Auth::id();
             if(isset($request->created_at)) {
-                $subcategories->updated_at = $request->created_at; 
+                $data->updated_at = $request->created_at; 
             }
         } else {
-            $subcategories = new self();
-            $subcategories->created_by = Auth::id();
-            $subcategories->created_at = date('Y-m-d H:i:s');
-            $subcategories->uuid = \Str::uuid()->toString();
-            $subcategories->status = 1;
+            $data = new self();
+            $data->created_by = Auth::id();
+            $data->created_at = date('Y-m-d H:i:s');
+            $data->uuid = \Str::uuid()->toString();
+            $data->status = 1;
         }
        
-        $subcategories->product_name = $request->product_name;
-        $subcategories->category_id = $request->category_id;
+        $data->product_name     = $request->product_name;
+        $data->category_id      = $request->category_id;
+        $data->subcategory_id   = $request->subcategory_id;
        
-        $subcategories->save();
+        $data->save();
 
         $response['status_code'] = '200';
-        $response['subcategories_id'] = $subcategories->id;
-        if ($request->has('subcategories_id')) {
-            $response['message'] = "subcategories has been updated successfully";
+        // $response['subcategories_id'] = $subcategories->id;
+        if ($request->has('product_details_id')) {
+            $response['message'] = "Product has been updated successfully";
         } else {
-            $response['message'] = "subcategories has been created successfully";
+            $response['message'] = "Product has been created successfully";
         }
 
         return $response;
@@ -125,16 +128,6 @@ class Productdetails extends Model
         ->where($filter)
         ->get()
         ->toArray();
-    }
-    
-    public static function getsubcategoriesCount(){
-        $fields = [
-            DB::raw('Count(id) AS subcategories_count'),
-        ];
-        $result = self::select($fields)
-        ->get()
-        ->toArray();
-        return isset($result[0]['subcategories_count'])?$result[0]['subcategories_count']:0;
     }
 
     public static function updateRecord(array $data, $id = 0): int

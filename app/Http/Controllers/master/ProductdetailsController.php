@@ -4,7 +4,8 @@ namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Categories;
-use App\Models\product_details;
+use App\Models\Productdetails;
+use App\Models\Sub_categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -33,17 +34,17 @@ class ProductdetailsController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'product_name'      => 'subcategories.product_name',
-                    'status'    => 'subcategories.status',
+                    'product_name'      => 'product_details.product_name',
+                    'status'    => 'product_details.status',
                 ];
                 $sortField   = [
-                    'product_name'     => 'subcategories.product_name',
-                    'status'  => 'subcategories.status',
-                    'date_created' => 'subcategories.created_at'
+                    'product_name'     => 'product_details.product_name',
+                    'status'  => 'product_details.status',
+                    'date_created' => 'product_details.created_at'
                 ];
                 $search_filter = [];
                 $sort = [
-                    'field' => 'subcategories.created_at',
+                    'field' => 'product_details.created_at',
                     'order' => 'desc'
                 ];
                 $page = config('pagination.page');
@@ -76,7 +77,7 @@ class ProductdetailsController extends Controller
                     }
                 }
 
-                $records = product_details::getsubcategories($page, $offset, $sort, $search_filter);
+                $records = Productdetails::getlist($page, $offset, $sort, $search_filter);
                 //print_r($records);exit;
 
                 if (!empty($records['records'])) {
@@ -123,6 +124,19 @@ class ProductdetailsController extends Controller
             return view('master.product_details.create',compact('categories'));
         }
     }
+    public function getSubCategory(Request $request) {
+
+        $values ='<option value="">----  Select ---</option>';
+
+        $search = ['status' => 1,'id'=>$request->get('id')];
+        $fields = ['id','sub_category_name'];
+        $data = Sub_categories::getAll($fields,$search);
+        foreach($data as $c){
+            $values .='<option value="'.$c['id'].'">'.$c['sub_category_name'].'</option>';
+        }
+        return $values;
+        
+    }
     public function store(Request $request)
     {
         $role = session('user_role');
@@ -132,10 +146,10 @@ class ProductdetailsController extends Controller
 
             if($request->has('product_name')){
                 
-                $product_name = $request->get('product_name');
+                $product_details_id = $request->get('product_details_id');
                 $fieldValidation = [
                 'product_name'         => [
-                    'required','min:2','max:50','unique:product_details,product_name,'.$product_name.',uuid'
+                    'required','min:2','max:50','unique:product_details,product_name,'.$product_details_id.',uuid'
                 ]
                 ];
             }
@@ -146,6 +160,8 @@ class ProductdetailsController extends Controller
                 ]
             ];
             }
+            $fieldValidation['subcategory_id']      = ['required'];
+            $fieldValidation['category_id']         = ['required'];
            
 
             $errorMessages    = [
@@ -161,10 +177,10 @@ class ProductdetailsController extends Controller
 
             if($request->has('product_details_id')){
                 $request['created_at']=date('Y-m-d H:i:s');
-                $response   = product_details::storeRecords($request);
+                $response   = Productdetails::storeRecords($request);
             }
             else{
-                $response   = product_details::storeRecords($request); 
+                $response   = Productdetails::storeRecords($request); 
             }
 
             $statusCode = $response['status_code'];
@@ -187,11 +203,20 @@ class ProductdetailsController extends Controller
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            $product_details  = product_details::where(['uuid' => $id])->first();
+            $product_details  = Productdetails::where(['uuid' => $id])->first();
+
+           
+
+            
             if ($product_details) {
+
+                $search1 = ['status' => 1,'id'=>$product_details->subcategory_id];
+                $fields1 = ['id','sub_category_name'];
+                $Sub_categories = Sub_categories::getAll($fields1,$search1);
                 $data = [
-                    'product_details' => $product_details,
-                    'categories'     => $categories,
+                    'sub_categories'    => $Sub_categories,
+                    'product_details'   => $product_details,
+                    'categories'        => $categories,
                 ];
 
                 return view('master.product_details.view', $data);
@@ -211,13 +236,19 @@ class ProductdetailsController extends Controller
         if (!config("roles.{$role}.product_details_management_access.edit")) {
             abort(403);
         } else {
-            // $product_details  = product_details::find($id);
+            // $product_details  = Productdetails::find($id);
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            $product_details  = product_details::where(['uuid' => $id])->first();
+            $product_details  = Productdetails::where(['uuid' => $id])->first();
             if ($product_details) {
+
+                $search1 = ['status' => 1,'id'=>$product_details->subcategory_id];
+                $fields1 = ['id','sub_category_name'];
+                $Sub_categories = Sub_categories::getAll($fields1,$search1);
+                
                 $data = [
+                    'sub_categories'    => $Sub_categories,
                     'product_details' => $product_details,
                     'categories'     => $categories,
                 ];
@@ -239,7 +270,7 @@ class ProductdetailsController extends Controller
         if (!config("roles.{$role}.product_details_management_access.edit")) {
             abort(403);
         } else {
-            $product_details  = product_details::where(['uuid' => $id])->first();
+            $product_details  = Productdetails::where(['uuid' => $id])->first();
             $product_details->status = ($product_details->status) ? 0 : 1;
             $product_details->save();
 
@@ -265,7 +296,7 @@ class ProductdetailsController extends Controller
         if (!config("roles.{$role}.product_details_management_access.delete")) {
             abort(403);
         } else {
-            $result = product_details::where('uuid', $id)->delete();
+            $result = Productdetails::where('uuid', $id)->delete();
 
             $data = [
                 'redirect_url' => url(route('product_details-list'))

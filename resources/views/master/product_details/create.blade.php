@@ -4,10 +4,10 @@
 	.error{color:#f00;    margin-bottom: 0px;}
 </style>
 <section class="content-header">
-	<h1 class="col-lg-6 no-padding">Product <small>Management</small></h1>
+	<h1 class="col-lg-6 no-padding">Product Details<small>Management</small></h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('product-details-list'))}}">Product management</a></li>
+		<li><a href="{{url(route('product-details-list'))}}">Product Details</a></li>
 		<li>Create Product</li>
 	</ol>
 </section>
@@ -37,6 +37,18 @@
 								<span class="validation_error"></span>
 								@if($errors->has('category_id'))
 								<div class="error">{{ $errors->first('category_id') }}</div>
+								@endif
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Select Sub category <span class="text-danger"> *</span></label>
+								<select name="subcategory_id" class="form-control pos_validate" id="subcategory_id">
+									<option value="">Select Sub category</option>
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('subcategory_id'))
+								<div class="error">{{ $errors->first('subcategory_id') }}</div>
 								@endif
 							</div>
 						</div>
@@ -74,5 +86,5 @@
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
-    @include('master.sub_categories.script')
+    @include('master.product_details.script')
     @stop

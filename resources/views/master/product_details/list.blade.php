@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('content')
 <section class="content-header">
-    <h1 class="col-lg-6 no-padding">Product <small>Management</small></h1>
+    <h1 class="col-lg-6 no-padding">Product Details <small>Management</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Product</li>
+        <li>Product Details</li>
     </ol>
 </section>
 <section class="content">
@@ -21,7 +21,7 @@
                             @endisset
                         </div>
                     </div>
-                    <h3 class="box-title">subcategories List</h3>
+                    <h3 class="box-title">Product Details List</h3>
                 </div>
                 <div class="box-body">
                     <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
@@ -64,6 +64,21 @@
                 "sort": {
                     "display" : 1,
                     "field" : "product_name"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
+            {
+                "name" : "sub_category_name",
+                "label": "Sub Category Name",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "sub_category_name"
                 },
                 "search": {
                     "display" : 1,

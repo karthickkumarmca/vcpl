@@ -2,11 +2,11 @@
 @section('content')
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Product <small>management</small>
+		ProductDetails <small>management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('product-details-list'))}}">Product management</a></li>
+		<li><a href="{{url(route('product-details-list'))}}">Product Details</a></li>
 	</ol>
 </section>
 <section class="content">
@@ -17,7 +17,7 @@
 					<h3 class="box-title">Product Details</h3>
 				</div>
 				<div class="box-body">
-					@if($sub_categories->status)
+					@if($product_details->status)
 					@php
 					$status = "Active";
 					$status_bg="bg-green";
@@ -36,8 +36,8 @@
 								</th>
 								<td>@isset($categories)
 										@foreach($categories as $category)
-											@isset($sub_categories->category_id)
-												@if($sub_categories->category_id == $category['id'])
+											@isset($product_details->category_id)
+												@if($product_details->category_id == $category['id'])
 													{{$category['category_name']}}
 												@endif
 											@endisset
@@ -48,7 +48,7 @@
 								<th class="grey_header">
 									<label>Category Name</label>
 								</th>
-								<td>{!! $sub_categories->product_name !!}</td>
+								<td>{!! $product_details->product_name !!}</td>
 							</tr>
 							<tr>
 								<th class="grey_header">
@@ -61,7 +61,7 @@
 								<th class="grey_header">
 									<label>Created At</label>
 								</th>
-								<td>{!! $sub_categories->created_at !!}</td>
+								<td>{!! $product_details->created_at !!}</td>
 							</tr>
 						</table>
 					</div>

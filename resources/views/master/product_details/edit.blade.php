@@ -5,11 +5,11 @@
 </style>
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Product <small>Management</small>
+		Product Details<small>Management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('product-details-list'))}}">Product management</a></li>
+		<li><a href="{{url(route('product-details-list'))}}">Product Details</a></li>
 		<li>Edit Product</li>
 	</ol>
 </section>
@@ -37,8 +37,8 @@
 													<option value="{{$category['id']}}">{{$category['category_name']}}</option>
 												@endif
 											@else
-												@isset($sub_categories->category_id)
-													@if($sub_categories->category_id == $category['id'])
+												@isset($product_details->category_id)
+													@if($product_details->category_id == $category['id'])
 														<option value="{{$category['id']}}" selected>{{$category['category_name']}}</option>
 													@else
 														<option value="{{$category['id']}}">{{$category['category_name']}}</option>
@@ -56,11 +56,32 @@
 								@endif
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Select Sub category <span class="text-danger"> *</span></label>
+								<select name="subcategory_id" class="form-control pos_validate" id="subcategory_id">
+									@isset($sub_categories)
+										@foreach($sub_categories as $sub)
+											@if ($product_details->subcategory_id != "")
+												@if($product_details->subcategory_id == $sub['id'])
+													<option value="{{$sub['id']}}" selected>{{$sub['sub_category_name']}}</option>
+												@endif
+											@endif
+										@endforeach
+									@endisset
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('subcategory_id'))
+								<div class="error">{{ $errors->first('subcategory_id') }}</div>
+								@endif
+							</div>
+						</div>
 					
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Product Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="product_name" value="{{old('product_name') ? old('product_name') : $sub_categories->product_name}}" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="product_name" value="{{old('product_name') ? old('product_name') : $product_details->product_name}}" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('product_name'))
 								<div class="error">{{ $errors->first('product_name') }}</div>
@@ -81,7 +102,7 @@
 						</div>
 					</div>
 				</div>
-				<input type="hidden" name="sub_categories_id" value="{!! $sub_categories->uuid !!}" />
+				<input type="hidden" name="product_details_id" value="{!! $product_details->uuid !!}" />
 			</form>
 		</div>
 	</div>
@@ -93,5 +114,5 @@
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
 
-@include('master.categories.script')
+@include('master.product_details.script')
 @stop

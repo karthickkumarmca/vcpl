@@ -54,6 +54,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('view/{id}', 'ProductdetailsController@view');
 	    $router->get('edit/{id}', 'ProductdetailsController@edit');
 	    $router->get('update-status/{id}', 'ProductdetailsController@updateStatus');
+	    $router->post('get-sub-category', 'ProductdetailsController@getSubCategory');
 	    $router->get('delete/{id}', 'ProductdetailsController@delete');
 	});
     
