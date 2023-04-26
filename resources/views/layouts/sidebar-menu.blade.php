@@ -209,7 +209,12 @@
 			    </ul>
 			</li>
 
-			<li class="treeview-nav treeview  @if(str_contains(url()->current(),'centering-materials')) active @endif">
+			<li class="treeview-nav treeview  
+			@if(str_contains(url()->current(),'centering-materials')) active @endif
+			@if(str_contains(url()->current(),'lorry-materials')) active @endif
+			@if(str_contains(url()->current(),'shop-materials')) active @endif
+			@if(str_contains(url()->current(),'toolsplants-materials')) active @endif
+			">
 				<a href="#">
 				    <span>Materials</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -231,17 +236,23 @@
 					</li>
 					@endif
 					
+					@if(config("roles.".Session::get('user_role').".shop_materials_management"))
+					<li class="{{ Request::is('master/shop-materials/*') ? 'active' : '' }}">
+						<a href="{!! url(route('shop-materials-list')) !!}">
+							<span>SHOP MATERIALS</span>
+						</a>
+					</li>
+					@endif
+
+					@if(config("roles.".Session::get('user_role').".toolsplants_materials_management"))
+					<li class="{{ Request::is('master/toolsplants-materials/*') ? 'active' : '' }}">
+						<a href="{!! url(route('toolsplants-materials-list')) !!}">
+							<span>TOOLS AND PLANTS</span>
+						</a>
+					</li>
+					@endif
 					
-					<li class="">
-						<a href="javascript::">
-							 <span>SHOP MATERIALS</span>
-						</a>
-					</li>
-					<li class="">
-						<a href="javascript::">
-							 <span>TOOLS AND PLANTS</span>
-						</a>
-					</li>
+					
 					<li class="">
 						<a href="javascript::">
 							 <span>VEHICLE</span>

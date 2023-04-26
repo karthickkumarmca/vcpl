@@ -119,6 +119,26 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'Lorry_materialsController@updateStatus');
 	    $router->get('delete/{id}', 'Lorry_materialsController@delete');
 	});
+
+	Route::group(['prefix' => 'shop-materials/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Shop_materialsController@list')->name('shop-materials-list');
+	    $router->get('create', 'Shop_materialsController@create')->name('create-shop-materials');
+	    $router->post('store', 'Shop_materialsController@store')->name('save-shop-materials');
+	    $router->get('view/{id}', 'Shop_materialsController@view');
+	    $router->get('edit/{id}', 'Shop_materialsController@edit');
+	    $router->get('update-status/{id}', 'Shop_materialsController@updateStatus');
+	    $router->get('delete/{id}', 'Shop_materialsController@delete');
+	});
+
+	Route::group(['prefix' => 'toolsplants-materials/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Toolsplants_materialsController@list')->name('toolsplants-materials-list');
+	    $router->get('create', 'Toolsplants_materialsController@create')->name('create-toolsplants-materials');
+	    $router->post('store', 'Toolsplants_materialsController@store')->name('save-toolsplants-materials');
+	    $router->get('view/{id}', 'Toolsplants_materialsController@view');
+	    $router->get('edit/{id}', 'Toolsplants_materialsController@edit');
+	    $router->get('update-status/{id}', 'Toolsplants_materialsController@updateStatus');
+	    $router->get('delete/{id}', 'Toolsplants_materialsController@delete');
+	});
 });
 
 
