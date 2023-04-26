@@ -251,17 +251,6 @@
 						</a>
 					</li>
 					@endif
-					
-					<li class="">
-						<a href="javascript::">
-							 <span>TOOLS AND PLANTS</span>
-						</a>
-					</li>
-					<li class="">
-						<a href="javascript::">
-							 <span>VEHICLE</span>
-						</a>
-					</li>
 
 			    </ul>
 
