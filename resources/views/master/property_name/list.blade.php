@@ -21,7 +21,7 @@
                             @endisset
                         </div>
                     </div>
-                    <h3 class="box-title">subcategories List</h3>
+                    <h3 class="box-title">Property Name List</h3>
                 </div>
                 <div class="box-body">
                     <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
