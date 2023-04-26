@@ -128,7 +128,7 @@ class ProductdetailsController extends Controller
 
         $values ='<option value="">----  Select ---</option>';
 
-        $search = ['status' => 1,'id'=>$request->get('id')];
+        $search = ['status' => 1,'category_id'=>$request->get('id')];
         $fields = ['id','sub_category_name'];
         $data = Sub_categories::getAll($fields,$search);
         foreach($data as $c){

@@ -98,6 +98,27 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'PropertynameController@updateStatus');
 	    $router->get('delete/{id}', 'PropertynameController@delete');
 	});
+
+
+	Route::group(['prefix' => 'centering-materials/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Centering_materialsController@list')->name('centering-materials-list');
+	    $router->get('create', 'Centering_materialsController@create')->name('create-centering-materials');
+	    $router->post('store', 'Centering_materialsController@store')->name('save-centering-materials');
+	    $router->get('view/{id}', 'Centering_materialsController@view');
+	    $router->get('edit/{id}', 'Centering_materialsController@edit');
+	    $router->get('update-status/{id}', 'Centering_materialsController@updateStatus');
+	    $router->get('delete/{id}', 'Centering_materialsController@delete');
+	});
+
+	Route::group(['prefix' => 'lorry-materials/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Lorry_materialsController@list')->name('lorry-materials-list');
+	    $router->get('create', 'Lorry_materialsController@create')->name('create-lorry-materials');
+	    $router->post('store', 'Lorry_materialsController@store')->name('save-lorry-materials');
+	    $router->get('view/{id}', 'Lorry_materialsController@view');
+	    $router->get('edit/{id}', 'Lorry_materialsController@edit');
+	    $router->get('update-status/{id}', 'Lorry_materialsController@updateStatus');
+	    $router->get('delete/{id}', 'Lorry_materialsController@delete');
+	});
 });
 
 

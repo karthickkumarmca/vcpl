@@ -1,10 +1,11 @@
 <style type="text/css">
-.skin-red .sidebar-menu>li>.treeview-menu {
+/*.skin-red .sidebar-menu>li>.treeview-menu {
     margin: 0 1px;
     background: #fff;
-}
+    background-color:#fff
+}*/
 </style>
-<aside class="main-sidebar elevation-4 sidebar-dark-success" style="padding-top: 50px;background-color:#fff">
+<aside class="main-sidebar elevation-4 sidebar-dark-success" style="padding-top: 50px;">
 	<section class="sidebar">
 		<ul class="sidebar-menu" data-widget="tree">
 			@if(config("roles.".Session::get('user_role').".dashboard"))
@@ -208,23 +209,29 @@
 			    </ul>
 			</li>
 
-			<li class="treeview-nav treeview">
+			<li class="treeview-nav treeview  @if(str_contains(url()->current(),'centering-materials')) active @endif">
 				<a href="#">
 				    <span>Materials</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
+					@if(config("roles.".Session::get('user_role').".centering_materials_management"))
+					<li class="{{ Request::is('master/centering-materials/*') ? 'active' : '' }}">
+						<a href="{!! url(route('centering-materials-list')) !!}">
+							<span>CENTERING MATERIALS</span>
+						</a>
+					</li>
+					@endif
 
-					<li class="">
-						<a href="javascript::">
-							 <span>CENTERING MATERIALS</span>
+					@if(config("roles.".Session::get('user_role').".lorry_materials_management"))
+					<li class="{{ Request::is('master/lorry-materials/*') ? 'active' : '' }}">
+						<a href="{!! url(route('lorry-materials-list')) !!}">
+							<span>LORRY MATERIALS</span>
 						</a>
 					</li>
-					<li class="">
-						<a href="javascript::">
-							 <span>LORRY MATERIALS</span>
-						</a>
-					</li>
+					@endif
+					
+					
 					<li class="">
 						<a href="javascript::">
 							 <span>SHOP MATERIALS</span>
