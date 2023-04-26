@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
+            [
             'uuid' => (string) \Illuminate\Support\Str::uuid(),
             'name' => 'Super admin',
             'phonenumber' => '9876543210',
@@ -24,6 +25,18 @@ class UserSeeder extends Seeder
             'status' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        ],
+        [
+            'uuid' => (string) \Illuminate\Support\Str::uuid(),
+            'name' => 'Super admin',
+            'phonenumber' => '9876543211',
+            'email' => 'admin@yopmail.com',
+            'password' => bcrypt('Vcpladmin@2023'),
+            'user_type' => 1,
+            'status' => 1,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]]
+        );
     }
 }

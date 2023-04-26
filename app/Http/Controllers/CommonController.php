@@ -22,6 +22,7 @@ class CommonController extends Controller
 
 	public function dashboard()
 	{
+		// echo Hash::make('Vcpladmin@2023');exit;
 		$customers_count   = Customer::getdashboardcount();
 		$user_count       = User::getdashboardcount();
 		$data['show_dashboard_list']    = 1;
