@@ -2,6 +2,7 @@
 .skin-red .sidebar-menu>li>.treeview-menu {
     margin: 0 1px;
     background: #fff;
+}
 </style>
 <aside class="main-sidebar elevation-4 sidebar-dark-success" style="padding-top: 50px;background-color:#fff">
 	<section class="sidebar">
@@ -245,7 +246,12 @@
 
 			</li>
 
-			<li class="treeview-nav treeview  @if(str_contains(url()->current(),'property-categories')) active @endif">
+			<li class="treeview-nav treeview  
+				@if(str_contains(url()->current(),'property-categories')) active @endif 
+				@if(str_contains(url()->current(),'ownership')) active @endif 
+				@if(str_contains(url()->current(),'property-name')) active @endif 
+
+				">
 				<a href="#">
 				    <span>PROPERTY</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
