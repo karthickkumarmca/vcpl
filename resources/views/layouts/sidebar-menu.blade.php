@@ -21,11 +21,13 @@
 				</a>
 				<ul class="treeview-menu">
 
-					<li class="">
-						<a href="javascript::">
-							 <span>STAFF GROUP</span>
+					@if(config("roles.".Session::get('user_role').".staffgroups_management"))
+						<li class="{{ Request::is('staffgroups-list') ? 'active' : '' }} {{ Request::is('create-staffgroups') ? 'active' : '' }} {{ Request::is('edit-staffgroups/*') ? 'active' : '' }} {{ Request::is('view-staffgroups/*') ? 'active' : '' }}">
+						<a href="{!! url(route('staffgroups-list')) !!}">
+							<span>STAFF GROUP</span>
 						</a>
-					</li>
+						</li>
+					@endif
 					<li class="">
 						<a href="javascript::">
 							<span>STAFF DETAILS </span>
@@ -93,8 +95,24 @@
 				</a>
 			</li>
 			@endif
-			
-        	<li class="treeview-nav treeview">
+
+			@if(config("roles.".Session::get('user_role').".roles_management"))
+				<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">
+				<a href="{!! url(route('roles-list')) !!}">
+					<span>ROLES MANAGEMENT</span>
+				</a>
+				</li>
+			@endif
+
+      		@if(config("roles.".Session::get('user_role').".clients_management"))
+				<li class="{{ Request::is('clients-list') ? 'active' : '' }} {{ Request::is('create-clients') ? 'active' : '' }} {{ Request::is('edit-clients/*') ? 'active' : '' }} {{ Request::is('view-clients/*') ? 'active' : '' }}">
+				<a href="{!! url(route('clients-list')) !!}">
+					<span>CLIENTS MANAGEMENT</span>
+				</a>
+			</li>
+			@endif
+        	{{-- <li class="treeview-nav treeview  @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
+
 				<a href="#">
 				    <span>MASTER SETTINGS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -119,7 +137,7 @@
 			    </ul>
 
 
-			</li>
+			</li> --}}
 			<li class="treeview-nav treeview  @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
 				<a href="#">
 				    <span>PRODUCT SETTINGS</span>

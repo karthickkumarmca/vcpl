@@ -77,13 +77,14 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'Property_categoriesController@updateStatus');
 	    $router->get('delete/{id}', 'Property_categoriesController@delete');
 	});
-    
 });
+
 
 require(__DIR__ . '/Admin/user.php');
 require(__DIR__ . '/Admin/customer.php');
 require(__DIR__ . '/Admin/units.php');
 require(__DIR__ . '/Admin/clients.php');
+require(__DIR__ . '/Admin/staffgroups.php');
 require(__DIR__ . '/Admin/roles.php');
 // require(__DIR__ . '/Admin/categories.php');
 // require(__DIR__ . '/Admin/sub_categories.php');

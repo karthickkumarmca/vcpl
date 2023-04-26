@@ -90,5 +90,12 @@ return [
             'change_status' => 1,
         ],
         'change_profile_password' => 1,
+        'staffgroups_management' =>1,
+        'staffgroups_management_access' => [
+            'create' => 1,
+            'edit' => 1,
+            'view' => 1,            
+            'change_status' => 1,
+        ],
     ],
 ];
