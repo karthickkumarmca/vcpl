@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePropertyCategoryTable extends Migration
+class CreateOwnershipTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreatePropertyCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_category', function (Blueprint $table) {
+        Schema::create('ownership', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
-            $table->string('category_name')->nullable();
+            $table->string('ownership_name')->nullable();
+            $table->string('short_name')->nullable();
+            $table->string('position')->nullable();
+            $table->string('email')->nullable();
             $table->smallInteger('status')->comment('1. Active 2. Deactive')->description('1. Active 2. Deactive');
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('SET NULL');
@@ -34,6 +37,6 @@ class CreatePropertyCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_category');
+        Schema::dropIfExists('ownership');
     }
 }

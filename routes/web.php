@@ -77,6 +77,27 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'Property_categoriesController@updateStatus');
 	    $router->get('delete/{id}', 'Property_categoriesController@delete');
 	});
+    
+
+    Route::group(['prefix' => 'ownership/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'OwnershipController@list')->name('ownership-list');
+	    $router->get('create', 'OwnershipController@create')->name('create-ownership');
+	    $router->post('store', 'OwnershipController@store')->name('save-ownership');
+	    $router->get('view/{id}', 'OwnershipController@view');
+	    $router->get('edit/{id}', 'OwnershipController@edit');
+	    $router->get('update-status/{id}', 'OwnershipController@updateStatus');
+	    $router->get('delete/{id}', 'OwnershipController@delete');
+	});
+
+	Route::group(['prefix' => 'property-name/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'PropertynameController@list')->name('property-name-list');
+	    $router->get('create', 'PropertynameController@create')->name('create-property-name');
+	    $router->post('store', 'PropertynameController@store')->name('save-property-name');
+	    $router->get('view/{id}', 'PropertynameController@view');
+	    $router->get('edit/{id}', 'PropertynameController@edit');
+	    $router->get('update-status/{id}', 'PropertynameController@updateStatus');
+	    $router->get('delete/{id}', 'PropertynameController@delete');
+	});
 });
 
 
