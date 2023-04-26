@@ -229,11 +229,13 @@
 				</a>
 				<ul class="treeview-menu">
 
-					<li class="">
-						<a href="javascript::">
-							 <span>OWNER SHIP</span>
+					@if(config("roles.".Session::get('user_role').".ownership_management"))
+					<li class="{{ Request::is('master/ownership/*') ? 'active' : '' }}">
+						<a href="{!! url(route('ownership-list')) !!}">
+							<span>OWNERSHIP</span>
 						</a>
 					</li>
+					@endif
 					@if(config("roles.".Session::get('user_role').".property_categories_management"))
 					<li class="{{ Request::is('master/property-categories/*') ? 'active' : '' }}">
 						<a href="{!! url(route('property-categories-list')) !!}">

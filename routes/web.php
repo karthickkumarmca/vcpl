@@ -78,6 +78,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Property_categoriesController@delete');
 	});
     
+
+    Route::group(['prefix' => 'ownership/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'OwnershipController@list')->name('ownership-list');
+	    $router->get('create', 'OwnershipController@create')->name('create-ownership');
+	    $router->post('store', 'OwnershipController@store')->name('save-ownership');
+	    $router->get('view/{id}', 'OwnershipController@view');
+	    $router->get('edit/{id}', 'OwnershipController@edit');
+	    $router->get('update-status/{id}', 'OwnershipController@updateStatus');
+	    $router->get('delete/{id}', 'OwnershipController@delete');
+	});
 });
 
 require(__DIR__ . '/Admin/user.php');
