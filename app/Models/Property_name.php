@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 
-class Ownership extends Model
+class Property_name extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'ownership';
+    protected $table = 'property_name';
 
     protected $guarded = [];
     /**
@@ -31,20 +31,20 @@ class Ownership extends Model
     {
         return encrypt(env('APP_KEY') . $value);
     }
-    public static function getList($page, $offset, $sort, $search_filter)
+    public static function getproperty_name($page, $offset, $sort, $search_filter)
     {
         $fields = [
-            'ownership.id',
-            'ownership.uuid',
-            'ownership.id AS encryptid',
+            'property_name.id',
+            'property_name.uuid',
+            'property_name.id AS encryptid',
+            'property_name.property_name',
+            'property_name.status as status_id',
+            'property_category.category_name',
             'ownership.ownership_name',
-            'ownership.short_name',
-            'ownership.position',
-            'ownership.email',
-            'ownership.status as status_id',
-            DB::raw('CASE WHEN ownership.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(ownership.created_at, "%d-%b-%Y %r") AS date_created'),
+            DB::raw('CASE WHEN property_name.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(property_name.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
-        $query = self::select($fields);
+        $query = self::select($fields)->leftjoin('property_category','property_category.id','property_name.property_category_id')
+        ->leftjoin('ownership','ownership.id','property_name.ownership_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -85,41 +85,39 @@ class Ownership extends Model
     public static function storeRecords(Request $request)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.categories_management")) {
+        if (!config("roles.{$role}.property_name_management")) {
             abort(403);
         }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
-        if ($request->has('ownership_id')) {
-            $categories = self::where(['uuid' => $request->ownership_id])->first();
-            $categories->updated_by = Auth::id();
-            if(isset($request->created_at))
-            {
-                $categories->updated_at = $request->created_at; 
+        if ($request->has('property_name_id')) {
+            $property_name = self::where(['uuid' => $request->property_name_id])->first();
+            $property_name->updated_by = Auth::id();
+            if(isset($request->created_at)) {
+                $property_name->updated_at = $request->created_at; 
             }
         } else {
-            $categories = new self();
-            $categories->created_by = Auth::id();
-            $categories->created_at = date('Y-m-d H:i:s');
-            $categories->uuid = \Str::uuid()->toString();
-            $categories->status = 1;
+            $property_name = new self();
+            $property_name->created_by = Auth::id();
+            $property_name->created_at = date('Y-m-d H:i:s');
+            $property_name->uuid = \Str::uuid()->toString();
+            $property_name->status = 1;
         }
        
-        $categories->ownership_name     = $request->ownership_name;
-        $categories->email              = $request->email;
-        $categories->short_name         = $request->short_name;
-        $categories->position           = $request->position;
+        $property_name->property_name           = $request->property_name;
+        $property_name->property_category_id    = $request->category_id;
+        $property_name->ownership_id            = $request->ownership_id;
        
-        $categories->save();
+        $property_name->save();
 
         $response['status_code'] = '200';
-        $response['categories_id'] = $categories->id;
-        if ($request->has('categories_id')) {
-            $response['message'] = "categories has been updated successfully";
+        $response['subcategories_id'] = $property_name->id;
+        if ($request->has('subcategories_id')) {
+            $response['message'] = "property-name has been updated successfully";
         } else {
-            $response['message'] = "categories has been created successfully";
+            $response['message'] = "property-name has been created successfully";
         }
 
         return $response;
@@ -132,19 +130,19 @@ class Ownership extends Model
         ->toArray();
     }
     
-    public static function getcategoriesCount(){
+    public static function getsubcategoriesCount(){
         $fields = [
-            DB::raw('Count(id) AS categories_count'),
+            DB::raw('Count(id) AS subcategories_count'),
         ];
         $result = self::select($fields)
         ->get()
         ->toArray();
-        return isset($result[0]['categories_count'])?$result[0]['categories_count']:0;
+        return isset($result[0]['subcategories_count'])?$result[0]['subcategories_count']:0;
     }
 
     public static function updateRecord(array $data, $id = 0): int
     {
-        DB::table('categories')->where('id', $id)->update($data);
+        DB::table('subcategories')->where('id', $id)->update($data);
         return $id;
     }
     public static function updateDetails($where,$updateDetails)
@@ -157,7 +155,7 @@ class Ownership extends Model
 
         $fields = [
             DB::raw('COUNT(*) AS total_count'),
-            DB::raw('COUNT(id) AS categoriess_count')           
+            DB::raw('COUNT(id) AS subcategoriess_count')           
         ];
         $query = Self::select($fields);
         $records = $query->first()->toArray();

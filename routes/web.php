@@ -88,6 +88,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'OwnershipController@updateStatus');
 	    $router->get('delete/{id}', 'OwnershipController@delete');
 	});
+
+	Route::group(['prefix' => 'property-name/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'PropertynameController@list')->name('property-name-list');
+	    $router->get('create', 'PropertynameController@create')->name('create-property-name');
+	    $router->post('store', 'PropertynameController@store')->name('save-property-name');
+	    $router->get('view/{id}', 'PropertynameController@view');
+	    $router->get('edit/{id}', 'PropertynameController@edit');
+	    $router->get('update-status/{id}', 'PropertynameController@updateStatus');
+	    $router->get('delete/{id}', 'PropertynameController@delete');
+	});
 });
 
 require(__DIR__ . '/Admin/user.php');
