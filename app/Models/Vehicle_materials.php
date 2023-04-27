@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 
-class Materials extends Model
+class Vehicle_materials extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'materials';
+    protected $table = 'vehicle_materials';
 
     protected $guarded = [];
     /**
@@ -34,27 +34,18 @@ class Materials extends Model
     public static function get_materials($page, $offset, $sort, $search_filter)
     {
         $fields = [
-            'materials.id',
-            'materials.uuid',
-            'materials.id AS encryptid',
-            'materials.rate_unit',
-            DB::raw('CASE WHEN materials.from_date IS NULL THEN "-" ELSE 
-                DATE_FORMAT(materials.from_date, "%d-%b-%Y")
-             END
-                AS from_date'),
-
-            DB::raw('CASE WHEN materials.to_date IS NULL THEN "-" ELSE 
-                DATE_FORMAT(materials.to_date, "%d-%b-%Y")
-             END
-                AS to_date'),
-
-            'materials.status as status_id',
-            'categories.category_name',
-            'units.unit_name',
-            DB::raw('CASE WHEN materials.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(materials.created_at, "%d-%b-%Y %r") AS date_created'),
+            'vehicle_materials.id',
+            'vehicle_materials.uuid',
+            'vehicle_materials.id AS encryptid',
+            'vehicle_materials.vehicle_name',
+            'vehicle_materials.status as status_id',
+             DB::raw('CASE WHEN vehicle_materials.status = 1 THEN "Active" ELSE "In-Active" END AS status,
+                CASE WHEN vehicle_materials.is_company = 1 THEN "Company" ELSE "" END AS is_company,
+              DATE_FORMAT(vehicle_materials.created_at, "%d-%b-%Y %r") AS date_created'),
+           
+           
         ];
-        $query = self::select($fields)->leftjoin('categories','categories.id','materials.property_material_id')
-        ->leftjoin('units','units.id','materials.units_id');
+        $query = self::select($fields);
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -102,8 +93,8 @@ class Materials extends Model
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
-        if ($request->has('centering_materials_id')) {
-            $materials = self::where(['uuid' => $request->centering_materials_id])->first();
+        if ($request->has('centering_vehicle_id')) {
+            $materials = self::where(['uuid' => $request->centering_vehicle_id])->first();
             $materials->updated_by = Auth::id();
             if(isset($request->created_at)) {
                 $materials->updated_at = $request->created_at; 
@@ -115,17 +106,10 @@ class Materials extends Model
             $materials->uuid = \Str::uuid()->toString();
             $materials->status = 1;
         }
-        if ($request->has('from_date')) {
-             $materials->from_date               = $request->from_date;
-        }
-        if ($request->has('to_date')) {
-             $materials->to_date               = $request->to_date;
-        }
+      
 
-        $materials->rate_unit               = $request->rate_unit;
-        $materials->property_material_id    = $request->category_id;
-        $materials->units_id                = $request->units_id;
-        $materials->material_id             = $request->material_id;
+        $materials->vehicle_name               = strtoupper($request->vehicle_name);
+        $materials->is_company                  = $request->is_company;
        
         $materials->save();
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Productdetails;
-use App\Models\Materials;
+use App\Models\Vehicle_materials;
 use App\Models\Units;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,7 @@ use Redirect;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Validator;
 
-class Centering_materialsController extends Controller
+class Vehicle_materialsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -29,22 +29,21 @@ class Centering_materialsController extends Controller
     public function list(Request $request)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management")) {
+        if (!config("roles.{$role}.vehicle_materials_management")) {
             abort(403);
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'materials'      => 'materials.materials',
-                    'status'    => 'materials.status',
+                    'vehicle_name'      => 'vehicle_materials.vehicle_name',
+                    'status'    => 'vehicle_materials.status',
                 ];
                 $sortField   = [
-                    'materials'     => 'materials.materials',
-                    'status'  => 'materials.status',
-                    'date_created' => 'materials.created_at'
+                    'status'  => 'vehicle_materials.status',
+                    'date_created' => 'vehicle_materials.created_at'
                 ];
                 $search_filter = [];
                 $sort = [
-                    'field' => 'materials.created_at',
+                    'field' => 'vehicle_materials.created_at',
                     'order' => 'desc'
                 ];
                 $page = config('pagination.page');
@@ -76,9 +75,8 @@ class Centering_materialsController extends Controller
                         array_push($search_filter, [$table_field, 'LIKE', '%' . addslashes($search_value) . '%']);
                     }
                 }
-                $search_filter['material_id'] = 2;
 
-                $records = Materials::get_materials($page, $offset, $sort, $search_filter);
+                $records = Vehicle_materials::get_materials($page, $offset, $sort, $search_filter);
                 //print_r($records);exit;
 
                 if (!empty($records['records'])) {
@@ -87,7 +85,7 @@ class Centering_materialsController extends Controller
                     $data       = $records;
                 } else {
                     $statusCode = '400';
-                    $message    = "No centering_materials found";
+                    $message    = "No vehicle_materials found";
                     $data       = $records;
                 }
 
@@ -102,13 +100,13 @@ class Centering_materialsController extends Controller
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
                 $role = session('user_role');
-                $create_access     = config("roles.{$role}.centering_materials_management_access.create");
-                $view_access     = config("roles.{$role}.centering_materials_management_access.view");
-                $edit_access     = config("roles.{$role}.centering_materials_management_access.edit");
-                $delete_access   = config("roles.{$role}.centering_materials_management_access.delete");
-                $change_status_access   = config("roles.{$role}.centering_materials_management_access.change_status");
+                $create_access     = config("roles.{$role}.vehicle_materials_management_access.create");
+                $view_access     = config("roles.{$role}.vehicle_materials_management_access.view");
+                $edit_access     = config("roles.{$role}.vehicle_materials_management_access.edit");
+                $delete_access   = config("roles.{$role}.vehicle_materials_management_access.delete");
+                $change_status_access   = config("roles.{$role}.vehicle_materials_management_access.change_status");
 
-                return view('master.centering_materials.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.vehicle_materials.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }
@@ -116,36 +114,47 @@ class Centering_materialsController extends Controller
     public function create(Request $request)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.create")) {
+        if (!config("roles.{$role}.vehicle_materials_management_access.create")) {
             abort(403);
         } else {
-            $search = ['status' => 1,'category_id'=>2];
+            $search = ['status' => 1,'category_id'=>6];
             $fields = ['id','product_name'];
             $categories = Productdetails::getAll($fields,$search);
 
             $search1 = ['status' => 1];
             $fields1 = ['id','unit_name'];
             $units = Units::getAll($fields1,$search1);
-            return view('master.centering_materials.create',compact('categories','units'));
+            return view('master.vehicle_materials.create',compact('categories','units'));
         }
     }
     public function store(Request $request)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management")) {
+        if (!config("roles.{$role}.vehicle_materials_management")) {
             abort(403);
         } else {
 
-            $fieldValidation['rate_unit']       = ['required'];
-            $fieldValidation['category_id']     = ['required'];
-            $fieldValidation['units_id']        = ['required'];
-            $fieldValidation['from_date']       = ['required'];
-            $fieldValidation['to_date']         = ['required'];
+            if($request->has('centering_vehicle_id')){
+                
+                $centering_vehicle_id = $request->get('centering_vehicle_id');
+                $fieldValidation = [
+                'vehicle_name'         => [
+                    'required','min:2','max:15','unique:vehicle_materials,vehicle_name,'.$centering_vehicle_id.',uuid'
+                ]
+                ];
+            }
+            else{
+                 $fieldValidation = [
+                'vehicle_name'         => [
+                    'required','min:2','max:15','unique:vehicle_materials,vehicle_name'
+                ]
+            ];
+            }
            
 
             $errorMessages    = [
-                'centering_materials.required'             => "Please enter the name",
-                'centering_materials.regex'                => "Should include only Two Decimal Places",
+                'lorry_materials.required'             => "Please enter the name",
+                'lorry_materials.regex'                => "Should include only Two Decimal Places",
             ];
 
             $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
@@ -154,17 +163,13 @@ class Centering_materialsController extends Controller
                 return Redirect::back()->withInput($request->input())->withErrors($validator);
             }
 
-            $request['material_id']= 2;
-
-            $request['from_date']   = date('Y-m-d',strtotime($request->get('from_date')));
-            $request['to_date']     = date('Y-m-d',strtotime($request->get('to_date')));
-
+            $request['material_id']= 6;
             if($request->has('centering_materials_id')){
                 $request['created_at']=date('Y-m-d H:i:s');
-                $response   = Materials::storeRecords($request);
+                $response   = Vehicle_materials::storeRecords($request);
             }
             else{
-                $response   = Materials::storeRecords($request); 
+                $response   = Vehicle_materials::storeRecords($request); 
             }
 
             $statusCode = $response['status_code'];
@@ -172,7 +177,7 @@ class Centering_materialsController extends Controller
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
-            return redirect('master/centering-materials/list'); 
+            return redirect('master/vehicle-materials/list'); 
 
         }
     }
@@ -180,11 +185,11 @@ class Centering_materialsController extends Controller
     public function view($id)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.view")) {
+        if (!config("roles.{$role}.vehicle_materials_management_access.view")) {
             abort(403);
         } else {
 
-            $search = ['status' => 1,'category_id'=>2];
+            $search = ['status' => 1,'category_id'=>6];
             $fields = ['id','product_name'];
             $categories = Productdetails::getAll($fields,$search);
 
@@ -192,7 +197,7 @@ class Centering_materialsController extends Controller
             $fields1 = ['id','unit_name'];
             $units = Units::getAll($fields1,$search1);
 
-            $centering_materials  = Materials::where(['uuid' => $id])->first();
+            $centering_materials  = Vehicle_materials::where(['uuid' => $id])->first();
             if ($centering_materials) {
 
                
@@ -202,10 +207,10 @@ class Centering_materialsController extends Controller
                     'categories'     => $categories,
                 ];
 
-                return view('master.centering_materials.view', $data);
+                return view('master.vehicle_materials.view', $data);
             } else {
                 $data = [
-                    'message' => "Invalid centering_materials"
+                    'message' => "Invalid vehicle_materials"
                 ];
 
                 return view('error_view', $data);
@@ -216,11 +221,11 @@ class Centering_materialsController extends Controller
     public function edit($id)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.edit")) {
+        if (!config("roles.{$role}.vehicle_materials_management_access.edit")) {
             abort(403);
         } else {
-            // $centering_materials  = Materials::find($id);
-            $search = ['status' => 1,'category_id'=>2];
+            // $centering_materials  = Vehicle_materials::find($id);
+            $search = ['status' => 1,'category_id'=>6];
             $fields = ['id','product_name'];
             $categories = Productdetails::getAll($fields,$search);
 
@@ -228,7 +233,7 @@ class Centering_materialsController extends Controller
             $fields1 = ['id','unit_name'];
             $units = Units::getAll($fields1,$search1);
 
-            $centering_materials  = Materials::where(['uuid' => $id])->first();
+            $centering_materials  = Vehicle_materials::where(['uuid' => $id])->first();
             if ($centering_materials) {
 
                
@@ -238,10 +243,10 @@ class Centering_materialsController extends Controller
                     'categories'     => $categories,
                 ];
 
-                return view('master.centering_materials.edit', $data);
+                return view('master.vehicle_materials.edit', $data);
             } else {
                 $data = [
-                    'message' => "Invalid centering_materials"
+                    'message' => "Invalid vehicle_materials"
                 ];
 
                 return view('error_view', $data);
@@ -252,15 +257,15 @@ class Centering_materialsController extends Controller
     public function updateStatus($id)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.edit")) {
+        if (!config("roles.{$role}.vehicle_materials_management_access.edit")) {
             abort(403);
         } else {
-            $centering_materials  = Materials::where(['uuid' => $id])->first();
+            $centering_materials  = Vehicle_materials::where(['uuid' => $id])->first();
             $centering_materials->status = ($centering_materials->status) ? 0 : 1;
             $centering_materials->save();
 
             $data = [
-                'redirect_url' => url(route('centering-materials-list'))
+                'redirect_url' => url(route('vehicle-materials-list'))
             ];
 
             $statusCode = '200';
@@ -278,13 +283,13 @@ class Centering_materialsController extends Controller
     public function delete($id)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.delete")) {
+        if (!config("roles.{$role}.vehicle_materials_management_access.delete")) {
             abort(403);
         } else {
-            $result = Materials::where('uuid', $id)->delete();
+            $result = Vehicle_materials::where('uuid', $id)->delete();
 
             $data = [
-                'redirect_url' => url(route('centering-materials-list'))
+                'redirect_url' => url(route('vehicle-materials-list'))
             ];
 
             $statusCode = '200';

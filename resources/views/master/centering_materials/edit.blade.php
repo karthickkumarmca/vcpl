@@ -25,9 +25,9 @@
 					<div class="box-body">
 					<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Category<span class="text-danger"> *</span></label>
+								<label>Select Material Name<span class="text-danger"> *</span></label>
 								<select name="category_id" class="form-control pos_validate" id="category_id">
-									<option value="">Select Category</option>
+									<option value="">Select Material Name</option>
 									@isset($categories)
 										@foreach($categories as $category)
 												@isset($centering_materials->property_material_id)

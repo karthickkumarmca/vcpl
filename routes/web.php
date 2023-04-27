@@ -139,6 +139,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'Toolsplants_materialsController@updateStatus');
 	    $router->get('delete/{id}', 'Toolsplants_materialsController@delete');
 	});
+
+	Route::group(['prefix' => 'vehicle-materials/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Vehicle_materialsController@list')->name('vehicle-materials-list');
+	    $router->get('create', 'Vehicle_materialsController@create')->name('create-vehicle-materials');
+	    $router->post('store', 'Vehicle_materialsController@store')->name('save-vehicle-materials');
+	    $router->get('view/{id}', 'Vehicle_materialsController@view');
+	    $router->get('edit/{id}', 'Vehicle_materialsController@edit');
+	    $router->get('update-status/{id}', 'Vehicle_materialsController@updateStatus');
+	    $router->get('delete/{id}', 'Vehicle_materialsController@delete');
+	});
 });
 
 
