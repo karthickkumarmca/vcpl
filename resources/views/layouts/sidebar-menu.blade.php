@@ -36,11 +36,7 @@
 						</li>
 					@endif
 					@if(config("roles.".Session::get('user_role').".staff_details_management"))
-					<li class="{{ Request::is('staff-details-list/*') ? 'active' : '' }}">
-						<a href="{!! url(route('staff-details-list')) !!}">
-							<span>STAFF DETAILS</span>
-						</a>
-					</li>
+					
 					@endif
 
 			    </ul>
