@@ -27,6 +27,17 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'], function () use ($router) {
 
+
+	Route::group(['prefix' => 'architect-site/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Architect_siteController@list')->name('architect-site-list');
+	    $router->get('create', 'Architect_siteController@create')->name('create-architect-site');
+	    $router->post('store', 'Architect_siteController@store')->name('save-architect-site');
+	    $router->get('view/{id}', 'Architect_siteController@view');
+	    $router->get('edit/{id}', 'Architect_siteController@edit');
+	    $router->get('update-status/{id}', 'Architect_siteController@updateStatus');
+	    $router->get('delete/{id}', 'Architect_siteController@delete');
+	});
+	
 	Route::group(['prefix' => 'categories/','middleware' => 'auth'], function () use ($router) {
 		$router->get('list', 'CategoriesController@list')->name('categories-list');
 	    $router->get('create', 'CategoriesController@create')->name('create-categories');

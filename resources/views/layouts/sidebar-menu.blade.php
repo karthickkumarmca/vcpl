@@ -43,7 +43,7 @@
 
 
 			</li>
-			<li class="treeview-nav treeview">
+			<li class="treeview-nav treeview @if(str_contains(url()->current(),'architect-site')) active @endif" >
 				<a href="#">
 				     <span>SITE </span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -60,16 +60,15 @@
 							<span>CLIENT  INFO </span>
 						</a>
 					</li>
-					<li class="">
-						<a href="javascript::">
+
+					@if(config("roles.".Session::get('user_role').".architect_site_management"))
+					<li class="{{ Request::is('master/architect-site/*') ? 'active' : '' }}">
+						<a href="{!! url(route('architect-site-list')) !!}">
 							<span>ARCHITECT INFO </span>
 						</a>
 					</li>
-					<li class="">
-						<a href="javascript::">
-							<span>SUPPLIER INFO</span>
-						</a>
-					</li>
+					@endif
+					
 
 			    </ul>
 

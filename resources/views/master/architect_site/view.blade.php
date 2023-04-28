@@ -2,11 +2,11 @@
 @section('content')
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Vehicle materials <small>management</small>
+		Architect Info <small>management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('vehicle-materials-list'))}}">Vehicle materials management</a></li>
+		<li><a href="{{url(route('architect-site-list'))}}">Architect Info management</a></li>
 	</ol>
 </section>
 <section class="content">
@@ -14,7 +14,7 @@
 		<div class="col-sm-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Vehicle materials Details</h3>
+					<h3 class="box-title">Architect Info Details</h3>
 				</div>
 				<div class="box-body">
 					@if($centering_materials->status)
@@ -36,7 +36,7 @@
 								<th class="grey_header">
 									<label>Vehicle Name</label>
 								</th>
-								<td>{!! $centering_materials->vehicle_name !!}</td>
+								<td>{!! $centering_materials->architect_name !!}</td>
 							</tr>
 							<tr>
 								<th class="grey_header">
@@ -62,7 +62,7 @@
 				</div>
 				<div class="box-footer">
 					<div class="pull-right">
-						<a href="{{url(route('vehicle-materials-list'))}}" class="btn btn-default">
+						<a href="{{url(route('architect-site-list'))}}" class="btn btn-default">
 							<strong>Back</strong>
 						</a>
 					</div>
