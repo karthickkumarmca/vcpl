@@ -200,9 +200,7 @@ class UserController extends Controller
                     'regex:/^([0-9\s\-\+\(\)]*)$/',
                 ]
             ];
-            if (App::environment() != "local") {
-                $fieldValidation['g-recaptcha-response'] = ['required','captcha'];
-            }
+           
             if ($request->has('user_id')) {
                 $fieldValidation['email'][] = 'check_email:users,email,' . $request->email . ',' . $request->user_id;
                 $fieldValidation['phone'][] = 'iunique:users,phonenumber,' . $request->phone . ',' . $request->user_id;
@@ -422,9 +420,7 @@ class UserController extends Controller
                         'confirm_password'  => ['required', 'max:100'],
                         'current_password'  => ['required', 'max:100']
                     ];
-                    if (App::environment() != "local") {
-                        $fieldValidation['g-recaptcha-response'] = ['required','captcha'];
-                    }
+                   
                     $errorMessages    = [
                         'current_password.required'      => "Please enter the current password",
                         'new_password.required'      => "Please enter the password",

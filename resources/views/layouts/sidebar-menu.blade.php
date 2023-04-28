@@ -84,22 +84,7 @@
 			</li>
 			@endif
 
-
-
-			@if(config("roles.".Session::get('user_role').".user_management"))
-			<li class="{{ Request::is('user-list') ? 'active' : '' }} {{ Request::is('create-user') ? 'active' : '' }} {{ Request::is('edit-user/*') ? 'active' : '' }} {{ Request::is('view-user/*') ? 'active' : '' }} {{ Request::is('change-password/*') ? 'active' : '' }}">
-				<a href="{!! url(route('user-list')) !!}">
-					<span>USERS </span>
-				</a>
-			</li>
-			@endif
-			@if(config("roles.".Session::get('user_role').".customer_management"))
-			<li class="{{ Request::is('customer-list') ? 'active' : '' }} {{ Request::is('create-customer') ? 'active' : '' }} {{ Request::is('edit-customer/*') ? 'active' : '' }} {{ Request::is('view-customer/*') ? 'active' : '' }}">
-				<a href="{!! url(route('customer-list')) !!}">
-					<span>CUSTOMERS </span>
-				</a>
-			</li>
-			@endif
+			
 
 			@if(config("roles.".Session::get('user_role').".roles_management"))
 				<li class="{{ Request::is('roles-list') ? 'active' : '' }} {{ Request::is('create-roles') ? 'active' : '' }} {{ Request::is('edit-roles/*') ? 'active' : '' }} {{ Request::is('view-roles/*') ? 'active' : '' }}">

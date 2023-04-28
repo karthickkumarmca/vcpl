@@ -21,6 +21,21 @@
 <section class="content">
 	<div class="row mb-3">
 		<div class="col-6">
+			<div class="card card-widget widget-user" style="height: 243px">
+				<div class="widget-user-header text-center"  style="height: 55px">
+					<h4 class="widget-user-desc">INTRODUCTION</h4>
+				</div>
+				<div class="card-footer pt-1">
+					<div class="row">
+						<div class="col-sm-12">
+							Viswanathan Constructions Private Limited is among the largest and most reputed professionally managed Civil Construction Company in Coimbatore, India Viswanathan Constructions Private Limited is among the largest and most reputed professionally managed Civil Construction. Viswanathan Constructions Private Limited is among the largest and most reputed professionally managed Civil Construction Company in Coimbatore, Company in Coimbatore, India
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
 			<div class="card card-widget widget-user">
 				<div class="widget-user-header bg-success text-center">
 					<h4 class="widget-user-desc">USER INFORMATION</h4>
@@ -52,12 +67,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-6 col-sm-6 pr-0">
+		</div>
+		<div class="row mb-3">
+		<div class="col-lg-12 col-sm-12 pr-0">
 			<div class="card">
 				<!-- <div class="card-header">Users</div> -->
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">Users</h3>
+						<h3 class="box-title">Points Ratio</h3>
 					</div>
 				</div>
 				<div class="card-body" style="min-height: 380px">
