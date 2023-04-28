@@ -123,6 +123,15 @@ return [
             'delete' => 1,
             'change_status' => 1,
         ],
+        'client_site_management' => 1,
+        'client_site_management_access' => [
+            'create' => 1,
+            'edit' => 1,
+            'view' => 1,
+            'change_password' => 1,
+            'delete' => 1,
+            'change_status' => 1,
+        ],
         'user_management' => 1,
         'user_management_access' => [
             'create' => 1,

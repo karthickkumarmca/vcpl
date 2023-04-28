@@ -37,7 +37,17 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'Architect_siteController@updateStatus');
 	    $router->get('delete/{id}', 'Architect_siteController@delete');
 	});
-	
+
+	Route::group(['prefix' => 'client-site/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Client_siteController@list')->name('client-site-list');
+	    $router->get('create', 'Client_siteController@create')->name('create-client-site');
+	    $router->post('store', 'Client_siteController@store')->name('save-client-site');
+	    $router->get('view/{id}', 'Client_siteController@view');
+	    $router->get('edit/{id}', 'Client_siteController@edit');
+	    $router->get('update-status/{id}', 'Client_siteController@updateStatus');
+	    $router->get('delete/{id}', 'Client_siteController@delete');
+	});
+
 	Route::group(['prefix' => 'categories/','middleware' => 'auth'], function () use ($router) {
 		$router->get('list', 'CategoriesController@list')->name('categories-list');
 	    $router->get('create', 'CategoriesController@create')->name('create-categories');
