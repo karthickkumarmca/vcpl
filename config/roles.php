@@ -151,5 +151,12 @@ return [
             'view' => 1,            
             'change_status' => 1,
         ],
+        'staff_details_management' =>1,
+        'staff_details_management_access' => [
+            'create' => 1,
+            'edit' => 1,
+            'view' => 1,            
+            'change_status' => 1,
+        ],
     ],
 ];
