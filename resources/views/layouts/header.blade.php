@@ -1,7 +1,7 @@
 <header class="main-header">
     <style>
         .skin-red .sidebar-menu>li.active>a {
-            border-left-color: #0078bf;
+            border-left-color: #28a745;
         }
 
         .sidebar-menu>li>a:hover {

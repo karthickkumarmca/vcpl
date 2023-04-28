@@ -119,4 +119,11 @@ class Roles extends Model
 
         return $response;
     }
+    public static function getAll(array $fields, array $filter = []): array
+    {
+        return self::select($fields)
+        ->where($filter)
+        ->get()
+        ->toArray();
+    }
 }
