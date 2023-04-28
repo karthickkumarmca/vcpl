@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<label>Select Material Name <span class="text-danger"> *</span></label>
 								<select name="category_id" class="form-control pos_validate" id="category_id">
-									<option value="">Select category</option>
+									<option value="">Select Material Name</option>
 									@isset($categories)
 										@foreach($categories as $category)
 										<option value="{{$category['id']}}">{{$category['product_name']}}</option>

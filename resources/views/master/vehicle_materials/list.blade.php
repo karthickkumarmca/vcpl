@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('content')
 <section class="content-header">
-    <h1 class="col-lg-6 no-padding">Centering materials <small>Management</small></h1>
+    <h1 class="col-lg-6 no-padding">Vehicle materials <small>Management</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Centering materials</li>
+        <li>Vehicle materials</li>
     </ol>
 </section>
 <section class="content">
@@ -16,12 +16,12 @@
                         <div class="btn-group">
                             @isset($create_access)
                             @if ($create_access == 1)
-                            <a href="{{ url(route('create-centering-materials')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Centering materials</a>
+                            <a href="{{ url(route('create-vehicle-materials')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Vehicle materials</a>
                             @endif
                             @endisset
                         </div>
                     </div>
-                    <h3 class="box-title">Centering materials List</h3>
+                    <h3 class="box-title">Vehicle materials List</h3>
                 </div>
                 <div class="box-body">
                     <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
@@ -41,77 +41,32 @@
             'name': 'subcategories-list',
             'columns': [
             {
-                "name" : "category_name",
-                "label": "Category Name",
+                "name" : "vehicle_name",
+                "label": "Vehicle Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "category_name"
+                    "field" : "vehicle_name"
                 },
                 "search": {
-                    "display" : 0,
+                    "display" : 1,
                     "type"    : "input"
                 }
             },
              {
-                "name" : "rate_unit",
-                "label": "Rate Units",
+                "name" : "is_company",
+                "label": "Is Company",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "rate_unit"
+                    "field" : "is_company"
                 },
                 "search": {
                     "display" : 1,
-                    "type"    : "input"
-                }
-            },
-            {
-                "name" : "unit_name",
-                "label": "Unit Name",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "unit_name"
-                },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
-                }
-            },
-            {
-                "name" : "from_date",
-                "label": "From Date",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "from_date"
-                },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
-                }
-            },
-             {
-                "name" : "to_date",
-                "label": "To Date",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "to_date"
-                },
-                "search": {
-                    "display" : 0,
                     "type"    : "input"
                 }
             },

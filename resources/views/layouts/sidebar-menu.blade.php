@@ -216,6 +216,7 @@
 			@if(str_contains(url()->current(),'lorry-materials')) active @endif
 			@if(str_contains(url()->current(),'shop-materials')) active @endif
 			@if(str_contains(url()->current(),'toolsplants-materials')) active @endif
+			@if(str_contains(url()->current(),'vehicle-materials')) active @endif
 			">
 				<a href="#">
 				    <span>Materials</span>
@@ -253,13 +254,16 @@
 						</a>
 					</li>
 					@endif
-					
-					
-					<li class="">
-						<a href="javascript::">
-							 <span>VEHICLE</span>
+
+					@if(config("roles.".Session::get('user_role').".vehicle_materials_management"))
+					<li class="{{ Request::is('master/vehicle-materials/*') ? 'active' : '' }}">
+						<a href="{!! url(route('vehicle-materials-list')) !!}">
+							<span>VEHICLE</span>
 						</a>
 					</li>
+					@endif
+					
+				
 
 			    </ul>
 

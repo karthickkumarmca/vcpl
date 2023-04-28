@@ -68,8 +68,32 @@
 								@endif
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>From Date <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Select date" id="from_date" name="from_date" value="{{old('from_date')}}" data-rule="admin" minlength="1" maxlength="128" readonly/>
+								<span class="validation_error"></span>
+								@if($errors->has('rate_unit'))
+								<div class="error">{{ $errors->first('from_date') }}</div>
+								@endif
+							</div>
+						</div>
+
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>To Date <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Select date" id="to_date" name="to_date" value="{{old('to_date')}}" data-rule="admin" minlength="1" maxlength="128" readonly/>
+								<span class="validation_error"></span>
+								@if($errors->has('rate_unit'))
+								<div class="error">{{ $errors->first('to_date') }}</div>
+								@endif
+							</div>
+						</div>
 						
 					</div>
+					
 					<div class="box-footer">
 						<div class="pull-right">
 							<button type="submit" id="categories-submit" class="btn btn-success">
@@ -93,4 +117,29 @@
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
     @include('master.property_name.script')
+    <script type="text/javascript">
+	// set default dates
+	var start = new Date();
+	// set end date to max one year period:
+	var end = new Date(new Date().setYear(start.getFullYear()+1));
+
+	$('#from_date').datepicker({
+	    startDate : start,
+	    endDate   : end
+	// update "toDate" defaults whenever "fromDate" changes
+	}).on('changeDate', function(){
+	    // set the "toDate" start to not be later than "fromDate" ends:
+	    $('#to_date').datepicker('setStartDate', new Date($(this).val()));
+	}); 
+
+	$('#to_date').datepicker({
+	    startDate : start,
+	    endDate   : end
+	// update "fromDate" defaults whenever "toDate" changes
+	}).on('changeDate', function(){
+	    // set the "fromDate" end to not be later than "toDate" starts:
+	    $('#from_date').datepicker('setEndDate', new Date($(this).val()));
+	});
+
+    </script>
     @stop
