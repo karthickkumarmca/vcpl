@@ -101,7 +101,7 @@
 				</a>
 			</li>
 			@endif
-        	{{-- <li class="treeview-nav treeview  @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
+        	<!--  <li class="treeview-nav treeview  @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
 
 				<a href="#">
 				    <span>MASTER SETTINGS</span>
@@ -127,8 +127,12 @@
 			    </ul>
 
 
-			</li> --}}
-			<li class="treeview-nav treeview  @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
+			</li>  -->
+			<li class="treeview-nav treeview  
+			@if(str_contains(url()->current(),'categories/list')) active @endif
+			@if(str_contains(url()->current(),'categories/edit')) active @endif
+			@if(str_contains(url()->current(),'categories/view')) active @endif
+			   @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
 				<a href="#">
 				    <span>PRODUCT SETTINGS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -200,7 +204,7 @@
 			@if(str_contains(url()->current(),'vehicle-materials')) active @endif
 			">
 				<a href="#">
-				    <span>Materials</span>
+				    <span>MATERIALS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">

@@ -62,7 +62,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Email <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Ownership email" name="email" value="{{old('email')}}"  minlength="3" maxlength="128"/>
+								<input type="email" class="form-control" autocomplete="off" placeholder="Enter Ownership email" name="email" value="{{old('email')}}"  minlength="3" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('email'))
 								<div class="error">{{ $errors->first('email') }}</div>
