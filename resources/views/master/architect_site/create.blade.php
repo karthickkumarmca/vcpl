@@ -26,7 +26,7 @@
 						
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Vehicle Name <span class="text-danger"> *</span></label>
+								<label>Architect Name <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="architect_name" value="{{old('architect_name')}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('architect_name'))
@@ -39,8 +39,12 @@
 							<div class="form-group">
 								<label>Site Name <span class="text-danger"> *</span></label>
 								<select name="site_id" class="form-control pos_validate" id="site_id">
-									<option value="0">No</option>
-									<option value="1">Yes</option>
+									<option value="">Select Site Name</option>
+									@isset($siteinfo)
+										@foreach($siteinfo as $siteinf)
+										<option value="{{$siteinf['id']}}">{{$siteinf['site_name']}}</option>
+										@endforeach
+									@endisset
 									
 								</select>
 								<span class="validation_error"></span>

@@ -45,7 +45,7 @@
 			    </ul>
 			</li>
 			<li class="treeview-nav treeview 
-			@if(str_contains(url()->current(),'client-info-list')) active @endif
+			@if(str_contains(url()->current(),'architect-site')) active @endif
 			@if(str_contains(url()->current(),'client-site')) active @endif
 			" >
 				<a href="#">

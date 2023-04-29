@@ -17,7 +17,7 @@
 					<h3 class="box-title">Architect Info Details</h3>
 				</div>
 				<div class="box-body">
-					@if($centering_materials->status)
+					@if($architect_site->status)
 					@php
 					$status = "Active";
 					$status_bg="bg-green";
@@ -36,13 +36,50 @@
 								<th class="grey_header">
 									<label>Vehicle Name</label>
 								</th>
-								<td>{!! $centering_materials->architect_name !!}</td>
+								<td>{!! $architect_site->architect_name !!}</td>
 							</tr>
+							
 							<tr>
 								<th class="grey_header">
-									<label>Is Company</label>
+									<label>Site Name</label>
 								</th>
-								<td>@if($centering_materials->is_company==1) Yes @else No @endif</td>
+								<td>@isset($siteinfo)
+										@foreach($siteinfo as $siteinf)
+											@isset($architect_site->site_id)
+													@if($architect_site->site_id == $siteinf['id'])
+													{{$siteinf['site_name']}}
+												@endif
+											@endisset
+										@endforeach
+									@endisset</td>
+							</tr>
+
+							<tr>
+								<th class="grey_header">
+									<label>Cader</label>
+								</th>
+								<td>{!! $architect_site->cader !!}</td>
+							</tr>
+
+							<tr>
+								<th class="grey_header">
+									<label>Mobile Number</label>
+								</th>
+								<td>{!! $architect_site->mobile_number !!}</td>
+							</tr>
+
+							<tr>
+								<th class="grey_header">
+									<label>Email</label>
+								</th>
+								<td>{!! $architect_site->email_id !!}</td>
+							</tr>
+
+							<tr>
+								<th class="grey_header">
+									<label>Address</label>
+								</th>
+								<td>{!! $architect_site->address !!}</td>
 							</tr>
 							<tr>
 								<th class="grey_header">
@@ -55,7 +92,7 @@
 								<th class="grey_header">
 									<label>Created At</label>
 								</th>
-								<td>{!! $centering_materials->created_at !!}</td>
+								<td>{!! $architect_site->created_at !!}</td>
 							</tr>
 						</table>
 					</div>

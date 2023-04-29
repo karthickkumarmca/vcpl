@@ -14,7 +14,7 @@ class Architect_site extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'architect_site';
+    protected $table = 'architect_info';
 
     protected $guarded = [];
     /**
@@ -34,22 +34,22 @@ class Architect_site extends Model
     public static function get_materials($page, $offset, $sort, $search_filter)
     {
         $fields = [
-            'Architect_site.id',
-            'Architect_site.uuid',
-            'Architect_site.id AS encryptid',
-            'Architect_site.architect_name',
-            'Architect_site.cader',
-            'Architect_site.mobile_number',
-            'Architect_site.email_id',
-            'Architect_site.address',
-            'Architect_site.status as status_id',
-             DB::raw('CASE WHEN Architect_site.status = 1 THEN "Active" ELSE "In-Active" END AS status,
-                CASE WHEN Architect_site.is_company = 1 THEN "Company" ELSE "" END AS is_company,
-              DATE_FORMAT(Architect_site.created_at, "%d-%b-%Y %r") AS date_created'),
+            'architect_info.id',
+            'architect_info.uuid',
+            'architect_info.id AS encryptid',
+            'architect_info.architect_name',
+            'architect_info.cader',
+            'architect_info.mobile_number',
+            'architect_info.email_id',
+            'architect_info.address',
+            'site_info.site_name',
+            'architect_info.status as status_id',
+             DB::raw('CASE WHEN architect_info.status = 1 THEN "Active" ELSE "In-Active" END AS status,
+              DATE_FORMAT(architect_info.created_at, "%d-%b-%Y %r") AS date_created'),
            
            
         ];
-        $query = self::select($fields);
+        $query = self::select($fields)->leftjoin('site_info','site_info.id','architect_info.site_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -98,7 +98,7 @@ class Architect_site extends Model
         $response['status_code'] = config('response_code.Bad_Request');
 
         if ($request->has('architect_name_id')) {
-            $materials = self::where(['uuid' => $request->centering_vehicle_id])->first();
+            $materials = self::where(['uuid' => $request->architect_name_id])->first();
             $materials->updated_by = Auth::id();
             if(isset($request->created_at)) {
                 $materials->updated_at = $request->created_at; 
@@ -112,9 +112,9 @@ class Architect_site extends Model
         }
       
 
-        $materials->vehicle_name                = ucfirst($request->architect_name);
+        $materials->architect_name              = ucfirst($request->architect_name);
         $materials->site_id                     = $request->site_id;
-        $materials->carer                       = $request->cader;
+        $materials->cader                       = $request->cader;
         $materials->mobile_number               = $request->mobile_number;
         $materials->email_id                    = $request->email_id;
         $materials->address                     = $request->address;

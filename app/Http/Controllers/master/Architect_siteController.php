@@ -5,7 +5,7 @@ namespace App\Http\Controllers\master;
 use App\Admin;
 use App\Models\Productdetails;
 use App\Models\Architect_site;
-use App\Models\Units;
+use App\Models\Siteinfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -34,16 +34,16 @@ class Architect_siteController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'vehicle_name'      => 'architect_site.architect_name',
-                    'status'    => 'architect_site.status',
+                    'architect_name'      => 'architect_info.architect_name',
+                    'status'    => 'architect_info.status',
                 ];
                 $sortField   = [
-                    'status'  => 'architect_site.status',
-                    'date_created' => 'architect_site.created_at'
+                    'status'  => 'architect_info.status',
+                    'date_created' => 'architect_info.created_at'
                 ];
                 $search_filter = [];
                 $sort = [
-                    'field' => 'architect_site.created_at',
+                    'field' => 'architect_info.created_at',
                     'order' => 'desc'
                 ];
                 $page = config('pagination.page');
@@ -85,7 +85,7 @@ class Architect_siteController extends Controller
                     $data       = $records;
                 } else {
                     $statusCode = '400';
-                    $message    = "No architect_site found";
+                    $message    = "No architect info found";
                     $data       = $records;
                 }
 
@@ -117,14 +117,11 @@ class Architect_siteController extends Controller
         if (!config("roles.{$role}.architect_site_management_access.create")) {
             abort(403);
         } else {
-            $search = ['status' => 1,'category_id'=>6];
-            $fields = ['id','product_name'];
-            $categories = Productdetails::getAll($fields,$search);
 
             $search1 = ['status' => 1];
-            $fields1 = ['id','unit_name'];
-            $units = Units::getAll($fields1,$search1);
-            return view('master.architect_site.create',compact('categories','units'));
+            $fields1 = ['id','site_name'];
+            $siteinfo = Siteinfo::getAll($fields1,$search1);
+            return view('master.architect_site.create',compact('siteinfo'));
         }
     }
     public function store(Request $request)
@@ -139,14 +136,14 @@ class Architect_siteController extends Controller
                 $architect_name_id = $request->get('architect_name_id');
                 $fieldValidation = [
                 'architect_name'         => [
-                    'required','min:2','max:15','unique:architect_site,architect_name,'.$architect_name_id.',uuid'
+                    'required','min:2','max:15','unique:architect_info,architect_name,'.$architect_name_id.',uuid'
                 ]
                 ];
             }
             else{
                  $fieldValidation = [
                 'architect_name'         => [
-                    'required','min:2','max:15','unique:architect_site,architect_name'
+                    'required','min:2','max:15','unique:architect_info,architect_name'
                 ]
             ];
             }
@@ -176,7 +173,7 @@ class Architect_siteController extends Controller
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
-            return redirect('master/vehicle-materials/list'); 
+            return redirect('master/architect-site/list'); 
 
         }
     }
@@ -188,22 +185,17 @@ class Architect_siteController extends Controller
             abort(403);
         } else {
 
-            $search = ['status' => 1,'category_id'=>6];
-            $fields = ['id','product_name'];
-            $categories = Productdetails::getAll($fields,$search);
-
             $search1 = ['status' => 1];
-            $fields1 = ['id','unit_name'];
-            $units = Units::getAll($fields1,$search1);
+            $fields1 = ['id','site_name'];
+            $siteinfo = Siteinfo::getAll($fields1,$search1);
 
             $architect_site  = Architect_site::where(['uuid' => $id])->first();
             if ($architect_site) {
 
                
                 $data = [
-                    'units'         => $units,
+                    'siteinfo'         => $siteinfo,
                     'architect_site' => $architect_site,
-                    'categories'     => $categories,
                 ];
 
                 return view('master.architect_site.view', $data);
@@ -223,22 +215,17 @@ class Architect_siteController extends Controller
         if (!config("roles.{$role}.architect_site_management_access.edit")) {
             abort(403);
         } else {
-            $search = ['status' => 1,'category_id'=>6];
-            $fields = ['id','product_name'];
-            $categories = Productdetails::getAll($fields,$search);
-
             $search1 = ['status' => 1];
-            $fields1 = ['id','unit_name'];
-            $units = Units::getAll($fields1,$search1);
+            $fields1 = ['id','site_name'];
+            $siteinfo = Siteinfo::getAll($fields1,$search1);
 
             $architect_site  = Architect_site::where(['uuid' => $id])->first();
             if ($architect_site) {
 
                
                 $data = [
-                    'units'         => $units,
+                    'siteinfo'         => $siteinfo,
                     'architect_site' => $architect_site,
-                    'categories'     => $categories,
                 ];
 
                 return view('master.architect_site.edit', $data);
@@ -263,7 +250,7 @@ class Architect_siteController extends Controller
             $architect_site->save();
 
             $data = [
-                'redirect_url' => url(route('vehicle-materials-list'))
+                'redirect_url' => url(route('architect-site-list'))
             ];
 
             $statusCode = '200';
@@ -287,7 +274,7 @@ class Architect_siteController extends Controller
             $result = Architect_site::where('uuid', $id)->delete();
 
             $data = [
-                'redirect_url' => url(route('vehicle-materials-list'))
+                'redirect_url' => url(route('architect-site-list'))
             ];
 
             $statusCode = '200';
