@@ -9,7 +9,7 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('client-site-list'))}}">client Info management</a></li>
+		<li><a href="{{url(route('client-info-list'))}}">client Info management</a></li>
 		<li>Edit client Info</li>
 	</ol>
 </section>
@@ -27,11 +27,11 @@
 					
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Vehicle Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="architect_name" value="{{old('architect_name') ? old('architect_name') : $architect_site->architect_name}}" maxlength="128"/>
+								<label>Client Name <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="client_name" value="{{old('client_name') ? old('client_name') : $client_site->client_name}}" maxlength="128"/>
 								<span class="validation_error"></span>
-								@if($errors->has('architect_name'))
-								<div class="error">{{ $errors->first('architect_name') }}</div>
+								@if($errors->has('client_name'))
+								<div class="error">{{ $errors->first('client_name') }}</div>
 								@endif
 							</div>
 						</div>
@@ -40,8 +40,7 @@
 							<div class="form-group">
 								<label>Company <span class="text-danger"> *</span></label>
 								<select name="is_company" class="form-control pos_validate" id="is_company">
-									<option value="0" @if($architect_site->is_company==0) selected @endif>No</option>
-									<option value="1" @if($architect_site->is_company==1) selected @endif>Yes</option>
+									
 									
 								</select>
 								<span class="validation_error"></span>
@@ -54,7 +53,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Cader <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Cader" name="cader" value="{{old('cader') ? old('cader') : $architect_site->cader}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Cader" name="cader" value="{{old('cader') ? old('cader') : $client_site->cader}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('cader'))
 								<div class="error">{{ $errors->first('cader') }}</div>
@@ -64,7 +63,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Mobile Number <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Moble Number" name="mobile_number" value="{{old('mobile_number') ? old('mobile_number') : $architect_site->mobile_number}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Moble Number" name="mobile_number" value="{{old('mobile_number') ? old('mobile_number') : $client_site->mobile_number}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('mobile_number'))
 								<div class="error">{{ $errors->first('mobile_number') }}</div>
@@ -75,7 +74,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Email Id <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Email id" name="email_id" value="{{old('email_id') ? old('email_id') : $architect_site->email_id}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Email id" name="email_id" value="{{old('email_id') ? old('email_id') : $client_site->email_id}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('email_id'))
 								<div class="error">{{ $errors->first('email_id') }}</div>
@@ -86,7 +85,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Address <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Address" name="address" value="{{old('address') ? old('address') : $architect_site->address}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Address" name="address" value="{{old('address') ? old('address') : $client_site->address}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('address'))
 								<div class="error">{{ $errors->first('address') }}</div>
@@ -102,13 +101,13 @@
 							<button type="submit" id="categories-submit" class="btn btn-success">
 								<strong>Save</strong>
 							</button>
-							<a href="{{url(route('client-site-list'))}}" class="btn btn-default">
+							<a href="{{url(route('client-info-list'))}}" class="btn btn-default">
 								<strong>Back</strong>
 							</a>
 						</div>
 					</div>
 				</div>
-				<input type="hidden" name="architect_name_id" value="{!! $architect_site->uuid !!}" />
+				<input type="hidden" name="client_name_id" value="{!! $client_site->uuid !!}" />
 			</form>
 		</div>
 	</div>
@@ -120,5 +119,5 @@
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
 
-@include('master.architect_site.script')
+@include('master.client_site.script')
 @stop

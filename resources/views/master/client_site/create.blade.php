@@ -7,7 +7,7 @@
 	<h1 class="col-lg-6 no-padding">client Info <small>Management</small></h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('client-site-list'))}}">client Info management</a></li>
+		<li><a href="{{url(route('client-info-list'))}}">client Info management</a></li>
 		<li>Create client Info</li>
 	</ol>
 </section>
@@ -26,11 +26,11 @@
 						
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Vehicle Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="architect_name" value="{{old('architect_name')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<label>Client Name <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="client_name" value="{{old('client_name')}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
-								@if($errors->has('architect_name'))
-								<div class="error">{{ $errors->first('architect_name') }}</div>
+								@if($errors->has('client_name'))
+								<div class="error">{{ $errors->first('client_name') }}</div>
 								@endif
 							</div>
 						</div>
@@ -100,7 +100,7 @@
 							<button type="submit" id="categories-submit" class="btn btn-success">
 								Save
 							</button>
-							<a href="{{url(route('client-site-list'))}}" class="btn btn-default">
+							<a href="{{url(route('client-info-list'))}}" class="btn btn-default">
 								Back
 							</a>
 						</div>

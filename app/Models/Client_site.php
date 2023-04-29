@@ -14,7 +14,7 @@ class Client_site extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'client_site';
+    protected $table = 'client_info';
 
     protected $guarded = [];
     /**
@@ -34,18 +34,17 @@ class Client_site extends Model
     public static function get_materials($page, $offset, $sort, $search_filter)
     {
         $fields = [
-            'client_site.id',
-            'client_site.uuid',
-            'client_site.id AS encryptid',
-            'client_site.architect_name',
-            'client_site.cader',
-            'client_site.mobile_number',
-            'client_site.email_id',
-            'client_site.address',
-            'client_site.status as status_id',
-             DB::raw('CASE WHEN client_site.status = 1 THEN "Active" ELSE "In-Active" END AS status,
-                CASE WHEN client_site.is_company = 1 THEN "Company" ELSE "" END AS is_company,
-              DATE_FORMAT(client_site.created_at, "%d-%b-%Y %r") AS date_created'),
+            'client_info.id',
+            'client_info.uuid',
+            'client_info.id AS encryptid',
+            'client_info.client_name',
+            'client_info.cader',
+            'client_info.mobile_number',
+            'client_info.email_id',
+            'client_info.address',
+            'client_info.status as status_id',
+             DB::raw('CASE WHEN client_info.status = 1 THEN "Active" ELSE "In-Active" END AS status,
+              DATE_FORMAT(client_info.created_at, "%d-%b-%Y %r") AS date_created'),
            
            
         ];
@@ -97,8 +96,8 @@ class Client_site extends Model
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
-        if ($request->has('architect_name_id')) {
-            $materials = self::where(['uuid' => $request->centering_vehicle_id])->first();
+        if ($request->has('client_name_id')) {
+            $materials = self::where(['uuid' => $request->client_name_id])->first();
             $materials->updated_by = Auth::id();
             if(isset($request->created_at)) {
                 $materials->updated_at = $request->created_at; 
@@ -112,9 +111,9 @@ class Client_site extends Model
         }
       
 
-        $materials->vehicle_name                = ucfirst($request->architect_name);
-        $materials->site_id                     = $request->site_id;
-        $materials->carer                       = $request->cader;
+        $materials->client_name                = ucfirst($request->client_name);
+        // $materials->site_id                     = $request->site_id;
+        $materials->cader                       = $request->cader;
         $materials->mobile_number               = $request->mobile_number;
         $materials->email_id                    = $request->email_id;
         $materials->address                     = $request->address;

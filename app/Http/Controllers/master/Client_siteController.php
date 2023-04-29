@@ -34,16 +34,16 @@ class Client_siteController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'vehicle_name'      => 'client_site.architect_name',
-                    'status'    => 'client_site.status',
+                    'client_name'      => 'client_info.client_name',
+                    'status'    => 'client_info.status',
                 ];
                 $sortField   = [
-                    'status'  => 'client_site.status',
-                    'date_created' => 'client_site.created_at'
+                    'status'  => 'client_info.status',
+                    'date_created' => 'client_info.created_at'
                 ];
                 $search_filter = [];
                 $sort = [
-                    'field' => 'client_site.created_at',
+                    'field' => 'client_info.created_at',
                     'order' => 'desc'
                 ];
                 $page = config('pagination.page');
@@ -85,7 +85,7 @@ class Client_siteController extends Controller
                     $data       = $records;
                 } else {
                     $statusCode = '400';
-                    $message    = "No client_site found";
+                    $message    = "No client info found";
                     $data       = $records;
                 }
 
@@ -134,27 +134,32 @@ class Client_siteController extends Controller
             abort(403);
         } else {
 
-            if($request->has('architect_name_id')){
+            if($request->has('client_name_id')){
                 
-                $architect_name_id = $request->get('architect_name_id');
+                $client_name_id = $request->get('client_name_id');
                 $fieldValidation = [
-                'architect_name'         => [
-                    'required','min:2','max:15','unique:client_site,architect_name,'.$architect_name_id.',uuid'
+                'client_name'         => [
+                    'required','min:2','max:15','unique:client_info,client_name,'.$client_name_id.',uuid'
                 ]
                 ];
             }
             else{
-                 $fieldValidation = [
-                'architect_name'         => [
-                    'required','min:2','max:15','unique:client_site,architect_name'
+                $fieldValidation = [
+                'client_name'         => [
+                    'required','min:2','max:15','unique:client_info,client_name'
                 ]
             ];
             }
-           
+            
+            $fieldValidation['site_id']             = ['required' ];
+            $fieldValidation['cader']               = ['required','min:2','max:25' ];
+            $fieldValidation['address']             = ['required','min:2','max:125' ];
+            $fieldValidation['mobile_number']       = ['required','min:8','max:15','numeric' ];
+            // $fieldValidation['email_id']            = ['required','min:8','max:56','email' ];
 
             $errorMessages    = [
-                'lorry_materials.required'             => "Please enter the name",
-                'lorry_materials.regex'                => "Should include only Two Decimal Places",
+                'client_name.required'             => "Please enter the name",
+                'client_name.regex'                => "Should include only Two Decimal Places",
             ];
 
             $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
@@ -163,7 +168,7 @@ class Client_siteController extends Controller
                 return Redirect::back()->withInput($request->input())->withErrors($validator);
             }
 
-            if($request->has('architect_name_id')){
+            if($request->has('client_name_id')){
                 $request['created_at']=date('Y-m-d H:i:s');
                 $response   = Client_site::storeRecords($request);
             }
@@ -176,7 +181,7 @@ class Client_siteController extends Controller
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
-            return redirect('master/vehicle-materials/list'); 
+            return redirect(url(route('client-info-list'))); 
 
         }
     }
@@ -263,7 +268,7 @@ class Client_siteController extends Controller
             $client_site->save();
 
             $data = [
-                'redirect_url' => url(route('vehicle-materials-list'))
+                'redirect_url' => url(route('client-info-list'))
             ];
 
             $statusCode = '200';
@@ -287,7 +292,7 @@ class Client_siteController extends Controller
             $result = Client_site::where('uuid', $id)->delete();
 
             $data = [
-                'redirect_url' => url(route('vehicle-materials-list'))
+                'redirect_url' => url(route('client-info-list'))
             ];
 
             $statusCode = '200';

@@ -41,14 +41,14 @@
             'name': 'subcategories-list',
             'columns': [
             {
-                "name" : "architect_name",
-                "label": "Architect Name",
+                "name" : "client_name",
+                "label": "Client",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "architect_name"
+                    "field" : "client_name"
                 },
                 "search": {
                     "display" : 1,

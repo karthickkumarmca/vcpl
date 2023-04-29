@@ -6,7 +6,7 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('client-site-list'))}}">client Info management</a></li>
+		<li><a href="{{url(route('client-info-list'))}}">client Info management</a></li>
 	</ol>
 </section>
 <section class="content">
@@ -36,7 +36,7 @@
 								<th class="grey_header">
 									<label>Vehicle Name</label>
 								</th>
-								<td>{!! $centering_materials->architect_name !!}</td>
+								<td>{!! $centering_materials->client_name !!}</td>
 							</tr>
 							<tr>
 								<th class="grey_header">
@@ -62,7 +62,7 @@
 				</div>
 				<div class="box-footer">
 					<div class="pull-right">
-						<a href="{{url(route('client-site-list'))}}" class="btn btn-default">
+						<a href="{{url(route('client-info-list'))}}" class="btn btn-default">
 							<strong>Back</strong>
 						</a>
 					</div>
