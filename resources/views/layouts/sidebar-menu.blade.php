@@ -36,12 +36,13 @@
 						</li>
 					@endif
 					@if(config("roles.".Session::get('user_role').".staff_details_management"))
-					
+					<li class="{{ Request::is('staff-details-list') ? 'active' : '' }} {{ Request::is('create-staff-details') ? 'active' : '' }} {{ Request::is('edit-staff-details/*') ? 'active' : '' }} {{ Request::is('view-staff-details/*') ? 'active' : '' }}">
+						<a href="{!! url(route('staff-details-list')) !!}">
+							<span>STAFF DETAILS</span>
+						</a>
+						</li>
 					@endif
-
 			    </ul>
-
-
 			</li>
 			<li class="treeview-nav treeview 
 			@if(str_contains(url()->current(),'client-site')) active @endif
