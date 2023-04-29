@@ -38,7 +38,7 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Company <span class="text-danger"> *</span></label>
+								<label>Site Name <span class="text-danger"> *</span></label>
 								<select name="site_id" class="form-control pos_validate" id="site_id">
 									<option value="">Select Site Name</option>
 									@isset($siteinfo)
