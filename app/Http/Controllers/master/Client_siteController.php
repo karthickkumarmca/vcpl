@@ -5,7 +5,7 @@ namespace App\Http\Controllers\master;
 use App\Admin;
 use App\Models\Productdetails;
 use App\Models\Client_site;
-use App\Models\Units;
+use App\Models\Siteinfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -122,9 +122,9 @@ class Client_siteController extends Controller
             $categories = Productdetails::getAll($fields,$search);
 
             $search1 = ['status' => 1];
-            $fields1 = ['id','unit_name'];
-            $units = Units::getAll($fields1,$search1);
-            return view('master.client_site.create',compact('categories','units'));
+            $fields1 = ['id','site_name'];
+            $siteinfo = Siteinfo::getAll($fields1,$search1);
+            return view('master.client_site.create',compact('categories','siteinfo'));
         }
     }
     public function store(Request $request)
@@ -154,7 +154,7 @@ class Client_siteController extends Controller
             $fieldValidation['site_id']             = ['required' ];
             $fieldValidation['cader']               = ['required','min:2','max:25' ];
             $fieldValidation['address']             = ['required','min:2','max:125' ];
-            $fieldValidation['mobile_number']       = ['required','min:8','max:15','numeric' ];
+            $fieldValidation['mobile_number']       = ['required','numeric' ];
             // $fieldValidation['email_id']            = ['required','min:8','max:56','email' ];
 
             $errorMessages    = [
@@ -198,15 +198,15 @@ class Client_siteController extends Controller
             $categories = Productdetails::getAll($fields,$search);
 
             $search1 = ['status' => 1];
-            $fields1 = ['id','unit_name'];
-            $units = Units::getAll($fields1,$search1);
+            $fields1 = ['id','site_name'];
+            $Siteinfo = Siteinfo::getAll($fields1,$search1);
 
             $client_site  = Client_site::where(['uuid' => $id])->first();
             if ($client_site) {
 
                
                 $data = [
-                    'units'         => $units,
+                    'siteinfo'         => $Siteinfo,
                     'client_site' => $client_site,
                     'categories'     => $categories,
                 ];
@@ -233,15 +233,15 @@ class Client_siteController extends Controller
             $categories = Productdetails::getAll($fields,$search);
 
             $search1 = ['status' => 1];
-            $fields1 = ['id','unit_name'];
-            $units = Units::getAll($fields1,$search1);
+            $fields1 = ['id','site_name'];
+            $Siteinfo = Siteinfo::getAll($fields1,$search1);
 
             $client_site  = Client_site::where(['uuid' => $id])->first();
             if ($client_site) {
 
                
                 $data = [
-                    'units'         => $units,
+                    'siteinfo'         => $Siteinfo,
                     'client_site' => $client_site,
                     'categories'     => $categories,
                 ];

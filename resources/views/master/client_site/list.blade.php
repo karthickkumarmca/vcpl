@@ -55,6 +55,21 @@
                     "type"    : "input"
                 }
             },
+            {
+                "name" : "site_name",
+                "label": "Site Name",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "site_name"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
              {
                 "name" : "mobile_number",
                 "label": "Mobile Number",

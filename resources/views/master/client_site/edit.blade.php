@@ -39,8 +39,29 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Company <span class="text-danger"> *</span></label>
-								<select name="is_company" class="form-control pos_validate" id="is_company">
-									
+								<select name="site_id" class="form-control pos_validate" id="site_id">
+									<option value="">Select Site Name</option>
+									@isset($siteinfo)
+										@foreach($siteinfo as $siteinf)
+											@if(old('site_id') != "")
+												@if(old('site_id') == $siteinf['id'])
+													<option value="{{$siteinf['id']}}" selected>{{$siteinf['site_name']}}</option>
+												@else
+													<option value="{{$siteinf['id']}}">{{$siteinf['site_name']}}</option>
+												@endif
+											@else
+												@isset($client_site->site_id)
+													@if($client_site->site_id == $siteinf['id'])
+														<option value="{{$siteinf['id']}}" selected>{{$siteinf['site_name']}}</option>
+													@else
+														<option value="{{$siteinf['id']}}">{{$siteinf['site_name']}}</option>
+													@endif
+												@else
+													<option value="{{$siteinf['id']}}">{{$siteinf['site_name']}}</option>
+												@endisset
+											@endif
+										@endforeach
+									@endisset
 									
 								</select>
 								<span class="validation_error"></span>

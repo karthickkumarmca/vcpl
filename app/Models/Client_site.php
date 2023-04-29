@@ -42,13 +42,14 @@ class Client_site extends Model
             'client_info.mobile_number',
             'client_info.email_id',
             'client_info.address',
+            'site_info.site_name',
             'client_info.status as status_id',
              DB::raw('CASE WHEN client_info.status = 1 THEN "Active" ELSE "In-Active" END AS status,
               DATE_FORMAT(client_info.created_at, "%d-%b-%Y %r") AS date_created'),
            
            
         ];
-        $query = self::select($fields);
+        $query = self::select($fields)->leftjoin('site_info','site_info.id','client_info.site_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -112,7 +113,7 @@ class Client_site extends Model
       
 
         $materials->client_name                = ucfirst($request->client_name);
-        // $materials->site_id                     = $request->site_id;
+        $materials->site_id                     = $request->site_id;
         $materials->cader                       = $request->cader;
         $materials->mobile_number               = $request->mobile_number;
         $materials->email_id                    = $request->email_id;

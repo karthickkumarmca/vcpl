@@ -39,8 +39,12 @@
 							<div class="form-group">
 								<label>Site Name <span class="text-danger"> *</span></label>
 								<select name="site_id" class="form-control pos_validate" id="site_id">
-									<option value="0">No</option>
-									<option value="1">Yes</option>
+									<option value="">Select Site Name</option>
+									@isset($siteinfo)
+										@foreach($siteinfo as $siteinf)
+										<option value="{{$siteinf['id']}}">{{$siteinf['site_name']}}</option>
+										@endforeach
+									@endisset
 									
 								</select>
 								<span class="validation_error"></span>
