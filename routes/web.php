@@ -39,7 +39,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	});
 
 	Route::group(['prefix' => 'client-site/','middleware' => 'auth'], function () use ($router) {
-		$router->get('list', 'Client_siteController@list')->name('client-site-list');
+		$router->get('list', 'Client_siteController@list')->name('client-info-list');
 	    $router->get('create', 'Client_siteController@create')->name('create-client-site');
 	    $router->post('store', 'Client_siteController@store')->name('save-client-site');
 	    $router->get('view/{id}', 'Client_siteController@view');

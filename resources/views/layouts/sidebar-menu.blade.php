@@ -45,7 +45,7 @@
 			    </ul>
 			</li>
 			<li class="treeview-nav treeview 
-			@if(str_contains(url()->current(),'client-site')) active @endif
+			@if(str_contains(url()->current(),'client-info-list')) active @endif
 			@if(str_contains(url()->current(),'client-site')) active @endif
 			" >
 				<a href="#">
@@ -63,7 +63,7 @@
 
 					@if(config("roles.".Session::get('user_role').".client_site_management"))
 					<li class="{{ Request::is('master/client-site/*') ? 'active' : '' }}">
-						<a href="{!! url(route('client-site-list')) !!}">
+						<a href="{!! url(route('client-info-list')) !!}">
 							<span>CLIENT INFO </span>
 						</a>
 					</li>
