@@ -7,6 +7,7 @@
     <title>{{ env('APP_NAME'); }}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <!-- <link rel="icon" href="{{ asset('images/fav-icon.png') }}" type="image/png" sizes="32x32"> -->
+    <meta name="site_url" content="{{ env('APP_URL'); }}">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="_token" content="{{ csrf_token() }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
