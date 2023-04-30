@@ -181,7 +181,9 @@
 
 			</li>
 
-			<li class="treeview-nav treeview @if(str_contains(url()->current(),'labour-categories')) active @endif">
+			<li class="treeview-nav treeview 
+			@if(str_contains(url()->current(),'labour-categories')) active @endif
+			@if(str_contains(url()->current(),'labour-wages')) active @endif">
 				<a href="#">
 				    <span>LABOURS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -195,11 +197,14 @@
 						</a>
 					</li>
 					@endif
-					<li class="">
-						<a href="javascript::">
-							 <span>LABOUR DAILY WAGES</span>
+					@if(config("roles.".Session::get('user_role').".labour_wages_management"))
+					<li class="{{ Request::is('master/labour-wages/*') ? 'active' : '' }}">
+						<a href="{!! url(route('labour-wages-list')) !!}">
+							<span>LABOUR DAILY WAGES </span>
 						</a>
 					</li>
+					@endif
+					
 			    </ul>
 			</li>
 

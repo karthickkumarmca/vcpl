@@ -84,7 +84,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Mobile Number <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Moble Number" name="mobile_number" value="{{old('mobile_number') ? old('mobile_number') : $architect_site->mobile_number}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Moble Number" name="mobile_number" value="{{old('mobile_number') ? old('mobile_number') : $architect_site->mobile_number}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('mobile_number'))
 								<div class="error">{{ $errors->first('mobile_number') }}</div>
@@ -95,7 +95,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Email Id <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Email id" name="email_id" value="{{old('email_id') ? old('email_id') : $architect_site->email_id}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate email" autocomplete="off" placeholder="Enter Email id" name="email_id" value="{{old('email_id') ? old('email_id') : $architect_site->email_id}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('email_id'))
 								<div class="error">{{ $errors->first('email_id') }}</div>

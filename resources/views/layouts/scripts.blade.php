@@ -19,6 +19,8 @@
             var regex = new RegExp("^[0-9.]+$");
         } else if($(this).hasClass('allow_characters')){
             var regex = new RegExp("^[a-zA-Z0-9!@$^&*.,-_ ]+$");
+        } else if($(this).hasClass('email')){
+            var regex = new RegExp("^[a-zA-Z0-9@.");
         }
         else{
             var regex = new RegExp("^[a-zA-Z0-9' ]+$");

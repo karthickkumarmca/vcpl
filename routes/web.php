@@ -89,6 +89,16 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Labour_categoriesController@delete');
 	});
 
+	Route::group(['prefix' => 'labour-wages/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'Labour_wagesController@list')->name('labour-wages-list');
+	    $router->get('create', 'Labour_wagesController@create')->name('create-labour-wages');
+	    $router->post('store', 'Labour_wagesController@store')->name('save-labour-wages');
+	    $router->get('view/{id}', 'Labour_wagesController@view');
+	    $router->get('edit/{id}', 'Labour_wagesController@edit');
+	    $router->get('update-status/{id}', 'Labour_wagesController@updateStatus');
+	    $router->get('delete/{id}', 'Labour_wagesController@delete');
+	});
+
 	Route::group(['prefix' => 'property-categories/','middleware' => 'auth'], function () use ($router) {
 		$router->get('list', 'Property_categoriesController@list')->name('property-categories-list');
 	    $router->get('create', 'Property_categoriesController@create')->name('create-property-categories');
