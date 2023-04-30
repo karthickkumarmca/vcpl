@@ -57,6 +57,21 @@
                 }
             },
             {
+                "name" : "sub_contractor_name",
+                "label": "Sub Contractor Name",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "sub_contractor_name"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+            {
                 "name" : "category_name",
                 "label": "Category Name",
                 "badge": {
@@ -67,7 +82,7 @@
                     "field" : "category_name"
                 },
                 "search": {
-                    "display" : 1,
+                    "display" : 0,
                     "type"    : "input"
                 }
             },

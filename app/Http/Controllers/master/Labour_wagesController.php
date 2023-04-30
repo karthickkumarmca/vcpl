@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\master;
 
 use App\Admin;
+use App\Models\Staffdetails;
 use App\Models\Labour_categories;
 use App\Models\Labour_wages;
 use App\Models\Siteinfo;
@@ -124,7 +125,11 @@ class Labour_wagesController extends Controller
             $search1 = ['status' => 1];
             $fields1 = ['id','site_name'];
             $siteinfo = Siteinfo::getAll($fields1,$search1);
-            return view('master.labour_wages.create',compact('categories','siteinfo'));
+
+            $search2 = ['status' => 1,'sub_contractor'=>1];
+            $fields2 = ['id','name'];
+            $staffdetails = Staffdetails::getAll($fields2,$search2);
+            return view('master.labour_wages.create',compact('categories','siteinfo','staffdetails'));
         }
     }
     public function store(Request $request)
@@ -137,6 +142,7 @@ class Labour_wagesController extends Controller
             $fieldValidation['rate']                    = ['required'];
             $fieldValidation['labour_category_id']      = ['required'];
             $fieldValidation['site_id']                 = ['required' ];
+            $fieldValidation['sub_contractor_id']       = ['required' ];
 
             $errorMessages    = [
                 'client_name.required'             => "Please enter the name",
@@ -185,8 +191,12 @@ class Labour_wagesController extends Controller
             $labour_wages  = Labour_wages::where(['uuid' => $id])->first();
             if ($labour_wages) {
 
-               
+                $search2 = ['status' => 1,'sub_contractor'=>1];
+                $fields2 = ['id','name'];
+                $staffdetails = Staffdetails::getAll($fields2,$search2);
+
                 $data = [
+                    'staffdetails'     => $staffdetails,
                     'siteinfo'         => $Siteinfo,
                     'labour_wages' => $labour_wages,
                     'categories'     => $categories,
@@ -220,11 +230,15 @@ class Labour_wagesController extends Controller
             $labour_wages  = Labour_wages::where(['uuid' => $id])->first();
             if ($labour_wages) {
 
+                $search2 = ['status' => 1,'sub_contractor'=>1];
+                $fields2 = ['id','name'];
+                $staffdetails = Staffdetails::getAll($fields2,$search2);
                
                 $data = [
-                    'siteinfo'         => $Siteinfo,
-                    'labour_wages' => $labour_wages,
-                    'categories'     => $categories,
+                    'staffdetails'      => $staffdetails,
+                    'siteinfo'          => $Siteinfo,
+                    'labour_wages'      => $labour_wages,
+                    'categories'        => $categories,
                 ];
 
                 return view('master.labour_wages.edit', $data);

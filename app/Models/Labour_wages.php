@@ -41,13 +41,15 @@ class Labour_wages extends Model
             'site_info.site_name',
             'labour_category.category_name',
             'labour_wages.status as status_id',
+            'staff_details.name as sub_contractor_name',
              DB::raw('CASE WHEN labour_wages.status = 1 THEN "Active" ELSE "In-Active" END AS status,
               DATE_FORMAT(labour_wages.created_at, "%d-%b-%Y %r") AS date_created'),
            
            
         ];
         $query = self::select($fields)->leftjoin('site_info','site_info.id','labour_wages.site_id')
-        ->leftjoin('labour_category','labour_category.id','labour_wages.labour_category_id');
+        ->leftjoin('labour_category','labour_category.id','labour_wages.labour_category_id')
+        ->leftjoin('staff_details','staff_details.id','labour_wages.sub_contractor_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -113,6 +115,7 @@ class Labour_wages extends Model
         $materials->rate                        = $request->rate;
         $materials->site_id                     = $request->site_id;
         $materials->labour_category_id          = $request->labour_category_id;
+        $materials->sub_contractor_id           = $request->sub_contractor_id;
        
         $materials->save();
 
