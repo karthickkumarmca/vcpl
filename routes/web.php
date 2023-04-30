@@ -180,6 +180,38 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('update-status/{id}', 'Vehicle_materialsController@updateStatus');
 	    $router->get('delete/{id}', 'Vehicle_materialsController@delete');
 	});
+
+	Route::group(['prefix' => 'site-info/','middleware' => 'auth'], function () use ($router) {
+		$router->get('list', 'SiteinfoController@list')->name('site-info-list');
+	    $router->get('create', 'SiteinfoController@create')->name('create-site-info');
+	    $router->post('store', 'SiteinfoController@store')->name('save-site-info');
+	    $router->get('view/{id}', 'SiteinfoController@view');
+	    $router->get('edit/{id}', 'SiteinfoController@edit');
+	    $router->get('update-status/{id}', 'SiteinfoController@updateStatus');
+	    $router->post('get-sub-category', 'SiteinfoController@getSubCategory');
+	    $router->get('delete/{id}', 'SiteinfoController@delete');
+	});
+
+	Route::group(['prefix' => 'staffgroups/','middleware' => 'auth'], function () use ($router) {
+		Route::get('list', 'StaffgroupsController@list')->name('staffgroups-list');
+	    Route::get('create', 'StaffgroupsController@create')->name('create-staffgroups');
+	    Route::post('store', 'StaffgroupsController@store')->name('save-staffgroups');
+	    Route::get('view/{id}', 'StaffgroupsController@view');
+	    Route::get('edit/{id}', 'StaffgroupsController@edit');
+	    Route::get('update-status/{id}', 'StaffgroupsController@updateStatus');
+	    Route::get('delete/{id}', 'StaffgroupsController@delete');
+
+	});
+	Route::group(['prefix' => 'staff-details/','middleware' => 'auth'], function () use ($router) {
+		Route::get('list', 'StaffdetailsController@list')->name('staff-details-list');
+	    Route::get('create', 'StaffdetailsController@create')->name('create-staff-details');
+	    Route::post('store', 'StaffdetailsController@store')->name('save-staff-details');
+	    Route::get('view/{id}', 'StaffdetailsController@view');
+	    Route::get('edit/{id}', 'StaffdetailsController@edit');
+	    Route::get('update-status/{id}', 'StaffdetailsController@updateStatus');
+	    Route::get('delete/{id}', 'StaffdetailsController@delete');
+
+	});
 });
 
 
@@ -187,8 +219,8 @@ require(__DIR__ . '/Admin/user.php');
 require(__DIR__ . '/Admin/customer.php');
 require(__DIR__ . '/Admin/units.php');
 require(__DIR__ . '/Admin/clients.php');
-require(__DIR__ . '/Admin/staff_details.php');
-require(__DIR__ . '/Admin/staffgroups.php');
+//require(__DIR__ . '/Admin/staff_details.php');
+//require(__DIR__ . '/Admin/staffgroups.php');
 require(__DIR__ . '/Admin/roles.php');
 // require(__DIR__ . '/Admin/categories.php');
 // require(__DIR__ . '/Admin/sub_categories.php');

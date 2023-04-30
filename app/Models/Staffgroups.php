@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Staffgroups extends Model
 {
-     use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'staffgroups';
 

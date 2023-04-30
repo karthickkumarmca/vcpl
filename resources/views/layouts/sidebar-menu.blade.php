@@ -21,7 +21,7 @@
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
-			<li class="treeview-nav treeview">
+			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/staffgroups') || str_contains(url()->current(),'master/staff-details') ) active @endif ">
 				<a href="#">
 				    <span>STAFF</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -29,15 +29,15 @@
 				<ul class="treeview-menu">
 
 					@if(config("roles.".Session::get('user_role').".staffgroups_management"))
-						<li class="{{ Request::is('staffgroups-list') ? 'active' : '' }} {{ Request::is('create-staffgroups') ? 'active' : '' }} {{ Request::is('edit-staffgroups/*') ? 'active' : '' }} {{ Request::is('view-staffgroups/*') ? 'active' : '' }}">
+						<li class="{{ Request::is('master/staffgroups/list') ? 'active' : '' }} {{ Request::is('master/staffgroups/create') ? 'active' : '' }} {{ Request::is('master/staffgroups/edit/*') ? 'active' : '' }} {{ Request::is('master/staffgroups/view/*') ? 'active' : '' }}">
 						<a href="{!! url(route('staffgroups-list')) !!}">
 							<span>STAFF GROUP</span>
 						</a>
 						</li>
 					@endif
 					@if(config("roles.".Session::get('user_role').".staff_details_management"))
-					<li class="{{ Request::is('staff-details-list') ? 'active' : '' }} {{ Request::is('create-staff-details') ? 'active' : '' }} {{ Request::is('edit-staff-details/*') ? 'active' : '' }} {{ Request::is('view-staff-details/*') ? 'active' : '' }}">
-						<a href="{!! url(route('staff-details-list')) !!}">
+					<li class="{{ Request::is('master/staff-details/list') ? 'active' : '' }} {{ Request::is('master/staff-details/create') ? 'active' : '' }} {{ Request::is('master/staff-details/edit/*') ? 'active' : '' }} {{ Request::is('staff-details.view/*') ? 'active' : '' }}">
+						<a href="{!! url('master/staff-details/list') !!}">
 							<span>STAFF DETAILS</span>
 						</a>
 						</li>
@@ -54,12 +54,14 @@
 				</a>
 				<ul class="treeview-menu">
 
-					<li class="">
-						<a href="javascript::">
+
+					@if(config("roles.".Session::get('user_role').".site_info_management"))
+					<li class="{{ Request::is('master/site-info-list/*') ? 'active' : '' }}">
+						<a href="{!! url(route('site-info-list')) !!}">
 							<span>SITE INFO</span>
 						</a>
 					</li>
-					
+					@endif
 
 					@if(config("roles.".Session::get('user_role').".client_site_management"))
 					<li class="{{ Request::is('master/client-site/*') ? 'active' : '' }}">

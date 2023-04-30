@@ -195,5 +195,12 @@ return [
             'view' => 1,            
             'change_status' => 1,
         ],
+        'site_info_management' =>1,
+        'site_info_management_access' => [
+            'create' => 1,
+            'edit' => 1,
+            'view' => 1,            
+            'change_status' => 1,
+        ],
     ],
 ];

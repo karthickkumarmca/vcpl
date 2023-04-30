@@ -2,11 +2,11 @@
 @section('content')
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Staff Details <small>management</small>
+		Site Info <small>Management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('product-details-list'))}}">Staff Details</a></li>
+		<li><a href="{{url(route('site-info-list'))}}">Site Info Details</a></li>
 	</ol>
 </section>
 <section class="content">
@@ -14,10 +14,10 @@
 		<div class="col-sm-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Staff Details</h3>
+					<h3 class="box-title">Site Info Details</h3>
 				</div>
 				<div class="box-body">
-					@if($Staffdetails->status)
+					@if($data->status)
 					@php
 					$status = "Active";
 					$status_bg="bg-green";
@@ -29,57 +29,64 @@
 					@endphp
 					@endif
 					<div class="table-responsive">
+
 						<table class="table table-bordered">
-							
+
 							<tr>
-								<th class="grey_header"><label>Name</label></th>
-								<td>{!! $Staffdetails->name !!}</td>
+								<th class="grey_header">
+									<label>Site Name</label>
+								</th>
+								<td>{!! $data->site_name !!}</td>
 							</tr>
+
 							<tr>
-								<th class="grey_header"><label>User name</label></th>
-								<td>{!! $Staffdetails->user_name !!}</td>
+								<th class="grey_header">
+									<label>Site Location</label>
+								</th>
+								<td>{!! $data->site_location !!}</td>
 							</tr>
+
 							<tr>
-								<th class="grey_header"><label>Email</label></th>
-								<td>{!! $Staffdetails->email !!}</td>
+								<th class="grey_header">
+									<label>Site Engineer Name</label>
+								</th>
+								<td>{!! $data->site_engineer_name !!}</td>
 							</tr>
+
 							<tr>
-								<th class="grey_header"><label>Phone number</label></th>
-								<td>{!! $Staffdetails->phone_number !!}</td>
+								<th class="grey_header">
+									<label>Sub Contractor Name</label>
+								</th>
+								<td>{!! $data->sub_contractor_name !!}</td>
 							</tr>
+
 							<tr>
-								<th class="grey_header"><label>Group name</label></th>
-								<td>{!! $Staffdetails->group_name !!}</td>
+								<th class="grey_header">
+									<label>Store Keeper Name</label>
+								</th>
+								<td>{!! $data->store_keeper_name !!}</td>
 							</tr>
-							<tr>
-								<th class="grey_header"><label>Role name</label></th>
-								<td>{!! $Staffdetails->role_name !!}</td>
-							</tr>
+
 							<tr>
 								<th class="grey_header">
 									<label>Status</label>
 								</th>
 								<td><span class="badge {!! $status_bg !!}"> {!! $status !!}</span></td>
 							</tr>
-							<tr>
-								<th class="grey_header">
-									<label>Status</label>
-								</th>
-								<td><span class="badge {!! $status_bg !!}"> {!! $status !!}</span></td>
-							</tr>
-							
+
 							<tr>
 								<th class="grey_header">
 									<label>Created At</label>
 								</th>
-								<td>{!! $Staffdetails->date_created !!}</td>
+								<td>{!! $data->date_created !!}</td>
 							</tr>
+
 						</table>
 					</div>
 				</div>
 				<div class="box-footer">
 					<div class="pull-right">
-						<a href="{{url(route('staff-details-list'))}}" class="btn btn-default">
+						<a href="{{url(route('site-info-list'))}}" class="btn btn-default">
 							<strong>Back</strong>
 						</a>
 					</div>

@@ -9,50 +9,11 @@
 	function gethallmarkValidationRules(rule) {
 		return validation = {
 			"admin" : {
-				"name" : {
+				"product_name" : {
 					"required": {
-						"message": "Please enter the name"
+						"message": "Please enter the Product name"
 					},
-				},
-				"user_name" : {
-					"required": {
-						"message": "Please enter the User name"
-					},
-				},
-				"password" : {
-					"required": {
-						"message": "Please enter the password name"
-					},
-				},
-				/*"confirm_password" : {
-					"required": {
-						"message": "Please enter the confirm password name"
-					},
-				},*/
-				"email" : {
-					"required": {
-						"message": "Please enter the email name"
-					},
-				},
-				"user_groups_id" : {
-					"required": {
-						"message": "Please select the user group name"
-					},
-				},
-				"site_id" : {
-					"required": {
-						"message": "Please select the site name"
-					},
-				},
-				"phone_number" : {
-					"required": {
-						"message": "Please enter the mobile number"
-					},
-				},
-				"role_id" : {
-					"required": {
-						"message": "Please select the role name"
-					},
+					
 				},
             },
         };
@@ -73,8 +34,8 @@
 		}else {
 			name = input_name;
 		}
+
 		var validator 		= validation[rule_type][name];
-		console.log(validator);return false;
 		var input_value 	= $(this).val();
 		var error_message 	= formValidation.doValidate(input_value, validator);
 
@@ -92,7 +53,7 @@
 	/**
 	* Create/Update the hallmark form
 	*/
-	$('#staff-details-submit').click(function(event){
+	$('#hallmark-submit').click(function(event){
 		event.preventDefault();	
 		var form         = "admin-form";
 		var rule         = fieldRule.admin;
@@ -121,8 +82,8 @@
 			return false;
 		}
 	});
-	$('#user_group_name').change(function(){
-		/*let id = $(this).val();
+	$('#category_id').change(function(){
+		let id = $(this).val();
 		$.ajaxSetup({
 		    headers: {
 		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -134,10 +95,10 @@
             url:"{{url('/')}}/master/product-details/get-sub-category",
             success:function(html){
 	            if(html!=''){
-	               $('#site_name').html(html);
+	               $('#subcategory_id').html(html);
 	           	}
          	}
-       });*/
+       });
 	})
 	
 	function isurlcheck(str)

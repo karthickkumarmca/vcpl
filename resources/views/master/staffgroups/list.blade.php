@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('content')
 <section class="content-header">
-    <h1 class="col-lg-6 no-padding">Staff Details <small>Management</small></h1>
+    <h1 class="col-lg-6 no-padding">Staff Groups <small>Management</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Staff Details</li>
+        <li>Staff Groups management</li>
     </ol>
 </section>
 <section class="content">
@@ -16,12 +16,12 @@
                         <div class="btn-group">
                             @isset($create_access)
                             @if ($create_access == 1)
-                            <a href="{{ url(route('create-staff-details')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Staff</a>
+                            <a href="{{ url(route('create-staffgroups')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Staff Groups</a>
                             @endif
                             @endisset
                         </div>
                     </div>
-                    <h3 class="box-title">Staff Details List</h3>
+                    <h3 class="box-title">Staff Groups List</h3>
                 </div>
                 <div class="box-body">
                     <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
@@ -38,62 +38,17 @@
          * DataTable Properties
          */
          var table_properties = {
-            'name': 'staff-details-list',
+            'name': 'staffgroups-list',
             'columns': [
             {
-                "name" : "name",
-                "label": "staff Name",
+                "name" : "group_name",
+                "label": "Staff Groups Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "name"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
-             {
-                "name" : "user_name",
-                "label": "User name",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "user_name"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
-            {
-                "name" : "email",
-                "label": "Email",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "email"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
-            {
-                "name" : "phone_number",
-                "label": "Mobile Number",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "phone_number"
+                    "field" : "group_name"
                 },
                 "search": {
                     "display" : 1,
@@ -123,7 +78,7 @@
             },
             ],
             'api_url': 'list',
-            'data_key': 'records',
+            'data_key': 'staffgroups',
             'daterange_picker': {
                 'display' : false,
                 'default_days': 29
@@ -185,7 +140,7 @@
                             'display' : true,
                             'title'   : "Are you sure?"
                         },
-                        "function_call" : "changesubcategoriesStatus"
+                        "function_call" : "changeStatus"
                     },
                     {
                         "name"      : "In-Active",
@@ -207,7 +162,7 @@
                             'display' : true,
                             'title'   : "Are you sure?"
                         },
-                        "function_call" : "changesubcategoriesStatus"
+                        "function_call" : "changeStatus"
                     },
                     {
                         "name"      : "Delete",
@@ -225,7 +180,7 @@
                             'display' : true,
                             'title'   : "Are you sure?"
                         },
-                        "function_call" : "subcategoriesDelete",
+                        "function_call" : "Delete",
                         condition: function(data) {
                             var deleteaccess = "{{$delete_access}}";
                             if (deleteaccess == 1) {
@@ -252,10 +207,10 @@
          dataTable.initiateDatatable(table_properties);
 
         /**
-         * change subcategories status
+         * change Units status
          * @param Object current object
          */
-         function subcategoriesDelete(current) {
+         function Delete(current) {
             var is_confirm = $(current).data('is_confirm');
             var method = $(current).data('method');
             var url = $(current).data('url');
@@ -271,20 +226,20 @@
                     dangerMode: true,
                 }).then(function(isConfirm) {
                     if (isConfirm) {
-                        subcategoriesDeleteRecord(url, method);
+                        DeleteRecord(url, method);
                     }
                 });
             }else {
-                subcategoriesDeleteRecord(url, method);
+                DeleteRecord(url, method);
             }
         }
 
         /**
-         * update subcategories status
+         * update Units status
          * @param string url
          * @param string method
          */
-         function subcategoriesDeleteRecord(url, method) {
+         function DeleteRecord(url, method) {
             var request  = {
                 'url'             : url,
                 'type'            : method,
@@ -310,10 +265,10 @@
         }
 
         /**
-         * change subcategories status
+         * change Units status
          * @param Object current object
          */
-         function changesubcategoriesStatus(current) {
+         function changeStatus(current) {
             var is_confirm = $(current).data('is_confirm');
             var method = $(current).data('method');
             var url = $(current).data('url');
@@ -329,20 +284,20 @@
                     dangerMode: true,
                 }).then(function(isConfirm) {
                     if (isConfirm) {
-                        updatesubcategoriesStatus(url, method);
+                        updateStatus(url, method);
                     }
                 });
             }else {
-                updatesubcategoriesStatus(url, method);
+                updateStatus(url, method);
             }
         }
 
         /**
-         * update subcategories status
+         * update Units status
          * @param string url
          * @param string method
          */
-         function updatesubcategoriesStatus(url, method) {
+         function updateStatus(url, method) {
             var request  = {
                 'url'             : url,
                 'type'            : method,

@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('content')
 <section class="content-header">
-    <h1 class="col-lg-6 no-padding">Staff Details <small>Management</small></h1>
+    <h1 class="col-lg-6 no-padding">Site Info<small>Management</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Staff Details</li>
+        <li>Site Info Details</li>
     </ol>
 </section>
 <section class="content">
@@ -16,12 +16,12 @@
                         <div class="btn-group">
                             @isset($create_access)
                             @if ($create_access == 1)
-                            <a href="{{ url(route('create-staff-details')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Staff</a>
+                            <a href="{{ url(route('create-site-info')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Site Info</a>
                             @endif
                             @endisset
                         </div>
                     </div>
-                    <h3 class="box-title">Staff Details List</h3>
+                    <h3 class="box-title">Site Info List</h3>
                 </div>
                 <div class="box-body">
                     <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
@@ -38,17 +38,17 @@
          * DataTable Properties
          */
          var table_properties = {
-            'name': 'staff-details-list',
+            'name': 'site-info-list',
             'columns': [
             {
-                "name" : "name",
-                "label": "staff Name",
+                "name" : "site_name",
+                "label": "Site name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "name"
+                    "field" : "site_name"
                 },
                 "search": {
                     "display" : 1,
@@ -56,14 +56,14 @@
                 }
             },
              {
-                "name" : "user_name",
-                "label": "User name",
+                "name" : "site_location",
+                "label": "Location",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "user_name"
+                    "field" : "site_location"
                 },
                 "search": {
                     "display" : 1,
@@ -71,14 +71,14 @@
                 }
             },
             {
-                "name" : "email",
-                "label": "Email",
+                "name" : "site_engineer_name",
+                "label": "Site Engineer Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "email"
+                    "field" : "site_engineer_name"
                 },
                 "search": {
                     "display" : 1,
@@ -86,14 +86,29 @@
                 }
             },
             {
-                "name" : "phone_number",
-                "label": "Mobile Number",
+                "name" : "sub_contractor_name",
+                "label": "Sub Contractor Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "phone_number"
+                    "field" : "sub_contractor_name"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
+            {
+                "name" : "store_keeper_name",
+                "label": "Store Keeper Name",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "store_keeper_name"
                 },
                 "search": {
                     "display" : 1,
@@ -214,7 +229,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Delete',
                         "url"       : function(data){
-                            return "delete/"+data['uuid'];
+                            return "subcategories/delete/"+data['uuid'];
                         },
                         "icon"      : "fa fa-trash",
                         "method"    : "get",

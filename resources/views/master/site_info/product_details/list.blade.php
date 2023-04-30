@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('content')
 <section class="content-header">
-    <h1 class="col-lg-6 no-padding">Staff Details <small>Management</small></h1>
+    <h1 class="col-lg-6 no-padding">Product Details <small>Management</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Staff Details</li>
+        <li>Product Details</li>
     </ol>
 </section>
 <section class="content">
@@ -16,12 +16,12 @@
                         <div class="btn-group">
                             @isset($create_access)
                             @if ($create_access == 1)
-                            <a href="{{ url(route('create-staff-details')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Staff</a>
+                            <a href="{{ url(route('create-product-details')) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus fa-fw"></i>Create Product</a>
                             @endif
                             @endisset
                         </div>
                     </div>
-                    <h3 class="box-title">Staff Details List</h3>
+                    <h3 class="box-title">Product Details List</h3>
                 </div>
                 <div class="box-body">
                     <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
@@ -38,17 +38,17 @@
          * DataTable Properties
          */
          var table_properties = {
-            'name': 'staff-details-list',
+            'name': 'subcategories-list',
             'columns': [
             {
-                "name" : "name",
-                "label": "staff Name",
+                "name" : "category_name",
+                "label": "Category Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "name"
+                    "field" : "category_name"
                 },
                 "search": {
                     "display" : 1,
@@ -56,14 +56,14 @@
                 }
             },
              {
-                "name" : "user_name",
-                "label": "User name",
+                "name" : "product_name",
+                "label": "Product Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "user_name"
+                    "field" : "product_name"
                 },
                 "search": {
                     "display" : 1,
@@ -71,29 +71,14 @@
                 }
             },
             {
-                "name" : "email",
-                "label": "Email",
+                "name" : "sub_category_name",
+                "label": "Sub Category Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
                     "display" : 1,
-                    "field" : "email"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
-            {
-                "name" : "phone_number",
-                "label": "Mobile Number",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "phone_number"
+                    "field" : "sub_category_name"
                 },
                 "search": {
                     "display" : 1,
@@ -214,7 +199,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Delete',
                         "url"       : function(data){
-                            return "delete/"+data['uuid'];
+                            return "subcategories/delete/"+data['uuid'];
                         },
                         "icon"      : "fa fa-trash",
                         "method"    : "get",

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Staffgroups;
@@ -197,7 +197,7 @@ class StaffdetailsController extends Controller
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
-            return redirect('staff-details-list'); 
+            return redirect('master/staff-details/list'); 
 
         }
     }

@@ -6,52 +6,22 @@
 	* @return object validation
 	*/
 	
-	function gethallmarkValidationRules(rule) {
+	function geValidationRules(rule) {
 		return validation = {
 			"admin" : {
-				"name" : {
+				"site_name" : {
 					"required": {
-						"message": "Please enter the name"
+						"message": "Please enter the Site name"
 					},
 				},
-				"user_name" : {
+				"site_location" : {
 					"required": {
-						"message": "Please enter the User name"
+						"message": "Please enter the Site location"
 					},
 				},
-				"password" : {
+				"sub_contractor_id" : {
 					"required": {
-						"message": "Please enter the password name"
-					},
-				},
-				/*"confirm_password" : {
-					"required": {
-						"message": "Please enter the confirm password name"
-					},
-				},*/
-				"email" : {
-					"required": {
-						"message": "Please enter the email name"
-					},
-				},
-				"user_groups_id" : {
-					"required": {
-						"message": "Please select the user group name"
-					},
-				},
-				"site_id" : {
-					"required": {
-						"message": "Please select the site name"
-					},
-				},
-				"phone_number" : {
-					"required": {
-						"message": "Please enter the mobile number"
-					},
-				},
-				"role_id" : {
-					"required": {
-						"message": "Please select the role name"
+						"message": "Please enter the Site Sub contractor"
 					},
 				},
             },
@@ -64,7 +34,7 @@
 	$(document).on('blur', '.pos_validate', function() {
 		var rule_type 		= $(this).data('rule');
 		var rule 			= fieldRule[rule_type];
-		var validation 		= gethallmarkValidationRules(rule);
+		var validation 		= geValidationRules(rule);
 		var input_name 		= $(this).attr('name');
 		var name 			= "";
 		var inputArray 		= input_name.match(/(.*?)\[(.*?)\]/);
@@ -73,8 +43,8 @@
 		}else {
 			name = input_name;
 		}
+
 		var validator 		= validation[rule_type][name];
-		console.log(validator);return false;
 		var input_value 	= $(this).val();
 		var error_message 	= formValidation.doValidate(input_value, validator);
 
@@ -90,13 +60,13 @@
 	});
 
 	/**
-	* Create/Update the hallmark form
+	* Create/Update the admin form
 	*/
-	$('#staff-details-submit').click(function(event){
+	$('#site-info-submit').click(function(event){
 		event.preventDefault();	
 		var form         = "admin-form";
 		var rule         = fieldRule.admin;
-		var validation   = gethallmarkValidationRules(rule);
+		var validation   = geValidationRules(rule);
 		var data         = $('#'+form).serializeArray();
 		var validator    = validation.admin;
 		formValidation.clearFormInputs(form, data);
@@ -121,8 +91,8 @@
 			return false;
 		}
 	});
-	$('#user_group_name').change(function(){
-		/*let id = $(this).val();
+	$('#category_id').change(function(){
+		let id = $(this).val();
 		$.ajaxSetup({
 		    headers: {
 		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -134,10 +104,10 @@
             url:"{{url('/')}}/master/product-details/get-sub-category",
             success:function(html){
 	            if(html!=''){
-	               $('#site_name').html(html);
+	               $('#subcategory_id').html(html);
 	           	}
          	}
-       });*/
+       });
 	})
 	
 	function isurlcheck(str)

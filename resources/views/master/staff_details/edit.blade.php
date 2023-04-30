@@ -5,104 +5,176 @@
 </style>
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Product Details<small>Management</small>
+		Staff Details<small>Management</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="{{url(route('home'))}}"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="{{url(route('product-details-list'))}}">Product Details</a></li>
-		<li>Edit Product</li>
+		<li><a href="{{url(route('product-details-list'))}}">Staff Details</a></li>
+		<li>Edit Staff</li>
 	</ol>
 </section>
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('master/product-details/store')}}">
+			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('master/staff-details/store')}}">
 				@csrf
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">Edit Product</h3>
+						<h3 class="box-title">Edit Staff</h3>
 					</div>
+
 					<div class="box-body">
+
 					<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Category <span class="text-danger"> *</span></label>
-								<select name="category_id" class="form-control pos_validate" id="category_id">
-									<option value="">Select Category</option>
-									@isset($categories)
-										@foreach($categories as $category)
-											@if(old('category_id') != "")
-												@if(old('category_id') == $category['id'])
-													<option value="{{$category['id']}}" selected>{{$category['category_name']}}</option>
-												@else
-													<option value="{{$category['id']}}">{{$category['category_name']}}</option>
-												@endif
-											@else
-												@isset($product_details->category_id)
-													@if($product_details->category_id == $category['id'])
-														<option value="{{$category['id']}}" selected>{{$category['category_name']}}</option>
-													@else
-														<option value="{{$category['id']}}">{{$category['category_name']}}</option>
-													@endif
-												@else
-													<option value="{{$category['id']}}">{{$category['category_name']}}</option>
-												@endisset
-											@endif
-										@endforeach
-									@endisset
-								</select>
+								<label>Name <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Full Name" name="name" value="{{old('name') ? old('name') : $details->name}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="3" maxlength="128"/>
 								<span class="validation_error"></span>
-								@if($errors->has('category_id'))
-								<div class="error">{{ $errors->first('category_id') }}</div>
+								@if($errors->has('name'))
+								<div class="error">{{ $errors->first('name') }}</div>
 								@endif
 							</div>
 						</div>
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Sub category <span class="text-danger"> *</span></label>
-								<select name="subcategory_id" class="form-control pos_validate" id="subcategory_id">
-									@isset($sub_categories)
-										@foreach($sub_categories as $sub)
-											@if ($product_details->subcategory_id != "")
-												@if($product_details->subcategory_id == $sub['id'])
-													<option value="{{$sub['id']}}" selected>{{$sub['sub_category_name']}}</option>
+								<label>User Name <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter User Name" name="user_name" value="{{old('user_name')? old('user_name') : $details->user_name}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="3" maxlength="128"/>
+								<span class="validation_error"></span>
+								@if($errors->has('user_name'))
+								<div class="error">{{ $errors->first('user_name') }}</div>
+								@endif
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Email <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate allow_characters" placeholder="Enter Email" name="email" value="{{old('email')? old('email') : $details->email}}" data-rule="admin" />
+								<span class="validation_error"></span>
+								@if($errors->has('email'))
+								<div class="error">{{ $errors->first('email') }}</div>
+								@endif
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Mobile Number <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate number_restrict" placeholder="Enter mobile number" name="phone_number" value="{{old('phone_number')? old('phone_number') : $details->phone_number}}" data-rule="admin" onkeypress="return ((event.charCode >= 48 && event.charCode <= 57));" minlength="7" maxlength="10"/>
+								<span class="validation_error"></span>
+								@if($errors->has('phone_number'))
+								<div class="error">{{ $errors->first('phone_number') }}</div>
+								@endif
+							</div>
+						</div>	
+					<div class="col-md-12">
+							<div class="form-group">
+								<label>Select User Group<span class="text-danger"> *</span></label>
+								<select name="user_groups_id" class="form-control pos_validate" id="user_groups_id">
+									<option value="">Select User Group</option>
+									@isset($staff_groups)
+										@foreach($staff_groups as $s)
+											@if(old('user_groups_ids') != "")
+												@if(old('user_groups_ids') == $s['id'])
+													<option value="{{$s['id']}}" selected>{{$s['group_name']}}</option>
+												@else
+													<option value="{{$s['id']}}">{{$s['group_name']}}</option>
+												@endif
+											@else
+												@isset($details->user_groups_ids)
+													@if($details->user_groups_ids == $s['id'])
+														<option value="{{$s['id']}}" selected>{{$s['group_name']}}</option>
+													@else
+														<option value="{{$s['id']}}">{{$s['group_name']}}</option>
+													@endif
+												@else
+													<option value="{{$s['id']}}">{{$s['group_name']}}</option>
+												@endisset
+											@endif
+										@endforeach
+									@endisset
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('user_groups_id'))
+								<div class="error">{{ $errors->first('user_groups_id') }}</div>
+								@endif
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Select Site Name <span class="text-danger"> *</span></label>
+								<select name="site_id" class="form-control pos_validate" id="site_id">
+									<option value="">Select Site Name</option>
+									@isset($site_info)
+										@foreach($site_info as $sub)
+											@if ($details->site_ids != "")
+												@if($details->site_ids == $sub['id'])
+													<option value="{{$sub['id']}}" selected>{{$sub['site_name']}}</option>
 												@endif
 											@endif
 										@endforeach
 									@endisset
 								</select>
 								<span class="validation_error"></span>
-								@if($errors->has('subcategory_id'))
-								<div class="error">{{ $errors->first('subcategory_id') }}</div>
+								@if($errors->has('site_id'))
+								<div class="error">{{ $errors->first('site_id') }}</div>
 								@endif
 							</div>
 						</div>
-					
+
+						<div class="col-md-12">
+							<div class="custom-control custom-checkbox">
+									@if($details->sub_contractor)
+									<input type="checkbox" class="custom-control-input" value="1" checked="checked" id="sub_contractor" name="sub_contractor" data-rule="admin">
+									@else
+									<input type="checkbox" class="custom-control-input" value="1" id="sub_contractor" name="sub_contractor" data-rule="admin">
+									@endif
+    							<label class="custom-control-label" for="sub_contractor">Sub Contractor</label>
+    							<span class="validation_error"></span>
+								@if($errors->has('sub_contractor'))
+								<div class="error">{{ $errors->first('sub_contractor') }}</div>
+								@endif
+  							</div>
+						</div>
+
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Product Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="product_name" value="{{old('product_name') ? old('product_name') : $product_details->product_name}}" maxlength="128"/>
+								<label>Select Role Name <span class="text-danger"> *</span></label>
+								<select name="role_id" class="form-control pos_validate" id="role_id">
+									<option value="">Select Role Name</option>
+									@isset($roles)
+										@foreach($roles as $r)
+											@if ($details->role_ids != "")
+												@if($details->role_ids == $r['id'])
+													<option value="{{$r['id']}}" selected>{{$r['role_name']}}</option>
+												@endif
+											@endif
+										@endforeach
+									@endisset
+								</select>
 								<span class="validation_error"></span>
-								@if($errors->has('product_name'))
-								<div class="error">{{ $errors->first('product_name') }}</div>
+								@if($errors->has('role_id'))
+								<div class="error">{{ $errors->first('role_id') }}</div>
 								@endif
 							</div>
 						</div>
+
 					
 					</div>
 					<div class="box-footer">
-						<input type="hidden" name="edited_categories" id="edited_categories" value="1">
+						<input type="hidden" name="edited_staff_details" id="edited_staff_details" value="1">
 						<div class="pull-right">
-							<button type="submit" id="categories-submit" class="btn btn-success">
+							<button type="submit" id="staff-details-submit" class="btn btn-success">
 								<strong>Save</strong>
 							</button>
-							<a href="{{url(route('product-details-list'))}}" class="btn btn-default">
+							<a href="{{url(route('staff-details-list'))}}" class="btn btn-default">
 								<strong>Back</strong>
 							</a>
 						</div>
 					</div>
 				</div>
-				<input type="hidden" name="product_details_id" value="{!! $product_details->uuid !!}" />
+				<input type="hidden" name="password" value="{!! $details->uuid !!}" />
+				<input type="hidden" name="staff_details_id" value="{!! $details->uuid !!}" />
 			</form>
 		</div>
 	</div>
@@ -114,5 +186,5 @@
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
 
-@include('master.product_details.script')
+@include('master.staff_details.script')
 @stop
