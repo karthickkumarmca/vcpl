@@ -50,6 +50,21 @@
 
 							<tr>
 								<th class="grey_header">
+									<label>Sub contractor Name</label>
+								</th>
+								<td>@isset($staffdetails)
+										@foreach($staffdetails as $staffdetail)
+											@isset($labour_wages->sub_contractor_id)
+												@if($labour_wages->sub_contractor_id == $staffdetail['id'])
+													{{$staffdetail['name']}}
+												@endif
+											@endisset
+										@endforeach
+									@endisset</td>
+							</tr>
+
+							<tr>
+								<th class="grey_header">
 									<label>Category Name</label>
 								</th>
 								<td>@isset($categories)

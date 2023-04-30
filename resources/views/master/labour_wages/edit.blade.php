@@ -61,6 +61,41 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
+								<label>Sub contractor Name <span class="text-danger"> *</span></label>
+								<select name="sub_contractor_id" class="form-control pos_validate" id="sub_contractor_id">
+									<option value="">Sub contractor Name</option>
+									@isset($staffdetails)
+										@foreach($staffdetails as $staffdetail)
+											@if(old('sub_contractor_id') != "")
+												@if(old('sub_contractor_id') == $staffdetail['id'])
+													<option value="{{$staffdetail['id']}}" selected>{{$staffdetail['name']}}</option>
+												@else
+													<option value="{{$staffdetail['id']}}">{{$staffdetail['name']}}</option>
+												@endif
+											@else
+												@isset($labour_wages->sub_contractor_id)
+													@if($labour_wages->sub_contractor_id == $staffdetail['id'])
+														<option value="{{$staffdetail['id']}}" selected>{{$staffdetail['category_name']}}</option>
+													@else
+														<option value="{{$staffdetail['id']}}">{{$staffdetail['name']}}</option>
+													@endif
+												@else
+													<option value="{{$staffdetail['id']}}">{{$staffdetail['name']}}</option>
+												@endisset
+											@endif
+										@endforeach
+									@endisset
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('sub_contractor_id'))
+								<div class="error">{{ $errors->first('sub_contractor_id') }}</div>
+								@endif
+							</div>
+						</div>
+
+
+						<div class="col-md-12">
+							<div class="form-group">
 								<label>Select Category <span class="text-danger"> *</span></label>
 								<select name="labour_category_id" class="form-control pos_validate" id="labour_category_id">
 									<option value="">Select Category</option>
