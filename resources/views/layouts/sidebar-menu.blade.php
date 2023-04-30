@@ -310,6 +310,8 @@
 
 
 			</li>
+			@include('layouts.sidebar-menu-transactions')
+			
 			<li>
 				<a title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();
 				swal('Are you sure want to logout?','','',{
