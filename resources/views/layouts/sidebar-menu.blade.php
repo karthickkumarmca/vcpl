@@ -25,6 +25,10 @@ $rolesAccess = Session::get('role_access');
 				</a>
 				</li>
 			@endif
+
+			@if($rolesAccess['staffgroups_management']==1 
+			|| $rolesAccess['staff_details_management']==1
+			)
 			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/staffgroups') || str_contains(url()->current(),'master/staff-details') ) active @endif ">
 				<a href="#">
 				    <span>STAFF</span>
@@ -48,6 +52,12 @@ $rolesAccess = Session::get('role_access');
 					@endif
 			    </ul>
 			</li>
+			@endif
+
+			@if($rolesAccess['site_info_management']==1 
+			|| $rolesAccess['client_site_management']==1
+			|| $rolesAccess['architect_site_management']==1
+			)
 			<li class="treeview-nav treeview 
 			@if(str_contains(url()->current(),'architect-site')) active @endif
 			@if(str_contains(url()->current(),'site-info')) active @endif
@@ -89,6 +99,7 @@ $rolesAccess = Session::get('role_access');
 
 
 			</li>
+			@endif
 
 			@if($rolesAccess['units_management']==1)
 			<li class="{{ Request::is('units-list') ? 'active' : '' }} {{ Request::is('create-units') ? 'active' : '' }} {{ Request::is('edit-hallmark/*') ? 'active' : '' }} {{ Request::is('view-hallmark/*') ? 'active' : '' }}">
@@ -99,7 +110,10 @@ $rolesAccess = Session::get('role_access');
 			@endif
 
 			
-        	
+        	@if($rolesAccess['categories_management']==1 
+			|| $rolesAccess['sub_categories_management']==1
+			|| $rolesAccess['product_details_management']==1
+			)
 			<li class="treeview-nav treeview  
 			@if(str_contains(url()->current(),'categories/list')) active @endif
 			@if(str_contains(url()->current(),'categories/edit')) active @endif
@@ -134,18 +148,13 @@ $rolesAccess = Session::get('role_access');
 					</li>
 					@endif
 					
-					<!-- <li class="">
-						<a href="javascript::">
-							<span>RENTAL RATE/ NAME CHANGE</span>
-						</a>
-					</li> -->
-
-
 			    </ul>
 
 
 			</li>
+			@endif
 
+			@if($rolesAccess['labour_categories_management']==1 || $rolesAccess['labour_wages_management']==1)
 			<li class="treeview-nav treeview 
 			@if(str_contains(url()->current(),'labour-categories')) active @endif
 			@if(str_contains(url()->current(),'labour-wages')) active @endif">
@@ -172,6 +181,14 @@ $rolesAccess = Session::get('role_access');
 					
 			    </ul>
 			</li>
+			@endif
+
+			@if($rolesAccess['centering_materials_management']==1 
+			|| $rolesAccess['lorry_materials_management']==1
+			|| $rolesAccess['shop_materials_management']==1
+			|| $rolesAccess['toolsplants_materials_management']==1
+			|| $rolesAccess['vehicle_materials_management']==1
+			)
 
 			<li class="treeview-nav treeview  
 			@if(str_contains(url()->current(),'centering-materials')) active @endif
@@ -232,6 +249,13 @@ $rolesAccess = Session::get('role_access');
 
 			</li>
 
+			@endif
+
+			@if($rolesAccess['ownership_management']==1 
+			|| $rolesAccess['property_categories_management']==1
+			|| $rolesAccess['property_name_management']==1
+			)
+
 			<li class="treeview-nav treeview  
 				@if(str_contains(url()->current(),'property-categories')) active @endif 
 				@if(str_contains(url()->current(),'ownership')) active @endif 
@@ -271,6 +295,9 @@ $rolesAccess = Session::get('role_access');
 
 
 			</li>
+			@endif
+
+
 			 </ul>
 
 

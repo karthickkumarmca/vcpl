@@ -9,7 +9,7 @@
 
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
-		Dashboard **{{Session::get('user_role')}}
+		Dashboard 
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
