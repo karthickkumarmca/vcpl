@@ -115,6 +115,11 @@ body{
     font-size: 14px;
     font-weight: 400;
 }
+.sidebar-menu>li.active>a>span{
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
 
 .sidebar-menu .treeview-menu>li>a {
     font-size: 14px;
