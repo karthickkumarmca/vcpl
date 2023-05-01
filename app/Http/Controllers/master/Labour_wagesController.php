@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Crypt;
 use Redirect;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Validator;
+use Session;
 
 class Labour_wagesController extends Controller
 {
@@ -29,8 +30,8 @@ class Labour_wagesController extends Controller
     }
     public function list(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.labour_wages_management")) {
+         $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['labour_wages_management']) || $rolesAccess['labour_wages_management']!=1){
             abort(403);
         } else {
             if ($request->has('request_type')) {
@@ -100,12 +101,15 @@ class Labour_wagesController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
-                $role = session('user_role');
-                $create_access     = config("roles.{$role}.labour_wages_management_access.create");
-                $view_access     = config("roles.{$role}.labour_wages_management_access.view");
-                $edit_access     = config("roles.{$role}.labour_wages_management_access.edit");
-                $delete_access   = config("roles.{$role}.labour_wages_management_access.delete");
-                $change_status_access   = config("roles.{$role}.labour_wages_management_access.change_status");
+                $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
+                if(isset($rolesAccess['labour_wages_management_access'])){
+
+                    $create_access          = $rolesAccess['labour_wages_management_access']['create'];
+                    $view_access            = $rolesAccess['labour_wages_management_access']['view'];
+                    $edit_access            = $rolesAccess['labour_wages_management_access']['edit'];
+                    $change_status_access   = $rolesAccess['labour_wages_management_access']['change_status'];
+                    $delete_access   = $rolesAccess['labour_wages_management_access']['delete'];
+                }
 
                 return view('master.labour_wages.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
@@ -114,8 +118,8 @@ class Labour_wagesController extends Controller
 
     public function create(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.labour_wages_management_access.create")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['labour_wages_management_access']['create']) || $rolesAccess['labour_wages_management_access']['create']!=1){
             abort(403);
         } else {
             $search = ['status' => 1];
@@ -134,8 +138,8 @@ class Labour_wagesController extends Controller
     }
     public function store(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.labour_wages_management")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['labour_wages_management_access']['create']) || $rolesAccess['labour_wages_management_access']['create']!=1){
             abort(403);
         } else {
 
@@ -175,8 +179,8 @@ class Labour_wagesController extends Controller
 
     public function view($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.labour_wages_management_access.view")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['labour_wages_management_access']['view']) || $rolesAccess['labour_wages_management_access']['view']!=1){
             abort(403);
         } else {
 
@@ -215,8 +219,8 @@ class Labour_wagesController extends Controller
 
     public function edit($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.labour_wages_management_access.edit")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['labour_wages_management_access']['edit']) || $rolesAccess['labour_wages_management_access']['edit']!=1){
             abort(403);
         } else {
             $search = ['status' => 1];
@@ -254,8 +258,7 @@ class Labour_wagesController extends Controller
 
     public function updateStatus($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.labour_wages_management_access.edit")) {
+        if(!isset($rolesAccess['labour_wages_management_access']['change_status']) || $rolesAccess['labour_wages_management_access']['change_status']!=1){
             abort(403);
         } else {
             $labour_wages  = Labour_wages::where(['uuid' => $id])->first();
@@ -280,8 +283,7 @@ class Labour_wagesController extends Controller
 
     public function delete($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.labour_wages_management_access.delete")) {
+         if(!isset($rolesAccess['labour_wages_management_access']['delete']) || $rolesAccess['labour_wages_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Labour_wages::where('uuid', $id)->delete();

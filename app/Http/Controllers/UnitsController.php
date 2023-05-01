@@ -16,6 +16,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Validator;
 use App\Helpers\Helper;
 use DB;
+use Session;
 
 class UnitsController extends Controller
 {
@@ -30,8 +31,9 @@ class UnitsController extends Controller
     }
     public function list(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management")) {
+        $rolesAccess = Session::get('role_access');
+        // echo "<pre>";print_r($rolesAccess);exit;
+        if(!isset($rolesAccess['units_management']) || $rolesAccess['units_management']!=1){
             abort(403);
         } else {
             if ($request->has('request_type')) {
@@ -102,12 +104,15 @@ class UnitsController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
-                $role = session('user_role');
-                $create_access     = config("roles.{$role}.units_management_access.create");
-                $view_access     = config("roles.{$role}.units_management_access.view");
-                $edit_access     = config("roles.{$role}.units_management_access.edit");
-                $delete_access   = config("roles.{$role}.units_management_access.delete");
-                $change_status_access   = config("roles.{$role}.units_management_access.change_status");
+                $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
+                if(isset($rolesAccess['units_management_access'])){
+
+                    $create_access          = $rolesAccess['units_management_access']['create'];
+                    $view_access            = $rolesAccess['units_management_access']['view'];
+                    $edit_access            = $rolesAccess['units_management_access']['edit'];
+                    $change_status_access   = $rolesAccess['units_management_access']['change_status'];
+                }
+                
 
                 return view('units.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
@@ -116,8 +121,8 @@ class UnitsController extends Controller
 
     public function create(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management_access.create")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['units_management_access']['create']) || $rolesAccess['units_management_access']['create']!=1){
             abort(403);
         } else {
             return view('units.create');
@@ -125,8 +130,8 @@ class UnitsController extends Controller
     }
     public function store(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['units_management_access']['create']) || $rolesAccess['units_management_access']['create']!=1){
             abort(403);
         } else {
 
@@ -171,8 +176,8 @@ class UnitsController extends Controller
 
     public function view($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management_access.view")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['units_management_access']['view']) || $rolesAccess['units_management_access']['view']!=1){
             abort(403);
         } else {
             $units  = Units::where(['uuid' => $id])->first();
@@ -194,8 +199,8 @@ class UnitsController extends Controller
 
     public function edit($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management_access.edit")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['units_management_access']['edit']) || $rolesAccess['units_management_access']['edit']!=1){
             abort(403);
         } else {
             // $units  = units::find($id);
@@ -218,8 +223,8 @@ class UnitsController extends Controller
 
     public function updateStatus($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management_access.edit")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['units_management_access']['change_status']) || $rolesAccess['units_management_access']['change_status']!=1){
             abort(403);
         } else {
             $units  = Units::where(['uuid' => $id])->first();

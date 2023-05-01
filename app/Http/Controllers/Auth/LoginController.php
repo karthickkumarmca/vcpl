@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Roles;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -50,7 +51,15 @@ class LoginController extends Controller
     {
         // echo Hash::make($request->password);exit;
         // dd($request->all());
-        $user = User::where(['email' => $request->email])->whereIn('user_type', array(1,2))->first();
+
+        $fields = [
+            'users.*',
+            'roles.master as master_access'
+        ];
+        $user = User::select($fields)
+        ->leftjoin('roles','roles.id','users.role_id')
+        ->where(['email' => $request->email])->whereIn('user_type', array(1,2))->first();
+        // print_r($user);exit;
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 if (Auth::guard()) {
@@ -82,9 +91,53 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user) {
+
+            $role_access = '';
+            if($user->user_type==1){
+                $role_access = config("roles.".config("general_settings.user_type.1"));
+            }
+            else if($user->user_type==2){
+                if($user->role_id>0){
+                    $roles = Roles::where('id',$user->role_id)->first();
+                    if($roles){
+                        if($roles->master!=''){
+                            $master_access =   explode(",",$roles->master);
+                             // echo "<pre>"; print_r($master_access);
+                            $role_access = config("roles.".config("general_settings.user_type.1"));
+                            foreach($role_access as $key=>$ur){
+                                if(in_array($key,$master_access)){
+                                    $role_access[$key] = $ur;
+
+                                }
+                                else{
+                                    if(is_array($ur)){
+                                        $mage = str_replace("_access", "", $key);
+                                        if(!in_array($mage,$master_access)){
+                                            foreach($ur as $key1=>$yu){
+                                                $role_access[$key][$key1] = 0;
+                                            }
+                                        }
+                                        else{
+                                            $role_access[$key] = $ur;
+                                        }
+                                        
+                                    }
+                                    else{
+                                        $role_access[$key] = 0;
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            // echo "<pre>";print_r($role_access);exit;
             session(['user_role' => config("general_settings.user_type.{$user->user_type}")]);
             session(['user_type' => $user->user_type]);
             session(['user_id' => $user->id]);
+            session(['role_access' => $role_access]);
         }
     }
     /**

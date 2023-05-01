@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Crypt;
 use Redirect;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Validator;
+use Session;
 
 class Centering_materialsController extends Controller
 {
@@ -28,8 +29,8 @@ class Centering_materialsController extends Controller
     }
     public function list(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management")) {
+         $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['centering_materials_management']) || $rolesAccess['centering_materials_management']!=1){
             abort(403);
         } else {
             if ($request->has('request_type')) {
@@ -101,12 +102,15 @@ class Centering_materialsController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
-                $role = session('user_role');
-                $create_access     = config("roles.{$role}.centering_materials_management_access.create");
-                $view_access     = config("roles.{$role}.centering_materials_management_access.view");
-                $edit_access     = config("roles.{$role}.centering_materials_management_access.edit");
-                $delete_access   = config("roles.{$role}.centering_materials_management_access.delete");
-                $change_status_access   = config("roles.{$role}.centering_materials_management_access.change_status");
+                $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
+                if(isset($rolesAccess['centering_materials_management_access'])){
+
+                    $create_access          = $rolesAccess['centering_materials_management_access']['create'];
+                    $view_access            = $rolesAccess['centering_materials_management_access']['view'];
+                    $edit_access            = $rolesAccess['centering_materials_management_access']['edit'];
+                    $change_status_access   = $rolesAccess['centering_materials_management_access']['change_status'];
+                    $delete_access   = $rolesAccess['centering_materials_management_access']['delete'];
+                }
 
                 return view('master.centering_materials.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
@@ -115,8 +119,8 @@ class Centering_materialsController extends Controller
 
     public function create(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.create")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['centering_materials_management_access']['create']) || $rolesAccess['centering_materials_management_access']['create']!=1){
             abort(403);
         } else {
             $search = ['status' => 1,'category_id'=>2];
@@ -131,8 +135,8 @@ class Centering_materialsController extends Controller
     }
     public function store(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['centering_materials_management_access']['create']) || $rolesAccess['centering_materials_management_access']['create']!=1){
             abort(403);
         } else {
 
@@ -179,8 +183,8 @@ class Centering_materialsController extends Controller
 
     public function view($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.view")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['centering_materials_management_access']['view']) || $rolesAccess['centering_materials_management_access']['view']!=1){
             abort(403);
         } else {
 
@@ -215,8 +219,8 @@ class Centering_materialsController extends Controller
 
     public function edit($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.edit")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['centering_materials_management_access']['edit']) || $rolesAccess['centering_materials_management_access']['edit']!=1){
             abort(403);
         } else {
             // $centering_materials  = Materials::find($id);
@@ -251,8 +255,7 @@ class Centering_materialsController extends Controller
 
     public function updateStatus($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.edit")) {
+         if(!isset($rolesAccess['centering_materials_management_access']['change_status']) || $rolesAccess['centering_materials_management_access']['change_status']!=1){
             abort(403);
         } else {
             $centering_materials  = Materials::where(['uuid' => $id])->first();
@@ -277,8 +280,7 @@ class Centering_materialsController extends Controller
 
     public function delete($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management_access.delete")) {
+        if(!isset($rolesAccess['centering_materials_management_access']['delete']) || $rolesAccess['centering_materials_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Materials::where('uuid', $id)->delete();

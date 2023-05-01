@@ -82,10 +82,6 @@ class Customer extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.customer_management")) {
-            abort(403);
-        }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');

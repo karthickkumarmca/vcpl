@@ -81,10 +81,6 @@ class Property_categories extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.categories_management")) {
-            abort(403);
-        }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
@@ -126,35 +122,11 @@ class Property_categories extends Model
         ->toArray();
     }
     
-    public static function getcategoriesCount(){
-        $fields = [
-            DB::raw('Count(id) AS categories_count'),
-        ];
-        $result = self::select($fields)
-        ->get()
-        ->toArray();
-        return isset($result[0]['categories_count'])?$result[0]['categories_count']:0;
-    }
-
-    public static function updateRecord(array $data, $id = 0): int
-    {
-        DB::table('categories')->where('id', $id)->update($data);
-        return $id;
-    }
+  
     public static function updateDetails($where,$updateDetails)
     {
         self::where($where)->update($updateDetails);
         return true;
     }
-    public static function getdashboardcount()
-    {
-
-        $fields = [
-            DB::raw('COUNT(*) AS total_count'),
-            DB::raw('COUNT(id) AS categoriess_count')           
-        ];
-        $query = Self::select($fields);
-        $records = $query->first()->toArray();
-        return $records;
-    }
+    
 }

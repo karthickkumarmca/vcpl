@@ -90,12 +90,7 @@ class Siteinfo extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.site_info_management")) {
-            abort(403);
-        }
-
-        $response = [];
+               $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
         if ($request->has('site_info_id')) {

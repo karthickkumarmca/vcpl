@@ -75,7 +75,7 @@
 											@else
 												@isset($labour_wages->sub_contractor_id)
 													@if($labour_wages->sub_contractor_id == $staffdetail['id'])
-														<option value="{{$staffdetail['id']}}" selected>{{$staffdetail['category_name']}}</option>
+														<option value="{{$staffdetail['id']}}" selected>{{$staffdetail['name']}}</option>
 													@else
 														<option value="{{$staffdetail['id']}}">{{$staffdetail['name']}}</option>
 													@endif

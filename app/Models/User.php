@@ -116,10 +116,6 @@ class User extends Authenticatable implements JWTSubject
      */
     public static function storeRecords(Request $request,$path)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.user_management")) {
-            abort(403);
-        }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
@@ -170,28 +166,6 @@ class User extends Authenticatable implements JWTSubject
         ->get()
         ->toArray();
     }
-    
-    public static function getCustomerCount(){
-        $fields = [
-            DB::raw('Count(id) AS customer_count'),
-        ];
-        $result = User::select($fields)
-        ->where('user_type',2)
-        ->get()
-        ->toArray();
-        return isset($result[0]['customer_count'])?$result[0]['customer_count']:0;
-    }
-
-    public static function updateRecord(array $data, $id = 0): int
-    {
-        DB::table('users')->where('id', $id)->update($data);
-        return $id;
-    }
-    public static function updateDetails($where,$updateDetails)
-    {
-        self::where($where)->update($updateDetails);
-        return true;
-    }
     public static function getdashboardcount()
     {
 
@@ -203,4 +177,12 @@ class User extends Authenticatable implements JWTSubject
         $records = $query->first()->toArray();
         return $records;
     }
+    
+   
+    public static function updateDetails($where,$updateDetails)
+    {
+        self::where($where)->update($updateDetails);
+        return true;
+    }
+   
 }

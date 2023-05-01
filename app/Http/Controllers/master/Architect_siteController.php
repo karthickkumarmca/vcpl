@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\master;
 
+use Session;
 use App\Admin;
 use App\Models\Productdetails;
 use App\Models\Architect_site;
@@ -28,8 +29,8 @@ class Architect_siteController extends Controller
     }
     public function list(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.architect_site_management")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['architect_site_management']) || $rolesAccess['architect_site_management']!=1){
             abort(403);
         } else {
             if ($request->has('request_type')) {
@@ -99,12 +100,15 @@ class Architect_siteController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
-                $role = session('user_role');
-                $create_access     = config("roles.{$role}.architect_site_management_access.create");
-                $view_access     = config("roles.{$role}.architect_site_management_access.view");
-                $edit_access     = config("roles.{$role}.architect_site_management_access.edit");
-                $delete_access   = config("roles.{$role}.architect_site_management_access.delete");
-                $change_status_access   = config("roles.{$role}.architect_site_management_access.change_status");
+                $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
+                if(isset($rolesAccess['architect_site_management_access'])){
+
+                    $create_access          = $rolesAccess['architect_site_management_access']['create'];
+                    $view_access            = $rolesAccess['architect_site_management_access']['view'];
+                    $edit_access            = $rolesAccess['architect_site_management_access']['edit'];
+                    $change_status_access   = $rolesAccess['architect_site_management_access']['change_status'];
+                    $delete_access   = $rolesAccess['architect_site_management_access']['delete'];
+                }
 
                 return view('master.architect_site.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
@@ -113,8 +117,8 @@ class Architect_siteController extends Controller
 
     public function create(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.architect_site_management_access.create")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['architect_site_management_access']['create']) || $rolesAccess['architect_site_management_access']['create']!=1){
             abort(403);
         } else {
 
@@ -126,8 +130,8 @@ class Architect_siteController extends Controller
     }
     public function store(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.architect_site_management")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['architect_site_management_access']['create']) || $rolesAccess['architect_site_management_access']['create']!=1){
             abort(403);
         } else {
 
@@ -180,8 +184,8 @@ class Architect_siteController extends Controller
 
     public function view($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.architect_site_management_access.view")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['architect_site_management_access']['view']) || $rolesAccess['architect_site_management_access']['view']!=1){
             abort(403);
         } else {
 
@@ -211,8 +215,8 @@ class Architect_siteController extends Controller
 
     public function edit($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.architect_site_management_access.edit")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['architect_site_management_access']['edit']) || $rolesAccess['architect_site_management_access']['edit']!=1){
             abort(403);
         } else {
             $search1 = ['status' => 1];
@@ -241,8 +245,7 @@ class Architect_siteController extends Controller
 
     public function updateStatus($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.architect_site_management_access.edit")) {
+        if(!isset($rolesAccess['architect_site_management_access']['change_status']) || $rolesAccess['architect_site_management_access']['change_status']!=1){
             abort(403);
         } else {
             $architect_site  = Architect_site::where(['uuid' => $id])->first();
@@ -267,8 +270,7 @@ class Architect_siteController extends Controller
 
     public function delete($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.architect_site_management_access.delete")) {
+         if(!isset($rolesAccess['architect_site_management_access']['delete']) || $rolesAccess['architect_site_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Architect_site::where('uuid', $id)->delete();

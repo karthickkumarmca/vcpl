@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Crypt;
 use Redirect;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Validator;
+use Session;
 
 class SubcategoriesController extends Controller
 {
@@ -27,8 +28,8 @@ class SubcategoriesController extends Controller
     }
     public function list(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.sub_categories_management")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['sub_categories_management']) || $rolesAccess['sub_categories_management']!=1){
             abort(403);
         } else {
             if ($request->has('request_type')) {
@@ -99,12 +100,14 @@ class SubcategoriesController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
-                $role = session('user_role');
-                $create_access     = config("roles.{$role}.sub_categories_management_access.create");
-                $view_access     = config("roles.{$role}.sub_categories_management_access.view");
-                $edit_access     = config("roles.{$role}.sub_categories_management_access.edit");
-                $delete_access   = config("roles.{$role}.sub_categories_management_access.delete");
-                $change_status_access   = config("roles.{$role}.sub_categories_management_access.change_status");
+                $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
+                if(isset($rolesAccess['sub_categories_management_access'])){
+
+                    $create_access          = $rolesAccess['sub_categories_management_access']['create'];
+                    $view_access            = $rolesAccess['sub_categories_management_access']['view'];
+                    $edit_access            = $rolesAccess['sub_categories_management_access']['edit'];
+                    $change_status_access   = $rolesAccess['sub_categories_management_access']['change_status'];
+                }
 
                 return view('master.sub_categories.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
@@ -113,8 +116,8 @@ class SubcategoriesController extends Controller
 
     public function create(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.sub_categories_management_access.create")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['sub_categories_management_access']['create']) || $rolesAccess['sub_categories_management_access']['create']!=1){
             abort(403);
         } else {
             $search = ['status' => 1];
@@ -125,8 +128,8 @@ class SubcategoriesController extends Controller
     }
     public function store(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.sub_categories_management")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['sub_categories_management_access']['create']) || $rolesAccess['sub_categories_management_access']['create']!=1){
             abort(403);
         } else {
 
@@ -179,8 +182,8 @@ class SubcategoriesController extends Controller
 
     public function view($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.sub_categories_management_access.view")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['sub_categories_management_access']['view']) || $rolesAccess['sub_categories_management_access']['view']!=1){
             abort(403);
         } else {
 
@@ -207,8 +210,8 @@ class SubcategoriesController extends Controller
 
     public function edit($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.sub_categories_management_access.edit")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['sub_categories_management_access']['edit']) || $rolesAccess['sub_categories_management_access']['edit']!=1){
             abort(403);
         } else {
             // $sub_categories  = Sub_categories::find($id);
@@ -235,8 +238,7 @@ class SubcategoriesController extends Controller
 
     public function updateStatus($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.sub_categories_management_access.edit")) {
+        if(!isset($rolesAccess['sub_categories_management_access']['change_status']) || $rolesAccess['sub_categories_management_access']['change_status']!=1){
             abort(403);
         } else {
             $sub_categories  = Sub_categories::where(['uuid' => $id])->first();
@@ -261,8 +263,7 @@ class SubcategoriesController extends Controller
 
     public function delete($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.sub_categories_management_access.delete")) {
+         if(!isset($rolesAccess['sub_categories_management_access']['delete']) || $rolesAccess['sub_categories_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Sub_categories::where('uuid', $id)->delete();

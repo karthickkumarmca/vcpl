@@ -81,11 +81,6 @@ class Units extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management")) {
-            abort(403);
-        }
-
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
@@ -147,15 +142,5 @@ class Units extends Model
         self::where($where)->update($updateDetails);
         return true;
     }
-    public static function getdashboardcount()
-    {
-
-        $fields = [
-            DB::raw('COUNT(*) AS total_count'),
-            DB::raw('COUNT(id) AS unitss_count')           
-        ];
-        $query = Self::select($fields);
-        $records = $query->first()->toArray();
-        return $records;
-    }
+    
 }
