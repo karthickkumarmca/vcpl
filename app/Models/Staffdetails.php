@@ -139,7 +139,7 @@ class Staffdetails extends Model
         ->get()
         ->toArray();
     }
-    public function getStaffGroupDetails($id){
+    public static function getStaffGroupDetails($id){
     	$fields = [
             'staff_details.id',
             'staff_details.uuid',
