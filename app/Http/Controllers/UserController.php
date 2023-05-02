@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use App\Models\User;
+use App\Models\Staffdetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -531,6 +532,7 @@ class UserController extends Controller
                 if (!config("roles.{$role}.user_management")) {
                     abort(403);
                 } else {
+
                     $userID = str_replace(env('APP_KEY'), "", decrypt($id));
                     $user = User::find($userID);
                     return view('admin.change_password', [
@@ -566,7 +568,94 @@ class UserController extends Controller
             ], $statusCode);
         }
     }
+    public function changeStaffPassword(Request $request)
+    {
+        $role = session('user_role');
+        if (!config("roles.{$role}.change_profile_password")) {
+            abort(403);
+        } else {
+            if ($request->isMethod('post')) {
 
+                //$admin          = User::find(Auth::id());
+                $LoggedInUserType = !empty(session('user_type')) ? session('user_type') : "";
+                $role             = session('user_role');
+                $admin            = User::where(['id' => Auth::id(), 'user_type' => $LoggedInUserType])->first();
+
+                if (!config("roles.{$role}.change_profile_password")) {
+                    return response()->json([
+                        'message' => "Invalid details,Please try again.",
+                        'data' => (object)[],
+                        'error' => (object)[]
+                    ], 400);
+                }
+                if ($admin) {
+                    $fieldValidation = [
+                        'new_password'   => ['required', 'max:100', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'],
+                        'confirm_password'  => ['required', 'max:100'],
+                        'current_password'  => ['required', 'max:100']
+                    ];
+                   
+                    $errorMessages    = [
+                        'current_password.required'      => "Please enter the current password",
+                        'new_password.required'      => "Please enter the password",
+                        'confirm_password.required'  => "Please enter the confirm password",
+                        'new_password.max'          => "Password should have maximum of 100 characters",
+                        'new_password.regex'          => "Password must be at least one uppercase, one lowercase letter, one numeric value, one special character and must be more than 8 characters long.",
+
+                    ];
+                    $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
+                    if ($validator->fails()) {
+                        return $this->createErrorResponse($validator->errors());
+                    }
+
+                    if (Hash::check($request->get('current_password'), $admin->password)) {
+                        if ($request->get('current_password') == $request->get('new_password')) {
+                            $response = response()->json([
+                                'message' => "Your current password & new password cant be same. Try new one.",
+                                'data'    => (object)[],
+                                'error'   => (object)[]
+                            ], 400);
+                        } else {
+                            $admin->password = Hash::make($request->get('new_password'));
+                            $admin->save();
+                            //DB::table('sessions')->where('user_id', $admin->id)->delete();
+                            $response = response()->json([
+                                'message' => "Password changed successfully",
+                                'data'    => (object)[],
+                                'error'   => (object)[]
+                            ], 200);
+                        }
+                    } else {
+                        $response = response()->json([
+                            'message' => "Your current password is invalid. Try again.",
+                            'data'    => (object)[],
+                            'error'   => (object)[]
+                        ], 400);
+                    }
+
+                    return $response;
+                } else {
+                    return response()->json([
+                        'message' => "Invalid details,Please try again.",
+                        'data' => (object)[],
+                        'error' => (object)[]
+                    ], 400);
+                }
+            } else {
+                if(!empty($request->id)){
+                    $sfaff_details  = Staffdetails::where(['uuid' => $request->id])->first();
+                    if($sfaff_details){
+                        return view('master.staff_details.change_user_password', ['id' => $request->id]);
+                    } else {
+                        $data = [ 'message' => "Invalid staff details"];
+                        return view('error_view', $data);
+                    }
+                } else {
+                    return view('users.change_user_password');
+                }
+            }
+        }
+    }
     public function checkemail($email)
     {
         $user_array=User::select('id','name','user_type','uuid')->where('email',$email)->get()->toArray();
