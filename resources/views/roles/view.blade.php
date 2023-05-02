@@ -38,6 +38,36 @@
 							</tr>
 							<tr>
 								<th class="grey_header">
+									<label>Master</label>
+								</th>
+								<td>
+									@if(in_array('roles_management',$roles->master)) Roles <br> @endif
+							    @if(in_array('units_management',$roles->master)) Units <br> @endif
+							    @if(in_array('staffgroups_management',$roles->master)) Staff Group <br> @endif
+							    @if(in_array('staff_details_management',$roles->master)) Staff Details <br> @endif
+							    @if(in_array('site_info_management',$roles->master)) Site Info <br> @endif
+							    @if(in_array('client_site_management',$roles->master)) Client Info <br> @endif
+							    @if(in_array('architect_site_management',$roles->master)) Architect Info <br> @endif
+							    @if(in_array('categories_management',$roles->master)) Product Categories <br> @endif
+							    @if(in_array('sub_categories_management',$roles->master)) Sub Product Categories <br> @endif
+							    @if(in_array('product_details_management',$roles->master)) Product Details <br> @endif
+							    @if(in_array('labour_categories_management',$roles->master)) Labour Categories <br> @endif
+							    @if(in_array('labour_wages_management',$roles->master)) Labour Wages <br> @endif
+
+
+							    @if(in_array('centering_materials_management',$roles->master)) centering Materials <br> @endif
+							    @if(in_array('lorry_materials_management',$roles->master)) Lorry Materials <br> @endif
+							    @if(in_array('shop_materials_management',$roles->master)) Shop Materials <br> @endif
+							    @if(in_array('toolsplants_materials_management',$roles->master)) Toold and Plant Materials <br> @endif
+							    @if(in_array('vehicle_materials_management',$roles->master)) Vehicle Materials <br> @endif
+
+							    @if(in_array('ownership_management',$roles->master)) Ownership <br> @endif
+							    @if(in_array('property_name_management',$roles->master)) Property Name <br> @endif
+							    @if(in_array('property_categories_management',$roles->master)) property Categories <br> @endif
+								</td>
+							</tr>
+							<tr>
+								<th class="grey_header">
 									<label>Status</label>
 								</th>
 								<td><span class="badge {!! $status_bg !!}"> {!! $status !!}</span></td>
@@ -65,3 +95,4 @@
 	</div>
 </section>
 @endsection
+

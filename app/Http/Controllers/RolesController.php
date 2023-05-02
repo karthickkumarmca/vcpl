@@ -209,6 +209,9 @@ class RolesController extends Controller
         } else {
             $roles  = Roles::where(['uuid' => $id])->first();
             if ($roles) {
+                if($roles->master!=''){
+                    $roles->master = explode(",",$roles->master);
+                }
                 $data = [
                     'roles' => $roles,
                 ];

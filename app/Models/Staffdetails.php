@@ -96,20 +96,24 @@ class Staffdetails extends Model
             {
                 $staffdetails->updated_at = $request->created_at; 
             }
+
+            User::where(['uuid' => $request->staff_details_id])->update([
+                'email'         =>$request->email,
+                'phonenumber'   =>$request->phone_number,
+                'role_id'       =>$request->role_id,
+                'user_name'     =>$request->user_name,
+                ]);
         } else {
+            $uuid = \Str::uuid()->toString();
             $staffdetails = new self();
             $staffdetails->created_by = Auth::id();
             $staffdetails->created_at = date('Y-m-d H:i:s');
-            $staffdetails->uuid = \Str::uuid()->toString();
+            $staffdetails->uuid = $uuid;
             $staffdetails->status = 1;
-        }
-        $staffdetails->name = $request->name;
-        $staffdetails->user_name = $request->user_name;
-        if($request->has('staff_details_id')){
-        }else{
+
             $staffdetails->password = $request->password;
             User::insert([
-                'uuid'          =>\Str::uuid()->toString(),
+                'uuid'          =>$uuid,
                 'email'         =>$request->email,
                 'phonenumber'   =>$request->phone_number,
                 'user_type'     => 2,
@@ -119,6 +123,9 @@ class Staffdetails extends Model
                 'status'        => 1
                 ]);
         }
+        $staffdetails->name = $request->name;
+        $staffdetails->user_name = $request->user_name;
+        
         $staffdetails->email = $request->email;
         $staffdetails->phone_number = $request->phone_number;
         $staffdetails->user_groups_ids = $request->user_groups_id;
