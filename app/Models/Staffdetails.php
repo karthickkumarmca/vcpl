@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class Staffdetails extends Model
 {
@@ -83,11 +85,7 @@ class Staffdetails extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.staff_details_management")) {
-            abort(403);
-        }
-
+      
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
 
@@ -98,24 +96,41 @@ class Staffdetails extends Model
             {
                 $staffdetails->updated_at = $request->created_at; 
             }
+
+            User::where(['uuid' => $request->staff_details_id])->update([
+                'email'         =>$request->email,
+                'phonenumber'   =>$request->phone_number,
+                'role_id'       =>$request->role_id,
+                'user_name'     =>$request->user_name,
+                ]);
         } else {
+            $uuid = \Str::uuid()->toString();
             $staffdetails = new self();
             $staffdetails->created_by = Auth::id();
             $staffdetails->created_at = date('Y-m-d H:i:s');
-            $staffdetails->uuid = \Str::uuid()->toString();
+            $staffdetails->uuid = $uuid;
             $staffdetails->status = 1;
+
+            $staffdetails->password = $request->password;
+            User::insert([
+                'uuid'          =>$uuid,
+                'email'         =>$request->email,
+                'phonenumber'   =>$request->phone_number,
+                'user_type'     => 2,
+                'role_id'       =>$request->role_id,
+                'user_name'     =>$request->user_name,
+                'password'      => Hash::make($request->password),
+                'status'        => 1
+                ]);
         }
         $staffdetails->name = $request->name;
         $staffdetails->user_name = $request->user_name;
-        if($request->has('staff_details_id')){
-        }else{
-            $staffdetails->password = $request->password;
-        }
+        
         $staffdetails->email = $request->email;
         $staffdetails->phone_number = $request->phone_number;
         $staffdetails->user_groups_ids = $request->user_groups_id;
         $staffdetails->site_ids = $request->site_id;
-        $staffdetails->sub_contractor = $request->sub_contractor;
+        $staffdetails->sub_contractor = isset($request->sub_contractor)?$request->sub_contractor:0;
         $staffdetails->role_ids = $request->role_id;
         $staffdetails->save();
 
@@ -139,7 +154,7 @@ class Staffdetails extends Model
         ->get()
         ->toArray();
     }
-    public function getStaffGroupDetails($id){
+    public static function getStaffGroupDetails($id){
     	$fields = [
             'staff_details.id',
             'staff_details.uuid',

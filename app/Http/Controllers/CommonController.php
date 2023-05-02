@@ -20,8 +20,10 @@ class CommonController extends Controller
 		$this->middleware('auth');
 	}
 
-	public function dashboard()
+	public function dashboard(Request $request)
 	{
+		$value =$request->session()->all();
+		// print_r($value);exit;
 		// echo Hash::make('Vcpladmin@2023');exit;
 		$customers_count   = Customer::getdashboardcount();
 		$user_count       = User::getdashboardcount();

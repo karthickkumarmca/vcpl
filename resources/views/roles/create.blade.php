@@ -35,6 +35,41 @@
 						</div>
 						
 					</div>
+					<div class="box-body">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Master Modules <span class="text-danger"> *</span></label>
+								<select data-placeholder="Begin typing a name to filter..." multiple class="form-control chosen-select" name="master[]">
+							    <option value=""></option>
+							    <option value="roles_management">Roles</option>
+							    <option value="units_management">Units</option>
+							    <option value="staffgroups_management">Staff Group</option>
+							    <option value="staff_details_management">Staff Details</option>
+							    <option value="site_info_management">Site Info</option>
+							    <option value="client_site_management">Client Info</option>
+							    <option value="architect_site_management">Architect Info</option>
+							    <option value="categories_management">Product Categories</option>
+							    <option value="sub_categories_management">Sub Product Categories</option>
+
+							    <option value="product_details_management">Product Details</option>
+							    <option value="labour_categories_management">Labour Categories</option>
+							    <option value="labour_wages_management">Labour Wages</option>
+							    
+							    <option value="centering_materials_management">centering Materials</option>
+							    <option value="lorry_materials_management">Lorry Materials</option>
+							    <option value="shop_materials_management">Shop Materials</option>
+							    <option value="toolsplants_materials_management">Toold and Plant Materials</option>
+							    <option value="vehicle_materials_management">Vehicle Materials</option>
+
+							    <option value="ownership_management">Ownership</option>
+							    <option value="property_name_management">Property Name</option>
+							    <option value="property_categories_management">property Categories</option>
+							   
+							  </select>
+							</div>
+						</div>
+						
+					</div>
 					<div class="box-footer">
 						<div class="pull-right">
 							<button type="submit" id="Roles-submit" class="btn btn-success">
@@ -56,6 +91,13 @@
 <script src="{{asset('js/custom/formValidation.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
     @include('roles.script')
+    <script type="text/javascript">
+$(".chosen-select").chosen({
+  no_results_text: "Oops, nothing found!"
+})
+    </script>
     @stop

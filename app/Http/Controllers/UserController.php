@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Validator;
 use App\Helpers\Helper;
+use Session;
 use DB;
 
 class UserController extends Controller

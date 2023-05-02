@@ -89,10 +89,6 @@ class Labour_wages extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management")) {
-            abort(403);
-        }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');

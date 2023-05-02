@@ -81,10 +81,6 @@ class Roles extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.roles_management")) {
-            abort(403);
-        }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
@@ -103,7 +99,8 @@ class Roles extends Model
             $roles->uuid = \Str::uuid()->toString();
             $roles->status = 1;
         }
-        $roles->role_name = $request->role_name;
+        $roles->role_name   = $request->role_name;
+        $roles->master      = implode(",",$request->master);
         $roles->save();
 
         $response['status_code'] = '200';

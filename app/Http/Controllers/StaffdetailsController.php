@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Crypt;
 use Redirect;
 use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Validator;
+use Session;
 
 class StaffdetailsController extends Controller
 {
@@ -29,8 +30,8 @@ class StaffdetailsController extends Controller
     }
     public function list(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.staff_details_management")) {
+         $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['staff_details_management']) || $rolesAccess['staff_details_management']!=1){
             abort(403);
         } else {
             if ($request->has('request_type')) {
@@ -101,12 +102,15 @@ class StaffdetailsController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
-                $role = session('user_role');
-                $create_access     = config("roles.{$role}.staff_details_management_access.create");
-                $view_access     = config("roles.{$role}.staff_details_management_access.view");
-                $edit_access     = config("roles.{$role}.staff_details_management_access.edit");
-                $delete_access   = config("roles.{$role}.staff_details_management_access.delete");
-                $change_status_access   = config("roles.{$role}.staff_details_management_access.change_status");
+                $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
+                if(isset($rolesAccess['staff_details_management_access'])){
+
+                    $create_access          = $rolesAccess['staff_details_management_access']['create'];
+                    $view_access            = $rolesAccess['staff_details_management_access']['view'];
+                    $edit_access            = $rolesAccess['staff_details_management_access']['edit'];
+                    $change_status_access   = $rolesAccess['staff_details_management_access']['change_status'];
+                    $delete_access   = $rolesAccess['staff_details_management_access']['delete'];
+                }
 
                 return view('master.staff_details.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
@@ -115,8 +119,8 @@ class StaffdetailsController extends Controller
 
     public function create(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.staff_details_management_access.create")) {
+       $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['staff_details_management_access']['create']) || $rolesAccess['staff_details_management_access']['create']!=1){
             abort(403);
         } else {
             $search = ['status' => 1];
@@ -144,8 +148,8 @@ class StaffdetailsController extends Controller
     }
     public function store(Request $request)
     {
-        $role = session('user_role'); 
-        if (!config("roles.{$role}.staff_details_management")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['staff_details_management_access']['create']) || $rolesAccess['staff_details_management_access']['create']!=1){
             abort(403);
         } else {
 
@@ -204,8 +208,8 @@ class StaffdetailsController extends Controller
 
     public function view($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.staff_details_management_access.view")) { 
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['staff_details_management_access']['view']) || $rolesAccess['staff_details_management_access']['view']!=1){
             abort(403);
         } else {
 
@@ -224,8 +228,8 @@ class StaffdetailsController extends Controller
 
     public function edit($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.staff_details_management_access.edit")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['staff_details_management_access']['edit']) || $rolesAccess['staff_details_management_access']['edit']!=1){
             abort(403);
         } else {
             $sfaff_details  = Staffdetails::where(['uuid' => $id])->first();
@@ -257,8 +261,7 @@ class StaffdetailsController extends Controller
 
     public function updateStatus($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.product_details_management_access.edit")) {
+        if(!isset($rolesAccess['staff_details_management_access']['change_status']) || $rolesAccess['staff_details_management_access']['change_status']!=1){
             abort(403);
         } else {
             $details  = Staffdetails::where(['uuid' => $id])->first();
@@ -283,8 +286,7 @@ class StaffdetailsController extends Controller
 
     public function delete($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.product_details_management_access.delete")) {
+        if(!isset($rolesAccess['staff_details_management_access']['delete']) || $rolesAccess['staff_details_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Staffdetails::where('uuid', $id)->delete();

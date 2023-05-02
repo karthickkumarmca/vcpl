@@ -94,10 +94,6 @@ class Materials extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.centering_materials_management")) {
-            abort(403);
-        }
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
@@ -147,35 +143,11 @@ class Materials extends Model
         ->toArray();
     }
     
-    public static function getsubcategoriesCount(){
-        $fields = [
-            DB::raw('Count(id) AS subcategories_count'),
-        ];
-        $result = self::select($fields)
-        ->get()
-        ->toArray();
-        return isset($result[0]['subcategories_count'])?$result[0]['subcategories_count']:0;
-    }
-
-    public static function updateRecord(array $data, $id = 0): int
-    {
-        DB::table('subcategories')->where('id', $id)->update($data);
-        return $id;
-    }
+   
     public static function updateDetails($where,$updateDetails)
     {
         self::where($where)->update($updateDetails);
         return true;
     }
-    public static function getdashboardcount()
-    {
-
-        $fields = [
-            DB::raw('COUNT(*) AS total_count'),
-            DB::raw('COUNT(id) AS subcategoriess_count')           
-        ];
-        $query = Self::select($fields);
-        $records = $query->first()->toArray();
-        return $records;
-    }
+   
 }
