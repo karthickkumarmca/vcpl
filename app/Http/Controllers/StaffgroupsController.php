@@ -220,7 +220,8 @@ class StaffgroupsController extends Controller
     }
     public function updateStatus($id)
     {
-         if(!isset($rolesAccess['staffgroups_management_access']['change_status']) || $rolesAccess['staffgroups_management_access']['change_status']!=1){
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['staffgroups_management_access']['change_status']) || $rolesAccess['staffgroups_management_access']['change_status']!=1){
             abort(403);
         } else {
             $staffgroups  = Staffgroups::where(['uuid' => $id])->first();

@@ -223,6 +223,7 @@ class LabourController extends Controller
 
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
         if(!isset($rolesAccess['categories_management_access']['change_status']) || $rolesAccess['categories_management_access']['change_status']!=1){
             abort(403);
         } else {

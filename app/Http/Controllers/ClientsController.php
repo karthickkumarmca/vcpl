@@ -217,8 +217,8 @@ class ClientsController extends Controller
     }
     public function updateStatus($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.clients_management_access.edit")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['roles_management_access']['change_status']) || $rolesAccess['roles_management_access']['change_status']!=1){
             abort(403);
         } else {
             $clients  = Clients::where(['uuid' => $id])->first();

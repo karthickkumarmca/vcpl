@@ -371,6 +371,10 @@ class UserController extends Controller
 
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
+         if(!isset($rolesAccess['roles_management_access']['change_status']) || $rolesAccess['roles_management_access']['change_status']!=1){
+            abort(403);
+        }
         $role = session('user_role');
         if (!config("roles.{$role}.user_management_access.edit")) {
             abort(403);
