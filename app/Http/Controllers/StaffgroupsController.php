@@ -246,6 +246,7 @@ class StaffgroupsController extends Controller
 
     public function delete($id)
     {
+        $rolesAccess = Session::get('role_access');
         if(!isset($rolesAccess['staffgroups_management_access']['delete']) || $rolesAccess['staffgroups_management_access']['delete']!=1){
             abort(403);
         } else {

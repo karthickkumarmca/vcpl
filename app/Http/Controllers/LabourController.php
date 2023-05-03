@@ -249,6 +249,7 @@ class LabourController extends Controller
 
     public function delete($id)
     {
+        $rolesAccess = Session::get('role_access');
         if(!isset($rolesAccess['categories_management_access']['delete']) || $rolesAccess['categories_management_access']['delete']!=1){
             abort(403);
         } else {
