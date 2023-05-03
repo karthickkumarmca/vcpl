@@ -228,6 +228,7 @@ class RolesController extends Controller
     }
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
          if(!isset($rolesAccess['roles_management_access']['change_status']) || $rolesAccess['roles_management_access']['change_status']!=1){
             abort(403);
         } else {
@@ -253,7 +254,8 @@ class RolesController extends Controller
 
     public function delete($id)
     {
-         if(!isset($rolesAccess['roles_management_access']['delete']) || $rolesAccess['roles_management_access']['delete']!=1){
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['roles_management_access']['delete']) || $rolesAccess['roles_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Roles::where('uuid', $id)->delete();
