@@ -249,8 +249,8 @@ class UnitsController extends Controller
 
     public function delete($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.units_management_access.delete")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['units_management_access']['delete']) || $rolesAccess['units_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Units::where('uuid', $id)->delete();

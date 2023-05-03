@@ -275,8 +275,8 @@ class Shop_materialsController extends Controller
 
     public function delete($id)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.shop_materials_management_access.delete")) {
+         $rolesAccess = Session::get('role_access');
+         if(!isset($rolesAccess['shop_materials_management_access']['delete']) || $rolesAccess['shop_materials_management_access']['delete']!=1){
             abort(403);
         } else {
             $result = Materials::where('uuid', $id)->delete();
