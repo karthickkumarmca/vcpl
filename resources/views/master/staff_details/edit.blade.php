@@ -147,6 +147,8 @@
 											@if ($details->role_ids != "")
 												@if($details->role_ids == $r['id'])
 													<option value="{{$r['id']}}" selected>{{$r['role_name']}}</option>
+												@else
+													<option value="{{$s['id']}}">{{$r['role_name']}}</option>
 												@endif
 											@endif
 										@endforeach
