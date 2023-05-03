@@ -260,6 +260,7 @@ class Vehicle_materialsController extends Controller
 
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
         if(!isset($rolesAccess['vehicle_materials_management_access']['change_status']) || $rolesAccess['vehicle_materials_management_access']['change_status']!=1){
             abort(403);
         } else {
@@ -285,6 +286,7 @@ class Vehicle_materialsController extends Controller
 
     public function delete($id)
     {
+        $rolesAccess = Session::get('role_access');
          if(!isset($rolesAccess['vehicle_materials_management_access']['delete']) || $rolesAccess['vehicle_materials_management_access']['delete']!=1){
             abort(403);
         } else {

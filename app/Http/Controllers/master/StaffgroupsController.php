@@ -220,6 +220,7 @@ class StaffgroupsController extends Controller
     }
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
          if(!isset($rolesAccess['staffgroups_management_access']['change_status']) || $rolesAccess['staffgroups_management_access']['change_status']!=1){
             abort(403);
         } else {
@@ -245,6 +246,7 @@ class StaffgroupsController extends Controller
 
     public function delete($id)
     {
+        $rolesAccess = Session::get('role_access');
          if(!isset($rolesAccess['staffgroups_management_access']['delete']) || $rolesAccess['staffgroups_management_access']['delete']!=1){
             abort(403);
         } else {

@@ -269,6 +269,7 @@ class ProductdetailsController extends Controller
 
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
         if(!isset($rolesAccess['product_details_management_access']['change_status']) || $rolesAccess['product_details_management_access']['change_status']!=1){
             abort(403);
         } else {
@@ -294,6 +295,7 @@ class ProductdetailsController extends Controller
 
     public function delete($id)
     {
+        $rolesAccess = Session::get('role_access');
          if(!isset($rolesAccess['product_details_management_access']['delete']) || $rolesAccess['product_details_management_access']['delete']!=1){
             abort(403);
         } else {

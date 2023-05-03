@@ -245,6 +245,7 @@ class Architect_siteController extends Controller
 
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
         if(!isset($rolesAccess['architect_site_management_access']['change_status']) || $rolesAccess['architect_site_management_access']['change_status']!=1){
             abort(403);
         } else {
@@ -270,6 +271,7 @@ class Architect_siteController extends Controller
 
     public function delete($id)
     {
+        $rolesAccess = Session::get('role_access');
          if(!isset($rolesAccess['architect_site_management_access']['delete']) || $rolesAccess['architect_site_management_access']['delete']!=1){
             abort(403);
         } else {

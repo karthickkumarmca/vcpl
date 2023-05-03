@@ -271,6 +271,7 @@ class SiteinfoController extends Controller
 
     public function updateStatus($id)
     {
+        $rolesAccess = Session::get('role_access');
         if(!isset($rolesAccess['site_info_management_access']['change_status']) || $rolesAccess['site_info_management_access']['change_status']!=1){
             abort(403);
         } else {
@@ -296,6 +297,7 @@ class SiteinfoController extends Controller
 
     public function delete($id)
     {
+        $rolesAccess = Session::get('role_access');
          if(!isset($rolesAccess['site_info_management_access']['delete']) || $rolesAccess['site_info_management_access']['delete']!=1){
             abort(403);
         } else {
