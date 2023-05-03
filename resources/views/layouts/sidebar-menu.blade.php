@@ -10,8 +10,8 @@ $rolesAccess = Session::get('role_access');
 					<i class="fa fa-dashboard"></i> <span>Dashboard </span>
 				</a>
 			</li>
-			@endif
-			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/')) active @endif">
+			@endif 
+			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/') || Request::is('roles-list') || Request::is('create-roles') || str_contains(url()->current(),'edit-roles') || str_contains(url()->current(),'view-roles') || Request::is('units-list') || str_contains(url()->current(),'view-units') || str_contains(url()->current(),'edit-units') || Request::is('create-units') ) active @endif">
 				<a href="#">
 				    <span>MASTERS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -102,7 +102,7 @@ $rolesAccess = Session::get('role_access');
 			@endif
 
 			@if($rolesAccess['units_management']==1)
-			<li class="{{ Request::is('units-list') ? 'active' : '' }} {{ Request::is('create-units') ? 'active' : '' }} {{ Request::is('edit-hallmark/*') ? 'active' : '' }} {{ Request::is('view-hallmark/*') ? 'active' : '' }}">
+			<li class="{{ Request::is('units-list') ? 'active' : '' }} {{ Request::is('create-units') ? 'active' : '' }} {{ Request::is('edit-units/*') ? 'active' : '' }} {{ Request::is('view-units/*') ? 'active' : '' }}">
 				<a href="{!! url(route('units-list')) !!}">
 					<span>UNITS MANAGEMENT</span>
 				</a>

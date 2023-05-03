@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('change-password/{id}/{userrole}', 'UserController@changeUserPassword');
     Route::post('change-password', 'UserController@changeUserPassword');
     Route::get('change-user-password', 'UserController@changePassword');
+    Route::post('change-staff-password', 'UserController@changeStaffPassword');
+    Route::get('change-staff-password/{id}', 'UserController@changeStaffPassword');
     Route::post('change-user-password', 'UserController@changePassword');
     Route::get('update-status/{id}', 'UserController@updateStatus');
     Route::get('user/delete/{id}', 'UserController@delete');

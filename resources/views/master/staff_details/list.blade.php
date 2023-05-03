@@ -210,6 +210,24 @@
                         "function_call" : "changesubcategoriesStatus"
                     },
                     {
+                        "name"      : "ChangePassword",
+                        "type"      : "dialog", //view,dialog,modal
+                        "title"     : 'Change Password',
+                        "url"       : function(data){
+                            return "change-staff-password/"+data['uuid'];
+                        },
+                        "icon"      : "fa fa-refresh",
+                        "method"    : "get",
+                        "condition" : function(data){
+                           return true;
+                        },
+                        'confirmation' : {
+                            'display' : true,
+                            'title'   : "Are you sure want to reset the password?"
+                        },
+                        "function_call" : "changepassword"
+                    },
+                    {
                         "name"      : "Delete",
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Delete',
@@ -276,6 +294,35 @@
                 });
             }else {
                 subcategoriesDeleteRecord(url, method);
+            }
+        }
+
+        /**
+         * change subcategories status
+         * @param Object current object
+         */
+         function changepassword(current) {
+            var is_confirm = $(current).data('is_confirm');
+            var method = $(current).data('method');
+            var url = $(current).data('url');
+            var siteurl = $("meta[name='site_url']").attr("content");
+            if(is_confirm) {
+                var title = $(current).data('confirm_title');
+                swal({
+                    title: title,
+                    text: "",
+                    buttons: [
+                    'CANCEL',
+                    'OK'
+                    ],
+                    dangerMode: true,
+                }).then(function(isConfirm) {
+                    if (isConfirm) {
+                         window.location.href = siteurl+url;
+                    }
+                });
+            }else {
+                window.location.href = siteurl+url;
             }
         }
 

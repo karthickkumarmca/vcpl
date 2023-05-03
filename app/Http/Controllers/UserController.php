@@ -572,17 +572,24 @@ class UserController extends Controller
     public function changeStaffPassword(Request $request)
     {
         $role = session('user_role');
-        if (!config("roles.{$role}.change_profile_password")) {
+        if (!config("roles.{$role}.reset_staff_password")) {
             abort(403);
         } else {
             if ($request->isMethod('post')) {
-
                 //$admin          = User::find(Auth::id());
                 $LoggedInUserType = !empty(session('user_type')) ? session('user_type') : "";
                 $role             = session('user_role');
-                $admin            = User::where(['id' => Auth::id(), 'user_type' => $LoggedInUserType])->first();
-
-                if (!config("roles.{$role}.change_profile_password")) {
+                $userid           = !empty($request->user_id)?Helper::getlogindata($request->user_id,1):'';
+                if(empty($userid)){
+                    return response()->json([
+                        'message' => "Invalid details,Please try again.",
+                        'data' => (object)[],
+                        'error' => (object)[]
+                    ], 400);
+                }
+                $admin            = User::where(['uuid' =>$userid])->first(); //, 'user_type' => $LoggedInUserType
+                $Staffdetails     = Staffdetails::where(['uuid' =>$userid])->first();
+                if (!config("roles.{$role}.reset_staff_password")) {
                     return response()->json([
                         'message' => "Invalid details,Please try again.",
                         'data' => (object)[],
@@ -593,11 +600,9 @@ class UserController extends Controller
                     $fieldValidation = [
                         'new_password'   => ['required', 'max:100', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'],
                         'confirm_password'  => ['required', 'max:100'],
-                        'current_password'  => ['required', 'max:100']
                     ];
                    
                     $errorMessages    = [
-                        'current_password.required'      => "Please enter the current password",
                         'new_password.required'      => "Please enter the password",
                         'confirm_password.required'  => "Please enter the confirm password",
                         'new_password.max'          => "Password should have maximum of 100 characters",
@@ -608,8 +613,20 @@ class UserController extends Controller
                     if ($validator->fails()) {
                         return $this->createErrorResponse($validator->errors());
                     }
+                    $admin->password = Hash::make($request->get('new_password'));
+                    $admin->save();
 
-                    if (Hash::check($request->get('current_password'), $admin->password)) {
+                    $Staffdetails->password = $request->get('new_password');
+                    $Staffdetails->save();
+                    
+                    //DB::table('sessions')->where('user_id', $admin->id)->delete();
+                    $response = response()->json([
+                        'message' => "Password changed successfully",
+                        'data'    => (object)[],
+                        'error'   => (object)[]
+                    ], 200);
+
+                    /*if (Hash::check($request->get('current_password'), $admin->password)) {
                         if ($request->get('current_password') == $request->get('new_password')) {
                             $response = response()->json([
                                 'message' => "Your current password & new password cant be same. Try new one.",
@@ -632,7 +649,7 @@ class UserController extends Controller
                             'data'    => (object)[],
                             'error'   => (object)[]
                         ], 400);
-                    }
+                    }*/
 
                     return $response;
                 } else {
@@ -644,15 +661,20 @@ class UserController extends Controller
                 }
             } else {
                 if(!empty($request->id)){
-                    $sfaff_details  = Staffdetails::where(['uuid' => $request->id])->first();
-                    if($sfaff_details){
-                        return view('master.staff_details.change_user_password', ['id' => $request->id]);
+                    $staff_details  = Staffdetails::where(['uuid' => $request->id])->first();
+                    if($staff_details){
+                        $details = ['id' => $request->id,'encrypt_id' => Helper::getlogindata($staff_details->uuid,0)];
+                        $data = [
+                            'data'    => $details,
+                        ];
+                        return view('master.staff_details.change_user_password',$data);
                     } else {
                         $data = [ 'message' => "Invalid staff details"];
                         return view('error_view', $data);
                     }
                 } else {
-                    return view('users.change_user_password');
+                    $data = [ 'message' => "Invalid staff details"];
+                    return view('error_view', $data);
                 }
             }
         }

@@ -51,14 +51,14 @@
 								<div class="error">{{ $errors->first('password') }}</div>
 								@endif
 							</div>
-							<a data-toggle="collapse" data-target="#demo" style="cursor: pointer;color:red">Passowrd intructions</a>
-
-<div id="demo" class="collapse">
-<li>Must be at least 10 characters in length </li>
-<li>Must contain at least one lowercase letter</li>
-<li>Must contain at least one uppercase letter </li>
-<li>Must contain at least one digit </li>
-<li>Must contain a special character</li> <br></div>
+							<a data-toggle="collapse" data-target="#demo" style="cursor: pointer;color:red">Passowrd intructions</a>	
+							<div id="demo" class="collapse">
+								<li>Must be at least 10 characters in length </li>
+								<li>Must contain at least one lowercase letter</li>
+								<li>Must contain at least one uppercase letter </li>
+								<li>Must contain at least one digit </li>
+								<li>Must contain a special character</li> <br>
+							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">

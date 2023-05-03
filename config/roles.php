@@ -195,6 +195,7 @@ return [
             'view' => 1,            
             'change_status' => 1,
         ],
+        'reset_staff_password' =>1,
         'site_info_management' =>1,
         'site_info_management_access' => [
             'create' => 1,
