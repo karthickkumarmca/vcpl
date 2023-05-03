@@ -63,17 +63,6 @@
 		formValidation.clearFormInputs(form, data);
 		var formResponse = formValidation.doFormValidation(data, validator);
 		if (formResponse.valid) {
-			if (path.indexOf('localhost') != -1) {
-			}
-			else{
-				if (grecaptcha.getResponse()) {
-					
-
-				} else {
-					toastr.error('Please confirm captcha to proceed');
-					return false;
-				}
-			}
 			$(".corona-preloader-backdrop").show();
 			$( "#admin-form" ).submit();
 		}
