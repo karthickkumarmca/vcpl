@@ -10,8 +10,8 @@ $rolesAccess = Session::get('role_access');
 					<i class="fa fa-dashboard"></i> <span>Dashboard </span>
 				</a>
 			</li>
-			@endif 
-			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/') || Request::is('roles-list') || Request::is('create-roles') || str_contains(url()->current(),'edit-roles') || str_contains(url()->current(),'view-roles') || Request::is('units-list') || str_contains(url()->current(),'view-units') || str_contains(url()->current(),'edit-units') || Request::is('create-units') ) active @endif">
+			@endif  
+			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/') || Request::is('roles-list') || Request::is('create-roles') || str_contains(url()->current(),'edit-roles') || str_contains(url()->current(),'view-roles') || Request::is('units-list') || str_contains(url()->current(),'view-units') || str_contains(url()->current(),'edit-units') || Request::is('create-units') || str_contains(url()->current(),'change-staff-password/') ) active @endif">
 				<a href="#">
 				    <span>MASTERS</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -29,7 +29,7 @@ $rolesAccess = Session::get('role_access');
 			@if($rolesAccess['staffgroups_management']==1 
 			|| $rolesAccess['staff_details_management']==1
 			)
-			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/staffgroups') || str_contains(url()->current(),'master/staff-details') ) active @endif ">
+			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/staffgroups') || str_contains(url()->current(),'master/staff-details') || str_contains(url()->current(),'change-staff-password/') ) active @endif ">
 				<a href="#">
 				    <span>STAFF</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -44,7 +44,7 @@ $rolesAccess = Session::get('role_access');
 						</li>
 					@endif
 					@if($rolesAccess['staff_details_management']==1)
-					<li class="{{ Request::is('master/staff-details/list') ? 'active' : '' }} {{ Request::is('master/staff-details/create') ? 'active' : '' }} {{ Request::is('master/staff-details/edit/*') ? 'active' : '' }} {{ Request::is('staff-details.view/*') ? 'active' : '' }}">
+					<li class="{{ Request::is('master/staff-details/list') ? 'active' : '' }} {{ Request::is('master/staff-details/create') ? 'active' : '' }} {{ Request::is('master/staff-details/edit/*') ? 'active' : '' }} {{ Request::is('staff-details.view/*') ? 'active' : '' }} {{ Request::is('change-staff-password/*') ? 'active' : '' }}">
 						<a href="{!! url('master/staff-details/list') !!}">
 							<span>STAFF DETAILS</span>
 						</a>

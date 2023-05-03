@@ -582,7 +582,7 @@ class UserController extends Controller
                 $userid           = !empty($request->user_id)?Helper::getlogindata($request->user_id,1):'';
                 if(empty($userid)){
                     return response()->json([
-                        'message' => "Invalid details,Please try again.",
+                        'message' => "Invalid details,Please try again..",
                         'data' => (object)[],
                         'error' => (object)[]
                     ], 400);
@@ -591,7 +591,7 @@ class UserController extends Controller
                 $Staffdetails     = Staffdetails::where(['uuid' =>$userid])->first();
                 if (!config("roles.{$role}.reset_staff_password")) {
                     return response()->json([
-                        'message' => "Invalid details,Please try again.",
+                        'message' => "Invalid details,Please try again....",
                         'data' => (object)[],
                         'error' => (object)[]
                     ], 400);
@@ -654,7 +654,7 @@ class UserController extends Controller
                     return $response;
                 } else {
                     return response()->json([
-                        'message' => "Invalid details,Please try again.",
+                        'message' => "Invalid details,Please try agains.",
                         'data' => (object)[],
                         'error' => (object)[]
                     ], 400);

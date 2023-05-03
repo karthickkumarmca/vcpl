@@ -6,7 +6,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ url(route('home')) }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ url(route('user-list'))  }}">Staff User management</a></li>
+        <li><a href="{{ url(route('staff-details-list'))  }}">Staff User management</a></li>
     </ol>
 </section>
 <section class="content">
@@ -44,7 +44,7 @@
                             <li>Must contain at least one digit </li>
                             <li>Must contain a special character</li> <br>
                         </div>
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <div class="form-group has-feedback @if ($errors->has('g-recaptcha-response')) has-error @endif col-md-12" id="recaptcha-boxs" style="max-width:100%;height: 0px !important;">
                                 <div id="capcha-elements"></div>
                                 <span class="validation_error"></span>
@@ -52,7 +52,7 @@
                                 <div class="error">{{ $errors->first('g-recaptcha-response') }}</div>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="box-footer">
@@ -75,14 +75,14 @@
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> !-->
 <script>
-    var siteCaptchaKey = "{{config('general_settings.site_captcha_key')}}";
+    /*var siteCaptchaKey = "{{config('general_settings.site_captcha_key')}}";
     var onloadCallback = function() {
         grecaptcha.render('capcha-elements', {
             'sitekey': siteCaptchaKey
         });
-    };
+    };*/
     /**
      * Define Admin Form validation rules and messages
      *
@@ -196,12 +196,12 @@
             if (path.indexOf('localhost') != -1) {
             }
             else{
-                if (grecaptcha.getResponse()) {
+                /*if (grecaptcha.getResponse()) {
 
                 } else {
                     toastr.error('Please confirm captcha to proceed');
                     return false;
-                }
+                }*/
             }
             var request = {
                 'url': "{{url('change-staff-password')}}",
