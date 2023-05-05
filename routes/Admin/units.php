@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' =>  ['auth']], function () {
     Route::get('units-list', 'UnitsController@list')->name('units-list');
     Route::get('create-units', 'UnitsController@create')->name('create-units');
     Route::post('units/store', 'UnitsController@store')->name('save-units');

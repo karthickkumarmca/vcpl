@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' =>  ['auth']], function () {
     Route::get('roles-list', 'RolesController@list')->name('roles-list');
     Route::get('create-roles', 'RolesController@create')->name('create-roles');
     Route::post('roles/store', 'RolesController@store')->name('save-roles');

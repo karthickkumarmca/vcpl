@@ -35,7 +35,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -69,7 +69,7 @@ class LoginController extends Controller
                         ]);
                     } else {
                         auth()->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1]);
-                        return redirect()->route('home');
+                        return redirect()->route('dashboard');
                     }
                 } else {
                     throw ValidationException::withMessages([

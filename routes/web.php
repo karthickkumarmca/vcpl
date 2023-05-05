@@ -25,10 +25,10 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/dashboard', 'CommonController@dashboard')->name('dashboard');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'], function () use ($router) {
+Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => ['auth']], function () use ($router) {
 
 
-	Route::group(['prefix' => 'architect-site/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'architect-site/'], function () use ($router) {
 		$router->get('list', 'Architect_siteController@list')->name('architect-site-list');
 	    $router->get('create', 'Architect_siteController@create')->name('create-architect-site');
 	    $router->post('store', 'Architect_siteController@store')->name('save-architect-site');
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Architect_siteController@delete');
 	});
 
-	Route::group(['prefix' => 'client-site/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'client-site/'], function () use ($router) {
 		$router->get('list', 'Client_siteController@list')->name('client-info-list');
 	    $router->get('create', 'Client_siteController@create')->name('create-client-site');
 	    $router->post('store', 'Client_siteController@store')->name('save-client-site');
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Client_siteController@delete');
 	});
 
-	Route::group(['prefix' => 'categories/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'categories/'], function () use ($router) {
 		$router->get('list', 'CategoriesController@list')->name('categories-list');
 	    $router->get('create', 'CategoriesController@create')->name('create-categories');
 	    $router->post('store', 'CategoriesController@store')->name('save-categories');
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'CategoriesController@delete');
 	});
 
-	Route::group(['prefix' => 'sub-categories/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'sub-categories/'], function () use ($router) {
 		$router->get('list', 'SubcategoriesController@list')->name('sub-categories-list');
 	    $router->get('create', 'SubcategoriesController@create')->name('create-sub-categories');
 	    $router->post('store', 'SubcategoriesController@store')->name('save-sub-categories');
@@ -68,7 +68,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'SubcategoriesController@delete');
 	});
 
-	Route::group(['prefix' => 'product-details/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'product-details/'], function () use ($router) {
 		$router->get('list', 'ProductdetailsController@list')->name('product-details-list');
 	    $router->get('create', 'ProductdetailsController@create')->name('create-product-details');
 	    $router->post('store', 'ProductdetailsController@store')->name('save-product-details');
@@ -79,7 +79,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'ProductdetailsController@delete');
 	});
 
-	Route::group(['prefix' => 'labour-categories/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'labour-categories/'], function () use ($router) {
 		$router->get('list', 'Labour_categoriesController@list')->name('labour-categories-list');
 	    $router->get('create', 'Labour_categoriesController@create')->name('create-labour-categories');
 	    $router->post('store', 'Labour_categoriesController@store')->name('save-labour-categories');
@@ -89,7 +89,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Labour_categoriesController@delete');
 	});
 
-	Route::group(['prefix' => 'labour-wages/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'labour-wages/'], function () use ($router) {
 		$router->get('list', 'Labour_wagesController@list')->name('labour-wages-list');
 	    $router->get('create', 'Labour_wagesController@create')->name('create-labour-wages');
 	    $router->post('store', 'Labour_wagesController@store')->name('save-labour-wages');
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Labour_wagesController@delete');
 	});
 
-	Route::group(['prefix' => 'property-categories/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'property-categories/'], function () use ($router) {
 		$router->get('list', 'Property_categoriesController@list')->name('property-categories-list');
 	    $router->get('create', 'Property_categoriesController@create')->name('create-property-categories');
 	    $router->post('store', 'Property_categoriesController@store')->name('save-property-categories');
@@ -110,7 +110,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	});
     
 
-    Route::group(['prefix' => 'ownership/','middleware' => 'auth'], function () use ($router) {
+    Route::group(['prefix' => 'ownership/'], function () use ($router) {
 		$router->get('list', 'OwnershipController@list')->name('ownership-list');
 	    $router->get('create', 'OwnershipController@create')->name('create-ownership');
 	    $router->post('store', 'OwnershipController@store')->name('save-ownership');
@@ -120,7 +120,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'OwnershipController@delete');
 	});
 
-	Route::group(['prefix' => 'property-name/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'property-name/'], function () use ($router) {
 		$router->get('list', 'PropertynameController@list')->name('property-name-list');
 	    $router->get('create', 'PropertynameController@create')->name('create-property-name');
 	    $router->post('store', 'PropertynameController@store')->name('save-property-name');
@@ -131,7 +131,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	});
 
 
-	Route::group(['prefix' => 'centering-materials/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'centering-materials/'], function () use ($router) {
 		$router->get('list', 'Centering_materialsController@list')->name('centering-materials-list');
 	    $router->get('create', 'Centering_materialsController@create')->name('create-centering-materials');
 	    $router->post('store', 'Centering_materialsController@store')->name('save-centering-materials');
@@ -141,7 +141,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Centering_materialsController@delete');
 	});
 
-	Route::group(['prefix' => 'lorry-materials/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'lorry-materials/'], function () use ($router) {
 		$router->get('list', 'Lorry_materialsController@list')->name('lorry-materials-list');
 	    $router->get('create', 'Lorry_materialsController@create')->name('create-lorry-materials');
 	    $router->post('store', 'Lorry_materialsController@store')->name('save-lorry-materials');
@@ -151,7 +151,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Lorry_materialsController@delete');
 	});
 
-	Route::group(['prefix' => 'shop-materials/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'shop-materials/'], function () use ($router) {
 		$router->get('list', 'Shop_materialsController@list')->name('shop-materials-list');
 	    $router->get('create', 'Shop_materialsController@create')->name('create-shop-materials');
 	    $router->post('store', 'Shop_materialsController@store')->name('save-shop-materials');
@@ -161,7 +161,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Shop_materialsController@delete');
 	});
 
-	Route::group(['prefix' => 'toolsplants-materials/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'toolsplants-materials/'], function () use ($router) {
 		$router->get('list', 'Toolsplants_materialsController@list')->name('toolsplants-materials-list');
 	    $router->get('create', 'Toolsplants_materialsController@create')->name('create-toolsplants-materials');
 	    $router->post('store', 'Toolsplants_materialsController@store')->name('save-toolsplants-materials');
@@ -171,7 +171,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Toolsplants_materialsController@delete');
 	});
 
-	Route::group(['prefix' => 'vehicle-materials/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'vehicle-materials/'], function () use ($router) {
 		$router->get('list', 'Vehicle_materialsController@list')->name('vehicle-materials-list');
 	    $router->get('create', 'Vehicle_materialsController@create')->name('create-vehicle-materials');
 	    $router->post('store', 'Vehicle_materialsController@store')->name('save-vehicle-materials');
@@ -181,7 +181,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'Vehicle_materialsController@delete');
 	});
 
-	Route::group(['prefix' => 'site-info/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'site-info/'], function () use ($router) {
 		$router->get('list', 'SiteinfoController@list')->name('site-info-list');
 	    $router->get('create', 'SiteinfoController@create')->name('create-site-info');
 	    $router->post('store', 'SiteinfoController@store')->name('save-site-info');
@@ -192,7 +192,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    $router->get('delete/{id}', 'SiteinfoController@delete');
 	});
 
-	Route::group(['prefix' => 'staffgroups/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'staffgroups/'], function () use ($router) {
 		Route::get('list', 'StaffgroupsController@list')->name('staffgroups-list');
 	    Route::get('create', 'StaffgroupsController@create')->name('create-staffgroups');
 	    Route::post('store', 'StaffgroupsController@store')->name('save-staffgroups');
@@ -202,7 +202,7 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => 'auth'
 	    Route::get('delete/{id}', 'StaffgroupsController@delete');
 
 	});
-	Route::group(['prefix' => 'staff-details/','middleware' => 'auth'], function () use ($router) {
+	Route::group(['prefix' => 'staff-details/'], function () use ($router) {
 		Route::get('list', 'StaffdetailsController@list')->name('staff-details-list');
 	    Route::get('create', 'StaffdetailsController@create')->name('create-staff-details');
 	    Route::post('store', 'StaffdetailsController@store')->name('save-staff-details');
