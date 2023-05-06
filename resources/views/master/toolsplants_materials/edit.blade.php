@@ -121,5 +121,5 @@
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
 
-@include('master.property_name.script')
+@include('master.toolsplants_materials.script')
 @stop

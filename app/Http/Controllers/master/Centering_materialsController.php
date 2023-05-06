@@ -235,6 +235,12 @@ class Centering_materialsController extends Controller
             $centering_materials  = Materials::where(['uuid' => $id])->first();
             if ($centering_materials) {
 
+                if($centering_materials->from_date!=''){
+                     $centering_materials->from_date = date('m/d/Y',strtotime($centering_materials->from_date));
+                }
+                if($centering_materials->to_date!=''){
+                     $centering_materials->to_date = date('m/d/Y',strtotime($centering_materials->to_date));
+                }
                
                 $data = [
                     'units'         => $units,

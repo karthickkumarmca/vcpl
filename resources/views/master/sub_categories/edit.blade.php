@@ -93,5 +93,5 @@
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
 
-@include('master.categories.script')
+@include('master.sub_categories.script')
 @stop

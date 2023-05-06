@@ -75,5 +75,5 @@
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
-    @include('master.property_name.script')
+    @include('master.vehicle_materials.script')
     @stop

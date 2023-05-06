@@ -74,7 +74,7 @@
 								<label>From Date <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Select date" id="from_date" name="from_date" value="{{old('from_date')}}" data-rule="admin" minlength="1" maxlength="128" readonly/>
 								<span class="validation_error"></span>
-								@if($errors->has('rate_unit'))
+								@if($errors->has('from_date'))
 								<div class="error">{{ $errors->first('from_date') }}</div>
 								@endif
 							</div>
@@ -86,7 +86,7 @@
 								<label>To Date <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Select date" id="to_date" name="to_date" value="{{old('to_date')}}" data-rule="admin" minlength="1" maxlength="128" readonly/>
 								<span class="validation_error"></span>
-								@if($errors->has('rate_unit'))
+								@if($errors->has('to_date'))
 								<div class="error">{{ $errors->first('to_date') }}</div>
 								@endif
 							</div>
@@ -116,7 +116,7 @@
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
-    @include('master.property_name.script')
+    @include('master.centering_materials.script')
     <script type="text/javascript">
 	// set default dates
 	var start = new Date();

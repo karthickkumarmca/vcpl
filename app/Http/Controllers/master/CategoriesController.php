@@ -211,7 +211,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $rolesAccess = Session::get('role_access');
-        if(!isset($rolesAccess['categories_management_access']['edit']) || $rolesAccess['categories_management_access']['edt']!=1){
+        if(!isset($rolesAccess['categories_management_access']['edit']) || $rolesAccess['categories_management_access']['edit']!=1){
             abort(403);
         } else {
             // $categories  = Categories::find($id);

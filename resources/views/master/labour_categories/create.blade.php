@@ -57,5 +57,5 @@
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
-    @include('master.categories.script')
+    @include('master.labour_categories.script')
     @stop
