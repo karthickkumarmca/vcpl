@@ -136,7 +136,7 @@ class RolesController extends Controller
             $validation = config('field_validation.admin');
             $fieldValidation = [
                 'role_name'         => [
-                    'required','min:2','max:15'
+                    'required','min:2','max:128'
                 ],
                 'master'         => [ 'required']
             ];
