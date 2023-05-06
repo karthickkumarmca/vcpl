@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Vehicle Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="vehicle_name" value="{{old('vehicle_name')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Vehicle Name" name="vehicle_name" value="{{old('vehicle_name')}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('vehicle_name'))
 								<div class="error">{{ $errors->first('vehicle_name') }}</div>

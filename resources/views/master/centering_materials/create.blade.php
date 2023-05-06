@@ -43,7 +43,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Unit Rate <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="rate_unit" value="{{old('rate_unit')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Unit Rate" name="rate_unit" value="{{old('rate_unit')}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('rate_unit'))
 								<div class="error">{{ $errors->first('rate_unit') }}</div>

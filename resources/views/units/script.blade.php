@@ -8,7 +8,12 @@
 	
 	$("#admin-form").validate({
 		rules: {
-			unit_name: "required",
+			unit_name: {
+	            required: true,
+	            normalizer:function( value ) {
+	           		return $.trim(value);
+	            },
+	        }
 			
 		},
 		messages: {
