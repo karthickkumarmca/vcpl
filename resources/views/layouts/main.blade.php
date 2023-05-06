@@ -39,7 +39,7 @@
         </div>
         @include('layouts.footer')
     </div>
-    <script src="{{ URL('js/jquery.validate.min.js') }}"></script>   
+   
     @yield('before-scripts-end')
     @include('layouts.scripts')
     @stack('scripts')

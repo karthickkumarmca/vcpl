@@ -26,14 +26,13 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Roles <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Roles" name="role_name" value="{{old('role_name')}}" data-rule="admin" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Roles" name="role_name" value="{{old('role_name')}}" data-rule="admin" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('role_name'))
 								<div class="error">{{ $errors->first('role_name') }}</div>
 								@endif
 							</div>
 						</div>
-						
 					</div>
 					<div class="box-body">
 						<div class="col-md-12">
@@ -70,7 +69,9 @@
 								<div class="error">{{ $errors->first('master') }}</div>
 								@endif
 							</div>
+							<label id="master[]-error" class="error" for="master[]"></label>
 						</div>
+
 						
 					</div>
 					<div class="box-footer">
@@ -99,8 +100,8 @@
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/> 
     @include('roles.script')
     <script type="text/javascript">
-/*$(".chosen-select").chosen({
+$(".chosen-select").chosen({
   no_results_text: "Oops, nothing found!"
-})*/
+})
     </script>
     @stop

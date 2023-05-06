@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Role Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Role" name="role_name" value="{{old('role_name') ? old('role_name') : $roles->role_name}}" data-rule="admin" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Role" name="role_name" value="{{old('role_name') ? old('role_name') : $roles->role_name}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('role_name'))
 								<div class="error">{{ $errors->first('role_name') }}</div>
@@ -68,7 +68,7 @@
 							  </select>
 							</div>
 						</div>
-						
+						<label id="master[]-error" class="error" for="master[]"></label>
 					</div>
 					
 					</div>
@@ -91,12 +91,12 @@
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="{{asset('js/custom/formValidation.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+<!--<script src="{{asset('js/custom/formValidation.js')}}"></script>
+<script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> !-->
 
  @include('roles.script')
     <script type="text/javascript">
