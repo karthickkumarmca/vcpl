@@ -14,6 +14,10 @@
 		},
 		messages: {
 			role_name: "Please enter Role name",
+		},
+		submitHandler: function(form) {
+			// console.log(form);
+			form.submit();
 		}
 	});
 	

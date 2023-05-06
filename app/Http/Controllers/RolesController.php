@@ -143,6 +143,7 @@ class RolesController extends Controller
 
 
             $errorMessages    = [
+                'master.required'               => "Please select the the master module",
                 'role_name.required'             => "Please enter the role",
                 'role_name.regex'                => "Should include only Two Decimal Places",
             ];

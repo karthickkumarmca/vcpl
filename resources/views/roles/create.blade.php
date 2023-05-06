@@ -66,6 +66,9 @@
 							    <option value="property_categories_management">property Categories</option>
 							   
 							  </select>
+							   @if($errors->has('master'))
+								<div class="error">{{ $errors->first('master') }}</div>
+								@endif
 							</div>
 						</div>
 						
