@@ -39,7 +39,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Master Modules <span class="text-danger"> *</span></label>
-								<select data-placeholder="Begin typing a name to filter..." multiple class="form-control chosen-select" name="master[]">
+								<select data-placeholder="Begin typing a name to filter..." multiple class="form-control chosen-select" id="master" name="master[]">
 							    <option value=""></option>
 							    <option value="roles_management">Roles</option>
 							    <option value="units_management">Units</option>
@@ -66,6 +66,9 @@
 							    <option value="property_categories_management">property Categories</option>
 							   
 							  </select>
+							   @if($errors->has('master'))
+								<div class="error">{{ $errors->first('master') }}</div>
+								@endif
 							</div>
 						</div>
 						

@@ -158,7 +158,7 @@ class StaffdetailsController extends Controller
                 $fieldValidation  = [ 'name' => ['required','min:2','max:50','unique:staff_details,name,'.$staff_details_id.',uuid']];
                 $fieldValidation  = [ 'user_name' => ['required','min:2','max:50','unique:staff_details,user_name,'.$staff_details_id.',uuid']];
                 $fieldValidation  = [ 'phone_number' => ['required','numeric','digits_between:1,10','unique:staff_details,phone_number,'.$staff_details_id.',uuid']];
-                $fieldValidation  = [ 'email' => ['required','email','min:2','max:100','unique:staff_details,user_name,'.$staff_details_id.',uuid']];
+                $fieldValidation  = [ 'email' => ['required','email','min:2','max:100','unique:staff_details,email,'.$staff_details_id.',uuid']];
             }
             else{
                 $fieldValidation = ['name' => ['required','min:2','max:50','unique:staff_details,name']];
@@ -172,11 +172,12 @@ class StaffdetailsController extends Controller
             }else{
                 $fieldValidation['password'] = ['required','min:6','max:100','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'];
             }
-            $fieldValidation['site_id']        = ['required'];
+            $fieldValidation['site_id']        = ['nullable'];
             $fieldValidation['role_id']        = ['required'];
            // $fieldValidation['confirm_password'] = ['required','min:6','max:100','same:password'];
 
             $errorMessages    = [
+                'site_id.required'          => "Please Select the site name",
                 'name.required'             => "Please enter the name",
                 'name.regex'                => "Should include only Two Decimal Places",
             ];

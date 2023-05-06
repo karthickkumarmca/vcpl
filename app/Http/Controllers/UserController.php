@@ -575,8 +575,8 @@ class UserController extends Controller
     }
     public function changeStaffPassword(Request $request)
     {
-        $role = session('user_role');
-        if (!config("roles.{$role}.reset_staff_password")) {
+        $rolesAccess = Session::get('role_access');
+        if(!isset($rolesAccess['staff_details_management']) || $rolesAccess['staff_details_management']!=1){
             abort(403);
         } else {
             if ($request->isMethod('post')) {

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Session;
 
 class Authenticate extends Middleware
 {
@@ -16,6 +17,12 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             return route('login');
+        }
+        if(empty($rolesAccess)){
+             return route('login');
+        }
+        if(!isset($rolesAccess['dashboard'])){
+             return route('login');
         }
     }
 }

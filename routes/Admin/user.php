@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("users/otp", 'ImmigrantController@getOtp');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' =>  ['auth']], function () {
     // Route::get('/', 'AdminController@index')->name('home');
     Route::get('/', function () {
         switch (Session::get('user_role')) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Roles;
+use App\Models\Staffdetails;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -35,7 +36,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -60,6 +61,7 @@ class LoginController extends Controller
         ->leftjoin('roles','roles.id','users.role_id')
         ->where(['email' => $request->email])->whereIn('user_type', array(1,2))->first();
         // print_r($user);exit;
+       
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 if (Auth::guard()) {
@@ -68,8 +70,23 @@ class LoginController extends Controller
                             'email' => 'Account is not Active. Contact Admin',
                         ]);
                     } else {
+
+                        if($user->user_type !=1){
+                            $Staffdetails = Staffdetails::select('status')->where(['email' => $request->email])->first();
+                            if($Staffdetails){
+
+                                if ($Staffdetails->status != 1) {
+
+                                     throw ValidationException::withMessages([
+                                        'email' => ' your account is inactive, please contact admin'
+                                    ]);
+                                }
+                               
+                            }
+                        }
+                        
                         auth()->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1]);
-                        return redirect()->route('home');
+                        return redirect()->route('dashboard');
                     }
                 } else {
                     throw ValidationException::withMessages([

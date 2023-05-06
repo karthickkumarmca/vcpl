@@ -138,7 +138,7 @@ class UnitsController extends Controller
             $validation = config('field_validation.admin');
             $fieldValidation = [
                 'unit_name'         => [
-                    'required','min:1','max:15'
+                    'required','min:1','max:128'
                 ]
             ];
 
