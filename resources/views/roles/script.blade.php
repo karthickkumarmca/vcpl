@@ -1,10 +1,33 @@
 <script>
+	$(document).ready(function () {
+
+	    $("#admin-form").validate({
+	        rules: {
+	            "role_name": {
+	                required: true,
+	                minlength: 1,
+	            },
+	        },
+	        messages: {
+	            "role_name": {
+	                required: "Please enter a role name",
+	                minlength: "Enter role name minimum 1 character"
+	            },
+	        },
+	        submitHandler: function (form) {
+	            alert('valid form submitted'); 
+	            return false; // for demo
+	        }
+	    });
+
+	});
+	
 	/**
 	* Define Admin Form validation rules and messages
 	*
 	* @param object rule
 	* @return object validation
-	*/
+	*
 	
 	function getrolesValidationRules(rule) {
 		return validation = {
@@ -21,7 +44,7 @@
 
 	/**
 	* Validate the input whenever the input value is changed
-	*/
+	*
 	$(document).on('blur', '.pos_validate', function() {
 		var rule_type 		= $(this).data('rule');
 		var rule 			= fieldRule[rule_type];
@@ -52,7 +75,7 @@
 
 	/**
 	* Create/Update the hallmark form
-	*/
+	*
 	$('#Roles-submit').click(function(event){
 		event.preventDefault();	
 		var form         = "admin-form";
@@ -97,6 +120,6 @@
 			return false;
 
 		return true;
-	}
+	}*/
 
 </script>
