@@ -152,28 +152,28 @@ class StaffdetailsController extends Controller
             abort(403);
         } else {
 
-            if($request->has('user_name')){
+            if($request->has('staff_details_id')){
                 
                 $staff_details_id = $request->get('staff_details_id');
-                $fieldValidation  = [ 'name' => ['required','min:2','max:50','unique:staff_details,name,'.$staff_details_id.',uuid']];
-                $fieldValidation  = [ 'user_name' => ['required','min:2','max:50','unique:staff_details,user_name,'.$staff_details_id.',uuid']];
-                $fieldValidation  = [ 'phone_number' => ['required','numeric','digits_between:1,10','unique:staff_details,phone_number,'.$staff_details_id.',uuid']];
-                $fieldValidation  = [ 'email' => ['required','email','min:2','max:100','unique:staff_details,email,'.$staff_details_id.',uuid']];
+                $fieldValidation['name']          = ['required','min:2','max:50','unique:staff_details,name,'.$staff_details_id.',uuid'];
+                $fieldValidation['user_name']     = ['required','min:2','max:50','unique:staff_details,user_name,'.$staff_details_id.',uuid'];
+                $fieldValidation['phone_number']  = ['required','numeric','digits_between:1,10','unique:staff_details,phone_number,'.$staff_details_id.',uuid'];
+                $fieldValidation['email']         = ['required','email','min:2','max:100','unique:staff_details,email,'.$staff_details_id.',uuid'];
             }
             else{
-                $fieldValidation = ['name' => ['required','min:2','max:50','unique:staff_details,name']];
-                $fieldValidation = ['user_name'=> ['required','min:2','max:50','unique:staff_details,user_name']];
-                $fieldValidation = ['phone_number'=> ['required','numeric','digits_between:1,10','unique:staff_details,phone_number']];
-                $fieldValidation = ['email'=> ['required','email','min:2','max:100','unique:staff_details,email']];
+                $fieldValidation['name']          = ['required','min:2','max:50','unique:staff_details,name'];
+                $fieldValidation['user_name']     = ['required','min:2','max:50','unique:staff_details,user_name'];
+                $fieldValidation['phone_number']  = ['required','numeric','digits_between:1,10','unique:staff_details,phone_number'];
+                $fieldValidation['email']         = ['required','email','min:2','max:100','unique:staff_details,email'];
             }
-            $fieldValidation['user_groups_id'] = ['required'];
+            $fieldValidation['user_groups_id']    = ['required'];
             
             if($request->has('staff_details_id')){
             }else{
-                $fieldValidation['password'] = ['required','min:6','max:100','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'];
+                $fieldValidation['password']      = ['required','min:6','max:100','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'];
             }
-            $fieldValidation['site_id']        = ['nullable'];
-            $fieldValidation['role_id']        = ['required'];
+            $fieldValidation['site_id']           = ['nullable'];
+            $fieldValidation['role_id']           = ['required'];
            // $fieldValidation['confirm_password'] = ['required','min:6','max:100','same:password'];
 
             $errorMessages    = [
