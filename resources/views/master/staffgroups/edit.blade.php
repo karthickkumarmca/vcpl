@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Staff Group Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Staff Group Name" name="group_name" value="{{old('group_name') ? old('group_name') : $staffgroups->group_name}}" data-rule="admin" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Staff Group Name" name="group_name" value="{{old('group_name') ? old('group_name') : $staffgroups->group_name}}" data-rule="admin" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('group_name'))
 								<div class="error">{{ $errors->first('group_name') }}</div>
@@ -55,9 +55,9 @@
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="{{asset('js/custom/formValidation.js')}}"></script>
+<!--<script src="{{asset('js/custom/formValidation.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
+<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>!-->
 
 
 @include('master.staffgroups.script')

@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Client Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="client_name" value="{{old('client_name')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="client_name" value="{{old('client_name')}}" data-rule="admin" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('client_name'))
 								<div class="error">{{ $errors->first('client_name') }}</div>
@@ -57,7 +57,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Cader <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Cader" name="cader" value="{{old('cader')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Cader" name="cader" value="{{old('cader')}}" data-rule="admin" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('cader'))
 								<div class="error">{{ $errors->first('cader') }}</div>
@@ -67,7 +67,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Mobile Number <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Moble Number" name="mobile_number" value="{{old('mobile_number')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Moble Number" name="mobile_number" value="{{old('mobile_number')}}" data-rule="admin" minlength="1" maxlength="10"/>
 								<span class="validation_error"></span>
 								@if($errors->has('mobile_number'))
 								<div class="error">{{ $errors->first('mobile_number') }}</div>
@@ -78,7 +78,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Email Id <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate email" autocomplete="off" placeholder="Enter Email id" name="email_id" value="{{old('email_id')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate email" autocomplete="off" placeholder="Enter Email id" name="email_id" value="{{old('email_id')}}" data-rule="admin" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('email_id'))
 								<div class="error">{{ $errors->first('email_id') }}</div>
@@ -117,9 +117,9 @@
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="{{asset('js/custom/formValidation.js')}}"></script>
+<!--<script src="{{asset('js/custom/formValidation.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
+<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>!-->
 
-    @include('master.architect_site.script')
+    @include('master.client_site.script')
     @stop

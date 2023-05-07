@@ -29,7 +29,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Site Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Site Name" name="site_name" value="{{old('site_name') ? old('site_name') : $site_info_details->site_name}}" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Site Name" name="site_name" value="{{old('site_name') ? old('site_name') : $site_info_details->site_name}}" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('site_name'))
 								<div class="error">{{ $errors->first('site_name') }}</div>
@@ -40,7 +40,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Site Location <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Site Name" name="site_location" value="{{old('site_location') ? old('site_location') : $site_info_details->site_location }}" data-rule="admin" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Site Name" name="site_location" value="{{old('site_location') ? old('site_location') : $site_info_details->site_location }}" data-rule="admin" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('site_location'))
 								<div class="error">{{ $errors->first('site_location') }}</div>
@@ -151,9 +151,9 @@
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="{{asset('js/custom/formValidation.js')}}"></script>
+<!--<script src="{{asset('js/custom/formValidation.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
+<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>!-->
 
 
 @include('master.site_info.script')

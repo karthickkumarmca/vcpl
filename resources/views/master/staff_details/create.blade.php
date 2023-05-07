@@ -25,7 +25,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Full Name" name="name" value="{{old('name')}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="name" value="{{old('name')}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('name'))
 								<div class="error">{{ $errors->first('name') }}</div>
@@ -35,7 +35,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>User Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter User Name" name="user_name" value="{{old('user_name')}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter User Name" name="user_name" value="{{old('user_name')}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('user_name'))
 								<div class="error">{{ $errors->first('user_name') }}</div>
@@ -45,7 +45,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Password <span class="text-danger"> *</span></label>
-								<input type="password" class="form-control pos_validate allow_characters" placeholder="Enter Password" name="password" value="{{old('password')}}" data-rule="admin" id="password" autocomplete="new-password" />
+								<input type="password" class="form-control pos_validate allow_characters" placeholder="Enter Password" name="password" value="{{old('password')}}" data-rule="admin" id="password" autocomplete="new-password" minlength="1" maxlength="100" />
 								<span class="validation_error"></span>
 								@if($errors->has('password'))
 								<div class="error">{{ $errors->first('password') }}</div>

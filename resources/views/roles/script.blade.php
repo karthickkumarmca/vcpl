@@ -24,7 +24,7 @@
 	            "role_name": {
 	                required: "Please enter a role name",
 	                minlength: "Enter role name minimum 1 character",
-	                maxlength: "Enter role name minimum 1 character",
+	                maxlength: "Enter role name maxmimum 100 character",
 	            },
 	            "master[]": {
 	                required: "Please select the master modules",

@@ -28,7 +28,7 @@
 					<div class="col-md-12">
 							<div class="form-group">
 								<label>Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Full Name" name="name" value="{{old('name') ? old('name') : $details->name}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Name" name="name" value="{{old('name') ? old('name') : $details->name}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('name'))
 								<div class="error">{{ $errors->first('name') }}</div>
@@ -39,7 +39,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>User Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter User Name" name="user_name" value="{{old('user_name')? old('user_name') : $details->user_name}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="3" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter User Name" name="user_name" value="{{old('user_name')? old('user_name') : $details->user_name}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="1" maxlength="100"/>
 								<span class="validation_error"></span>
 								@if($errors->has('user_name'))
 								<div class="error">{{ $errors->first('user_name') }}</div>
@@ -49,7 +49,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Email <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate allow_characters" placeholder="Enter Email" name="email" value="{{old('email')? old('email') : $details->email}}" data-rule="admin" />
+								<input type="text" class="form-control pos_validate allow_characters" placeholder="Enter Email" name="email" value="{{old('email')? old('email') : $details->email}}" data-rule="admin" minlength="1" maxlength="100" />
 								<span class="validation_error"></span>
 								@if($errors->has('email'))
 								<div class="error">{{ $errors->first('email') }}</div>
@@ -102,7 +102,7 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Site Name <span class="text-danger"> *</span></label>
+								<label>Select Site Name </label>
 								<select name="site_id" class="form-control pos_validate" id="site_id">
 									<option value="">Select Site Name</option>
 									@isset($site_info)
@@ -183,9 +183,9 @@
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="{{asset('js/custom/formValidation.js')}}"></script>
+<!--<script src="{{asset('js/custom/formValidation.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
+<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script> !-->
 
 
 @include('master.staff_details.script')
