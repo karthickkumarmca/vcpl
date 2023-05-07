@@ -10,7 +10,12 @@
 		rules: {
 			category_id: "required",
 			subcategory_id: "required",
-			product_name: "required",
+			product_name: {
+	            required: true,
+	            normalizer:function( value ) {
+	           		return $.trim(value);
+	            },
+	        }
 			
 		},
 		messages: {

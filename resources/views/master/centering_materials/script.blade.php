@@ -10,6 +10,12 @@
 		rules: {
 			category_id: "required",
 			rate_unit: "required",
+			"rate_unit": {
+                required: true,
+                normalizer:function( value ) {
+               		return $.trim(value);
+                },
+            },
 			units_id: "required",
 			from_date: "required",
 			to_date: "required",

@@ -1,7 +1,12 @@
 <script>
 	$("#admin-form").validate({
 		rules: {
-			vehicle_name: "required",
+			"vehicle_name": {
+                required: true,
+                normalizer:function( value ) {
+               		return $.trim(value);
+                },
+            },
 			
 		},
 		messages: {
