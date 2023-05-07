@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ URL('css/custom/formValidation.css') }}">
     <link rel="stylesheet" href="{{ URL('css/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ URL('css/custom/style.css') }}">
-    <link rel="stylesheet" href="{{ URL('css/plugins/multiselect/jquery.multiselect.css') }}">
+    
     @stack('styles')
 </head>
 

@@ -1,7 +1,11 @@
+
+
 <script src="{{ URL('js/jquery.min.js') }}"></script>
-<script src="{{ URL('js/jquery.validate.min.js') }}"></script>   
 <script src="{{ URL('js/popper.min.js') }}"></script>
 <script src="{{ URL('js/bootstrap.min.js') }}"></script>
+<script src="{{ URL('js/bootstrap-multiselect.min.js')}}"></script>
+<script src="{{ URL('js/jquery.validate.min.js') }}"></script>   
+
 <script src="{{ URL('js/moment.min.js') }}"></script>
 <script src="{{ URL('js/daterangepicker.js') }}"></script>
 <script src="{{ URL('js/bootstrap-datepicker.min.js') }}"></script>

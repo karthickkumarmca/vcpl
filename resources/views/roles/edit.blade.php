@@ -1,7 +1,9 @@
 @extends('layouts.main')
 @section('content')
+<link rel="stylesheet" href="{{ URL('css/bootstrap-multiselect.css') }}">
 <style>
 	.error{color:#f00;    margin-bottom: 0px;}
+	.multiselect-container {transform:translate3d(0px, 0px, 0px) !important;}
 </style>
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
@@ -38,8 +40,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Master Modules <span class="text-danger"> *</span></label>
-								<select data-placeholder="Begin typing a name to filter..." multiple class="form-control chosen-select" name="master[]">
-							    <option value=""></option>
+								<select data-placeholder="" id="master" multiple class="form-control " name="master[]">
 							    <option value="roles_management" @if(in_array('roles_management',$roles->master)) selected @endif >Roles</option>
 							    <option value="units_management"  @if(in_array('units_management',$roles->master)) selected @endif>Units</option>
 							    <option value="staffgroups_management"  @if(in_array('staffgroups_management',$roles->master)) selected @endif>Staff Group</option>
@@ -68,6 +69,7 @@
 							  </select>
 							</div>
 						</div>
+						<label id="master-error" class="error" for="master"></label>
 						<label id="master[]-error" class="error" for="master[]"></label>
 					</div>
 					
@@ -91,17 +93,18 @@
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
-<!--<script src="{{asset('js/custom/formValidation.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> !-->
 
  @include('roles.script')
     <script type="text/javascript">
-$(".chosen-select").chosen({
-  no_results_text: "Oops, nothing found!"
-})
+	    $('#master').multiselect({
+	        enableFiltering: true,
+			maxHeight: 400,
+			dropUp: true,
+	        includeSelectAllOption: true,
+	        enableCaseInsensitiveFiltering: true,
+	        filterPlaceholder: 'Please choose roles list',
+	        buttonWidth: '800px',
+	        dropRight: true,
+	    });
     </script>
     @stop
