@@ -49,11 +49,12 @@ class Materials extends Model
                 AS to_date'),
 
             'materials.status as status_id',
-            'categories.category_name',
+            'product_details.product_name as category_name',
             'units.unit_name',
             DB::raw('CASE WHEN materials.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(materials.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
-        $query = self::select($fields)->leftjoin('categories','categories.id','materials.property_material_id')
+        $query = self::select($fields)
+        ->leftjoin('product_details','product_details.id','materials.property_material_id')
         ->leftjoin('units','units.id','materials.units_id');
 
         if ($search_filter) {

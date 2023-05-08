@@ -42,12 +42,12 @@
             'columns': [
             {
                 "name" : "category_name",
-                "label": "Category Name",
+                "label": "Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
-                    "display" : 1,
+                    "display" : 0,
                     "field" : "category_name"
                 },
                 "search": {

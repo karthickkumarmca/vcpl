@@ -85,6 +85,21 @@
                     "type"    : "input"
                 }
             },
+             {
+                "name" : "cader",
+                "label": "Cader",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "cader"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
             {
                 "name" : "status",
                 "label": "Status",
