@@ -41,6 +41,7 @@ class Productrental extends Model
             'product_rental.status as status_id',
             'categories.category_name',
             'product_details.product_name',
+            DB::raw('CASE WHEN product_rental.status >= -1 THEN "No\'s" ELSE "-" END AS words'),
             DB::raw('CASE WHEN product_rental.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(product_rental.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
         $query = self::select($fields)->leftjoin('categories','categories.id','product_rental.category_id')

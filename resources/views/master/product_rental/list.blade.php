@@ -56,6 +56,21 @@
                 }
             },
              {
+                "name" : "words",
+                "label": "Unit",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "words"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+             {
                 "name" : "product_name",
                 "label": "Product",
                 "badge": {

@@ -140,7 +140,7 @@ $rolesAccess = Session::get('role_access');
 					@endif
 
 					@if($rolesAccess['product_details_management']==1)
-					<li class="{{ Request::is('master/product-details-list/*') ? 'active' : '' }}">
+					<li class="{{ Request::is('master/product-details/*') ? 'active' : '' }}">
 						<a href="{!! url(route('product-details-list')) !!}">
 							<span>PRODUCT DETAILS</span>
 						</a>
