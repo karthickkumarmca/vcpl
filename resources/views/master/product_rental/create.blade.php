@@ -54,7 +54,7 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Rent / Unt <span class="text-danger"> *</span></label>
+								<label>Rent / Unit <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Rent/Unit" name="rent_unit" value="{{old('rent_unit')}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('rent_unit'))

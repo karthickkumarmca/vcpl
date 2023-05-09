@@ -223,6 +223,17 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => ['auth
 	    $router->get('delete/{id}', 'ProductrentalController@delete');
 	});
 
+	Route::group(['prefix' => 'message-header/'], function () use ($router) {
+		$router->get('list', 'MessageheaderController@list')->name('message-header-list');
+	    $router->get('create', 'MessageheaderController@create')->name('create-message-header');
+	    $router->post('store', 'MessageheaderController@store')->name('save-message-header');
+	    $router->get('view/{id}', 'MessageheaderController@view');
+	    $router->get('edit/{id}', 'MessageheaderController@edit');
+	    $router->get('update-status/{id}', 'MessageheaderController@updateStatus');
+	    $router->post('get-product-list', 'MessageheaderController@getProductList');
+	    $router->get('delete/{id}', 'MessageheaderController@delete');
+	});
+
 	/*Route::group(['prefix' => 'staff-details/','middleware' => 'auth'], function () use ($router) {
 
 		Route::get('roles-list', 'RolesController@list')->name('roles-list');

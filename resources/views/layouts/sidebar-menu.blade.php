@@ -310,7 +310,7 @@ $rolesAccess = Session::get('role_access');
 				</a>
 				<ul class="treeview-menu">
 
-					@if($rolesAccess['ownership_management']==1)
+					@if($rolesAccess['product_rental_management']==1)
 					<li class="{{ Request::is('master/product-rental/*') ? 'active' : '' }}">
 						<a href="{!! url(route('product-rental-list')) !!}">
 							<span>PRODUCT RENTAL</span>
@@ -325,6 +325,13 @@ $rolesAccess = Session::get('role_access');
 			</li>
 			@endif
 
+			@if($rolesAccess['message_header_management']==1)
+			<li class="{{ Request::is('master/message-header/*') ? 'active' : '' }}">
+				<a href="{!! url(route('message-header-list')) !!}">
+					<span>MESSAGE HEADER</span>
+				</a>
+			</li>
+			@endif
 
 			 </ul>
 
