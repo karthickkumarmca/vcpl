@@ -79,7 +79,7 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Store Keeper <span class="text-danger"> *</span></label>
+								<label>Select Store Keeper </label>
 								<select name="store_keeper_id" class="form-control pos_validate" id="store_keeper_id" data-rule="admin">
 									<option value="">Select store keeper</option>
 									@isset($Storekeeper)

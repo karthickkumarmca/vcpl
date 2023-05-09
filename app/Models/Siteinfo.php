@@ -43,10 +43,11 @@ class Siteinfo extends Model
             'site_info.site_name',
             'site_info.site_location',
             'site_info.status as status_id',
-            'se.name AS site_engineer_name',
-            'sc.name AS sub_contractor_name',
-            'sk.name AS store_keeper_name',
-            DB::raw('CASE WHEN site_info.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(site_info.created_at, "%d-%b-%Y %r") AS date_created'),
+            DB::raw('CASE WHEN site_info.status = 1 THEN "Active" ELSE "In-Active" END AS status, 
+                CASE WHEN se.name is NULL THEN "-" ELSE  se.name END AS site_engineer_name,
+                CASE WHEN sc.name is NULL THEN "-" ELSE  sc.name END AS sub_contractor_name,
+                CASE WHEN sk.name is NULL THEN "-" ELSE  sk.name END AS store_keeper_name,
+                DATE_FORMAT(site_info.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
         $query = self::select($fields)->leftjoin('staff_details as se','se.id','site_info.site_engineer_id')
         ->leftjoin('staff_details as sc','sc.id','site_info.sub_contractor_id')
