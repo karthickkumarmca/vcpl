@@ -22,20 +22,20 @@
             <span class="sr-only">Toggle navigation</span>
         </a>
         <div class="collapse navbar-collapse">
-            <div class="navbar-nav mr-auto">
+            <div class="navbar-nav mr-auto" style="margin-right:7%">
             </div>
-            <ul class="navbar-nav mt-2 mt-md-0 nav">
+            <ul class="navbar-nav mt-2 mt-md-0 nav"  style="margin-right:7%">
 
-                <li class="user user-menu">
-                    <a href="{{ url('change-user-password') }}">Change Password</a>
-                </li>
-                <li>
-                    <a title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();
+                <li class="nav-item dropdown">
+<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Welcome , <?php echo Session::get('name')?>    </a>
+<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+<li><a href="{{ url('change-user-password') }}"  style="margin-left:7%">Change Password</a></li>
+<li> <a  style="margin-left:7%" title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();
                     swal('Are you sure want to logout?','','',{
-                        buttons:{						
+                        buttons:{                       
                             cancel : 'Cancel',
                             confirm : {text:'Confirm',className:'btn-success'}
-                        }	
+                        }   
                     })
                     .then((value) => {
                         if(value){
@@ -43,8 +43,13 @@
                         }
                     });
                     ">
-                        <i class="fa fa-sign-out fa-fw"></i>
-                    </a>
+                     Logout   <i class="fa fa-sign-out fa-fw"></i>
+                    </a></li>
+</ul>
+</li>
+                
+                <li>
+                   
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
