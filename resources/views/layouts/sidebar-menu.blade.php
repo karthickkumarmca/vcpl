@@ -297,6 +297,35 @@ $rolesAccess = Session::get('role_access');
 			@endif
 
 
+			@if($rolesAccess['product_rental_management']==1 
+			)
+
+			<li class="treeview-nav treeview  
+				@if(str_contains(url()->current(),'product-rental')) active @endif 
+
+				">
+				<a href="#">
+				    <span>RENTAL RATE</span>
+				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+
+					@if($rolesAccess['ownership_management']==1)
+					<li class="{{ Request::is('master/product-rental/*') ? 'active' : '' }}">
+						<a href="{!! url(route('product-rental-list')) !!}">
+							<span>PRODUCT RENTAL</span>
+						</a>
+					</li>
+					@endif
+					
+
+			    </ul>
+
+
+			</li>
+			@endif
+
+
 			 </ul>
 
 

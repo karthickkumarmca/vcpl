@@ -4,8 +4,8 @@ namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Categories;
+use App\Models\Productrental;
 use App\Models\Productdetails;
-use App\Models\Sub_categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Validator;
 use Session;
 
-class ProductdetailsController extends Controller
+class ProductrentalController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -30,22 +30,22 @@ class ProductdetailsController extends Controller
     public function list(Request $request)
     {
          $rolesAccess = Session::get('role_access');
-        if(!isset($rolesAccess['product_details_management']) || $rolesAccess['product_details_management']!=1){
+        if(!isset($rolesAccess['product_rental_management']) || $rolesAccess['product_rental_management']!=1){
             abort(403);
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'product_name'      => 'product_details.product_name',
-                    'status'    => 'product_details.status',
+                    'rent_unit'      => 'product_rental.rent_unit',
+                    'status'    => 'product_rental.status',
                 ];
                 $sortField   = [
-                    'product_name'     => 'product_details.product_name',
-                    'status'  => 'product_details.status',
-                    'date_created' => 'product_details.created_at'
+                    'rent_unit'     => 'product_rental.rent_unit',
+                    'status'  => 'product_rental.status',
+                    'date_created' => 'product_rental.created_at'
                 ];
                 $search_filter = [];
                 $sort = [
-                    'field' => 'product_details.created_at',
+                    'field' => 'product_rental.id',
                     'order' => 'desc'
                 ];
                 $page = config('pagination.page');
@@ -78,7 +78,7 @@ class ProductdetailsController extends Controller
                     }
                 }
 
-                $records = Productdetails::getlist($page, $offset, $sort, $search_filter);
+                $records = Productrental::getlist($page, $offset, $sort, $search_filter);
                 //print_r($records);exit;
 
                 if (!empty($records['records'])) {
@@ -87,7 +87,7 @@ class ProductdetailsController extends Controller
                     $data       = $records;
                 } else {
                     $statusCode = '400';
-                    $message    = "No product_details found";
+                    $message    = "No product_rental found";
                     $data       = $records;
                 }
 
@@ -102,15 +102,15 @@ class ProductdetailsController extends Controller
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
-                if(isset($rolesAccess['product_details_management_access'])){
+                if(isset($rolesAccess['product_rental_management_access'])){
 
-                    $create_access          = $rolesAccess['product_details_management_access']['create'];
-                    $view_access            = $rolesAccess['product_details_management_access']['view'];
-                    $edit_access            = $rolesAccess['product_details_management_access']['edit'];
-                    $change_status_access   = $rolesAccess['product_details_management_access']['change_status'];
+                    $create_access          = $rolesAccess['product_rental_management_access']['create'];
+                    $view_access            = $rolesAccess['product_rental_management_access']['view'];
+                    $edit_access            = $rolesAccess['product_rental_management_access']['edit'];
+                    $change_status_access   = $rolesAccess['product_rental_management_access']['change_status'];
                 }
 
-                return view('master.product_details.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.product_rental.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }
@@ -118,24 +118,24 @@ class ProductdetailsController extends Controller
     public function create(Request $request)
     {
         $rolesAccess = Session::get('role_access');
-        if(!isset($rolesAccess['product_details_management_access']['create']) || $rolesAccess['product_details_management_access']['create']!=1){
+        if(!isset($rolesAccess['product_rental_management_access']['create']) || $rolesAccess['product_rental_management_access']['create']!=1){
             abort(403);
         } else {
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            return view('master.product_details.create',compact('categories'));
+            return view('master.product_rental.create',compact('categories'));
         }
     }
-    public function getSubCategory(Request $request) {
+    public function getProductList(Request $request) {
 
         $values ='<option value="">----  Select ---</option>';
 
         $search = ['status' => 1,'category_id'=>$request->get('id')];
-        $fields = ['id','sub_category_name'];
-        $data = Sub_categories::getAll($fields,$search);
+        $fields = ['id','product_name'];
+        $data = Productdetails::getAll($fields,$search);
         foreach($data as $c){
-            $values .='<option value="'.$c['id'].'">'.$c['sub_category_name'].'</option>';
+            $values .='<option value="'.$c['id'].'">'.$c['product_name'].'</option>';
         }
         return $values;
         
@@ -143,28 +143,14 @@ class ProductdetailsController extends Controller
     public function store(Request $request)
     {
        $rolesAccess = Session::get('role_access');
-        if(!isset($rolesAccess['product_details_management_access']['create']) || $rolesAccess['product_details_management_access']['create']!=1){
+        if(!isset($rolesAccess['product_rental_management_access']['create']) || $rolesAccess['product_rental_management_access']['create']!=1){
             abort(403);
         } else {
 
-            if($request->has('product_name')){
-                
-                $product_details_id = $request->get('product_details_id');
-                $fieldValidation = [
-                'product_name'         => [
-                    'required','min:2','max:50','unique:product_details,product_name,'.$product_details_id.',uuid'
-                ]
-                ];
-            }
-            else{
-                 $fieldValidation = [
-                'product_name'         => [
-                    'required','min:2','max:50','unique:product_details,product_name'
-                ]
-            ];
-            }
-            $fieldValidation['subcategory_id']      = ['required'];
-            $fieldValidation['category_id']         = ['required'];
+           
+            $fieldValidation['product_details_id']      = ['required'];
+            $fieldValidation['category_id']             = ['required'];
+            $fieldValidation['rent_unit']               = ['required'];
            
 
             $errorMessages    = [
@@ -178,12 +164,12 @@ class ProductdetailsController extends Controller
                 return Redirect::back()->withInput($request->input())->withErrors($validator);
             }
 
-            if($request->has('product_details_id')){
+            if($request->has('product_rental_id')){
                 $request['created_at']=date('Y-m-d H:i:s');
-                $response   = Productdetails::storeRecords($request);
+                $response   = Productrental::storeRecords($request);
             }
             else{
-                $response   = Productdetails::storeRecords($request); 
+                $response   = Productrental::storeRecords($request); 
             }
 
             $statusCode = $response['status_code'];
@@ -191,7 +177,7 @@ class ProductdetailsController extends Controller
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
 
-            return redirect('master/product-details/list'); 
+            return redirect('master/product-rental/list'); 
 
         }
     }
@@ -199,33 +185,33 @@ class ProductdetailsController extends Controller
     public function view($id)
     {
         $rolesAccess = Session::get('role_access');
-        if(!isset($rolesAccess['product_details_management_access']['view']) || $rolesAccess['product_details_management_access']['view']!=1){
+        if(!isset($rolesAccess['product_rental_management_access']['view']) || $rolesAccess['product_rental_management_access']['view']!=1){
             abort(403);
         } else {
 
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            $product_details  = Productdetails::where(['uuid' => $id])->first();
+            $product_rental  = Productrental::where(['uuid' => $id])->first();
 
            
 
             
-            if ($product_details) {
+            if ($product_rental) {
 
-                $search1 = ['status' => 1,'id'=>$product_details->subcategory_id];
-                $fields1 = ['id','sub_category_name'];
-                $Sub_categories = Sub_categories::getAll($fields1,$search1);
+                $search1 = ['status' => 1,'category_id'=>$product_rental->category_id];
+                $fields1 = ['id','product_name'];
+                $Productdetails = Productdetails::getAll($fields1,$search1);
                 $data = [
-                    'sub_categories'    => $Sub_categories,
-                    'product_details'   => $product_details,
+                    'Productdetails'    => $Productdetails,
+                    'product_rental'   => $product_rental,
                     'categories'        => $categories,
                 ];
 
-                return view('master.product_details.view', $data);
+                return view('master.product_rental.view', $data);
             } else {
                 $data = [
-                    'message' => "Invalid product_details"
+                    'message' => "Invalid product_rental"
                 ];
 
                 return view('error_view', $data);
@@ -236,30 +222,30 @@ class ProductdetailsController extends Controller
     public function edit($id)
     {
         $rolesAccess = Session::get('role_access');
-        if(!isset($rolesAccess['product_details_management_access']['edit']) || $rolesAccess['product_details_management_access']['edit']!=1){
+        if(!isset($rolesAccess['product_rental_management_access']['edit']) || $rolesAccess['product_rental_management_access']['edit']!=1){
             abort(403);
         } else {
-            // $product_details  = Productdetails::find($id);
+            // $product_rental  = Productrental::find($id);
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            $product_details  = Productdetails::where(['uuid' => $id])->first();
-            if ($product_details) {
+            $product_rental  = Productrental::where(['uuid' => $id])->first();
+            if ($product_rental) {
 
-                $search1 = ['status' => 1,'category_id'=>$product_details->category_id];
-                $fields1 = ['id','sub_category_name'];
-                $Sub_categories = Sub_categories::getAll($fields1,$search1);
+                $search1 = ['status' => 1,'category_id'=>$product_rental->category_id];
+                $fields1 = ['id','product_name'];
+                $Productdetails = Productdetails::getAll($fields1,$search1);
 
                 $data = [
-                    'sub_categories'    => $Sub_categories,
-                    'product_details' => $product_details,
+                    'Productdetails'    => $Productdetails,
+                    'product_rental' => $product_rental,
                     'categories'     => $categories,
                 ];
 
-                return view('master.product_details.edit', $data);
+                return view('master.product_rental.edit', $data);
             } else {
                 $data = [
-                    'message' => "Invalid product_details"
+                    'message' => "Invalid product_rental"
                 ];
 
                 return view('error_view', $data);
@@ -270,15 +256,15 @@ class ProductdetailsController extends Controller
     public function updateStatus($id)
     {
         $rolesAccess = Session::get('role_access');
-        if(!isset($rolesAccess['product_details_management_access']['change_status']) || $rolesAccess['product_details_management_access']['change_status']!=1){
+        if(!isset($rolesAccess['product_rental_management_access']['change_status']) || $rolesAccess['product_rental_management_access']['change_status']!=1){
             abort(403);
         } else {
-            $product_details  = Productdetails::where(['uuid' => $id])->first();
-            $product_details->status = ($product_details->status) ? 0 : 1;
-            $product_details->save();
+            $product_rental  = Productrental::where(['uuid' => $id])->first();
+            $product_rental->status = ($product_rental->status) ? 0 : 1;
+            $product_rental->save();
 
             $data = [
-                'redirect_url' => url(route('product-details-list'))
+                'redirect_url' => url(route('product-rental-list'))
             ];
 
             $statusCode = '200';
@@ -296,18 +282,18 @@ class ProductdetailsController extends Controller
     public function delete($id)
     {
         $rolesAccess = Session::get('role_access');
-         if(!isset($rolesAccess['product_details_management_access']['delete']) || $rolesAccess['product_details_management_access']['delete']!=1){
+         if(!isset($rolesAccess['product_rental_management_access']['delete']) || $rolesAccess['product_rental_management_access']['delete']!=1){
             abort(403);
         } else {
-            $result = Productdetails::where('uuid', $id)->delete();
+            $result = Productrental::where('uuid', $id)->delete();
 
             $data = [
-                'redirect_url' => url(route('product_details-list'))
+                'redirect_url' => url(route('product-rental-list'))
             ];
 
             $statusCode = '200';
             $error      = (object)[];
-            $message    = "product_details has been deleted Successfully";
+            $message    = "product_rental has been deleted Successfully";
 
             return response()->json([
                 'message' => $message,

@@ -212,6 +212,17 @@ Route::group(['prefix' => 'master/','namespace'=>'master','middleware' => ['auth
 	    Route::get('delete/{id}', 'StaffdetailsController@delete');
 	});
 
+	Route::group(['prefix' => 'product-rental/'], function () use ($router) {
+		$router->get('list', 'ProductrentalController@list')->name('product-rental-list');
+	    $router->get('create', 'ProductrentalController@create')->name('create-product-rental');
+	    $router->post('store', 'ProductrentalController@store')->name('save-product-rental');
+	    $router->get('view/{id}', 'ProductrentalController@view');
+	    $router->get('edit/{id}', 'ProductrentalController@edit');
+	    $router->get('update-status/{id}', 'ProductrentalController@updateStatus');
+	    $router->post('get-product-list', 'ProductrentalController@getProductList');
+	    $router->get('delete/{id}', 'ProductrentalController@delete');
+	});
+
 	/*Route::group(['prefix' => 'staff-details/','middleware' => 'auth'], function () use ($router) {
 
 		Route::get('roles-list', 'RolesController@list')->name('roles-list');
