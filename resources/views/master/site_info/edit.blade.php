@@ -50,7 +50,7 @@
 						
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Site Engineer  <span class="text-danger"> *</span></label>
+								<label>Select Site Engineer <span class="text-danger"> *</span></label>
 								<select name="site_engineer_id" class="form-control pos_validate" id="site_engineer_id">
 									<option value="">Select Site Engineer </option>
 									@isset($site_engineer)
@@ -119,7 +119,7 @@
 												
 												@endif
 											@else
-											<option value="{{$sub['id']}}" selected>{{$sub['name']}}</option>
+											<option value="{{$sub['id']}}" >{{$sub['name']}}</option>
 											@endif
 										@endforeach
 									@endisset
