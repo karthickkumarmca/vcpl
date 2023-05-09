@@ -112,8 +112,10 @@ $rolesAccess = Session::get('role_access');
         	@if($rolesAccess['categories_management']==1 
 			|| $rolesAccess['sub_categories_management']==1
 			|| $rolesAccess['product_details_management']==1
+			|| $rolesAccess['product_rental_management'] ==1
 			)
 			<li class="treeview-nav treeview  
+			@if(str_contains(url()->current(),'product-rental')) active @endif 
 			@if(str_contains(url()->current(),'categories/list')) active @endif
 			@if(str_contains(url()->current(),'categories/edit')) active @endif
 			@if(str_contains(url()->current(),'categories/view')) active @endif
@@ -143,6 +145,14 @@ $rolesAccess = Session::get('role_access');
 					<li class="{{ Request::is('master/product-details/*') ? 'active' : '' }}">
 						<a href="{!! url(route('product-details-list')) !!}">
 							<span>PRODUCT DETAILS</span>
+						</a>
+					</li>
+					@endif
+
+					@if($rolesAccess['product_rental_management']==1)
+					<li class="{{ Request::is('master/product-rental/*') ? 'active' : '' }}">
+						<a href="{!! url(route('product-rental-list')) !!}">
+							<span>PRODUCT RENTAL</span>
 						</a>
 					</li>
 					@endif
@@ -297,33 +307,6 @@ $rolesAccess = Session::get('role_access');
 			@endif
 
 
-			@if($rolesAccess['product_rental_management']==1 
-			)
-
-			<li class="treeview-nav treeview  
-				@if(str_contains(url()->current(),'product-rental')) active @endif 
-
-				">
-				<a href="#">
-				    <span>RENTAL RATE</span>
-				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-				</a>
-				<ul class="treeview-menu">
-
-					@if($rolesAccess['product_rental_management']==1)
-					<li class="{{ Request::is('master/product-rental/*') ? 'active' : '' }}">
-						<a href="{!! url(route('product-rental-list')) !!}">
-							<span>PRODUCT RENTAL</span>
-						</a>
-					</li>
-					@endif
-					
-
-			    </ul>
-
-
-			</li>
-			@endif
 
 			@if($rolesAccess['message_header_management']==1)
 			<li class="{{ Request::is('master/message-header/*') ? 'active' : '' }}">

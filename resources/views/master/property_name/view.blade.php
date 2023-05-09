@@ -36,8 +36,8 @@
 								</th>
 								<td>@isset($categories)
 										@foreach($categories as $category)
-											@isset($property_name->category_id)
-												@if($property_name->category_id == $category['id'])
+											@isset($property_name->property_category_id)
+												@if($property_name->property_category_id == $category['id'])
 													{{$category['category_name']}}
 												@endif
 											@endisset
@@ -46,9 +46,17 @@
 							</tr>
 							<tr>
 								<th class="grey_header">
-									<label>Category Name</label>
+									<label>Ownership Name {{$property_name->ownership_id}}</label>
 								</th>
-								<td>{!! $property_name->sub_category_name !!}</td>
+								<td>@isset($ownership)
+										@foreach($ownership as $owner)
+											@isset($property_name->ownership_id)
+												@if($property_name->ownership_id == $owner['id'])
+													{{$owner['ownership_name']}}
+												@endif
+											@endisset
+										@endforeach
+									@endisset</td>
 							</tr>
 							<tr>
 								<th class="grey_header">

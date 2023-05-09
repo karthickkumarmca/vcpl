@@ -244,9 +244,9 @@ class SiteinfoController extends Controller
 	            $fields = ['id','name'];
 	            $Siteengineer = Staffdetails::getAll($fields,$search);
 
-	            $search = ['status' => 1,'sub_contractor'=>1];
-	            $fields = ['id','name'];
-	            $Subcontractor = Staffdetails::getAll($fields,$search);
+	            $search1 = ['status' => 1,'sub_contractor'=>1];
+	            $fields1 = ['id','name'];
+	            $Subcontractor = Staffdetails::getAll($fields1,$search1);
 
 	            $search = ['status' => 1,'user_groups_ids'=>4];
 	            $fields = ['id','name'];

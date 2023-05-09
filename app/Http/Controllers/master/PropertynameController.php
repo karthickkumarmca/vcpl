@@ -198,11 +198,17 @@ class PropertynameController extends Controller
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Property_categories::getAll($fields,$search);
+
+            $search1 = ['status' => 1];
+            $fields1 = ['id','ownership_name'];
+            $ownership = Ownership::getAll($fields1,$search1);
+
             $property_name  = Property_name::where(['uuid' => $id])->first();
             if ($property_name) {
                 $data = [
-                    'property_name' => $property_name,
-                    'categories'     => $categories,
+                    'property_name'     => $property_name,
+                    'categories'        => $categories,
+                    'ownership'         => $ownership,
                 ];
 
                 return view('master.property_name.view', $data);

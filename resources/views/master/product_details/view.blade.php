@@ -46,7 +46,21 @@
 							</tr>
 							<tr>
 								<th class="grey_header">
-									<label>Category Name</label>
+									<label>Sub Category Name</label>
+								</th>
+								<td>@isset($sub_categories)
+										@foreach($sub_categories as $sub)
+											@isset($product_details->subcategory_id)
+												@if($product_details->subcategory_id == $sub['id'])
+													{{$sub['sub_category_name']}}
+												@endif
+											@endisset
+										@endforeach
+									@endisset</td>
+							</tr>
+							<tr>
+								<th class="grey_header">
+									<label>Product Name</label>
 								</th>
 								<td>{!! $product_details->product_name !!}</td>
 							</tr>

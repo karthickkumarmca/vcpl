@@ -87,14 +87,25 @@
 								<label>Select Sub Contractor <span class="text-danger"> *</span></label>
 								<select name="sub_contractor_id" class="form-control pos_validate" id="sub_contractor_id">
 									<option value="">Select Sub Contractor </option>
+
 									@isset($sub_contractor)
 										@foreach($sub_contractor as $sub)
-											@if ($site_info_details->sub_contractor_id != "")
-												@if($site_info_details->sub_contractor_id == $sub['id'])
+											@if(old('category_id') != "")
+												@if(old('category_id') == $sub['id'])
 													<option value="{{$sub['id']}}" selected>{{$sub['name']}}</option>
-												else
-													<option value="{{$sub['id']}}" selected>{{$sub['name']}}</option>
+												@else
+													<option value="{{$sub['id']}}">{{$sub['name']}}</option>
 												@endif
+											@else
+												@isset($site_info_details->sub_contractor_id)
+													@if($site_info_details->sub_contractor_id == $sub['id'])
+														<option value="{{$sub['id']}}" selected>{{$sub['name']}}</option>
+													@else
+														<option value="{{$sub['id']}}">{{$sub['name']}}</option>
+													@endif
+												@else
+													<option value="{{$sub['id']}}">{{$sub['name']}}</option>
+												@endisset
 											@endif
 										@endforeach
 									@endisset
