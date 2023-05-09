@@ -27,9 +27,7 @@
 	            "sub_contractor_id": {
 	                required: true,
 	            },
-	            "store_keeper_id": {
-	                required: true,
-	            },
+	           
 	        },
 	        messages: {
 	            "site_name": {
