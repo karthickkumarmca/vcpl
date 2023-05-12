@@ -67,6 +67,8 @@
 							    <option value="property_name_management">Property Name</option>
 							    <option value="property_categories_management">property Categories</option>
 							    <option value="product_rental_management">Product Rental</option>
+							    
+							    <option value="message_header_management">Message Header</option>
 							   
 							  </select>
 							   @if($errors->has('master'))

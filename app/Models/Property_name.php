@@ -74,6 +74,24 @@ class Property_name extends Model
             'total_items' => $totalItems,
         ];
     }
+    public static function getname($search_filter)
+    {
+        $fields = [
+            'property_name.property_name',
+            'property_category.category_name',
+            'ownership.ownership_name',
+        ];
+        $query = self::select($fields)->leftjoin('property_category','property_category.id','property_name.property_category_id')
+        ->leftjoin('ownership','ownership.id','property_name.ownership_id');
+
+        if ($search_filter) {
+            $query->where($search_filter);
+        }
+
+        $records = $query->get()->toArray();
+
+        return $records;
+    }
 
     /**
      * Store admin details

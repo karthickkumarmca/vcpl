@@ -66,6 +66,7 @@
 							    <option value="property_name_management"  @if(in_array('property_name_management',$roles->master)) selected @endif>Property Name</option>
 							    <option value="property_categories_management"  @if(in_array('property_categories_management',$roles->master)) selected @endif>property Categories</option>
 							     <option value="product_rental_management"  @if(in_array('product_rental_management',$roles->master)) selected @endif>Product Rental</option>
+							     <option value="message_header_management"  @if(in_array('message_header_management',$roles->master)) selected @endif>Message Header</option>
 							  </select>
 							</div>
 						</div>

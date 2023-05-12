@@ -210,8 +210,15 @@ return [
             'view' => 1,            
             'change_status' => 1,
         ], 
-        'message_header_management' =>0,
+        'message_header_management' =>1,
         'message_header_management_access' => [
+            'create' => 1,
+            'edit' => 1,
+            'view' => 1,            
+            'change_status' => 1,
+        ], 
+        'rental_agreement_management' =>1,
+        'rental_agreement_management_access' => [
             'create' => 1,
             'edit' => 1,
             'view' => 1,            

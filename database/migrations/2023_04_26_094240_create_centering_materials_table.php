@@ -20,7 +20,7 @@ class CreateCenteringMaterialsTable extends Migration
             $table->bigInteger('material_id')->nullable();
 
             $table->bigInteger('property_material_id')->nullable()->unsigned();
-            $table->foreign('property_material_id')->references('id')->on('categories')->onDelete('SET NULL');
+            $table->foreign('property_material_id')->references('id')->on('product_details')->onDelete('SET NULL');
 
             $table->bigInteger('units_id')->nullable()->unsigned();
             $table->foreign('units_id')->references('id')->on('units')->onDelete('SET NULL');

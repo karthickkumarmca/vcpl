@@ -316,6 +316,14 @@ $rolesAccess = Session::get('role_access');
 			</li>
 			@endif
 
+			@if($rolesAccess['rental_agreement_management']==1)
+			<li class="{{ Request::is('master/rental-agreement/*') ? 'active' : '' }}">
+				<a href="{!! url(route('rental-agreement-list')) !!}">
+					<span>RENTAL AGREEMENT</span>
+				</a>
+			</li>
+			@endif
+
 			 </ul>
 
 

@@ -113,10 +113,10 @@ class Materials extends Model
             $materials->status = 1;
         }
         if ($request->has('from_date')) {
-             $materials->from_date               = $request->from_date;
+             $materials->from_date               = date('Y-m-d',strtotime($request->from_date));
         }
         if ($request->has('to_date')) {
-             $materials->to_date               = $request->to_date;
+             $materials->to_date               = date('Y-m-d',strtotime($request->to_date));
         }
 
         $materials->rate_unit               = $request->rate_unit;
