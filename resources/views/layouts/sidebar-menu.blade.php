@@ -330,26 +330,6 @@ $rolesAccess = Session::get('role_access');
 			</li>
 			@include('layouts.sidebar-menu-transactions')
 			
-			<li>
-				<a title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();
-				swal('Are you sure want to logout?','','',{
-					buttons:{						
-						cancel : 'Cancel',
-						confirm : {text:'Confirm',className:'btn-success'}
-					}	
-				})
-				.then((value) => {
-					if(value){
-						document.getElementById('logout-form-slide').submit();
-					}
-				});
-				">
-				<i class="fa fa-sign-out fa-fw"></i> Logout
-				</a>
-				<form id="logout-form-slide" action="{{ route('logout') }}" method="POST" style="display: none;">
-					@csrf
-				</form>
-			</li>
 			
 		</ul>
 	</section>
