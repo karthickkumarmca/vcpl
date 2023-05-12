@@ -55,21 +55,6 @@
                     "type"    : "input"
                 }
             },
-             {
-                "name" : "product_name",
-                "label": "Product Name",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "product_name"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
             {
                 "name" : "sub_category_name",
                 "label": "Sub Category Name",
@@ -85,6 +70,22 @@
                     "type"    : "input"
                 }
             },
+             {
+                "name" : "product_name",
+                "label": "Product Name",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "product_name"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
+            
             {
                 "name" : "status",
                 "label": "Status",

@@ -41,11 +41,13 @@ class Productrental extends Model
             'product_rental.status as status_id',
             'categories.category_name',
             'product_details.product_name',
+            'units.unit_name',
             DB::raw('CASE WHEN product_rental.status >= -1 THEN "No\'s" ELSE "-" END AS words'),
             DB::raw('CASE WHEN product_rental.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(product_rental.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
         $query = self::select($fields)->leftjoin('categories','categories.id','product_rental.category_id')
-        ->leftjoin('product_details','product_details.id','product_rental.product_details_id');
+        ->leftjoin('product_details','product_details.id','product_rental.product_details_id')
+        ->leftjoin('units','units.id','product_rental.unit_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -103,6 +105,7 @@ class Productrental extends Model
             $data->status = 1;
         }
        
+        $data->unit_id              = $request->unit_id;
         $data->rent_unit            = $request->rent_unit;
         $data->category_id          = $request->category_id;
         $data->product_details_id   = $request->product_details_id;

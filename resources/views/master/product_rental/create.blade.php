@@ -54,11 +54,29 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Rent / Unit <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Rent/Unit" name="rent_unit" value="{{old('rent_unit')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<label>Rent <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Rent" name="rent_unit" value="{{old('rent_unit')}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('rent_unit'))
 								<div class="error">{{ $errors->first('rent_unit') }}</div>
+								@endif
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Select Unit <span class="text-danger"> *</span></label>
+								<select name="unit_id" class="form-control pos_validate" id="unit_id">
+									<option value="">Select Unit</option>
+									@isset($units)
+										@foreach($units as $unit)
+										<option value="{{$unit['id']}}">{{$unit['unit_name']}}</option>
+										@endforeach
+									@endisset
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('unit_id'))
+								<div class="error">{{ $errors->first('unit_id') }}</div>
 								@endif
 							</div>
 						</div>

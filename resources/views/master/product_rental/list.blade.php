@@ -102,13 +102,28 @@
             },
             {
                 "name" : "rent_unit",
-                "label": "Rent/Unit",
+                "label": "Rent",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
+                    "display" : 0,
+                    "field" : "rent_unit"
+                },
+                "search": {
                     "display" : 1,
-                    "field" : "sub_category_name"
+                    "type"    : "input"
+                }
+            },
+            {
+                "name" : "unit_name",
+                "label": "Units",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "unit_name"
                 },
                 "search": {
                     "display" : 1,

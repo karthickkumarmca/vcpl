@@ -60,9 +60,23 @@
 							</tr>
 							<tr>
 								<th class="grey_header">
-									<label>Product Rent/Unit</label>
+									<label>Product Rent</label>
 								</th>
 								<td>{!! $product_rental->rent_unit !!}</td>
+							</tr>
+							<tr>
+								<th class="grey_header">
+									<label>Product Unit</label>
+								</th>
+								<td>@isset($units)
+										@foreach($units as $unit)
+											@isset($product_rental->unit_id)
+												@if($product_rental->unit_id == $unit['id'])
+													{{$unit['unit_name']}}
+												@endif
+											@endisset
+										@endforeach
+									@endisset</td>
 							</tr>
 							<tr>
 								<th class="grey_header">

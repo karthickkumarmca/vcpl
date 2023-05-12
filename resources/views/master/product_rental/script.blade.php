@@ -23,6 +23,7 @@
 	$("#admin-form").validate({
 		rules: {
 			category_id: "required",
+			unit_id: "required",
 			product_details_id: "required",
 			rent_unit: {
 	            required: true,

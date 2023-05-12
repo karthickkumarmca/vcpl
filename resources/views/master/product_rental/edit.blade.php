@@ -80,11 +80,45 @@
 					
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Product Rent/Unit <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Rent / Unit" name="rent_unit" value="{{old('rent_unit') ? old('rent_unit') : $product_rental->rent_unit}}" maxlength="128"/>
+								<label>Product Rent <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" placeholder="Enter Rent" name="rent_unit" value="{{old('rent_unit') ? old('rent_unit') : $product_rental->rent_unit}}" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('rent_unit'))
 								<div class="error">{{ $errors->first('rent_unit') }}</div>
+								@endif
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Select Unit <span class="text-danger"> *</span></label>
+								<select name="unit_id" class="form-control pos_validate" id="unit_id">
+									<option value="">Select Unit</option>
+									@isset($units)
+										@foreach($units as $unit)
+											@if(old('unit_id') != "")
+												@if(old('unit_id') == $unit['id'])
+													<option value="{{$unit['id']}}" selected>{{$unit['unit_name']}}</option>
+												@else
+													<option value="{{$unit['id']}}">{{$unit['unit_name']}}</option>
+												@endif
+											@else
+												@isset($product_rental->unit_id)
+													@if($product_rental->unit_id == $unit['id'])
+														<option value="{{$unit['id']}}" selected>{{$unit['unit_name']}}</option>
+													@else
+														<option value="{{$unit['id']}}">{{$unit['unit_name']}}</option>
+													@endif
+												@else
+													<option value="{{$category['id']}}">{{$category['unit_name']}}</option>
+												@endisset
+											@endif
+										@endforeach
+									@endisset
+								</select>
+								<span class="validation_error"></span>
+								@if($errors->has('unit_id'))
+								<div class="error">{{ $errors->first('unit_id') }}</div>
 								@endif
 							</div>
 						</div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Categories;
+use App\Models\Units;
 use App\Models\Productrental;
 use App\Models\Productdetails;
 use Illuminate\Http\Request;
@@ -82,6 +83,16 @@ class ProductrentalController extends Controller
                 //print_r($records);exit;
 
                 if (!empty($records['records'])) {
+                    if($page==0){
+                        $page =1;
+                    }
+                    if($offset==0){
+                        $offset =1;
+                    }
+                    $i = ($page * $offset)-$offset+1;
+                    foreach($records['records'] as $key=>$val){
+                        $records['records'][$key]['id'] = $i++;
+                    }
                     $statusCode = '200';
                     $message    = "Product details are retrieved Successfully";
                     $data       = $records;
@@ -124,7 +135,11 @@ class ProductrentalController extends Controller
             $search = ['status' => 1];
             $fields = ['id','category_name'];
             $categories = Categories::getAll($fields,$search);
-            return view('master.product_rental.create',compact('categories'));
+
+            $search = ['status' => 1];
+            $fields = ['id','unit_name'];
+            $units = Units::getAll($fields,$search);
+            return view('master.product_rental.create',compact('categories','units'));
         }
     }
     public function getProductList(Request $request) {
@@ -151,6 +166,7 @@ class ProductrentalController extends Controller
             $fieldValidation['product_details_id']      = ['required'];
             $fieldValidation['category_id']             = ['required'];
             $fieldValidation['rent_unit']               = ['required'];
+            $fieldValidation['unit_id']                 = ['required'];
            
 
             $errorMessages    = [
@@ -202,10 +218,16 @@ class ProductrentalController extends Controller
                 $search1 = ['status' => 1,'category_id'=>$product_rental->category_id];
                 $fields1 = ['id','product_name'];
                 $Productdetails = Productdetails::getAll($fields1,$search1);
+
+                $search = ['status' => 1];
+                $fields = ['id','unit_name'];
+                $units = Units::getAll($fields,$search);
+
                 $data = [
                     'Productdetails'    => $Productdetails,
                     'product_rental'   => $product_rental,
                     'categories'        => $categories,
+                    'units'             => $units,
                 ];
 
                 return view('master.product_rental.view', $data);
@@ -236,10 +258,15 @@ class ProductrentalController extends Controller
                 $fields1 = ['id','product_name'];
                 $Productdetails = Productdetails::getAll($fields1,$search1);
 
+                $search = ['status' => 1];
+                $fields = ['id','unit_name'];
+                $units = Units::getAll($fields,$search);
+
                 $data = [
                     'Productdetails'    => $Productdetails,
                     'product_rental' => $product_rental,
                     'categories'     => $categories,
+                    'units'     => $units,
                 ];
 
                 return view('master.product_rental.edit', $data);
