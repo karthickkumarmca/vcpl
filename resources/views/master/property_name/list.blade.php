@@ -40,6 +40,21 @@
          var table_properties = {
             'name': 'subcategories-list',
             'columns': [
+             {
+                "name" : "ownership_name",
+                "label": "Ownership Name",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "ownership_name"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
             {
                 "name" : "category_name",
                 "label": "Category Name",
@@ -70,21 +85,7 @@
                     "type"    : "input"
                 }
             },
-            {
-                "name" : "ownership_name",
-                "label": "Ownership Name",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "ownership_name"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
+           
             {
                 "name" : "status",
                 "label": "Status",
