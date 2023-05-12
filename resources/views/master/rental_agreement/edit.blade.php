@@ -264,6 +264,35 @@
 								@endif
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Upload Adhaar Image </label>
+								<input type="file" class="form-control pos_validate "  placeholder="select file" name="aadhar_img" />
+								<span class="validation_error"></span>
+								@if($errors->has('aadhar_img'))
+								<div class="error">{{ $errors->first('aadhar_img') }}</div>
+								@endif
+
+								@if($rental_agreement->aadhar_proof!='')
+								<a href="{{$rental_agreement->aadhar_proof}}" target="_blank">Click to view the uploaded image</a>
+								@endif
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Upload Pan Image</label>
+								<input type="file" class="form-control pos_validate "  placeholder="select file" name="pan_img" />
+								<span class="validation_error"></span>
+								@if($errors->has('pan_img'))
+								<div class="error">{{ $errors->first('pan_img') }}</div>
+								@endif
+								@if($rental_agreement->pan_proof!='')
+								<a href="{{$rental_agreement->pan_proof}}" target="_blank">Click to view the uploaded image</a>
+								@endif
+							</div>
+						</div>
 					
 					</div>
 					<div class="box-footer">

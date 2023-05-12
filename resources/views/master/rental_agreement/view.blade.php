@@ -164,6 +164,24 @@
 					
 					@endif</td>
 							</tr>
+
+							@if($rental_agreement->aadhar_proof!='')
+							<tr>
+								<th class="grey_header">
+									<label>Adhaar Image </label>
+								</th>
+								<td><a href="{{$rental_agreement->aadhar_proof}}" target="_blank">Click to view the uploaded image</a></td>
+							</tr>
+							@endif
+
+							@if($rental_agreement->pan_proof!='')
+							<tr>
+								<th class="grey_header">
+									<label>Pan Image </label>
+								</th>
+								<td><a href="{{$rental_agreement->pan_proof}}" target="_blank">Click to view the uploaded image</a></td>
+							</tr>
+							@endif
 							
 							<tr>
 								<th class="grey_header">

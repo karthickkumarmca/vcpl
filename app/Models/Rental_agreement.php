@@ -38,7 +38,11 @@ class Rental_agreement extends Model
             'rental_agreement.uuid',
             'rental_agreement.id AS encryptid',
             'rental_agreement.tenant_name',
+            'rental_agreement.contact_person_mobile_number',
+            'rental_agreement.rental_amount',
             'rental_agreement.status as status_id',
+            DB::raw('DATE_FORMAT(rental_agreement.rent_start_date, "%d-%b-%Y") AS rent_start_date'),
+            DB::raw('DATE_FORMAT(rental_agreement.rent_end_date, "%d-%b-%Y") AS rent_end_date'),
             DB::raw('CASE WHEN rental_agreement.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(rental_agreement.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
         $query = self::select($fields);
@@ -119,6 +123,13 @@ class Rental_agreement extends Model
         $data->present_rental_rate      = $request->present_rental_rate;
         $data->advance_paid             = $request->advance_paid;
         $data->payment_mode             = $request->payment_mode;
+
+        if($request->aadhar_proof!=''){
+            $data->aadhar_proof             = $request->aadhar_proof;
+        }
+        if($request->pan_proof!=''){
+            $data->pan_proof             = $request->pan_proof;
+        }
        
         $data->save();
 

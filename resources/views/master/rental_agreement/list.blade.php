@@ -71,6 +71,66 @@
                 }
             },
             {
+                "name" : "contact_person_mobile_number",
+                "label": "Mobile Number",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "contact_person_mobile_number"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
+            {
+                "name" : "rent_start_date",
+                "label": "Rent Start Date",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "rent_start_date"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+             {
+                "name" : "rent_end_date",
+                "label": "Rent End Date",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "rent_end_date"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+            {
+                "name" : "rental_amount",
+                "label": "Rent Amount",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "rental_amount"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+            {
                 "name" : "status",
                 "label": "Status",
                 "badge": {

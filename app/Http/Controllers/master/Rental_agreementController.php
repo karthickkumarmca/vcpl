@@ -171,6 +171,8 @@ class Rental_agreementController extends Controller
             $fieldValidation['advance_paid']              = ['required'];
             $fieldValidation['payment_mode']              = ['required'];
             $fieldValidation['property_id']               = ['required'];
+            $fieldValidation['aadhar_img']                = ['nullable','mimes:png,jpg,jpeg,pdf|max:2048'];
+            $fieldValidation['pan_img']                   = ['nullable','mimes:png,jpg,jpeg,pdf|max:2048'];
            
 
             $errorMessages    = [
@@ -184,6 +186,21 @@ class Rental_agreementController extends Controller
             if ($validator->fails()) {
                 return Redirect::back()->withInput($request->input())->withErrors($validator);
             }
+            if($request->file('aadhar_img')) {
+                $file = $request->file('aadhar_img');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $location = 'public/uploads/';
+                $file->move($location,$filename);
+                $request['aadhar_proof'] = $filename;
+            }
+            if($request->file('pan_img')) {
+                $file = $request->file('pan_img');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $location = 'public/uploads/';
+                $file->move($location,$filename);
+                $request['pan_proof'] = $filename;
+            }
+            
 
             if($request->has('rental_agreement_id')){
                 $request['created_at']=date('Y-m-d H:i:s');
@@ -227,6 +244,13 @@ class Rental_agreementController extends Controller
                     $rental_agreement->property_name = $prdata[0]['property_name'];
                 }
 
+                if($rental_agreement->aadhar_proof!=''){
+                    $rental_agreement->aadhar_proof  = url('/').'/public/uploads/'.$rental_agreement->aadhar_proof;
+                }
+                if($rental_agreement->pan_proof!=''){
+                    $rental_agreement->pan_proof   = url('/').'/public/uploads/'.$rental_agreement->pan_proof;
+                }
+
                 $data = [
                     'rental_agreement'   => $rental_agreement,
                 ];
@@ -256,6 +280,12 @@ class Rental_agreementController extends Controller
                 }
                 if($rental_agreement->rent_end_date!=''){
                     $rental_agreement->rent_end_date = date('m/d/Y',strtotime($rental_agreement->rent_end_date));
+                }
+                if($rental_agreement->aadhar_proof!=''){
+                    $rental_agreement->aadhar_proof  = url('/').'/public/uploads/'.$rental_agreement->aadhar_proof;
+                }
+                if($rental_agreement->pan_proof!=''){
+                    $rental_agreement->pan_proof   = url('/').'/public/uploads/'.$rental_agreement->pan_proof;
                 }
 
                 $search = ['status' => 1];

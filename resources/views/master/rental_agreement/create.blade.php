@@ -249,8 +249,27 @@
 							</div>
 						</div>
 
-						
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Upload Adhaar Image</label>
+								<input type="file" class="form-control pos_validate " autocomplete="off" placeholder="select file" name="aadhar_img" value="" data-rule="admin" />
+								<span class="validation_error"></span>
+								@if($errors->has('aadhar_img'))
+								<div class="error">{{ $errors->first('aadhar_img') }}</div>
+								@endif
+							</div>
+						</div>
 
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Upload Pan Image</label>
+								<input type="file" class="form-control pos_validate " autocomplete="off" placeholder="select file" name="pan_img" value="" data-rule="admin" />
+								<span class="validation_error"></span>
+								@if($errors->has('pan_img'))
+								<div class="error">{{ $errors->first('pan_img') }}</div>
+								@endif
+							</div>
+						</div>
 
 						
 					</div>
