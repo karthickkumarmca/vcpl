@@ -50,9 +50,10 @@
                     "display" : 0,
                     "field" : "category_name"
                 },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
+                 "search": {
+                    "display" : 1,
+                    "type"    : "select",
+                    'values'  : {!! json_encode($Productdetails) !!}
                 }
             },
              {
@@ -80,9 +81,10 @@
                     "display" : 0,
                     "field" : "unit_name"
                 },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
+                 "search": {
+                    "display" : 1,
+                    "type"    : "select",
+                    'values'  : {!! json_encode($units) !!}
                 }
             },
             {

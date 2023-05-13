@@ -38,7 +38,7 @@ class CategoriesController extends Controller
             if ($request->has('request_type')) {
                 $searchField = [
                     'category_name'      => 'categories.category_name',
-                    'status'    => 'categories.status',
+                    'status'            => 'categories.status',
                 ];
                 $sortField   = [
                     'category_name'     => 'categories.category_name',

@@ -35,7 +35,9 @@ class Rental_agreementController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'tenant_name'      => 'rental_agreement.tenant_name',
+                    'tenant_name'        => 'rental_agreement.tenant_name',
+                    'rental_amount'      => 'rental_agreement.rental_amount',
+                    'contact_person_mobile_number'      => 'rental_agreement.contact_person_mobile_number',
                     'status'    => 'rental_agreement.status',
                 ];
                 $sortField   = [

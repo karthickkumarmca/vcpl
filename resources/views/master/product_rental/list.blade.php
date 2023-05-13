@@ -50,24 +50,10 @@
                     "display" : 0,
                     "field" : "category_name"
                 },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
-                }
-            },
-             {
-                "name" : "words",
-                "label": "Unit",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 0,
-                    "field" : "words"
-                },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
+                 "search": {
+                    "display" : 1,
+                    "type"    : "select",
+                    'values'  : {!! json_encode($categories) !!}
                 }
             },
              {
@@ -80,9 +66,10 @@
                     "display" : 0,
                     "field" : "product_name"
                 },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
+                 "search": {
+                    "display" : 1,
+                    "type"    : "select",
+                    'values'  : {!! json_encode($Productdetails) !!}
                 }
             },
             {
@@ -110,9 +97,10 @@
                     "display" : 0,
                     "field" : "unit_name"
                 },
-                "search": {
+               "search": {
                     "display" : 1,
-                    "type"    : "input"
+                    "type"    : "select",
+                    'values'  : {!! json_encode($units) !!}
                 }
             },
             {

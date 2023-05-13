@@ -36,8 +36,12 @@ class Labour_wagesController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'client_name'      => 'labour_wages.client_name',
-                    'status'    => 'labour_wages.status',
+                    'client_name'           => 'labour_wages.client_name',
+                    'status'                => 'labour_wages.status',
+                    'rate'                  => 'labour_wages.rate',
+                    'category_name'         => 'labour_wages.labour_category_id',
+                    'sub_contractor_name'   => 'labour_wages.sub_contractor_id',
+                    'site_name'             => 'labour_wages.site_id',
                 ];
                 $sortField   = [
                     'status'  => 'labour_wages.status',
@@ -104,6 +108,18 @@ class Labour_wagesController extends Controller
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['labour_wages_management_access'])){
 
+                    $search = ['status' => 1];
+                    $fields = ['id as value','category_name as label'];
+                    $categories = Labour_categories::getAll($fields,$search);
+
+                    $search1 = ['status' => 1];
+                    $fields1 = ['id as value','site_name as label'];
+                    $siteinfo = Siteinfo::getAll($fields1,$search1);
+
+                    $search2 = ['status' => 1,'sub_contractor'=>1];
+                    $fields2 = ['id as value','name as label'];
+                    $staffdetails = Staffdetails::getAll($fields2,$search2);
+
                     $create_access          = $rolesAccess['labour_wages_management_access']['create'];
                     $view_access            = $rolesAccess['labour_wages_management_access']['view'];
                     $edit_access            = $rolesAccess['labour_wages_management_access']['edit'];
@@ -111,7 +127,7 @@ class Labour_wagesController extends Controller
                     $delete_access   = $rolesAccess['labour_wages_management_access']['delete'];
                 }
 
-                return view('master.labour_wages.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.labour_wages.list', compact('statuses','categories','siteinfo','staffdetails', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }

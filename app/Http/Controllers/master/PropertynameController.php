@@ -36,6 +36,8 @@ class PropertynameController extends Controller
             if ($request->has('request_type')) {
                 $searchField = [
                     'property_name'      => 'property_name.property_name',
+                    'ownership_name'      => 'property_category.id',
+                    'category_name'      => 'property_name.ownership_id',
                     'status'    => 'property_name.status',
                 ];
                 $sortField   = [
@@ -83,11 +85,11 @@ class PropertynameController extends Controller
 
                 if (!empty($records['records'])) {
                     $statusCode = '200';
-                    $message    = "Sub categories are retrieved Successfully";
+                    $message    = "data are retrieved Successfully";
                     $data       = $records;
                 } else {
                     $statusCode = '400';
-                    $message    = "No Property_name found";
+                    $message    = "No Property name found";
                     $data       = $records;
                 }
 
@@ -104,6 +106,14 @@ class PropertynameController extends Controller
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['property_name_management_access'])){
 
+                    $search1 = ['status' => 1];
+                    $fields1 = ['id as value','ownership_name as label'];
+                    $ownership = Ownership::getAll($fields1,$search1);
+
+                    $search = ['status' => 1];
+                    $fields = ['id  as value','category_name  as label'];
+                    $categories = Property_categories::getAll($fields,$search);
+
                     $create_access          = $rolesAccess['property_name_management_access']['create'];
                     $view_access            = $rolesAccess['property_name_management_access']['view'];
                     $edit_access            = $rolesAccess['property_name_management_access']['edit'];
@@ -111,7 +121,7 @@ class PropertynameController extends Controller
                     $delete_access   = $rolesAccess['property_name_management_access']['delete'];
                 }
 
-                return view('master.property_name.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.property_name.list', compact('statuses','ownership','categories', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }

@@ -52,8 +52,9 @@
                     "field" : "site_name"
                 },
                 "search": {
-                    "display" : 0,
-                    "type"    : "input"
+                    "display" : 1,
+                    "type"    : "select",
+                    'values'  : {!! json_encode($siteinfo) !!}
                 }
             },
             {
@@ -67,8 +68,9 @@
                     "field" : "sub_contractor_name"
                 },
                 "search": {
-                    "display" : 0,
-                    "type"    : "input"
+                    "display" : 1,
+                    "type"    : "select",
+                    'values'  : {!! json_encode($staffdetails) !!}
                 }
             },
             {
@@ -82,8 +84,9 @@
                     "field" : "category_name"
                 },
                 "search": {
-                    "display" : 0,
-                    "type"    : "input"
+                    "display" : 1,
+                    "type"    : "select",
+                    'values'  : {!! json_encode($categories) !!}
                 }
             },
              {

@@ -52,7 +52,8 @@
                 },
                 "search": {
                     "display" : 1,
-                    "type"    : "input"
+                    "type"    : "select",
+                    'values'  : {!! json_encode($Productdetails) !!}
                 }
             },
              {
@@ -82,7 +83,8 @@
                 },
                 "search": {
                     "display" : 1,
-                    "type"    : "input"
+                    "type"    : "select",
+                    'values'  : {!! json_encode($units) !!}
                 }
             },
             {

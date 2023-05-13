@@ -66,7 +66,7 @@
                     "field" : "description"
                 },
                 "search": {
-                    "display" : 0,
+                    "display" : 1,
                     "type"    : "input"
                 }
             },

@@ -36,8 +36,11 @@ class ProductrentalController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'rent_unit'      => 'product_rental.rent_unit',
-                    'status'    => 'product_rental.status',
+                    'rent_unit'             => 'product_rental.rent_unit',
+                    'status'                => 'product_rental.status',
+                    'category_name'         => 'product_rental.category_id',
+                    'product_name'          => 'product_rental.product_details_id',
+                    'unit_name'             => 'product_rental.unit_id',
                 ];
                 $sortField   = [
                     'rent_unit'     => 'product_rental.rent_unit',
@@ -105,13 +108,25 @@ class ProductrentalController extends Controller
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['product_rental_management_access'])){
 
+                    $search = ['status' => 1];
+                    $fields = ['id as value','category_name as label'];
+                    $categories = Categories::getAll($fields,$search);
+
+                    $search = ['status' => 1];
+                    $fields = ['id as value','unit_name as label'];
+                    $units = Units::getAll($fields,$search);
+
+                    $search = ['status' => 1];
+                    $fields = ['id as value','product_name as label'];
+                    $Productdetails = Productdetails::getAll($fields,$search);
+
                     $create_access          = $rolesAccess['product_rental_management_access']['create'];
                     $view_access            = $rolesAccess['product_rental_management_access']['view'];
                     $edit_access            = $rolesAccess['product_rental_management_access']['edit'];
                     $change_status_access   = $rolesAccess['product_rental_management_access']['change_status'];
                 }
 
-                return view('master.product_rental.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.product_rental.list', compact('statuses','categories','units','Productdetails', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }

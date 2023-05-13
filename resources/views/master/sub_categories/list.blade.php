@@ -52,7 +52,8 @@
                 },
                 "search": {
                     "display" : 1,
-                    "type"    : "input"
+                    "type"    : "select",
+                    'values'  : {!! json_encode($categories) !!}
                 }
             },
              {

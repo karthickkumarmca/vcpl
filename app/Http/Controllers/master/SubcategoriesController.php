@@ -35,7 +35,8 @@ class SubcategoriesController extends Controller
             if ($request->has('request_type')) {
                 $searchField = [
                     'sub_category_name'      => 'subcategories.sub_category_name',
-                    'status'    => 'subcategories.status',
+                    'status'            => 'subcategories.status',
+                    'category_name'     => 'subcategories.category_id',
                 ];
                 $sortField   = [
                     'sub_category_name'     => 'subcategories.sub_category_name',
@@ -103,13 +104,17 @@ class SubcategoriesController extends Controller
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['sub_categories_management_access'])){
 
+                    $search = ['status' => 1];
+                    $fields = ['id as value','category_name as label'];
+                    $categories = Categories::getAll($fields,$search);
+
                     $create_access          = $rolesAccess['sub_categories_management_access']['create'];
                     $view_access            = $rolesAccess['sub_categories_management_access']['view'];
                     $edit_access            = $rolesAccess['sub_categories_management_access']['edit'];
                     $change_status_access   = $rolesAccess['sub_categories_management_access']['change_status'];
                 }
 
-                return view('master.sub_categories.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.sub_categories.list', compact('statuses','categories', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }

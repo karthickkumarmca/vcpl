@@ -36,7 +36,10 @@ class Lorry_materialsController extends Controller
             if ($request->has('request_type')) {
                 $searchField = [
                     'materials'      => 'materials.materials',
-                    'status'    => 'materials.status',
+                     'rate_unit'      => 'materials.rate_unit',
+                    'status'         => 'materials.status',
+                    'category_name'  => 'product_details.id',
+                    'unit_name'      => 'units.id',
                 ];
                 $sortField   = [
                     'materials'     => 'materials.materials',
@@ -105,6 +108,14 @@ class Lorry_materialsController extends Controller
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['lorry_materials_management_access'])){
 
+                    $search = ['status' => 1,'category_id'=>3];
+                    $fields = ['id as value','product_name as label'];
+                    $Productdetails = Productdetails::getAll($fields,$search);
+
+                    $search1 = ['status' => 1];
+                    $fields1 = ['id as value','unit_name as label'];
+                    $units = Units::getAll($fields1,$search1);
+
                     $create_access          = $rolesAccess['lorry_materials_management_access']['create'];
                     $view_access            = $rolesAccess['lorry_materials_management_access']['view'];
                     $edit_access            = $rolesAccess['lorry_materials_management_access']['edit'];
@@ -112,7 +123,7 @@ class Lorry_materialsController extends Controller
                     $delete_access   = $rolesAccess['lorry_materials_management_access']['delete'];
                 }
 
-                return view('master.lorry_materials.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.lorry_materials.list', compact('statuses','Productdetails', 'units','create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }
