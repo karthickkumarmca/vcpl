@@ -38,6 +38,11 @@ class Vehicle_materials extends Model
             'vehicle_materials.uuid',
             'vehicle_materials.id AS encryptid',
             'vehicle_materials.vehicle_name',
+            'vehicle_materials.vehicle_no',
+             DB::raw('CASE WHEN vehicle_materials.insurance_date IS NULL THEN "-" ELSE 
+                DATE_FORMAT(vehicle_materials.insurance_date, "%d-%b-%Y")
+             END
+                AS insurance_date'),
             'vehicle_materials.status as status_id',
              DB::raw('CASE WHEN vehicle_materials.status = 1 THEN "Active" ELSE "In-Active" END AS status,
                 CASE WHEN vehicle_materials.is_company = 1 THEN "Company" ELSE "" END AS is_company,
@@ -104,8 +109,12 @@ class Vehicle_materials extends Model
         }
       
 
-        $materials->vehicle_name               = strtoupper($request->vehicle_name);
+        $materials->vehicle_name                = strtoupper($request->vehicle_name);
         $materials->is_company                  = $request->is_company;
+        $materials->vehicle_no                  = strtoupper($request->vehicle_no);
+        if ($request->has('insurance_date')) {
+             $materials->insurance_date               = date('Y-m-d',strtotime($request->insurance_date));
+        }
        
         $materials->save();
 

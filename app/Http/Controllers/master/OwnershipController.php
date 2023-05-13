@@ -4,6 +4,7 @@ namespace App\Http\Controllers\master;
 
 use App\Admin;
 use App\Models\Ownership;
+use App\Models\Staffdetails;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +38,10 @@ class OwnershipController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'category_name'      => 'ownership.category_name',
-                    'status'    => 'ownership.status',
+                    'ownership_name'        => 'ownership.ownership_name',
+                    'status'                => 'ownership.status',
+                    'staff_name'            => 'ownership.staff_id',
+                    'position'              => 'ownership.position',
                 ];
                 $sortField   = [
                     'category_name'     => 'ownership.category_name',
@@ -103,6 +106,10 @@ class OwnershipController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
+                $search = ['status' => 1];
+                $fields = ['id as value','name as label'];
+                $Staffdetails = Staffdetails::getAll($fields,$search);
+
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['ownership_management_access'])){
 
@@ -113,7 +120,7 @@ class OwnershipController extends Controller
                     $delete_access   = $rolesAccess['ownership_management_access']['delete'];
                 }
 
-                return view('master.ownership.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.ownership.list', compact('statuses','Staffdetails', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }
@@ -124,7 +131,12 @@ class OwnershipController extends Controller
         if(!isset($rolesAccess['ownership_management_access']['create']) || $rolesAccess['ownership_management_access']['create']!=1){
             abort(403);
         } else {
-            return view('master.ownership.create');
+
+            $search = ['status' => 1];
+            $fields = ['id','name'];
+            $Staffdetails = Staffdetails::getAll($fields,$search);
+
+            return view('master.ownership.create',compact('Staffdetails'));
         }
     }
     public function store(Request $request)
@@ -142,9 +154,6 @@ class OwnershipController extends Controller
                 'ownership_name'         => [
                     'required','min:2','max:50','unique:ownership,ownership_name,'.$id.',uuid'
                 ],
-                'email'         => [
-                    'nullable','min:2','max:50','unique:ownership,email,'.$id.',uuid'
-                ]
                 ];
             }
             else{
@@ -152,13 +161,10 @@ class OwnershipController extends Controller
                 'ownership_name'         => [
                     'required','min:2','max:50','unique:ownership,ownership_name'
                 ],
-                'email'         => [
-                    'nullable','min:2','max:50','unique:ownership,email'
-                ]
             ];
             }
 
-            $fieldValidation['short_name']  = ['required','min:2','max:50'];
+            $fieldValidation['staff_id']    = ['required'];
             $fieldValidation['position']    = ['required','min:2','max:50'];
            
 
@@ -201,6 +207,16 @@ class OwnershipController extends Controller
         } else {
             $ownership  = Ownership::where(['uuid' => $id])->first();
             if ($ownership) {
+
+                $search = ['status' => 1,'id'=>$ownership->staff_id];
+                $fields = ['id','name'];
+                $Staffdetails = Staffdetails::getAll($fields,$search);
+                $ownership->staff_name = '';
+                if(count($Staffdetails)>0){
+                    // echo "<pre>";print_r($Staffdetails);exit;
+                    $ownership->staff_name = $Staffdetails[0]['name'];
+                }
+
                 $data = [
                     'ownership' => $ownership,
                 ];
@@ -225,8 +241,13 @@ class OwnershipController extends Controller
             // $categories  = Ownership::find($id);
             $ownership  = Ownership::where(['uuid' => $id])->first();
             if ($ownership) {
+
+                $search = ['status' => 1];
+                $fields = ['id','name'];
+                $Staffdetails = Staffdetails::getAll($fields,$search);
                 $data = [
                     'ownership' => $ownership,
+                    'Staffdetails' => $Staffdetails,
                 ];
 
                 return view('master.ownership.edit', $data);

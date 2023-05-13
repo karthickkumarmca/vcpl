@@ -50,6 +50,28 @@
 								@endif
 							</div>
 						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Vehicle Number <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Vehicle Name" name="vehicle_no" value="{{old('vehicle_no') ? old('vehicle_no') : $centering_materials->vehicle_no}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<span class="validation_error"></span>
+								@if($errors->has('vehicle_no'))
+								<div class="error">{{ $errors->first('vehicle_no') }}</div>
+								@endif
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Insurance Date <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Select date" id="insurance_date" name="insurance_date" value="{{old('insurance_date') ? old('insurance_date') : $centering_materials->insurance_date}}" data-rule="admin" minlength="1" maxlength="128" readonly/>
+								<span class="validation_error"></span>
+								@if($errors->has('insurance_date'))
+								<div class="error">{{ $errors->first('insurance_date') }}</div>
+								@endif
+							</div>
+						</div>
 						
 					
 					</div>
@@ -76,6 +98,22 @@
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
 
+ @include('master.vehicle_materials.script')
+     <script type="text/javascript">
+	// set default dates
+	var start = new Date();
+	// set end date to max one year period:
+	var end = new Date(new Date().setYear(start.getFullYear()+1));
 
-@include('master.vehicle_materials.script')
-@stop
+	$('#insurance_date').datepicker({
+	    startDate : start,
+	    endDate   : end
+	// update "toDate" defaults whenever "fromDate" changes
+	}).on('changeDate', function(){
+	    // set the "toDate" start to not be later than "fromDate" ends:
+	    $('#to_date').datepicker('setStartDate', new Date($(this).val()));
+	}); 
+
+
+    </script>
+    @stop

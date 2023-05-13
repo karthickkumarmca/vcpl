@@ -40,21 +40,6 @@
          var table_properties = {
             'name': 'subcategories-list',
             'columns': [
-             {
-                "name" : "id",
-                "label": "SNo",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 0,
-                    "field" : "id"
-                },
-                "search": {
-                    "display" : 0,
-                    "type"    : "input"
-                }
-            },
             {
                 "name" : "category_name",
                 "label": "Product Category",

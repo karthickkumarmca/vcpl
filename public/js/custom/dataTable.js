@@ -371,17 +371,18 @@ var dataTable = {
         for (c in columns) {
             var column = columns[c];
             if (column["sort"]["display"]) {
-                datatable +=
-                `<th
-                class='sorting'
-                sort='none'
-                data-property_key="${property_key}"
-                onclick='dataTable.sortCustomDatatable(this);'
-                sort-field='${column["sort"]["field"]}'
-                sort-active='0'>
-                ${column["label"]}
-                <i class='fa fa-sort' aria-hidden='true'></i>
-                </th>`;
+                // datatable +=
+                // `<th
+                // class='sorting'
+                // sort='none'
+                // data-property_key="${property_key}"
+                // onclick='dataTable.sortCustomDatatable(this);'
+                // sort-field='${column["sort"]["field"]}'
+                // sort-active='0'>
+                // ${column["label"]}
+                // <i class='fa fa-sort' aria-hidden='true'></i>
+                // </th>`;
+                datatable += "<th>" + column["label"] + "</th>";
             }
             else {
                 datatable += "<th>" + column["label"] + "</th>";
@@ -857,7 +858,13 @@ renderDatatable: function(page = 1, property_key) {
                     tbody += `<td>${columns[c].render(rows[i])}</td>`;
                 }
                 else {
-                    tbody += "<td>" + rows[i][c_name] + "</td>";
+                    if(rows[i][c_name]==null){
+                        tbody += "<td></td>";
+                    }
+                    else{
+                        tbody += "<td>" + rows[i][c_name] + "</td>";
+                    }
+                   
                 }
             }
 

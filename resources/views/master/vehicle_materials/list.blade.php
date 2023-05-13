@@ -55,6 +55,36 @@
                     "type"    : "input"
                 }
             },
+            {
+                "name" : "vehicle_no",
+                "label": "Vehicle Number",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "vehicle_no"
+                },
+                "search": {
+                    "display" : 1,
+                    "type"    : "input"
+                }
+            },
+            {
+                "name" : "insurance_date",
+                "label": "Insurance Date",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 1,
+                    "field" : "insurance_date"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
              {
                 "name" : "is_company",
                 "label": "Is Company",
@@ -67,7 +97,8 @@
                 },
                 "search": {
                     "display" : 1,
-                    "type"    : "input"
+                    "type"    : "select",
+                    'values'  : {!! json_encode($company) !!}
                 }
             },
             {

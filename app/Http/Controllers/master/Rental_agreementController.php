@@ -83,16 +83,7 @@ class Rental_agreementController extends Controller
                 //print_r($records);exit;
 
                 if (!empty($records['records'])) {
-                    if($page==0){
-                        $page =1;
-                    }
-                    if($offset==0){
-                        $offset =1;
-                    }
-                    $i = ($page * $offset)-$offset+1;
-                    foreach($records['records'] as $key=>$val){
-                        $records['records'][$key]['id'] = $i++;
-                    }
+                    
                     $statusCode = '200';
                     $message    = "Product details are retrieved Successfully";
                     $data       = $records;

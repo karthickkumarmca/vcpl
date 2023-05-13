@@ -40,6 +40,18 @@
 							</tr>
 							<tr>
 								<th class="grey_header">
+									<label>Vehicle Number</label>
+								</th>
+								<td>{!! $centering_materials->vehicle_no !!}</td>
+							</tr>
+							<tr>
+								<th class="grey_header">
+									<label>Insurance Date</label>
+								</th>
+								<td>{!! $centering_materials->insurance_date !!}</td>
+							</tr>
+							<tr>
+								<th class="grey_header">
 									<label>Is Company</label>
 								</th>
 								<td>@if($centering_materials->is_company==1) Yes @else No @endif</td>

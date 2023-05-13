@@ -36,7 +36,9 @@ class Vehicle_materialsController extends Controller
             if ($request->has('request_type')) {
                 $searchField = [
                     'vehicle_name'      => 'vehicle_materials.vehicle_name',
-                    'status'    => 'vehicle_materials.status',
+                    'vehicle_no'        => 'vehicle_materials.vehicle_no',
+                    'status'            => 'vehicle_materials.status',
+                    'is_company'        => 'vehicle_materials.is_company',
                 ];
                 $sortField   = [
                     'status'  => 'vehicle_materials.status',
@@ -99,6 +101,7 @@ class Vehicle_materialsController extends Controller
                 return $response;
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
+                $company = [['value' => 1, 'label' => 'Company'], ['value' => 0, 'label' => 'All']];
 
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['vehicle_materials_management_access'])){
@@ -110,7 +113,7 @@ class Vehicle_materialsController extends Controller
                     $delete_access   = $rolesAccess['vehicle_materials_management_access']['delete'];
                 }
 
-                return view('master.vehicle_materials.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.vehicle_materials.list', compact('statuses','company', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }
@@ -143,18 +146,20 @@ class Vehicle_materialsController extends Controller
                 $centering_vehicle_id = $request->get('centering_vehicle_id');
                 $fieldValidation = [
                 'vehicle_name'         => [
-                    'required','min:2','max:15','unique:vehicle_materials,vehicle_name,'.$centering_vehicle_id.',uuid'
+                    'required','min:2','max:128','unique:vehicle_materials,vehicle_name,'.$centering_vehicle_id.',uuid'
                 ]
                 ];
             }
             else{
                  $fieldValidation = [
                 'vehicle_name'         => [
-                    'required','min:2','max:15','unique:vehicle_materials,vehicle_name'
+                    'required','min:2','max:128','unique:vehicle_materials,vehicle_name'
                 ]
             ];
             }
-           
+            
+            $fieldValidation['insurance_date']  = ['required'];
+            $fieldValidation['vehicle_no']      = ['required','min:2','max:15',];
 
             $errorMessages    = [
                 'lorry_materials.required'             => "Please enter the name",
@@ -204,7 +209,9 @@ class Vehicle_materialsController extends Controller
             $centering_materials  = Vehicle_materials::where(['uuid' => $id])->first();
             if ($centering_materials) {
 
-               
+                if($centering_materials->insurance_date!=''){
+                     $centering_materials->insurance_date = date('m/d/Y',strtotime($centering_materials->insurance_date));
+                }
                 $data = [
                     'units'         => $units,
                     'centering_materials' => $centering_materials,
@@ -240,7 +247,9 @@ class Vehicle_materialsController extends Controller
             $centering_materials  = Vehicle_materials::where(['uuid' => $id])->first();
             if ($centering_materials) {
 
-               
+                if($centering_materials->insurance_date!=''){
+                     $centering_materials->insurance_date = date('m/d/Y',strtotime($centering_materials->insurance_date));
+                }
                 $data = [
                     'units'         => $units,
                     'centering_materials' => $centering_materials,

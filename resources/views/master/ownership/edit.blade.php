@@ -35,17 +35,6 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>Short Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Short Name" name="short_name" value="{{old('short_name') ? old('short_name') : $ownership->short_name}}" data-rule="admin" minlength="3" maxlength="128"/>
-								<span class="validation_error"></span>
-								@if($errors->has('short_name'))
-								<div class="error">{{ $errors->first('short_name') }}</div>
-								@endif
-							</div>
-						</div>
-
 
 						<div class="col-md-12">
 							<div class="form-group">
@@ -61,11 +50,34 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Email <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate email" autocomplete="off" placeholder="Enter Ownership email" name="email" value="{{old('email') ? old('email') : $ownership->email}}"  minlength="3" maxlength="128"/>
+								<label>Select Staff <span class="text-danger"> *</span></label>
+								<select name="staff_id" class="form-control pos_validate" id="staff_id">
+									<option value="">Select Staff</option>
+									@isset($Staffdetails)
+										@foreach($Staffdetails as $category)
+											@if(old('staff_id') != "")
+												@if(old('staff_id') == $category['id'])
+													<option value="{{$category['id']}}" selected>{{$category['name']}}</option>
+												@else
+													<option value="{{$category['id']}}">{{$category['name']}}</option>
+												@endif
+											@else
+												@isset($ownership->staff_id)
+													@if($ownership->staff_id == $category['id'])
+														<option value="{{$category['id']}}" selected>{{$category['name']}}</option>
+													@else
+														<option value="{{$category['id']}}">{{$category['name']}}</option>
+													@endif
+												@else
+													<option value="{{$category['id']}}">{{$category['name']}}</option>
+												@endisset
+											@endif
+										@endforeach
+									@endisset
+								</select>
 								<span class="validation_error"></span>
-								@if($errors->has('email'))
-								<div class="error">{{ $errors->first('email') }}</div>
+								@if($errors->has('staff_id'))
+								<div class="error">{{ $errors->first('staff_id') }}</div>
 								@endif
 							</div>
 						</div>

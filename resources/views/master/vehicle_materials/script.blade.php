@@ -7,6 +7,15 @@
                		return $.trim(value);
                 },
             },
+            "vehicle_no": {
+                required: true,
+                normalizer:function( value ) {
+               		return $.trim(value);
+                },
+            },
+            "insurance_date":{
+            	required: true,
+            }
 			
 		},
 		messages: {

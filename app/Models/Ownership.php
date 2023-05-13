@@ -38,13 +38,13 @@ class Ownership extends Model
             'ownership.uuid',
             'ownership.id AS encryptid',
             'ownership.ownership_name',
-            'ownership.short_name',
             'ownership.position',
-            'ownership.email',
+            'staff_details.name as staff_name',
             'ownership.status as status_id',
             DB::raw('CASE WHEN ownership.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(ownership.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
-        $query = self::select($fields);
+        $query = self::select($fields)
+         ->leftjoin('staff_details','staff_details.id','ownership.staff_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -104,8 +104,7 @@ class Ownership extends Model
         }
        
         $categories->ownership_name     = $request->ownership_name;
-        $categories->email              = $request->email;
-        $categories->short_name         = $request->short_name;
+        $categories->staff_id           = $request->staff_id;
         $categories->position           = $request->position;
        
         $categories->save();
@@ -113,9 +112,9 @@ class Ownership extends Model
         $response['status_code'] = '200';
         $response['categories_id'] = $categories->id;
         if ($request->has('categories_id')) {
-            $response['message'] = "categories has been updated successfully";
+            $response['message'] = "Ownership has been updated successfully";
         } else {
-            $response['message'] = "categories has been created successfully";
+            $response['message'] = "Ownership has been created successfully";
         }
 
         return $response;

@@ -13,7 +13,7 @@ class UpdateProductrentalTable extends Migration
      */
     public function up()
     {
-         Schema::table('product_rental', function (Blueprint $table) {
+        Schema::table('product_rental', function (Blueprint $table) {
             $table->bigInteger('unit_id')->nullable()->unsigned();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('SET NULL');
         });

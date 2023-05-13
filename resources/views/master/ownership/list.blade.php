@@ -55,21 +55,7 @@
                     "type"    : "input"
                 }
             },
-            {
-                "name" : "short_name",
-                "label": "Short Name",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "short_name"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
+            
             {
                 "name" : "position",
                 "label": "Position",
@@ -86,18 +72,19 @@
                 }
             },
             {
-                "name" : "email",
-                "label": "Email",
+                "name" : "staff_name",
+                "label": "Staff Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
-                    "display" : 1,
-                    "field" : "email"
+                    "display" : 0,
+                    "field" : "staff_name"
                 },
                 "search": {
                     "display" : 1,
-                    "type"    : "input"
+                    "type"    : "select",
+                    'values'  : {!! json_encode($Staffdetails) !!}
                 }
             },
             {
@@ -112,7 +99,7 @@
                     }
                 },
                 "sort": {
-                    "display"   : 1,
+                    "display"   : 0,
                     "field"     : "status"
                 },
                 "search": {
