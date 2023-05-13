@@ -37,6 +37,9 @@ class Architect_siteController extends Controller
                 $searchField = [
                     'architect_name'      => 'architect_info.architect_name',
                     'status'    => 'architect_info.status',
+                    'site_name'        => 'architect_info.site_id',
+                    'mobile_number'    => 'architect_info.mobile_number',
+                    'cader'            => 'architect_info.cader',
                 ];
                 $sortField   = [
                     'status'  => 'architect_info.status',
@@ -103,6 +106,10 @@ class Architect_siteController extends Controller
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['architect_site_management_access'])){
 
+                    $search1 = ['status' => 1];
+                    $fields1 = ['id as value','site_name as label'];
+                    $siteinfo = Siteinfo::getAll($fields1,$search1);
+
                     $create_access          = $rolesAccess['architect_site_management_access']['create'];
                     $view_access            = $rolesAccess['architect_site_management_access']['view'];
                     $edit_access            = $rolesAccess['architect_site_management_access']['edit'];
@@ -110,7 +117,7 @@ class Architect_siteController extends Controller
                     $delete_access   = $rolesAccess['architect_site_management_access']['delete'];
                 }
 
-                return view('master.architect_site.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.architect_site.list', compact('statuses','siteinfo', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }

@@ -36,7 +36,10 @@ class Client_siteController extends Controller
             if ($request->has('request_type')) {
                 $searchField = [
                     'client_name'      => 'client_info.client_name',
-                    'status'    => 'client_info.status',
+                    'status'           => 'client_info.status',
+                    'site_name'        => 'client_info.site_id',
+                    'mobile_number'    => 'client_info.mobile_number',
+                    'cader'            => 'client_info.cader',
                 ];
                 $sortField   = [
                     'status'  => 'client_info.status',
@@ -103,6 +106,10 @@ class Client_siteController extends Controller
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['client_site_management_access'])){
 
+                    $search1 = ['status' => 1];
+                    $fields1 = ['id as value','site_name as label'];
+                    $siteinfo = Siteinfo::getAll($fields1,$search1);
+
                     $create_access          = $rolesAccess['client_site_management_access']['create'];
                     $view_access            = $rolesAccess['client_site_management_access']['view'];
                     $edit_access            = $rolesAccess['client_site_management_access']['edit'];
@@ -110,7 +117,7 @@ class Client_siteController extends Controller
                     $delete_access          = $rolesAccess['client_site_management_access']['delete'];
                 }
 
-                return view('master.client_site.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
+                return view('master.client_site.list', compact('statuses', 'siteinfo','create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));
             }
         }
     }
