@@ -367,6 +367,7 @@ var dataTable = {
         }
 
         var columns = table_properties["columns"];
+         datatable += `<th>S.no</th>`;
         for (c in columns) {
             var column = columns[c];
             if (column["sort"]["display"]) {
@@ -399,6 +400,7 @@ var dataTable = {
             var th_search = table_properties["search"]
             ? table_properties["search"]
             : { display: true };
+            datatable +='<td></td>';
             for (c in columns) {
                 var column = columns[c];
 
@@ -615,7 +617,8 @@ renderDatatable: function(page = 1, property_key) {
         if (response) {
             var records = response.data[data_key];
             var details = response.data;
-            dataTable.renderTableTds(records, property_key);
+            var current_page = details.current_page;
+            dataTable.renderTableTds(records, property_key,current_page);
             dataTable.renderTablePagination(details, property_key);
             dataTable.renderTableInfo(details, property_key);
         }
@@ -772,7 +775,8 @@ renderDatatable: function(page = 1, property_key) {
      *
      * @param Array rows
      */
-     renderTableTds: function(rows, property_key) {
+     renderTableTds: function(rows, property_key,current_page) {
+
         var table_properties = dataTable.properties[property_key];
         var name             = table_properties["name"];
         var tbody            = "";
@@ -781,9 +785,18 @@ renderDatatable: function(page = 1, property_key) {
         var td_checkbox      = table_properties["checkbox"]
         ? table_properties["checkbox"]
         : { display: false };
-
+        var offset           = $("#" + name + "-tablelimit").val();
+        var limit            = offset;
+        var current_pages    = parseInt(current_page);       
+        var sno = '';//var current_items = (parseInt(current_page) * parseInt(limit))+1;
         for (i in rows) {
             action_id = "";
+            if(current_pages>1){
+                var sncount  = parseInt(current_pages)-1;
+                sno = ((parseInt(i)+sncount)+parseInt(offset));
+            } else {
+                sno = parseInt(i)+1;
+            }
             tbody += "<tr>";
 
             if (td_checkbox["display"]) {
@@ -819,7 +832,7 @@ renderDatatable: function(page = 1, property_key) {
                     tbody += "<td></td>";
                 }
             }
-
+            tbody += `<td>${sno}</td>`;
             for (c in columns) {
                 var column = columns[c];
                 var c_name = column["name"];
