@@ -128,13 +128,13 @@ class SiteinfoController extends Controller
             $fields = ['id','name'];
             $Siteengineer = Staffdetails::getAll($fields,$search);
 
-            $search = ['status' => 1,'sub_contractor'=>1];
+            $search = ['status' => 1,'user_groups_ids'=>6];
             $fields = ['id','name'];
-            $Subcontractor = [];//Staffdetails::getAll($fields,$search);
+            $Subcontractor = Staffdetails::getAll($fields,$search);
 
-            $search = ['status' => 1,'user_groups_ids'=>5];
+            $search = ['status' => 1,'user_groups_ids'=>4];
             $fields = ['id','name'];
-            $Storekeeper = Staffdetails::getAll($fields,$search);
+            $Storekeeper = [];//Staffdetails::getAll($fields,$search);
 
             return view('master.site_info.create',compact('Siteengineer','Subcontractor','Storekeeper'));
         }
@@ -247,13 +247,13 @@ class SiteinfoController extends Controller
 	            $fields = ['id','name'];
 	            $Siteengineer = Staffdetails::getAll($fields,$search);
 
-	            $search1 = ['status' => 1,'sub_contractor'=>1];
+	            $search1 = ['status' => 1,'user_groups_ids'=>6];
 	            $fields1 = ['id','name'];
-	            $Subcontractor = [];//Staffdetails::getAll($fields1,$search1);
+	            $Subcontractor = Staffdetails::getAll($fields1,$search1);
 
-	            $search = ['status' => 1,'user_groups_ids'=>5];
+	            $search = ['status' => 1,'user_groups_ids'=>4];
 	            $fields = ['id','name'];
-	            $Storekeeper = Staffdetails::getAll($fields,$search);
+	            $Storekeeper =[];// Staffdetails::getAll($fields,$search);
 	            $data = [
 	                    'site_info_details'    => $site_info_details,
 	                    'site_engineer'        => $Siteengineer,
