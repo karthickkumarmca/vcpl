@@ -57,7 +57,7 @@
             },
              {
                 "name" : "user_name",
-                "label": "User name",
+                "label": "Employee Code",
                 "badge": {
                     "display" : 0
                 },

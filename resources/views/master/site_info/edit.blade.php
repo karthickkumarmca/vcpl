@@ -50,9 +50,9 @@
 						
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Site Engineer <span class="text-danger"> *</span></label>
+								<label>Select Site Incharge <span class="text-danger"> *</span></label>
 								<select name="site_engineer_id" class="form-control pos_validate" id="site_engineer_id">
-									<option value="">Select Site Engineer </option>
+									<option value="">Select Site Incharge</option>
 									@isset($site_engineer)
 										@foreach($site_engineer as $s)
 											@if(old('site_engineer_id') != "")
@@ -117,7 +117,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+						{{-- <div class="col-md-12">
 							<div class="form-group">
 								<label>Select Store keeper</label>
 								<select name="store_keeper_id" class="form-control pos_validate" id="store_keeper_id">
@@ -140,7 +140,7 @@
 								<div class="error">{{ $errors->first('store_keeper_id') }}</div>
 								@endif
 							</div>
-						</div>
+						</div> --}}
 					
 					</div>
 					<div class="box-footer">

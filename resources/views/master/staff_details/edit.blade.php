@@ -38,13 +38,14 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>User Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter User Name" name="user_name" value="{{old('user_name')? old('user_name') : $details->user_name}}" data-rule="admin" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32);" minlength="1" maxlength="100"/>
+								<label>Employee Code <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Employee Code" name="user_name" value="{{old('user_name')? old('user_name') : $details->user_name}}" data-rule="admin" onkeypress="" minlength="1" maxlength="10" style="text-transform:uppercase;" />
 								<span class="validation_error"></span>
 								@if($errors->has('user_name'))
 								<div class="error">{{ $errors->first('user_name') }}</div>
 								@endif
 							</div>
+							<a data-toggle="collapse" data-target="#username" style="cursor: pointer;color:red">Example Format : VCPL001 </a>	
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
@@ -100,7 +101,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+						{{-- <div class="col-md-12">
 							<div class="form-group">
 								<label>Select Site Name </label>
 								<select name="site_id" class="form-control pos_validate" id="site_id">
@@ -135,7 +136,7 @@
 								<div class="error">{{ $errors->first('sub_contractor') }}</div>
 								@endif
   							</div>
-						</div>
+						</div> --}}
 
 						<div class="col-md-12">
 							<div class="form-group">

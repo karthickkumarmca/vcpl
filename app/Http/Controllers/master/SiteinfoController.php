@@ -36,6 +36,9 @@ class SiteinfoController extends Controller
             if ($request->has('request_type')) {
                 $searchField = [
                     'site_name'      => 'site_info.site_name',
+                    'site_location'      => 'site_info.site_location',
+                    'site_engineer_name'      => 'se.name',
+                    'sub_contractor_name'      => 'sc.name',
                     'status'    => 'site_info.status',
                 ];
                 $sortField   = [

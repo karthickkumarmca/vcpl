@@ -72,7 +72,7 @@
             },
             {
                 "name" : "site_engineer_name",
-                "label": "Site Engineer Name",
+                "label": "Site Incharge Name",
                 "badge": {
                     "display" : 0
                 },
@@ -94,21 +94,6 @@
                 "sort": {
                     "display" : 1,
                     "field" : "sub_contractor_name"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
-            {
-                "name" : "store_keeper_name",
-                "label": "Store Keeper Name",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "store_keeper_name"
                 },
                 "search": {
                     "display" : 1,

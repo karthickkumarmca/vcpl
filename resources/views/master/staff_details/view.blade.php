@@ -36,7 +36,7 @@
 								<td>{!! $Staffdetails->name !!}</td>
 							</tr>
 							<tr>
-								<th class="grey_header"><label>User name</label></th>
+								<th class="grey_header"><label>Employee Code</label></th>
 								<td>{!! $Staffdetails->user_name !!}</td>
 							</tr>
 							<tr>
@@ -61,13 +61,6 @@
 								</th>
 								<td><span class="badge {!! $status_bg !!}"> {!! $status !!}</span></td>
 							</tr>
-							<tr>
-								<th class="grey_header">
-									<label>Status</label>
-								</th>
-								<td><span class="badge {!! $status_bg !!}"> {!! $status !!}</span></td>
-							</tr>
-							
 							<tr>
 								<th class="grey_header">
 									<label>Created At</label>

@@ -68,8 +68,8 @@
                     @csrf
                     <div class="row">
                         <div class="form-group has-feedback @if ($errors->has('email')) has-error @endif col-md-12">
-                            <label>Email <span class="text-danger"> *</span></label>
-                            <input type="email" name="email" class="form-control" placeholder="Email">
+                            <label>Username <span class="text-danger"> *</span></label>
+                            <input type="text" name="email" class="form-control" placeholder="Enter user name">
                         </div>
                         <div class="form-group has-feedback @if ($errors->has('password')) has-error @endif col-md-12">
                             <label>Password <span class="text-danger"> *</span></label>

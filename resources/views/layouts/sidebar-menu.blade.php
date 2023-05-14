@@ -1,7 +1,7 @@
 <?php 
 $rolesAccess = Session::get('role_access');
 ?>
-<aside class="main-sidebar elevation-4 sidebar-dark-success" style="padding-top: 50px;">
+<aside class="main-sidebar elevation-4 sidebar-dark-success" style="padding-top: 50px;font-weight:600;">
 	<section class="sidebar">
 		<ul class="sidebar-menu" data-widget="tree">
 			

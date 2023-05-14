@@ -59,7 +59,7 @@ class LoginController extends Controller
         ];
         $user = User::select($fields)
         ->leftjoin('roles','roles.id','users.role_id')
-        ->where(['email' => $request->email])->whereIn('user_type', array(1,2))->first();
+        ->where(['user_name' => $request->email])->whereIn('user_type', array(1,2))->first();
         // print_r($user);exit;
        
         if ($user) {
@@ -85,7 +85,7 @@ class LoginController extends Controller
                             }
                         }
                         
-                        auth()->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1]);
+                        auth()->attempt(['user_name' => $request->email, 'password' => $request->password, 'status' => 1]);
                         return redirect()->route('dashboard');
                     }
                 } else {

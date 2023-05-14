@@ -45,9 +45,9 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Select Site Engineer <span class="text-danger"> *</span></label>
+								<label>Select Site Incharge <span class="text-danger"> *</span></label>
 								<select name="site_engineer_id" class="form-control pos_validate" id="site_engineer_id" data-rule="admin">
-									<option value="">Select site engineer</option>
+									<option value="">Select Site Incharge</option>
 									@isset($Siteengineer)
 										@foreach($Siteengineer as $s)
 										<option value="{{$s['id']}}">{{$s['name']}}</option>
@@ -77,7 +77,7 @@
 								@endif
 							</div>
 						</div>
-						<div class="col-md-12">
+						{{-- <div class="col-md-12">
 							<div class="form-group">
 								<label>Select Store Keeper </label>
 								<select name="store_keeper_id" class="form-control pos_validate" id="store_keeper_id" data-rule="admin">
@@ -93,7 +93,7 @@
 								<div class="error">{{ $errors->first('store_keeper_id') }}</div>
 								@endif
 							</div>
-						</div>
+						</div> --}}
 						
 					</div>
 					<div class="box-footer">

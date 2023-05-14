@@ -48,7 +48,7 @@
 
 							<tr>
 								<th class="grey_header">
-									<label>Site Engineer Name</label>
+									<label>Site Incharge Name</label>
 								</th>
 								<td>{!! $data->site_engineer_name !!}</td>
 							</tr>
@@ -59,14 +59,6 @@
 								</th>
 								<td>{!! $data->sub_contractor_name !!}</td>
 							</tr>
-
-							<tr>
-								<th class="grey_header">
-									<label>Store Keeper Name</label>
-								</th>
-								<td>{!! $data->store_keeper_name !!}</td>
-							</tr>
-
 							<tr>
 								<th class="grey_header">
 									<label>Status</label>

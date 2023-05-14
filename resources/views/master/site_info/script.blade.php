@@ -41,7 +41,7 @@
 	                maxlength: "Enter site location maxmimum 100 character",
 	            },
 	            "site_engineer_id": {
-	                required: "Please select site engineer",
+	                required: "Please select site incharge",
 	            },
 	            "sub_contractor_id": {
 	                required: "Please select sub contractor",

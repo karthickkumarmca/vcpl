@@ -106,19 +106,19 @@ body{
 
 .sidebar-menu>li>a{
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.5;
 
 }
 .sidebar-menu>li>a>span{
     color: #000000;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
 }
 .sidebar-menu>li.active>a>span{
     color: #fff;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .sidebar-menu .treeview-menu>li>a {

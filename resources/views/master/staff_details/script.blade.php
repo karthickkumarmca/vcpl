@@ -14,8 +14,8 @@
 	            },
 	            "user_name": {
 	                required: true,
-	                minlength: 1,
-	                maxlength: 100,
+	                minlength: 5,
+	                maxlength: 10,
 	                normalizer:function( value ) {
 	               		return $.trim(value);
 	                },
@@ -65,9 +65,9 @@
 	                maxlength: "Enter name maxmimum 100 character",
 	            },
 	            "user_name": {
-	                required: "Please enter user name",
-	                minlength: "Enter user name minimum 1 character",
-	                maxlength: "Enter user name maxmimum 100 character",
+	                required: "Please enter employee code",
+	                minlength: "Enter user employee code minimum 5 character",
+	                maxlength: "Enter user employee code maxmimum 10 character",
 	            }, 
 	            "password": {
 	                required: "Please enter password",
@@ -86,9 +86,6 @@
 	            },
 	            "user_groups_id": {
 	                required: "Please select user group ",
-	            },
-	            "site_id": {
-	                required: "Please select site name",
 	            },
 	            "role_id": {
 	                required: "Please select role name",
