@@ -34,6 +34,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@yopmail.com',
             'password' => bcrypt('Vcpladmin@2023'),
             'user_type' => 1,
+            'user_name' =>'vcpladmin',
             'status' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),

@@ -124,15 +124,15 @@ class SiteinfoController extends Controller
         if(!isset($rolesAccess['site_info_management_access']['create']) || $rolesAccess['site_info_management_access']['create']!=1){
             abort(403);
         } else {
-            $search = ['status' => 1,'user_groups_ids'=>2];
+            $search = ['status' => 1];//,'user_groups_ids'=>2
             $fields = ['id','name'];
             $Siteengineer = Staffdetails::getAll($fields,$search);
 
             $search = ['status' => 1,'sub_contractor'=>1];
             $fields = ['id','name'];
-            $Subcontractor = Staffdetails::getAll($fields,$search);
+            $Subcontractor = [];//Staffdetails::getAll($fields,$search);
 
-            $search = ['status' => 1,'user_groups_ids'=>4];
+            $search = ['status' => 1,'user_groups_ids'=>5];
             $fields = ['id','name'];
             $Storekeeper = Staffdetails::getAll($fields,$search);
 
@@ -243,15 +243,15 @@ class SiteinfoController extends Controller
 
         	$site_info_details  = Siteinfo::where(['uuid' => $id])->first();
         	if($site_info_details) {
-	        	$search = ['status' => 1,'user_groups_ids'=>2];
+	        	$search = ['status' => 1];//,'user_groups_ids'=>2
 	            $fields = ['id','name'];
 	            $Siteengineer = Staffdetails::getAll($fields,$search);
 
 	            $search1 = ['status' => 1,'sub_contractor'=>1];
 	            $fields1 = ['id','name'];
-	            $Subcontractor = Staffdetails::getAll($fields1,$search1);
+	            $Subcontractor = [];//Staffdetails::getAll($fields1,$search1);
 
-	            $search = ['status' => 1,'user_groups_ids'=>4];
+	            $search = ['status' => 1,'user_groups_ids'=>5];
 	            $fields = ['id','name'];
 	            $Storekeeper = Staffdetails::getAll($fields,$search);
 	            $data = [
