@@ -28,15 +28,6 @@
 	               		return $.trim(value);
 	                },
 	            },
-	            "email": {
-	            	email:true,
-	                required: true,
-	                minlength: 1,
-	                maxlength: 100,
-	                normalizer:function( value ) {
-	               		return $.trim(value);
-	                },
-	            },
 	            "phone_number": {
 	                required: true,
 	                minlength: 1,

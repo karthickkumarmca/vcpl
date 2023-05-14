@@ -61,7 +61,7 @@
 								<li>Must contain a special character</li> <br>
 							</div>
 						</div>
-						<div class="col-md-12">
+						{{-- <div class="col-md-12">
 							<div class="form-group">
 								<label>Email <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control pos_validate allow_characters" placeholder="Enter Email" name="email" value="{{old('email')}}" data-rule="admin" />
@@ -70,7 +70,7 @@
 								<div class="error">{{ $errors->first('email') }}</div>
 								@endif
 							</div>
-						</div>
+						</div> --}}
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Mobile Number <span class="text-danger"> *</span></label>

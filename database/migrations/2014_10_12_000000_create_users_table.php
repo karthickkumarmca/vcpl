@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('uuid');
             $table->string('name');
             $table->string('phonenumber');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('password');
             $table->smallInteger('user_type')->comment('1. Super Admin 2. Admin 3. Customer')->description('1. Super Admin 2. Admin 3. Customer');
             $table->string('user_image', 256)->nullable();

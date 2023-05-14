@@ -40,10 +40,6 @@
 								<td>{!! $Staffdetails->user_name !!}</td>
 							</tr>
 							<tr>
-								<th class="grey_header"><label>Email</label></th>
-								<td>{!! $Staffdetails->email !!}</td>
-							</tr>
-							<tr>
 								<th class="grey_header"><label>Phone number</label></th>
 								<td>{!! $Staffdetails->phone_number !!}</td>
 							</tr>

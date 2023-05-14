@@ -47,7 +47,7 @@
 							</div>
 							<a data-toggle="collapse" data-target="#username" style="cursor: pointer;color:red">Example Format : VCPL001 </a>	
 						</div>
-						<div class="col-md-12">
+						{{-- <div class="col-md-12">
 							<div class="form-group">
 								<label>Email <span class="text-danger"> *</span></label>
 								<input type="text" class="form-control pos_validate allow_characters" placeholder="Enter Email" name="email" value="{{old('email')? old('email') : $details->email}}" data-rule="admin" minlength="1" maxlength="100" />
@@ -56,7 +56,7 @@
 								<div class="error">{{ $errors->first('email') }}</div>
 								@endif
 							</div>
-						</div>
+						</div> --}}
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Mobile Number <span class="text-danger"> *</span></label>

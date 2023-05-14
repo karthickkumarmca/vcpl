@@ -121,7 +121,7 @@ $rolesAccess = Session::get('role_access');
 			@if(str_contains(url()->current(),'categories/view')) active @endif
 			   @if(str_contains(url()->current(),'sub-categories')) active @endif   @if(str_contains(url()->current(),'product-details')) active @endif">
 				<a href="#">
-				    <span>PRODUCT SETTINGS</span>
+				    <span>PRODUCT</span>
 				    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">

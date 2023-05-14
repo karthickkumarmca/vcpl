@@ -71,21 +71,6 @@
                 }
             },
             {
-                "name" : "email",
-                "label": "Email",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 1,
-                    "field" : "email"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "input"
-                }
-            },
-            {
                 "name" : "phone_number",
                 "label": "Mobile Number",
                 "badge": {
