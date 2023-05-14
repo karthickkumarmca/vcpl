@@ -110,7 +110,7 @@
 														<option value="{{$unit['id']}}">{{$unit['unit_name']}}</option>
 													@endif
 												@else
-													<option value="{{$category['id']}}">{{$category['unit_name']}}</option>
+													<option value="{{$unit['id']}}">{{$unit['unit_name']}}</option>
 												@endisset
 											@endif
 										@endforeach
