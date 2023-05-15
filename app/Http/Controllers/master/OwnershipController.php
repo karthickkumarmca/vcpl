@@ -38,9 +38,8 @@ class OwnershipController extends Controller
         } else {
             if ($request->has('request_type')) {
                 $searchField = [
-                    'ownership_name'        => 'ownership.ownership_name',
                     'status'                => 'ownership.status',
-                    'staff_name'            => 'ownership.staff_id',
+                    'staff_name'            => 'ownership.id',
                     'position'              => 'ownership.position',
                 ];
                 $sortField   = [
@@ -106,9 +105,7 @@ class OwnershipController extends Controller
             } else {
                 $statuses = [['value' => 1, 'label' => 'Active'], ['value' => 0, 'label' => 'In-Active']];
 
-                $search = ['status' => 1];
-                $fields = ['id as value','name as label'];
-                $Staffdetails = Staffdetails::getAll($fields,$search);
+                $Staffdetails = Ownership::getOwnerNamelist();
 
                 $create_access = $view_access = $edit_access = $delete_access = $change_status_access = 0;
                 if(isset($rolesAccess['ownership_management_access'])){

@@ -53,7 +53,12 @@
 								<th class="grey_header">
 									<label>Tenant Name</label>
 								</th>
-								<td>{!! $rental_agreement->tenant_name !!}</td>
+								@if($rental_agreement->tenant_name=='')
+									<td>Vacant</td>
+								@else
+									<td>{!! $rental_agreement->tenant_name !!}</td>
+								@endif
+								
 							</tr>
 							<tr>
 								<th class="grey_header">
