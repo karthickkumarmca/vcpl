@@ -152,7 +152,7 @@ class Rental_agreementController extends Controller
         } else {
 
            
-            $fieldValidation['tenant_name']               = ['required','min:1','max:100'];
+            $fieldValidation['tenant_name']               = ['nullable','min:1','max:100'];
             $fieldValidation['aadhar_number']             = ['required','min:1','max:128'];
             $fieldValidation['rent_start_date']           = ['required'];
             $fieldValidation['rent_end_date']             = ['required'];

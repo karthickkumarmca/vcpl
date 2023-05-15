@@ -23,12 +23,6 @@
 	})
 	$("#admin-form").validate({
 		rules: {
-			tenant_name: {
-	            required: true,
-	            normalizer:function( value ) {
-	           		return $.trim(value);
-	            },
-	        },
 	        aadhar_number: {
 	            required: true,
 	            normalizer:function( value ) {

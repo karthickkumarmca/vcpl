@@ -34,7 +34,7 @@
 							
 							<tr>
 								<th class="grey_header">
-									<label>Vehicle Name</label>
+									<label>Client Name</label>
 								</th>
 								<td>{!! $client_site->client_name !!}</td>
 							</tr>

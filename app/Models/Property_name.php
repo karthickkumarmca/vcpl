@@ -40,11 +40,12 @@ class Property_name extends Model
             'property_name.property_name',
             'property_name.status as status_id',
             'property_category.category_name',
-            'ownership.ownership_name',
+            'staff_details.name as ownership_name',
             DB::raw('CASE WHEN property_name.status = 1 THEN "Active" ELSE "In-Active" END AS status, DATE_FORMAT(property_name.created_at, "%d-%b-%Y %r") AS date_created'),
         ];
         $query = self::select($fields)->leftjoin('property_category','property_category.id','property_name.property_category_id')
-        ->leftjoin('ownership','ownership.id','property_name.ownership_id');
+        ->leftjoin('ownership','ownership.id','property_name.ownership_id')
+        ->leftjoin('staff_details','staff_details.id','ownership.staff_id');
 
         if ($search_filter) {
             $query->where($search_filter);
@@ -79,10 +80,11 @@ class Property_name extends Model
         $fields = [
             'property_name.property_name',
             'property_category.category_name',
-            'ownership.ownership_name',
+            'staff_details.name as ownership_name',
         ];
         $query = self::select($fields)->leftjoin('property_category','property_category.id','property_name.property_category_id')
-        ->leftjoin('ownership','ownership.id','property_name.ownership_id');
+        ->leftjoin('ownership','ownership.id','property_name.ownership_id')
+        ->leftjoin('staff_details','staff_details.id','ownership.staff_id');;
 
         if ($search_filter) {
             $query->where($search_filter);

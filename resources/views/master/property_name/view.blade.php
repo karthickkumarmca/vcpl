@@ -46,7 +46,13 @@
 							</tr>
 							<tr>
 								<th class="grey_header">
-									<label>Ownership Name {{$property_name->ownership_id}}</label>
+									<label>Property Name</label>
+								</th>
+								<td>{!! $property_name->property_name !!}</td>
+							</tr>
+							<tr>
+								<th class="grey_header">
+									<label>Ownership Name</label>
 								</th>
 								<td>@isset($ownership)
 										@foreach($ownership as $owner)

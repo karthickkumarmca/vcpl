@@ -8,7 +8,6 @@
 	
 	$("#admin-form").validate({
 		rules: {
-			ownership_name: "required",
 			"position": {
                 required: true,
                 normalizer:function( value ) {

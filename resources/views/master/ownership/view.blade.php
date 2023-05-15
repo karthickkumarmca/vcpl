@@ -32,9 +32,9 @@
 						<table class="table table-bordered">
 							<tr>
 								<th class="grey_header">
-									<label>Owner Name</label>
+									<label>Staff Owner Name</label>
 								</th>
-								<td>{!! $ownership->ownership_name !!}</td>
+								<td>{!! $ownership->staff_name !!}</td>
 							</tr>
 							<tr>
 								<th class="grey_header">
@@ -42,12 +42,7 @@
 								</th>
 								<td>{!! $ownership->position !!}</td>
 							</tr>
-							<tr>
-								<th class="grey_header">
-									<label>Staff Name</label>
-								</th>
-								<td>{!! $ownership->staff_name !!}</td>
-							</tr>
+							
 							<tr>
 								<th class="grey_header">
 									<label>Status</label>

@@ -136,9 +136,7 @@ class PropertynameController extends Controller
             $fields = ['id','category_name'];
             $categories = Property_categories::getAll($fields,$search);
 
-            $search1 = ['status' => 1];
-            $fields1 = ['id','ownership_name'];
-            $ownership = Ownership::getAll($fields1,$search1);
+            $ownership = Ownership::getOwnerName();
             return view('master.property_name.create',compact('categories','ownership'));
         }
     }
@@ -209,9 +207,7 @@ class PropertynameController extends Controller
             $fields = ['id','category_name'];
             $categories = Property_categories::getAll($fields,$search);
 
-            $search1 = ['status' => 1];
-            $fields1 = ['id','ownership_name'];
-            $ownership = Ownership::getAll($fields1,$search1);
+            $ownership = Ownership::getOwnerName();
 
             $property_name  = Property_name::where(['uuid' => $id])->first();
             if ($property_name) {
@@ -245,9 +241,7 @@ class PropertynameController extends Controller
             $property_name  = Property_name::where(['uuid' => $id])->first();
             if ($property_name) {
 
-                 $search1 = ['status' => 1];
-                $fields1 = ['id','ownership_name'];
-                $ownership = Ownership::getAll($fields1,$search1);
+                $ownership = Ownership::getOwnerName();
                 $data = [
                     'ownership'         => $ownership,
                     'property_name' => $property_name,

@@ -26,33 +26,9 @@
 					<div class="box-body">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Ownership Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" placeholder="Enter Name" name="ownership_name" value="{{old('ownership_name') ? old('ownership_name') : $ownership->ownership_name}}" maxlength="128"/>
-								<span class="validation_error"></span>
-								@if($errors->has('ownership_name'))
-								<div class="error">{{ $errors->first('ownership_name') }}</div>
-								@endif
-							</div>
-						</div>
-
-
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>Position <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter position" name="position" value="{{old('position') ? old('position') : $ownership->position}}" data-rule="admin" minlength="3" maxlength="128"/>
-								<span class="validation_error"></span>
-								@if($errors->has('position'))
-								<div class="error">{{ $errors->first('position') }}</div>
-								@endif
-							</div>
-						</div>
-
-
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>Select Staff <span class="text-danger"> *</span></label>
+								<label>Select Owner Name <span class="text-danger"> *</span></label>
 								<select name="staff_id" class="form-control pos_validate" id="staff_id">
-									<option value="">Select Staff</option>
+									<option value="">Select Owner Name</option>
 									@isset($Staffdetails)
 										@foreach($Staffdetails as $category)
 											@if(old('staff_id') != "")
@@ -81,6 +57,21 @@
 								@endif
 							</div>
 						</div>
+
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Position <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter position" name="position" value="{{old('position') ? old('position') : $ownership->position}}" data-rule="admin" minlength="3" maxlength="128"/>
+								<span class="validation_error"></span>
+								@if($errors->has('position'))
+								<div class="error">{{ $errors->first('position') }}</div>
+								@endif
+							</div>
+						</div>
+
+
+						
 
 						
 					

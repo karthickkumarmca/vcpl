@@ -40,22 +40,22 @@
          var table_properties = {
             'name': 'categories-list',
             'columns': [
-            {
-                "name" : "ownership_name",
-                "label": "OwnereShip Name",
+             {
+                "name" : "staff_name",
+                "label": "Owner Name",
                 "badge": {
                     "display" : 0
                 },
                 "sort": {
-                    "display" : 1,
-                    "field" : "ownership_name"
+                    "display" : 0,
+                    "field" : "staff_name"
                 },
                 "search": {
                     "display" : 1,
-                    "type"    : "input"
+                    "type"    : "select",
+                    'values'  : {!! json_encode($Staffdetails) !!}
                 }
             },
-            
             {
                 "name" : "position",
                 "label": "Position",
@@ -71,22 +71,7 @@
                     "type"    : "input"
                 }
             },
-            {
-                "name" : "staff_name",
-                "label": "Staff Name",
-                "badge": {
-                    "display" : 0
-                },
-                "sort": {
-                    "display" : 0,
-                    "field" : "staff_name"
-                },
-                "search": {
-                    "display" : 1,
-                    "type"    : "select",
-                    'values'  : {!! json_encode($Staffdetails) !!}
-                }
-            },
+           
             {
                 "name" : "status",
                 "label": "Status",

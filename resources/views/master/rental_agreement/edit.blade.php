@@ -73,7 +73,7 @@
 					
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Tenant Name <span class="text-danger"> *</span></label>
+								<label>Tenant Name </label>
 								<input type="text" class="form-control pos_validate" placeholder="Enter Tenant Name" name="tenant_name" value="{{old('tenant_name') ? old('tenant_name') : $rental_agreement->tenant_name}}" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('name'))

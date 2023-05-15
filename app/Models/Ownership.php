@@ -126,6 +126,18 @@ class Ownership extends Model
         ->get()
         ->toArray();
     }
+    public static function getOwnerName(): array
+    {
+        $fields = [
+            'ownership.id',
+            'staff_details.name as ownership_name',
+        ];
+        return $query = self::select($fields)
+        ->leftjoin('staff_details','staff_details.id','ownership.staff_id')
+        ->where(['ownership.status'=>1,'staff_details.status'=>1])
+        ->get()
+        ->toArray();
+    }
     
    
     public static function updateDetails($where,$updateDetails)

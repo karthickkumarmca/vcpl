@@ -147,23 +147,6 @@ class OwnershipController extends Controller
         } else {
 
            
-            if($request->has('ownership_id')){
-                
-                $id = $request->get('ownership_id');
-                $fieldValidation = [
-                'ownership_name'         => [
-                    'required','min:2','max:50','unique:ownership,ownership_name,'.$id.',uuid'
-                ],
-                ];
-            }
-            else{
-                $fieldValidation = [
-                'ownership_name'         => [
-                    'required','min:2','max:50','unique:ownership,ownership_name'
-                ],
-            ];
-            }
-
             $fieldValidation['staff_id']    = ['required'];
             $fieldValidation['position']    = ['required','min:2','max:50'];
            

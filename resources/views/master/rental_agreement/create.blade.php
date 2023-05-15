@@ -57,7 +57,7 @@
 						
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Tenant Name <span class="text-danger"> *</span></label>
+								<label>Tenant Name </label>
 								<input type="text" class="form-control pos_validate " autocomplete="off" placeholder="Enter Tenant Name" name="tenant_name" value="{{old('tenant_name')}}" data-rule="admin" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('tenant_name'))

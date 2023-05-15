@@ -22,19 +22,25 @@
 						<h3 class="box-title">Create Ownership</h3>
 					</div>
 
-					<div class="box-body">
+					
+
 						<div class="col-md-12">
-							<div class="form-group">
-								<label>Name <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Ownership" name="ownership_name" value="{{old('ownership_name')}}" data-rule="admin" minlength="3" maxlength="128"/>
+						<div class="form-group">
+								<label>Select Owner Name <span class="text-danger"> *</span></label>
+								<select name="staff_id" class="form-control pos_validate" id="staff_id">
+									<option value="">Select Owner Name</option>
+									@isset($Staffdetails)
+										@foreach($Staffdetails as $cat)
+										<option value="{{$cat['id']}}">{{$cat['name']}}</option>
+										@endforeach
+									@endisset
+								</select>
 								<span class="validation_error"></span>
-								@if($errors->has('ownership_name'))
-								<div class="error">{{ $errors->first('ownership_name') }}</div>
+								@if($errors->has('staff_id'))
+								<div class="error">{{ $errors->first('staff_id') }}</div>
 								@endif
 							</div>
-						</div>
-
-
+							</div>
 						
 
 
@@ -48,23 +54,7 @@
 								@endif
 							</div>
 						</div>
-						<div class="col-md-12">
-						<div class="form-group">
-								<label>Select Staff <span class="text-danger"> *</span></label>
-								<select name="staff_id" class="form-control pos_validate" id="staff_id">
-									<option value="">Select Staff</option>
-									@isset($Staffdetails)
-										@foreach($Staffdetails as $cat)
-										<option value="{{$cat['id']}}">{{$cat['name']}}</option>
-										@endforeach
-									@endisset
-								</select>
-								<span class="validation_error"></span>
-								@if($errors->has('staff_id'))
-								<div class="error">{{ $errors->first('staff_id') }}</div>
-								@endif
-							</div>
-							</div>
+						
 
 						
 					</div>
