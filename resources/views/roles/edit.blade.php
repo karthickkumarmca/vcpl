@@ -4,6 +4,18 @@
 <style>
 	.error{color:#f00;    margin-bottom: 0px;}
 	.multiselect-container {transform:translate3d(0px, 0px, 0px) !important;}
+	 table {
+        border-collapse: collapse;
+    }
+    table, th, td {
+       
+    }
+    th, td {
+        padding: 10px;
+    }
+    table.secondary caption {
+        caption-side: bottom;
+    }
 </style>
 <section class="content-header">
 	<h1 class="col-lg-6 no-padding">
@@ -40,34 +52,48 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Master Modules <span class="text-danger"> *</span></label>
-								<select data-placeholder="" id="master" multiple class="form-control " name="master[]">
-							    <option value="roles_management" @if(in_array('roles_management',$roles->master)) selected @endif >Roles</option>
-							    <option value="units_management"  @if(in_array('units_management',$roles->master)) selected @endif>Units</option>
-							    <option value="staffgroups_management"  @if(in_array('staffgroups_management',$roles->master)) selected @endif>Staff Group</option>
-							    <option value="staff_details_management"  @if(in_array('staff_details_management',$roles->master)) selected @endif>Staff Details</option>
-							    <option value="site_info_management"  @if(in_array('site_info_management',$roles->master)) selected @endif>Site Info</option>
-							    <option value="client_site_management"  @if(in_array('client_site_management',$roles->master)) selected @endif>Client Info</option>
-							    <option value="architect_site_management"  @if(in_array('architect_site_management',$roles->master)) selected @endif>Architect Info</option>
-							    <option value="categories_management"  @if(in_array('categories_management',$roles->master)) selected @endif>Product Categories</option>
-							    <option value="sub_categories_management"  @if(in_array('sub_categories_management',$roles->master)) selected @endif>Sub Product Categories</option>
+								<!--<select data-placeholder="" id="master" multiple class="form-control " name="master[]"></select>!-->
 
-							    <option value="product_details_management"  @if(in_array('product_details_management',$roles->master)) selected @endif>Product Details</option>
-							    <option value="labour_categories_management"  @if(in_array('labour_categories_management',$roles->master)) selected @endif>Labour Categories</option>
-							    <option value="labour_wages_management"  @if(in_array('labour_wages_management',$roles->master)) selected @endif>Labour Wages</option>
-
-
-							     <option value="centering_materials_management"  @if(in_array('centering_materials_management',$roles->master)) selected @endif>centering Materials</option>
-							    <option value="lorry_materials_management"  @if(in_array('lorry_materials_management',$roles->master)) selected @endif>Lorry Materials</option>
-							    <option value="shop_materials_management"  @if(in_array('shop_materials_management',$roles->master)) selected @endif>Shop Materials</option>
-							    <option value="toolsplants_materials_management"  @if(in_array('toolsplants_materials_management',$roles->master)) selected @endif>Toold and Plant Materials</option>
-							    <option value="vehicle_materials_management"  @if(in_array('vehicle_materials_management',$roles->master)) selected @endif>Vehicle Materials</option>
-
-							    <option value="ownership_management"  @if(in_array('ownership_management',$roles->master)) selected @endif>Ownership</option>
-							    <option value="property_name_management"  @if(in_array('property_name_management',$roles->master)) selected @endif>Property Name</option>
-							    <option value="property_categories_management"  @if(in_array('property_categories_management',$roles->master)) selected @endif>property Categories</option>
-							     <option value="product_rental_management"  @if(in_array('product_rental_management',$roles->master)) selected @endif>Product Rental</option>
-							     <option value="message_header_management"  @if(in_array('message_header_management',$roles->master)) selected @endif>Message Header</option>
-							  </select>
+								<table>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="roles_management" @if(in_array('roles_management',$roles->master)) checked @endif> Roles</td>
+										<td><input type="checkbox" name="master[]" value="units_management"  @if(in_array('units_management',$roles->master)) checked @endif> Units</td>
+										<td><input type="checkbox" name="master[]" value="staffgroups_management"  @if(in_array('staffgroups_management',$roles->master)) checked @endif> Staff Group</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="staff_details_management"  @if(in_array('staff_details_management',$roles->master)) checked @endif> Staff Details</td>
+										<td><input type="checkbox" name="master[]" value="site_info_management"  @if(in_array('site_info_management',$roles->master)) checked @endif> Site Info</td>
+										<td><input type="checkbox" name="master[]" value="client_site_management"  @if(in_array('client_site_management',$roles->master)) checked @endif> Client Info</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="architect_site_management"  @if(in_array('architect_site_management',$roles->master)) checked @endif> Architect Info</td>
+										<td><input type="checkbox" name="master[]" value="categories_management"  @if(in_array('categories_management',$roles->master)) checked @endif> Product Categories</td>
+										<td><input type="checkbox" name="master[]" value="sub_categories_management"  @if(in_array('sub_categories_management',$roles->master)) checked @endif> Sub Product Categories</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="product_details_management"  @if(in_array('product_details_management',$roles->master)) checked @endif> Product Details</td>
+										<td><input type="checkbox" name="master[]" value="labour_categories_management"  @if(in_array('labour_categories_management',$roles->master)) checked @endif> Labour Categories</td>
+										<td><input type="checkbox" name="master[]" value="labour_wages_management"  @if(in_array('labour_wages_management',$roles->master)) checked @endif> Labour Wages</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="centering_materials_management"  @if(in_array('centering_materials_management',$roles->master)) checked @endif> centering Materials</td>
+										<td><input type="checkbox" name="master[]" value="lorry_materials_management"  @if(in_array('lorry_materials_management',$roles->master)) checked @endif> Lorry Materials</td>
+										<td><input type="checkbox" name="master[]" value="shop_materials_management"  @if(in_array('shop_materials_management',$roles->master)) checked @endif> Shop Materials</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="toolsplants_materials_management"  @if(in_array('toolsplants_materials_management',$roles->master)) checked @endif> Toold and Plant Materials</td>
+										<td><input type="checkbox" name="master[]" value="vehicle_materials_management"  @if(in_array('vehicle_materials_management',$roles->master)) checked @endif> Vehicle Materials</td>
+										<td><input type="checkbox" name="master[]" value="ownership_management"  @if(in_array('ownership_management',$roles->master)) checked @endif> Ownership</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="property_name_management"  @if(in_array('property_name_management',$roles->master)) checked @endif> Property Name</td>
+										<td><input type="checkbox" name="master[]" value="property_categories_management"  @if(in_array('property_categories_management',$roles->master)) checked @endif> property Categories</td>
+										<td><input type="checkbox" name="master[]" value="product_rental_management"  @if(in_array('product_rental_management',$roles->master)) checked @endif> Product Rental</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" value="message_header_management"  @if(in_array('message_header_management',$roles->master)) checked @endif> Message Header</td>
+									</tr>
+								</table>
 							</div>
 						</div>
 						<label id="master-error" class="error" for="master"></label>
@@ -97,7 +123,7 @@
 
  @include('roles.script')
     <script type="text/javascript">
-	    $('#master').multiselect({
+	    /*$('#master').multiselect({
 	        enableFiltering: true,
 			maxHeight: 400,
 			dropUp: true,
@@ -106,6 +132,6 @@
 	        filterPlaceholder: 'Please choose roles list',
 	        buttonWidth: '800px',
 	        dropRight: true,
-	    });
+	    });*/
     </script>
     @stop

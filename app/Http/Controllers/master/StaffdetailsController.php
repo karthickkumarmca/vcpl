@@ -158,13 +158,13 @@ class StaffdetailsController extends Controller
             if($request->has('staff_details_id')){
                 
                 $staff_details_id = $request->get('staff_details_id');
-                $fieldValidation['name']          = ['required','min:2','max:50','unique:staff_details,name,'.$staff_details_id.',uuid'];
+                $fieldValidation['name']          = ['required','min:2','max:50'];
                 $fieldValidation['user_name']     = ['required','alpha_num','min:5','max:50','unique:staff_details,user_name,'.$staff_details_id.',uuid'];
                 $fieldValidation['phone_number']  = ['required','numeric','digits_between:1,10','unique:staff_details,phone_number,'.$staff_details_id.',uuid'];
                 ///$fieldValidation['email']         = ['required','email','min:2','max:100','unique:staff_details,email,'.$staff_details_id.',uuid'];
             }
             else{
-                $fieldValidation['name']          = ['required','min:2','max:50','unique:staff_details,name'];
+                $fieldValidation['name']          = ['required','min:2','max:50'];
                 $fieldValidation['user_name']     = ['required','alpha_num','min:5','max:50','unique:staff_details,user_name'];
                 $fieldValidation['phone_number']  = ['required','numeric','digits_between:1,10','unique:staff_details,phone_number'];
                 //$fieldValidation['email']         = ['required','email','min:2','max:100','unique:staff_details,email'];

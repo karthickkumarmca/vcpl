@@ -5,6 +5,18 @@
 <style>
 	.error{color:#f00;    margin-bottom: 0px;}
 	.multiselect-container {transform:translate3d(0px, 0px, 0px) !important;}
+    table {
+        border-collapse: collapse;
+    }
+    table, th, td {
+       
+    }
+    th, td {
+        padding: 10px;
+    }
+    table.secondary caption {
+        caption-side: bottom;
+    }
 
 </style>
 <section class="content-header">
@@ -42,7 +54,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Master Modules <span class="text-danger"> *</span></label>
-								<select data-placeholder="Please choose roles list" class="form-control" multiple="multiple" id="master" name="master[]">
+								<!--<select data-placeholder="Please choose roles list" class="form-control" multiple="multiple" id="master" name="master[]">
 							    <option value="roles_management">Roles</option>
 							    <option value="units_management">Units</option>
 							    <option value="staffgroups_management">Staff Group</option>
@@ -70,7 +82,50 @@
 							    
 							    <option value="message_header_management">Message Header</option>
 							   
-							  </select>
+							  </select> !-->
+
+
+							  	<table>
+									<tr>
+										<td><input type="checkbox" name="master[]" id="master" value="roles_management"> Roles</td>
+										<td><input type="checkbox" name="master[]" id="master" value="units_management"> Units</td>
+										<td><input type="checkbox" name="master[]" id="master" value="staffgroups_management"> Staff Group</td>
+									</tr>
+									<tr>	
+										<td><input type="checkbox" name="master[]" id="master" value="staff_details_management"> Staff Details</td>
+										<td><input type="checkbox" name="master[]" id="master" value="site_info_management"> Site Info</td>
+										<td><input type="checkbox" name="master[]" id="master" value="client_site_management"> Client Info</td>
+									</tr>
+									<tr>	
+										<td><input type="checkbox" name="master[]" id="master" value="architect_site_management"> Architect Info</td>
+										<td><input type="checkbox" name="master[]" id="master" value="categories_management"> Product Categories</td>
+										<td><input type="checkbox" name="master[]" id="master" value="sub_categories_management"> Sub Product Categories</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" name="master[]" id="master" value="product_details_management"> Product Details</td>
+											<td><input type="checkbox" name="master[]" id="master" value="labour_categories_management"> Labour Categories</td>
+											<td><input type="checkbox" name="master[]" id="master" value="labour_wages_management"> Labour Wages</td>
+									</tr>
+									<tr>
+											<td><input type="checkbox" name="master[]" id="master" value="centering_materials_management"> centering Materials</td>
+											<td><input type="checkbox" name="master[]" id="master" value="lorry_materials_management"> Lorry Materials</td>
+											<td><input type="checkbox" name="master[]" id="master" value="shop_materials_management"> Shop Materials</td>
+									</tr>
+									<tr>		
+											<td><input type="checkbox" name="master[]" id="master" value="toolsplants_materials_management"> Toold and Plant Materials</td>
+											<td><input type="checkbox" name="master[]" id="master" value="vehicle_materials_management"> Vehicle Materials</td>
+
+											<td><input type="checkbox" name="master[]" id="master" value="ownership_management"> Ownership</td>
+									</tr>
+									<tr>		
+											<td><input type="checkbox" name="master[]" id="master" value="property_name_management"> Property Name</td>
+											<td><input type="checkbox" name="master[]" id="master" value="property_categories_management"> property Categories</td>
+											<td><input type="checkbox" name="master[]" id="master" value="product_rental_management"> Product Rental</td>
+									</tr>
+									<tr>
+											<td><input type="checkbox" name="master[]" id="master" value="message_header_management"> Message Header</td>
+									</tr>
+								</table>
 							   @if($errors->has('master'))
 								<div class="error">{{ $errors->first('master') }}</div>
 								@endif
@@ -102,7 +157,7 @@
 @section('after-scripts-end')
 @include('roles.script')
 <script type="text/javascript">
-	$('#master').multiselect({
+	/*$('#master').multiselect({
         enableFiltering: true,
 		maxHeight: 400,
 		dropUp: true,
@@ -111,6 +166,6 @@
         filterPlaceholder: 'Please choose roles list',
         buttonWidth: '800px',
         dropRight: true,
-    });
+    });*/
 </script>
 @stop
