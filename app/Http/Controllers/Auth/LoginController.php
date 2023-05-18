@@ -86,7 +86,22 @@ class LoginController extends Controller
                         }
                         
                         auth()->attempt(['user_name' => $request->email, 'password' => $request->password, 'status' => 1]);
-                        return redirect()->route('dashboard');
+                        $Staffdetails = Staffdetails::select('name','user_groups_ids')->where(['uuid' => $user->uuid])->first();
+                       
+                        if($Staffdetails){
+
+                            if($Staffdetails->user_groups_ids==4){
+                                return redirect()->route('create-cement-movement');
+                            }
+                            else{
+                                return redirect()->route('dashboard');
+                            }
+                            
+                        }
+                        else{
+                            return redirect()->route('dashboard');
+                        }
+                       
                     }
                 } else {
                     throw ValidationException::withMessages([
@@ -114,6 +129,9 @@ class LoginController extends Controller
             if($user->user_type==1){
                 $role_access = config("roles.".config("general_settings.user_type.1"));
                 $name = $user->name;
+                // if($request->email=='superadmin'){
+                //     $user->user_type = 3;
+                // }
             }
             else if($user->user_type==2){
                 if($user->role_id>0){
@@ -152,11 +170,68 @@ class LoginController extends Controller
                     }
                 }
             }
-            $Staffdetails = Staffdetails::select('name')->where(['uuid' => $user->uuid])->first();
+            if(empty($role_access)){
+                $role_access = config("roles.".config("general_settings.user_type.1"));
+                $master_access =   [];
+                foreach($role_access as $key=>$ur){
+                    if(in_array($key,$master_access)){
+                        $role_access[$key] = $ur;
+
+                    }
+                    else{
+                        if(is_array($ur)){
+                            $mage = str_replace("_access", "", $key);
+                            if(!in_array($mage,$master_access)){
+                                foreach($ur as $key1=>$yu){
+                                    $role_access[$key][$key1] = 0;
+                                }
+                            }
+                            else{
+                                $role_access[$key] = $ur;
+                            }
+                            
+                        }
+                        else{
+                            $role_access[$key] = 0;
+                        }
+                    }
+                }
+            }
+            $Staffdetails = Staffdetails::select('name','user_groups_ids')->where(['uuid' => $user->uuid])->first();
             if($Staffdetails){
                 $name = $Staffdetails->name;
+                if($Staffdetails->user_groups_ids==4){
+
+                    $role_access = config("roles.".config("general_settings.user_type.1"));
+                    $master_access =   [];
+                    foreach($role_access as $key=>$ur){
+                        if(in_array($key,$master_access)){
+                            $role_access[$key] = $ur;
+
+                        }
+                        else{
+                            if(is_array($ur)){
+                                $mage = str_replace("_access", "", $key);
+                                if(!in_array($mage,$master_access)){
+                                    foreach($ur as $key1=>$yu){
+                                        $role_access[$key][$key1] = 0;
+                                    }
+                                }
+                                else{
+                                    $role_access[$key] = $ur;
+                                }
+                                
+                            }
+                            else{
+                                $role_access[$key] = 0;
+                            }
+                        }
+                    }
+                    $user->user_type = 3;
+                }
             }
-            // echo "<pre>";print_r($role_access);exit;
+            // echo $user->user_type;exit;
+            // echo "qqq<pre>";print_r($role_access);exit;
             session(['user_role' => config("general_settings.user_type.{$user->user_type}")]);
             session(['user_type' => $user->user_type]);
             session(['user_id' => $user->id]);

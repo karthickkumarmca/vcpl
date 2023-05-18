@@ -271,6 +271,7 @@ require(__DIR__ . '/Admin/roles.php');
 // require(__DIR__ . '/Admin/categories.php');
 // require(__DIR__ . '/Admin/sub_categories.php');
 require(__DIR__ . '/Admin/stock.php');
+require(__DIR__ . '/appview/web.php');
 
 
 Route::get('/clear-cache', function () {
