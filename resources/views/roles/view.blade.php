@@ -65,6 +65,8 @@
 							    @if(in_array('property_name_management',$roles->master)) Property Name <br> @endif
 							    @if(in_array('property_categories_management',$roles->master)) property Categories <br> @endif
 							    @if(in_array('product_rental_management',$roles->master)) Product Rental <br> @endif
+							    @if(in_array('message_header_management',$roles->master)) Message Header <br> @endif
+							    @if(in_array('rental_agreement_management',$roles->master)) Rental Agreement <br> @endif
 								</td>
 							</tr>
 							<tr>

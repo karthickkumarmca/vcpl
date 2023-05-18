@@ -92,6 +92,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" name="master[]" value="message_header_management"  @if(in_array('message_header_management',$roles->master)) checked @endif> Message Header</td>
+										<td><input type="checkbox" name="master[]" value="rental_agreement_management" @if(in_array('rental_agreement_management',$roles->master)) checked @endif> Rental Agreement</td>
 									</tr>
 								</table>
 							</div>

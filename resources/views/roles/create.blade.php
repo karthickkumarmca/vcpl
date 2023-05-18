@@ -123,6 +123,7 @@
 											<td><input type="checkbox" name="master[]" id="master" value="product_rental_management"> Product Rental</td>
 									</tr>
 									<tr>
+											<td><input type="checkbox" name="master[]" id="master" value="rental_agreement_management"> Rental Agreement</td>
 											<td><input type="checkbox" name="master[]" id="master" value="message_header_management"> Message Header</td>
 									</tr>
 								</table>
