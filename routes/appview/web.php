@@ -43,6 +43,10 @@ Route::group(['prefix' => 'appview/','namespace'=>'appview','middleware' => ['au
 	    $router->get('create', 'MaterialsController@tools_movement')->name('create-tools-movement');
 	});
 
+	Route::group(['prefix' => 'task-movement/'], function () use ($router) {
+	    $router->get('create', 'MaterialsController@task_movement')->name('create-task-movement');
+	});
+
 	
 });
 

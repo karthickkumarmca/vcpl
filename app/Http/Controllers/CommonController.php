@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use App\Admin;
+use Session;
 
 class CommonController extends Controller
 {
@@ -22,6 +23,10 @@ class CommonController extends Controller
 
 	public function dashboard(Request $request)
 	{
+		$user_type = Session::get('user_type');
+		if($user_type==3){
+			 return redirect(url(route('create-cement-movement')));
+		}
 		$value =$request->session()->all();
 		// print_r($value);exit;
 		// echo Hash::make('Vcpladmin@2023');exit;

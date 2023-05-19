@@ -50,5 +50,9 @@ class MaterialsController extends Controller
 
         return view('appview.tools_movement');
     }
+    public function task_movement(Request $request){
+
+        return view('appview.task_movement');
+    }
    
 }
