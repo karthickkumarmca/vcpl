@@ -214,7 +214,7 @@
                         "type"      : "dialog", //view,dialog,modal
                         "title"     : 'Delete',
                         "url"       : function(data){
-                            return "subcategories/delete/"+data['uuid'];
+                            return "delete/"+data['uuid'];
                         },
                         "icon"      : "fa fa-trash",
                         "method"    : "get",

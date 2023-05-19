@@ -111,6 +111,7 @@ class SiteinfoController extends Controller
                     $view_access            = $rolesAccess['site_info_management_access']['view'];
                     $edit_access            = $rolesAccess['site_info_management_access']['edit'];
                     $change_status_access   = $rolesAccess['site_info_management_access']['change_status'];
+                    $delete_access          = $rolesAccess['site_info_management_access']['delete'];
                 }
 
                 return view('master.site_info.list', compact('statuses', 'create_access', 'view_access', 'edit_access', 'delete_access', 'change_status_access'));

@@ -202,6 +202,7 @@ return [
             'edit' => 1,
             'view' => 1,            
             'change_status' => 1,
+            'delete' => 1,
         ],
         'product_rental_management' =>1,
         'product_rental_management_access' => [
