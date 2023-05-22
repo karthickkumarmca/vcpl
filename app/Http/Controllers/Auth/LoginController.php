@@ -125,7 +125,8 @@ class LoginController extends Controller
         if ($user) {
 
             $role_access = '';
-            $name = '';
+            $name        = '';
+            $username    = !empty($user->user_name)?$user->user_name:'';
             if($user->user_type==1){
                 $role_access = config("roles.".config("general_settings.user_type.1"));
                 $name = $user->name;
@@ -199,7 +200,7 @@ class LoginController extends Controller
             }
             $Staffdetails = Staffdetails::select('name','user_groups_ids')->where(['uuid' => $user->uuid])->first();
             if($Staffdetails){
-                $name = $Staffdetails->name;
+                $name     = $Staffdetails->name;
                 if($Staffdetails->user_groups_ids==4){
 
                     $role_access = config("roles.".config("general_settings.user_type.1"));
@@ -237,6 +238,7 @@ class LoginController extends Controller
             session(['user_id' => $user->id]);
             session(['role_access' => $role_access]);
             session(['name' => $name]);
+            session(['username' => $username]); 
         }
     }
     /**

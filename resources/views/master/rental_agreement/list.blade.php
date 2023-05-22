@@ -1,5 +1,9 @@
 @extends('layouts.main')
 @section('content')
+<style type="text/css">
+    .datepicker {transform: translate(0, 3.1em);
+}
+</style>
 <section class="content-header">
     <h1 class="col-lg-6 no-padding">Rental Agreement <small>Management</small></h1>
     <ol class="breadcrumb">
@@ -81,7 +85,7 @@
                     "field" : "rent_start_date"
                 },
                 "search": {
-                    "display" : 0,
+                    "display" : 1,
                     "type"    : "input"
                 }
             },
@@ -96,7 +100,7 @@
                     "field" : "rent_end_date"
                 },
                 "search": {
-                    "display" : 0,
+                    "display" : 1,
                     "type"    : "input"
                 }
             },
@@ -381,6 +385,19 @@
                 }
             }
         }
+
+
+
+$('#search_rent_start_date').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-99m'
+});
+
+$('#search_rent_end_date').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-99m'
+});
+
 
     </script>
     @stop

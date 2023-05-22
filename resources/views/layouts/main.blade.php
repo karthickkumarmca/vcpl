@@ -28,7 +28,7 @@
 </head>
 
 <body class="hold-transition skin-red sidebar-mini">
-    <div class="wrapper">
+    <div class="wrapper" style="font-weight:600;">
         @include('layouts.header')
         @include('layouts.sidebar-menu')
         <div class="content-wrapper">

@@ -16,7 +16,7 @@
             overflow-y: hidden;
             background-repeat: no-repeat;
             background-size: cover;
-            background:#0078bf;
+            background:#0078bf1f;
         }
 
         .login-box {
@@ -53,7 +53,7 @@
             <div class="login-logo">
                 <a href="/">
                     <span class="logo-lg">
-                        <img src="images/logonew.png">
+                        <img src="images/logonew.png" style="width:250px;height: 100px;">
                     </span>
                 </a>
             </div>

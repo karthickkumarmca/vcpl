@@ -37,6 +37,8 @@ class Rental_agreementController extends Controller
                 $searchField = [
                     'tenant_name'        => 'rental_agreement.tenant_name',
                     'rental_amount'      => 'rental_agreement.rental_amount',
+                    'rent_start_date'      => 'rental_agreement.rent_start_date',
+                    'rent_end_date'      => 'rental_agreement.rent_end_date',
                     'contact_person_mobile_number'      => 'rental_agreement.contact_person_mobile_number',
                     'status'    => 'rental_agreement.status',
                 ];

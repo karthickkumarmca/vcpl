@@ -13,8 +13,8 @@
         }
     </style>
 
-    <a href="{{url('/')}}" class="logo" style="height: 55px;padding: 0 5px!important;background-color: #fff;">
-        <img src="{{asset('images/logonew.png')}}" alt="Logo" style="max-width:100%;">
+    <a href="{{url('/')}}" class="logo" style="height: 100px;padding: 0 5px!important;background-color: #fff;">
+        <img src="{{asset('images/logonew.png')}}" alt="Logo" style="height:100px;max-width:100%;">
        
     </a>
     <nav class="navbar navbar-expand-md fixed-top flex-md-nowrap p-0" style="background-color: #0078bf;">
@@ -27,7 +27,7 @@
             <ul class="navbar-nav mt-2 mt-md-0 nav"  style="margin-right:7%">
 
                 <li class="nav-item dropdown">
-<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Hi, Welcome <?php echo Session::get('name')?>    </a>
+<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Hi, Welcome , <?php echo Session::get('username')?>    </a>
 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
 <li><a href="{{ url('change-user-password') }}"  style="margin-left:7%">Change Password</a></li>
 <li> <a  style="margin-left:7%" title="Logout" data-toggle="control-sidebar" href="#" onclick="event.preventDefault();

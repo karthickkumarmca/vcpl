@@ -2,14 +2,14 @@
 $rolesAccess = Session::get('role_access');
 $user_type = Session::get('user_type');
 ?>
-<aside class="main-sidebar elevation-4 sidebar-dark-success" style="padding-top: 50px;font-weight:600;">
+<aside class="main-sidebar elevation-4 sidebar-dark-success" style="padding-top: 100px;">
 	<section class="sidebar">
 		<ul class="sidebar-menu" data-widget="tree">
 			
 			@if($user_type!=3)
 			<li class="{{ Request::is('dashboard') ? 'active' : '' }}">
 				<a href="{!! url('dashboard') !!}">
-					<i class="fa fa-dashboard"></i> <span>Dashboard {{$user_type}}</span>
+					<i class="fa fa-dashboard"></i> <span>Dashboard</span>
 				</a>
 			</li>
 			<li class="treeview-nav treeview @if(str_contains(url()->current(),'master/') || Request::is('roles-list') || Request::is('create-roles') || str_contains(url()->current(),'edit-roles') || str_contains(url()->current(),'view-roles') || Request::is('units-list') || str_contains(url()->current(),'view-units') || str_contains(url()->current(),'edit-units') || Request::is('create-units') || str_contains(url()->current(),'change-staff-password/') ) active @endif">

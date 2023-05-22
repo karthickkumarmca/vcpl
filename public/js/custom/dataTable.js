@@ -411,8 +411,7 @@ var dataTable = {
                         if (search["type"] == "input") {
                             datatable +=
                             '<td><input type="text" class="form-control dt_search" name="' +
-                            column["name"] +
-                            '" value="" /></td>';
+                            column["name"] +'" id="search_' + column["name"] +'"  value="" /></td>';
                         }
                         else if (search["type"] == "select") {
                             var options = search["values"];
