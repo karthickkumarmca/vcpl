@@ -94,11 +94,11 @@
                     "display" : 0
                 },
                 "sort": {
-                    "display" : 1,
+                    "display" : 0,
                     "field" : "from_date"
                 },
                 "search": {
-                    "display" : 0,
+                    "display" : 1,
                     "type"    : "input"
                 }
             },
@@ -109,11 +109,11 @@
                     "display" : 0
                 },
                 "sort": {
-                    "display" : 1,
+                    "display" : 0,
                     "field" : "to_date"
                 },
                 "search": {
-                    "display" : 0,
+                    "display" : 1,
                     "type"    : "input"
                 }
             },
@@ -383,6 +383,17 @@
                 }
             }
         }
+
+
+$('#search_from_date').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-99m'
+});
+
+$('#search_to_date').datepicker({
+    format: 'yyyy-mm-dd',
+    startDate: '-99m'
+});
 
     </script>
     @stop

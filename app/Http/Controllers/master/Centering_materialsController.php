@@ -38,6 +38,8 @@ class Centering_materialsController extends Controller
                     'materials'      => 'materials.materials',
                     'rate_unit'      => 'materials.rate_unit',
                     'status'         => 'materials.status',
+                    'from_date'      => 'materials.from_date',
+                    'to_date'        => 'materials.to_date',
                     'category_name'  => 'product_details.id',
                     'unit_name'      => 'units.id',
                 ];
