@@ -31,10 +31,47 @@
 								
 							</div>
 						</div>
-						<input type="hidden" value="2" name="selected_tab" id="selected_tab">
+						<input type="hidden" value="3" name="selected_tab" id="selected_tab">
 						<div class="col-md-12">
 							<div id="accordion">
 							  <div class="card">
+
+							  	<div class="card-header" id="headingthree">
+							      <h5 class="mb-0">
+							        <a class="btn btn-link tab3" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree">
+							         ISSUED TO SITE
+							        </a>
+							      </h5>
+							    </div>
+							    <div id="collapsethree" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+							      <div class="card-body">
+
+							      	<div class="col-md-12">
+										<div class="form-group">
+											<label>BAGS <span class="text-danger"> *</span></label>
+											<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Quantity" name="bags" value="{{old('bags')}}" data-rule="admin" minlength="1" maxlength="128"/>
+											<span class="validation_error"></span>
+											@if($errors->has('bags'))
+											<div class="error">{{ $errors->first('bags') }}</div>
+											@endif
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>PURPOSE <span class="text-danger"> *</span></label>
+											<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter PURPOSE " name="purpose" value="{{old('purpose')}}" data-rule="admin" minlength="1" maxlength="128"/>
+											<span class="validation_error"></span>
+											@if($errors->has('purpose'))
+											<div class="error">{{ $errors->first('purpose') }}</div>
+											@endif
+										</div>
+									</div>
+									
+							      </div>
+							    </div>
+							  </div>
+
+
 							    <div class="card-header" id="headingOne">
 							      <h5 class="mb-0">
 							        <a class="btn btn-link tab1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -43,7 +80,7 @@
 							      </h5>
 							    </div>
 
-							    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+							    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 							      <div class="card-body">
 									<div class="col-md-12">
 										<div class="form-group">

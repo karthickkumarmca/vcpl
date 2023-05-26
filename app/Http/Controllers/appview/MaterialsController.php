@@ -126,7 +126,13 @@ class MaterialsController extends Controller
             ];
             $fieldValidation['rquantity']       = ['required'];
             $fieldValidation['vehicle_id']      = ['required'];
-        }else{
+        }
+        else if($request->get('selected_tab')==3){
+
+            $fieldValidation['bags']         = ['required'];
+            $fieldValidation['purpose']      = ['required'];
+        }
+        else{
             $fieldValidation = [
             'transfer_slip_number'         => ['required','min:2','max:15','unique:cement_transactions,bill_number' ],
             ];
@@ -147,7 +153,7 @@ class MaterialsController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withInput($request->input())->withErrors($validator);
         }
-        if($request->selected_tab==1){
+        if(in_array($request->selected_tab,[1,3])){
 
             $site_id = Session::get('site_id');
 

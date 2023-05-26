@@ -4,6 +4,9 @@ $('.tab1').click(function(){
 $('.tab2').click(function(){
     $('#selected_tab').val(1);
 });
+$('.tab3').click(function(){
+    $('#selected_tab').val(3);
+});
 
 $("#admin-form").validate({
         rules: {
@@ -42,6 +45,18 @@ $("#admin-form").validate({
                 required: true
             },
             quantity: {
+                required: true,
+                normalizer:function( value ) {
+                    return $.trim(value);
+                },
+            },
+            purpose: {
+                required: true,
+                normalizer:function( value ) {
+                    return $.trim(value);
+                },
+            },
+            bags: {
                 required: true,
                 normalizer:function( value ) {
                     return $.trim(value);

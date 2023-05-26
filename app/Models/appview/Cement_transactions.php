@@ -116,6 +116,23 @@ class Cement_transactions extends Model
             $data->bill_number              = strtoupper($request->transfer_slip_number);
             $data->vehicle_id               = $request->vechile_number;
             $data->site_id                  = $request->site_id;
+
+            $getdata = Materials_stock::where('materials_category_id',1)->where('site_id',$site_id)->get()->toArray();
+            if(count($getdata) > 0){
+                Materials_stock::where(['materials_category_id'=>1,'site_id'=>$site_id])
+                ->update(['stock'=>DB::raw('stock-'.round($request->quantity,2))]);
+            }
+        }
+
+        if($request->selected_tab==3){
+            $data->quantity                 = round($request->bags,2);
+            $data->bill_number              = strtoupper($request->purpose);
+
+            $getdata = Materials_stock::where('materials_category_id',1)->where('site_id',$site_id)->get()->toArray();
+            if(count($getdata) > 0){
+                Materials_stock::where(['materials_category_id'=>1,'site_id'=>$site_id])
+                ->update(['stock'=>DB::raw('stock-'.round($request->bags,2))]);
+            }
         }
        
         $data->grand_and_brand              = $request->grand_and_brand;
