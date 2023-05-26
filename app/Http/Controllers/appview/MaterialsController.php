@@ -78,7 +78,7 @@ class MaterialsController extends Controller
                 $data       = $records;
             } else {
                 $statusCode = '400';
-                $message    = "No architect info found";
+                $message    = "No data info found";
                 $data       = $records;
             }
 
@@ -91,9 +91,13 @@ class MaterialsController extends Controller
             return $response;
         }
         else{
-            $search1 = ['status' => 1];
-            $fields1 = ['id','site_name'];
-            $siteinfo = Siteinfo::getAll($fields1,$search1);
+
+            $site_id = Session::get('site_id');
+            $search1[]          = ['id','!=', $site_id];
+            $search1['status']  = 1;
+            // print_r($search1);exit;
+            $fields1            = ['id','site_name'];
+            $siteinfo           = Siteinfo::getAll($fields1,$search1);
 
             $search1 = ['status' => 1];
             $fields1 = ['id','vehicle_name'];
@@ -103,11 +107,9 @@ class MaterialsController extends Controller
 
         
     }
-     public function cement_store(Request $request)
+    public function cement_store(Request $request)
     {
        
-        
-
         if($request->get('selected_tab')==2){
 
             $fieldValidation = [

@@ -125,9 +125,14 @@ class SiteinfoController extends Controller
         if(!isset($rolesAccess['site_info_management_access']['create']) || $rolesAccess['site_info_management_access']['create']!=1){
             abort(403);
         } else {
+
+            $search = ['status' => 1];//,'user_groups_ids'=>2
+            $fields = ['site_engineer_id'];
+            $site_engineer_id = Siteinfo::where('status', 1)->pluck('site_engineer_id')->toArray();
+
             $search = ['status' => 1];//,'user_groups_ids'=>2
             $fields = ['id','name'];
-            $Siteengineer = Staffdetails::getAll($fields,$search);
+            $Siteengineer = Staffdetails::getAll($fields,$search,$site_engineer_id);
 
             $search = ['status' => 1,'user_groups_ids'=>6];
             $fields = ['id','name'];

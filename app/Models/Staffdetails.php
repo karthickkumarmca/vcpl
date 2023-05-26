@@ -147,11 +147,14 @@ class Staffdetails extends Model
 
         return $response;
     }
-    public static function getAll(array $fields, array $filter = []): array
+    public static function getAll(array $fields, array $filter = [],array $site_engineer_id=[]): array
     {
-        return self::select($fields)
-        ->where($filter)
-        ->get()
+        $query = self::select($fields)
+        ->where($filter);
+        if(count($site_engineer_id)>0){
+            $query->whereNotIn('id',$site_engineer_id);
+        }
+        return $query->get()
         ->toArray();
     }
     public static function getStaffGroupDetails($id){

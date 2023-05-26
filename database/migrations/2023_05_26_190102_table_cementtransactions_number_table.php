@@ -26,6 +26,8 @@ class TableCementtransactionsNumberTable extends Migration
 
             $table->string('bill_number',256)->nullable();
             $table->string('quantity')->double(10,2)->default(0.00);
+            $table->string('opening_balance')->double(10,2)->default(0.00);
+            $table->string('closing_balance')->double(10,2)->default(0.00);
             $table->string('grand_and_brand',512)->nullable();
 
             $table->smallInteger('type')->comment('1 TRANSFER 2 RECEIVED 3 ISSUED')->description('1 TRANSFER 2 RECEIVED 3 ISSUED');

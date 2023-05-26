@@ -198,9 +198,11 @@ class LoginController extends Controller
                     }
                 }
             }
-            $Staffdetails = Staffdetails::select('name','user_groups_ids')->where(['uuid' => $user->uuid])->first();
+            $site_ids       = 0;
+            $Staffdetails   = Staffdetails::select('name','user_groups_ids','site_ids')->where(['uuid' => $user->uuid])->first();
             if($Staffdetails){
                 $name     = $Staffdetails->name;
+                $site_ids = $Staffdetails->site_ids;
                 if($Staffdetails->user_groups_ids==4){
 
                     $role_access = config("roles.".config("general_settings.user_type.1"));
@@ -239,6 +241,7 @@ class LoginController extends Controller
             session(['role_access' => $role_access]);
             session(['name' => $name]);
             session(['username' => $username]); 
+            session(['site_id' => $site_ids]); 
         }
     }
     /**
