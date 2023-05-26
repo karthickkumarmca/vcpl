@@ -9,6 +9,7 @@ use Redirect;
 use Illuminate\Validation\Validator;
 use Session;
 use App\Models\appview\Cement_transactions;
+use App\Models\appview\Materials_stock;
 use App\Models\Vehicle_materials;
 use App\Models\Siteinfo;
 
@@ -93,6 +94,14 @@ class MaterialsController extends Controller
         else{
 
             $site_id = Session::get('site_id');
+            $stock   = 0;
+            $getdata = Materials_stock::where('materials_category_id',1)->where('site_id',$site_id)->get()->toArray();
+            if(count($getdata)>0){
+                $stock = isset($getdata[0]['stock'])?$getdata[0]['stock']:0;
+            }
+           
+
+            $site_id = Session::get('site_id');
             $search1[]          = ['id','!=', $site_id];
             $search1['status']  = 1;
             // print_r($search1);exit;
@@ -102,7 +111,7 @@ class MaterialsController extends Controller
             $search1 = ['status' => 1];
             $fields1 = ['id','vehicle_name'];
             $Vehicle_materials = Vehicle_materials::getAll($fields1,$search1);
-            return view('appview.cement_movement',compact('siteinfo','Vehicle_materials'));
+            return view('appview.cement_movement',compact('siteinfo','Vehicle_materials','stock'));
         }
 
         
@@ -138,6 +147,25 @@ class MaterialsController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withInput($request->input())->withErrors($validator);
         }
+        if($request->selected_tab==1){
+
+            $site_id = Session::get('site_id');
+
+            $getdata = Materials_stock::where('materials_category_id',1)->where('site_id',$site_id)->get()->toArray();
+            if(count($getdata)==0){
+                Session::flash('message', 'your issue value is more then opening balance,so transaction incomplete');
+                Session::flash('class', 'error');
+                return redirect('appview/cement-movement/create'); 
+            }
+            $stock = isset($getdata[0]['stock'])?$getdata[0]['stock']:0;
+
+            if($stock<$request->quantity){
+                Session::flash('message', 'your issue value is more then opening balance,so transaction incomplete');
+                Session::flash('class', 'error');
+                return redirect('appview/cement-movement/create'); 
+            }
+        }
+       
        
         $request['created_at']=date('Y-m-d H:i:s');
         $response   = Cement_transactions::storeRecords($request);

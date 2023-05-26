@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Siteinfo;
 use App\Models\Roles;
 use App\Models\Staffdetails;
 use App\Http\Controllers\Controller;
@@ -86,17 +87,24 @@ class LoginController extends Controller
                         }
                         
                         auth()->attempt(['user_name' => $request->email, 'password' => $request->password, 'status' => 1]);
-                        $Staffdetails = Staffdetails::select('name','user_groups_ids')->where(['uuid' => $user->uuid])->first();
+                        $Staffdetails = Staffdetails::select('id','name','user_groups_ids')->where(['uuid' => $user->uuid])->first();
                        
                         if($Staffdetails){
-
-                            if($Staffdetails->user_groups_ids==4){
-                                return redirect()->route('create-cement-movement');
+                            $staff_id     = $Staffdetails->id;
+                            $siteData = Siteinfo::select('id','site_name')->where('site_engineer_id',$staff_id)->get()->toArray();
+                            if(count($siteData)!=1){
+                                throw ValidationException::withMessages([
+                                        'email' => ' User mapped with wrongly'
+                                ]);
                             }
                             else{
-                                return redirect()->route('dashboard');
+                                if($Staffdetails->user_groups_ids==4){
+                                    return redirect()->route('create-cement-movement');
+                                }
+                                else{
+                                    return redirect()->route('dashboard');
+                                }
                             }
-                            
                         }
                         else{
                             return redirect()->route('dashboard');
@@ -199,12 +207,15 @@ class LoginController extends Controller
                 }
             }
             $site_ids       = 0;
-            $Staffdetails   = Staffdetails::select('name','user_groups_ids','site_ids')->where(['uuid' => $user->uuid])->first();
+            $Staffdetails   = Staffdetails::select('id','name','user_groups_ids')->where(['uuid' => $user->uuid])->first();
             if($Staffdetails){
-                $name     = $Staffdetails->name;
-                $site_ids = $Staffdetails->site_ids;
+                $name         = $Staffdetails->name;
+                $staff_id     = $Staffdetails->id;
                 if($Staffdetails->user_groups_ids==4){
-
+                    $siteData = Siteinfo::select('id','site_name')->where('site_engineer_id',$staff_id)->get()->toArray();
+                    if(count($siteData)==1){
+                        $site_ids = isset($siteData[0]['id'])?$siteData[0]['id']:0;
+                    }
                     $role_access = config("roles.".config("general_settings.user_type.1"));
                     $master_access =   [];
                     foreach($role_access as $key=>$ur){

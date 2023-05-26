@@ -3,12 +3,14 @@
 namespace App\Models\appview;
 
 use DB;
+use Session;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use App\Models\appview\Materials_stock;
 
 class Cement_transactions extends Model
 {
@@ -81,7 +83,7 @@ class Cement_transactions extends Model
      */
     public static function storeRecords(Request $request)
     {
-        $role = session('user_role');
+        $site_id = Session::get('site_id');
 
         $response = [];
         $response['status_code'] = config('response_code.Bad_Request');
@@ -99,6 +101,15 @@ class Cement_transactions extends Model
             $data->quantity                    = round($request->rquantity,2);
             $data->bill_number                 = strtoupper($request->bill_number);
             $data->vehicle_id                  = $request->vehicle_id;
+
+            $getdata = Materials_stock::where('materials_category_id',1)->where('site_id',$site_id)->get()->toArray();
+            if(count($getdata)==0){
+                Materials_stock::insert(['materials_category_id'=>1,'site_id'=>$site_id,'stock'=>round($request->rquantity,2)]);
+            }
+            else{
+                Materials_stock::where(['materials_category_id'=>1,'site_id'=>$site_id])
+                ->update(['stock'=>DB::raw('stock+'.round($request->rquantity,2))]);
+            }
         }
         if($request->selected_tab==1){
             $data->quantity                 = round($request->quantity,2);
@@ -107,7 +118,8 @@ class Cement_transactions extends Model
             $data->site_id                  = $request->site_id;
         }
        
-        $data->grand_and_brand             = $request->grand_and_brand;
+        $data->grand_and_brand              = $request->grand_and_brand;
+        $data->from_site_id                 = $request->site_id;
        
        
         $data->save();

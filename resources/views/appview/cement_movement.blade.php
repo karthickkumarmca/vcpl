@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Opening Balance <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="EnterOpening Balance" name="opening_balance" value="500" data-rule="admin" minlength="1" maxlength="128" readonly/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="EnterOpening Balance" name="opening_balance" value="{{$stock}}" data-rule="admin" minlength="1" maxlength="128" readonly/>
 								
 							</div>
 						</div>
