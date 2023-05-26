@@ -183,9 +183,7 @@ class Architect_siteController extends Controller
             $error      = isset($response['error']) ? $response['error'] : (object)[];
             $message    = $response['message'];
             $data       = isset($response['data']) ? $response['data'] : (object)[];
-
             return redirect('master/architect-site/list'); 
-
         }
     }
 
