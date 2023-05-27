@@ -6,7 +6,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('master/vehicle-materials/store')}}">
+			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('appview/labour-movement/store')}}">
 				@csrf
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -21,6 +21,11 @@
 								<label>Subcontractor List <span class="text-danger"> *</span></label>
 								<select name="subcontractor_id" class="form-control pos_validate" id="subcontractor_id">
 									<option value="">Select Subcontractor List</option>
+									@isset($subcontractors)
+										@foreach($subcontractors as $s)
+										<option value="{{$s['id']}}">{{$s['name']}}</option>
+										@endforeach
+									@endisset
 								</select>
 								<span class="validation_error"></span>
 								@if($errors->has('subcontractor_id'))
@@ -33,6 +38,8 @@
 								<label>Shift <span class="text-danger"> *</span></label>
 								<select name="shift_id" class="form-control pos_validate" id="shift_id">
 									<option value="">Select Shift</option>
+									<option value="1">Day Shift</option>
+									<option value="2">Night Shift</option>
 								</select>
 								<span class="validation_error"></span>
 								@if($errors->has('shift_id'))
@@ -56,19 +63,27 @@
 							<div class="form-group">
 								<label>Labour Category <span class="text-danger"> *</span></label>
 								<div class="table-responsive">
-        <table class="table table-bordered table-striped custom_datatable" id="categories-list-datatable">
-        <thead>
-        <tr><th>S.no</th><th>Labour Category</th><th>No of Labour</th></tr></thead>
-        <tbody><tr><td>1</td><td>dshgsdfh</td><td><span ><input type="text"></span></td>
-        </tr><tr><td>2</td><td>Barbender</td><td><span ><input type="text"></span></td></tr>
-        <tr><td>4</td><td>Earthwork Men Mazdoor</td><td><span ><input type="text"></span></td></tr>
-        <tr><td>5</td><td>Earthwork Women Mazdoor</td><td><span ><input type="text"></span></td>
-        </tr><tr><td>6</td><td>Helper</td><td><span ><input type="text"></span></td><td></tr><tr><td>7</td><td>Mason</td><td><span ><input type="text"></span></td></tr><tr><td>8</td><td>Men Mazdoor</td><td><span ><input type="text"></span></td></tr><tr><td>9</td><td>Site Maistry</td><td><span ><input type="text"></span></td></tr><tr><td>10</td><td>Stone Cutter</td><td><span ><input type="text"></span></td></tr></tbody></table></div>
+        							<table class="table table-bordered table-striped custom_datatable" id="categories-list-datatable">
+	        							<thead>
+	        								<tr><th>S.no</th><th>Labour Category</th><th>No of Labour</th></tr>
+	        							</thead>
+	        							<tbody>
+											@isset($labour_categories)
+												@foreach($labour_categories as $k=>$l)
+												<tr>
+		        									<td>{{$k+1}}</td>
+		        									<td>{{$l['category_name']}}</td>
+		        									<td><span ><input type="text" name="number_of_labour[{{$l['id']}}]" value=""></span></td>
+	        									</tr>
+												@endforeach
+											@endisset
+	        								
+									        
+	    								</tbody>
+    								</table>
+    							</div>
 							</div>
 						</div>
-
-					
-						
 					</div>
 					<div class="box-footer">
 						<div class="pull-right">

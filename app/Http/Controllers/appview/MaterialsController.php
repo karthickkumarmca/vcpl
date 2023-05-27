@@ -11,7 +11,11 @@ use Session;
 use App\Models\appview\Cement_transactions;
 use App\Models\appview\Materials_stock;
 use App\Models\Vehicle_materials;
+use App\Models\Staffdetails; 
 use App\Models\Siteinfo;
+use App\Models\Labour_categories;
+use App\Models\Labour_transactions;
+
 
 class MaterialsController extends Controller
 {
@@ -192,8 +196,14 @@ class MaterialsController extends Controller
         return view('appview.lorry_movement');
     }
     public function labour_movement(Request $request){
-
-        return view('appview.labour_movement');
+        $search           = ['status' => 1,'user_groups_ids'=>6];
+        $fields           = ['id','name','user_name'];
+        $Staffgroups      = Staffdetails::getAll($fields,$search);
+        $searchLabour     = ['status' => 1];
+        $fieldsLabour     = ['id','category_name'];
+        $LabourCategories = Labour_categories::getAll($fieldsLabour,$searchLabour);
+        $data             = ["subcontractors"=>$Staffgroups,"labour_categories"=>$LabourCategories];
+        return view('appview.labour_movement',$data);
     }
     public function workout_movement(Request $request){
 
@@ -210,6 +220,32 @@ class MaterialsController extends Controller
     public function task_movement(Request $request){
 
         return view('appview.task_movement');
+    }
+
+    public function labour_store(Request $request)
+    {
+       
+       exit("=");
+        $fieldValidation['subcontractor_id']     = ['required'];
+        /*$fieldValidation['labour_category']    = ['required'];
+        $fieldValidation['number_of_labour']   = ['required'];
+        $fieldValidation['shift_id']           = ['required'];*/
+        $errorMessages                         = [];
+
+        $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput($request->input())->withErrors($validator);
+        }
+        
+        print_r($request);exit;
+        $response   = Labour_transactions::storeRecords($request);
+
+        Session::flash('message', 'Labour recorded has been successfully');
+        Session::flash('class', 'success');
+        return redirect('appview/labour-movement/create'); 
+
+        
     }
    
 }
