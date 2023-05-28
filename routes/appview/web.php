@@ -29,6 +29,7 @@ Route::group(['prefix' => 'appview/','namespace'=>'appview','middleware' => ['au
 
 	Route::group(['prefix' => 'lorry-movement/'], function () use ($router) {
 	    $router->get('create', 'MaterialsController@lorry_movement')->name('create-lorry-movement');
+	    $router->post('store', 'MaterialsController@lorry_store')->name('create-lorry-store');
 	});
 	Route::group(['prefix' => 'labour-movement/'], function () use ($router) {
 	    $router->get('create', 'MaterialsController@labour_movement')->name('create-labour-movement');
