@@ -6,24 +6,37 @@
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('master/vehicle-materials/store')}}">
+			@if(Session::has('message'))
+			    <div class="alert alert-{{Session::get('class')}} alert-dismissible fade show w-50 ml-auto alert-custom"
+			        role="alert">
+			        {{ Session::get('message') }}
+			        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			            <span aria-hidden="true">&times;</span>
+			        </button>
+			    </div>
+			@endif
+			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('appview/centering-movement/store')}}">
 				@csrf
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">CEMENT MOVEMENT</h3>
+						<h3 class="box-title">CENTERING MOVEMENT</h3>
 					</div>
 
 					<div class="box-body">
-						
-						
-
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Balance <span class="text-danger"> *</span></label>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="EnterOpening Balance" name="opening_balance" value="{{$stock}}" data-rule="admin" minlength="1" maxlength="128" readonly/>
+								
+							</div>
+						</div>
 						<div class="col-md-12">
 							<div id="accordion">
 							  <div class="card">
 							    <div class="card-header" id="headingOne">
 							      <h5 class="mb-0">
 							        <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							          OPENING BALANCE
+							          TRANSFERED TO WHOM
 							        </a>
 							      </h5>
 							    </div>
@@ -31,138 +44,53 @@
 							    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 							      <div class="card-body">
 							        <div class="col-md-12">
-							<div class="form-group">
-								<label>Material List <span class="text-danger"> *</span></label>
-								<div class="table-responsive">
-        <table class="table table-bordered table-striped custom_datatable" id="categories-list-datatable">
-        <thead>
-        <tr><th>S.no</th><th>Materials</th><th>Numbers</th></tr></thead>
-        <tbody><tr><td>1</td><td>C,sheet</td><td>553</td>
-        </tr></tbody></table></div>
-							</div>
-						</div>
-							      </div>
-							    </div>
-							  </div>
-							  <div class="card">
-							    <div class="card-header" id="headingTwo">
-							      <h5 class="mb-0">
-							        <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							        RECEIVED ITEMS
-							        </a>
-							      </h5>
-							    </div>
-							    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-							      <div class="card-body">
-							        
-							      </div>
-							    </div>
-							  </div>
-
-							  <div class="card">
-							    <div class="card-header" id="headingTwo">
-							      <h5 class="mb-0">
-							        <a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							         TRANSFERED TO WHOM
-							        </a>
-							      </h5>
-							    </div>
-							    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-							      <div class="card-body">
-							        <div class="col-md-12">
-										<div class="form-group">
-											<label>Seril Number <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Seril Number" name="seril_number" value="{{old('seril_number')}}" data-rule="admin" minlength="1" maxlength="128"/>
-											<span class="validation_error"></span>
-											@if($errors->has('seril_number'))
-											<div class="error">{{ $errors->first('seril_number') }}</div>
-											@endif
-										</div>
+									<div class="form-group">
+										<label>SITE NAME <span class="text-danger"> *</span></label>
+										<select name="site_id" class="form-control pos_validate" id="site_id">
+											<option value="">Select Site Name</option>
+											@isset($siteinfo)
+												@foreach($siteinfo as $siteinf)
+												<option value="{{$siteinf['id']}}">{{$siteinf['site_name']}}</option>
+												@endforeach
+											@endisset
+											
+										</select>
+										<span class="validation_error"></span>
+										@if($errors->has('site_id'))
+										<div class="error">{{ $errors->first('site_id') }}</div>
+										@endif
 									</div>
-									 <div class="col-md-12">
-										<div class="form-group">
-											<label>To Site <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter To site" name="to_site" value="{{old('to_site')}}" data-rule="admin" minlength="1" maxlength="128"/>
-											<span class="validation_error"></span>
-											@if($errors->has('to_site'))
-											<div class="error">{{ $errors->first('to_site') }}</div>
-											@endif
-										</div>
 									</div>
-									 <div class="col-md-12">
+							      	<div class="col-md-12">
 										<div class="form-group">
-											<label>Transfer slip number <span class="text-danger"> *</span></label>
-											<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Transfer slip number" name="transfer_slip_number" value="{{old('Transfer slip number')}}" data-rule="admin" minlength="1" maxlength="128"/>
-											<span class="validation_error"></span>
-											@if($errors->has('Transfer slip number'))
-											<div class="error">{{ $errors->first('Transfer slip number') }}</div>
-											@endif
-										</div>
-									</div>
-									
-									<div class="col-md-12">
-										<div class="form-group">
-											<label>Vechile Number <span class="text-danger"> *</span></label>
-											<select name="vechile_number" class="form-control pos_validate" id="vechile_number">
+											<label>VEHICLE NAME <span class="text-danger"> *</span></label>
+											<select name="vehicle_id" class="form-control pos_validate" id="vehicle_id">
+												<option value="">SELECT VEHICLE NAME</option>
+												@isset($Vehicle_materials)
+													@foreach($Vehicle_materials as $dfg)
+													<option value="{{$dfg['id']}}">{{$dfg['vehicle_name']}}</option>
+													@endforeach
+												@endisset
+												
 											</select>
 											<span class="validation_error"></span>
-											@if($errors->has('vechile_number'))
-											<div class="error">{{ $errors->first('vechile_number') }}</div>
+											@if($errors->has('vehicle_id'))
+											<div class="error">{{ $errors->first('vehicle_id') }}</div>
 											@endif
 										</div>
 									</div>
-									<div class="col-md-12">
-										<div class="form-group col-md-12">
-											<label>In/Out Time <span class="text-danger"> *</span></label>
-											<div class="row ">
-												<input type="text" class="form-control pos_validate col-md-5" autocomplete="off" placeholder="Select Time" name="received_date" value="{{old('received_date')}}" data-rule="admin" minlength="1" maxlength="128"/>
-											<input type="text" class="form-control pos_validate col-md-6" autocomplete="off" placeholder="Select Time" name="received_date" value="{{old('received_date')}}" data-rule="admin" minlength="1" maxlength="128"/>
-											</div>
-											
-											
+							       <div class="col-md-12">
+										<div class="form-group">
+											<label>QUANTITY <span class="text-danger"> *</span></label>
+											<input type="text" class="form-control pos_validate number_restrict" autocomplete="off" placeholder="Enter Quantity" name="quantity" value="{{old('rquantity')}}" data-rule="admin" minlength="1" maxlength="128"/>
+											<span class="validation_error"></span>
+											@if($errors->has('rquantity'))
+											<div class="error">{{ $errors->first('rquantity') }}</div>
+											@endif
 										</div>
 									</div>
-
-									<div class="col-md-12">
-										<div class="form-group col-md-12">
-											<div class="row ">
-												<input type="text" class="form-control pos_validate col-md-6" autocomplete="off" placeholder="Materail" name="received_date" value="{{old('received_date')}}" data-rule="admin" minlength="1" maxlength="128"/>
-											<input type="text" class="form-control pos_validate col-md-5" autocomplete="off" placeholder="Quantity" name="received_date" value="{{old('received_date')}}" data-rule="admin" minlength="1" maxlength="128"/>
-
-											<a href="javascript::" id="categories-submit col-md-1" class="btn btn-success">Add</a>
-											</div>
-											
-											
-										</div>
-									</div>
-
 									
-							      </div>
-							    </div>
-							  </div>
-
-							   <div class="card">
-							    <div class="card-header" id="headingfour">
-							      <h5 class="mb-0">
-							        <a class="btn btn-link" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-							          CLOSING BALANCE
-							        </a>
-							      </h5>
-							    </div>
-
-							    <div id="collapsefour" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-							      <div class="card-body">
-							        <div class="col-md-12">
-							<div class="form-group">
-								<label>Material List <span class="text-danger"> *</span></label>
-								<div class="table-responsive">
-        <table class="table table-bordered table-striped custom_datatable" id="categories-list-datatable">
-        <thead>
-        <tr><th>S.no</th><th>Materials</th><th>Numbers</th></tr></thead>
-        <tbody><tr><td>1</td><td>C,sheet</td><td>553</td>
-        </tr></tbody></table></div>
-							</div>
-						</div>
+									
 							      </div>
 							    </div>
 							  </div>
@@ -170,11 +98,6 @@
 							</div>
 						</div>
 
-						
-
-						
-
-					
 						
 					</div>
 					<div class="box-footer">
@@ -189,32 +112,110 @@
 					</div>
 				</div>
 			</form>
+			<div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">TRANSCATION HISOTY</h3>
+                </div>
+                <div class="box-body">
+                    <div class="datatable_list form-inline" id="pos-custom-datatable"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 		</div>
+
 	</div>
 </div>
 </section>
 @endsection
 @section('after-scripts-end')
-<script src="{{asset('js/custom/formValidation.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
+<script src="{{asset('js/custom/appview.js')}}"></script>
+<script type="text/javascript">
 
-    @include('master.vehicle_materials.script')
-     <script type="text/javascript">
-	// set default dates
-	var start = new Date();
-	// set end date to max one year period:
-	var end = new Date(new Date().setYear(start.getFullYear()+1));
+        /**
+         * DataTable Properties
+         */
+         var table_properties = {
+            'name': 'subcategories-list',
+            'columns': [
+            {
+                "name" : "date_created",
+                "label": "Date",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "date_created"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+             {
+                "name" : "quantity",
+                "label": "Quantity",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "quantity"
+                },
+               "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+             {
+                "name" : "type",
+                "label": "Type",
+                "badge": {
+                    "display" : 0
+                },
+                "sort": {
+                    "display" : 0,
+                    "field" : "type"
+                },
+                "search": {
+                    "display" : 0,
+                    "type"    : "input"
+                }
+            },
+             
+            ],
+            'api_url': 'create',
+            'data_key': 'records',
+            'daterange_picker': {
+                'display' : false,
+                'default_days': 29
+            },
+            'action_button' : {
+                'display': false,
+                'action': [
+               
 
-	$('#insurance_date').datepicker({
-	    startDate : start,
-	    endDate   : end
-	// update "toDate" defaults whenever "fromDate" changes
-	}).on('changeDate', function(){
-	    // set the "toDate" start to not be later than "fromDate" ends:
-	    $('#to_date').datepicker('setStartDate', new Date($(this).val()));
-	}); 
+                    ]
+                },
+                "offset" : [
+                10,
+                25,
+                50
+                ],
+                'pos_container' : 'pos-custom-datatable',
+                'property_key' : 'admin_properties'
+            };
 
+        /**
+         * Initiate DataTable
+         */
+         dataTable.initiateDatatable(table_properties);
+
+        $('#subcategories-list-search').hide();
 
     </script>
-    @stop
+@include('master.architect_site.script')
+@stop

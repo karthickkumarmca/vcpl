@@ -17,6 +17,8 @@ use App\Models\Siteinfo;
 use App\Models\Labour_categories;
 use App\Models\appview\Labour_transactions;
 use App\Models\appview\LorryMaterialsMovement;
+use App\Models\appview\Centering_transactions;
+use App\Models\appview\Tools_transactions;
 
 
 class MaterialsController extends Controller
@@ -217,11 +219,266 @@ class MaterialsController extends Controller
     }
     public function centering_movement(Request $request){
 
-        return view('appview.centering_movement');
+        if ($request->has('request_type')) {
+            $searchField = [
+                'status'    => 'centering_transactions.status',
+            ];
+            $sortField   = [
+                'date_created' => 'centering_transactions.created_at'
+            ];
+            $search_filter = [];
+            $sort = [
+                'field' => 'centering_transactions.created_at',
+                'order' => 'desc'
+            ];
+            $page = config('pagination.page');
+            if ($request->has('page')) {
+                $page = $request->page;
+            }
+
+            $offset = config('pagination.offset');
+            if ($request->has('offset')) {
+                $offset = $request->offset;
+            }
+
+            if ($request->has('sort')) {
+                $name = $request->sort['field'];
+                if (isset($sortField[$name])) {
+                    $sort['field'] = $sortField[$name];
+                    $sort['order'] = $request->sort['order'];
+                }
+            }
+
+            $filters = $request->get('search') ? $request->get('search') : [];
+
+            foreach ($filters as $search_field => $search_value) {
+                $search_value = strip_tags($search_value); //Sanitization
+                $table_field = $searchField[$search_field];
+                if (in_array($search_field, ["status"])) {
+                    array_push($search_filter, [$table_field, '=', $search_value]);
+                } else {
+                    array_push($search_filter, [$table_field, 'LIKE', '%' . addslashes($search_value) . '%']);
+                }
+            }
+
+            $records = Centering_transactions::get_materials($page, $offset, $sort, $search_filter);
+            //print_r($records);exit;
+
+            if (!empty($records['records'])) {
+                $statusCode = '200';
+                $message    = "Data are retrieved Successfully";
+                $data       = $records;
+            } else {
+                $statusCode = '400';
+                $message    = "No data info found";
+                $data       = $records;
+            }
+
+            $response = response()->json([
+                'message' => $message,
+                'data'    => $data,
+                'error'   => (object)[]
+            ], $statusCode);
+
+            return $response;
+        }
+        else{
+
+            $site_id = Session::get('site_id');
+            $stock   = 0;
+            $getdata = Materials_stock::where('materials_category_id',2)->where('site_id',$site_id)->get()->toArray();
+            if(count($getdata)>0){
+                $stock = isset($getdata[0]['stock'])?$getdata[0]['stock']:0;
+            }
+
+            $site_id = Session::get('site_id');
+            $search1[]          = ['id','!=', $site_id];
+            $search1['status']  = 1;
+            // print_r($search1);exit;
+            $fields1            = ['id','site_name'];
+            $siteinfo           = Siteinfo::getAll($fields1,$search1);
+
+            $search1 = ['status' => 1];
+            $fields1 = ['id','vehicle_name'];
+            $Vehicle_materials = Vehicle_materials::getAll($fields1,$search1);
+            return view('appview.centering_movement',compact('siteinfo','Vehicle_materials','stock'));
+        }
+       
+    }
+    public function centering_store(Request $request)
+    {
+          
+        $fieldValidation['quantity']        = ['required'];
+        $fieldValidation['vehicle_id']      = ['required'];
+        $fieldValidation['site_id']         = ['required'];
+
+        $errorMessages    = [
+            'quantity.required'              => "The quantity field is required.",
+        ];
+
+        $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput($request->input())->withErrors($validator);
+        }
+
+        $site_id = Session::get('site_id');
+
+        $getdata = Materials_stock::where('materials_category_id',2)->where('site_id',$site_id)->get()->toArray();
+        if(count($getdata)==0){
+            Session::flash('message', 'your issue value is more then opening balance,so transaction incomplete');
+            Session::flash('class', 'error');
+            return redirect('appview/centering-movement/create'); 
+        }
+        $stock = isset($getdata[0]['stock'])?$getdata[0]['stock']:0;
+
+        if($stock<$request->quantity){
+            Session::flash('message', 'your issue value is more then opening balance,so transaction incomplete');
+            Session::flash('class', 'error');
+            return redirect('appview/centering-movement/create'); 
+        }
+        
+       
+        $request['created_at']=date('Y-m-d H:i:s');
+        $response   = Centering_transactions::storeRecords($request);
+
+        Session::flash('message', 'Cement recorded has been successfully');
+        Session::flash('class', 'success');
+
+        return redirect('appview/centering-movement/create'); 
+
+        
     }
     public function tools_movement(Request $request){
 
-        return view('appview.tools_movement');
+        if ($request->has('request_type')) {
+            $searchField = [
+                'status'    => 'tools_transactions.status',
+            ];
+            $sortField   = [
+                'date_created' => 'tools_transactions.created_at'
+            ];
+            $search_filter = [];
+            $sort = [
+                'field' => 'tools_transactions.created_at',
+                'order' => 'desc'
+            ];
+            $page = config('pagination.page');
+            if ($request->has('page')) {
+                $page = $request->page;
+            }
+
+            $offset = config('pagination.offset');
+            if ($request->has('offset')) {
+                $offset = $request->offset;
+            }
+
+            if ($request->has('sort')) {
+                $name = $request->sort['field'];
+                if (isset($sortField[$name])) {
+                    $sort['field'] = $sortField[$name];
+                    $sort['order'] = $request->sort['order'];
+                }
+            }
+
+            $filters = $request->get('search') ? $request->get('search') : [];
+
+            foreach ($filters as $search_field => $search_value) {
+                $search_value = strip_tags($search_value); //Sanitization
+                $table_field = $searchField[$search_field];
+                if (in_array($search_field, ["status"])) {
+                    array_push($search_filter, [$table_field, '=', $search_value]);
+                } else {
+                    array_push($search_filter, [$table_field, 'LIKE', '%' . addslashes($search_value) . '%']);
+                }
+            }
+
+            $records = Tools_transactions::get_materials($page, $offset, $sort, $search_filter);
+            //print_r($records);exit;
+
+            if (!empty($records['records'])) {
+                $statusCode = '200';
+                $message    = "Data are retrieved Successfully";
+                $data       = $records;
+            } else {
+                $statusCode = '400';
+                $message    = "No data info found";
+                $data       = $records;
+            }
+
+            $response = response()->json([
+                'message' => $message,
+                'data'    => $data,
+                'error'   => (object)[]
+            ], $statusCode);
+
+            return $response;
+        }
+        else{
+
+            $site_id = Session::get('site_id');
+            $stock   = 0;
+            $getdata = Materials_stock::where('materials_category_id',6)->where('site_id',$site_id)->get()->toArray();
+            if(count($getdata)>0){
+                $stock = isset($getdata[0]['stock'])?$getdata[0]['stock']:0;
+            }
+
+            $site_id = Session::get('site_id');
+            $search1[]          = ['id','!=', $site_id];
+            $search1['status']  = 1;
+            // print_r($search1);exit;
+            $fields1            = ['id','site_name'];
+            $siteinfo           = Siteinfo::getAll($fields1,$search1);
+
+            $search1 = ['status' => 1];
+            $fields1 = ['id','vehicle_name'];
+            $Vehicle_materials = Vehicle_materials::getAll($fields1,$search1);
+            return view('appview.tools_movement',compact('siteinfo','Vehicle_materials','stock'));
+        }
+    }
+    public function tools_store(Request $request)
+    {
+          
+        $fieldValidation['quantity']        = ['required'];
+        $fieldValidation['vehicle_id']      = ['required'];
+        $fieldValidation['site_id']         = ['required'];
+
+        $errorMessages    = [
+            'quantity.required'              => "The quantity field is required.",
+        ];
+
+        $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput($request->input())->withErrors($validator);
+        }
+
+        $site_id = Session::get('site_id');
+
+        $getdata = Materials_stock::where('materials_category_id',6)->where('site_id',$site_id)->get()->toArray();
+        if(count($getdata)==0){
+            Session::flash('message', 'your issue value is more then opening balance,so transaction incomplete');
+            Session::flash('class', 'error');
+            return redirect('appview/tools-movement/create'); 
+        }
+        $stock = isset($getdata[0]['stock'])?$getdata[0]['stock']:0;
+
+        if($stock<$request->quantity){
+            Session::flash('message', 'your issue value is more then opening balance,so transaction incomplete');
+            Session::flash('class', 'error');
+            return redirect('appview/tools-movement/create'); 
+        }
+        
+       
+        $request['created_at']=date('Y-m-d H:i:s');
+        $response   = Tools_transactions::storeRecords($request);
+
+        Session::flash('message', 'Tools recorded has been successfully');
+        Session::flash('class', 'success');
+
+        return redirect('appview/tools-movement/create'); 
+
+        
     }
     public function task_movement(Request $request){
 

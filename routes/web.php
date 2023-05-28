@@ -280,3 +280,9 @@ Route::get('/clear-cache', function () {
 
    return "Cache cleared successfully";
 });
+
+Route::get('/migrate-db', function () {
+   Artisan::call('migrate');
+
+   return "migrate successfully";
+});
