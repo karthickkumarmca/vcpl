@@ -50,7 +50,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Date <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Date" name="labour_date" value="{{ date('d-M-Y')}}" data-rule="admin" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Date" name="labour_date" value="{{ date('Y-m-d')}}" data-rule="admin" id="labour_date" minlength="1" maxlength="128"/>
 								<span class="validation_error"></span>
 								@if($errors->has('labour_date'))
 								<div class="error">{{ $errors->first('labour_date') }}</div>
@@ -114,7 +114,7 @@
 	// set end date to max one year period:
 	var end = new Date(new Date().setYear(start.getFullYear()+1));
 
-	$('#insurance_date').datepicker({
+	$('#labour_date').datepicker({
 	    startDate : start,
 	    endDate   : end
 	// update "toDate" defaults whenever "fromDate" changes
@@ -123,6 +123,34 @@
 	    $('#to_date').datepicker('setStartDate', new Date($(this).val()));
 	}); 
 
+	$(document).ready(function () {
 
-    </script>
+	    $("#admin-form").validate({
+	    	ignore: [],
+	        rules: {
+	            "group_name": {
+	                required: true,
+	                minlength: 1,
+	                maxlength: 100,
+	                normalizer:function( value ) {
+	               		return $.trim(value);
+	                },
+	            },
+	        },
+	        messages: {
+	            "group_name": {
+	                required: "Please enter a group name",
+	                minlength: "Enter group name minimum 1 character",
+	                maxlength: "Enter group name maximum 100 character",
+	            },
+	        },
+	        submitHandler: function (form) {
+	           form.submit();
+	        }
+	    });
+
+	});
+
+</script>
+
     @stop

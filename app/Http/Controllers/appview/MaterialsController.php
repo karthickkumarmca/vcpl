@@ -14,7 +14,7 @@ use App\Models\Vehicle_materials;
 use App\Models\Staffdetails; 
 use App\Models\Siteinfo;
 use App\Models\Labour_categories;
-use App\Models\Labour_transactions;
+use App\Models\appview\Labour_transactions;
 
 
 class MaterialsController extends Controller
@@ -224,12 +224,11 @@ class MaterialsController extends Controller
 
     public function labour_store(Request $request)
     {
-       
-       exit("=");
-        $fieldValidation['subcontractor_id']     = ['required'];
-        /*$fieldValidation['labour_category']    = ['required'];
+
+        $fieldValidation['subcontractor_id']   = ['required',];
+        //$fieldValidation['labour_category']    = ['required'];
         $fieldValidation['number_of_labour']   = ['required'];
-        $fieldValidation['shift_id']           = ['required'];*/
+        $fieldValidation['shift_id']           = ['required'];
         $errorMessages                         = [];
 
         $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
@@ -237,12 +236,15 @@ class MaterialsController extends Controller
         if ($validator->fails()) {
             return Redirect::back()->withInput($request->input())->withErrors($validator);
         }
-        
-        print_r($request);exit;
+       
         $response   = Labour_transactions::storeRecords($request);
-
-        Session::flash('message', 'Labour recorded has been successfully');
-        Session::flash('class', 'success');
+        if($response>0){
+            Session::flash('message', 'Labour recorded has been successfully');
+            Session::flash('class', 'success');
+        } else {
+            Session::flash('message', 'Labour recorded has been successfully');
+            Session::flash('class', 'success');
+        }
         return redirect('appview/labour-movement/create'); 
 
         

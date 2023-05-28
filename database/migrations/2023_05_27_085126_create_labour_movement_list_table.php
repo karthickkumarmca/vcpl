@@ -15,10 +15,14 @@ class CreateLabourMovementListTable extends Migration
     {
         Schema::create('labour_movement_list', function (Blueprint $table) {
            $table->bigIncrements('id');
-           $table->bigInteger('sub_contractor')->comment('Sub Contractor')->description('Sub Contractor');
-           $table->string('labour_category')->nullable();
+           $table->string('uuid');
+           $table->bigInteger('subcontractor_id')->comment('Sub Contractor')->description('Sub Contractor');
+           $table->string('labour_category_id')->nullable()->default('0');
            $table->integer('number_of_labour')->nullable()->default('0');
+           $table->date('labour_date')->nullable();
+           $table->bigInteger('created_by')->nullable();
            $table->tinyInteger('shift_id')->comment('1-Day 2-Night')->description('1-Day 2-Night');
+           $table->bigInteger('updated_by')->nullable();
            $table->timestamps();
         });
     }
