@@ -11,10 +11,12 @@ use Session;
 use App\Models\appview\Cement_transactions;
 use App\Models\appview\Materials_stock;
 use App\Models\Vehicle_materials;
+use App\Models\Productdetails; 
 use App\Models\Staffdetails; 
 use App\Models\Siteinfo;
 use App\Models\Labour_categories;
 use App\Models\appview\Labour_transactions;
+use App\Models\appview\LorryMaterialsMovement;
 
 
 class MaterialsController extends Controller
@@ -191,9 +193,13 @@ class MaterialsController extends Controller
 
         return view('appview.shop_movement');
     }
-    public function lorry_movement(Request $request){
-
-        return view('appview.lorry_movement');
+    public function lorry_movement(Request $request) {
+        $search           = ['status' => 1,'category_id'=>6];
+        $fields           = ['id','uuid','product_name'];
+        $Productdetails   = Productdetails::getAll($fields,$search);
+        $supplyScope      = [["id"=>1,"name"=>"VCPL"],["id"=>2,"name"=>"SUPPLIER"],["id"=>3,"name"=>"CLIENT"]];
+        $data             = ["productdetails"=>$Productdetails,"supply_scope"=>$supplyScope];
+        return view('appview.lorry_movement',$data);
     }
     public function labour_movement(Request $request){
         $search           = ['status' => 1,'user_groups_ids'=>6];
@@ -224,7 +230,6 @@ class MaterialsController extends Controller
 
     public function labour_store(Request $request)
     {
-
         $fieldValidation['subcontractor_id']   = ['required',];
         //$fieldValidation['labour_category']    = ['required'];
         $fieldValidation['number_of_labour']   = ['required'];
@@ -246,8 +251,31 @@ class MaterialsController extends Controller
             Session::flash('class', 'success');
         }
         return redirect('appview/labour-movement/create'); 
+    }
+    public function lorry_store(Request $request)
+    {
+        $fieldValidation['material_id']                = ['required'];
+        $fieldValidation['supply_score']               = ['required'];
+        $fieldValidation['delivery_chellan_number']    = ['required','min:2','max:15','unique:lorry_materials_movement_list,delivery_chellan_number' ]
+        $fieldValidation['quantity']                   = ['required'];
+        $fieldValidation['unit']                       = ['required'];
+        $errorMessages                                 = [];
 
-        
+        $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput($request->input())->withErrors($validator);
+        }
+       
+        $response   = LorryMaterialsMovement::storeRecords($request);
+        if($response>0){
+            Session::flash('message', 'Labour recorded has been successfully');
+            Session::flash('class', 'success');
+        } else {
+            Session::flash('message', 'Labour recorded has been successfully');
+            Session::flash('class', 'success');
+        }
+        return redirect('appview/labour-movement/create'); 
     }
    
 }
