@@ -513,7 +513,7 @@ class MaterialsController extends Controller
     {
         $fieldValidation['material_id']                = ['required'];
         $fieldValidation['supply_score']               = ['required'];
-        $fieldValidation['delivery_chellan_number']    = ['required','min:2','max:15','unique:lorry_materials_movement_list,delivery_chellan_number' ]
+        //$fieldValidation['delivery_chellan_number']    = ['required','min:2','max:15','unique:lorry_materials_movement_list,delivery_chellan_number' ];
         $fieldValidation['quantity']                   = ['required'];
         $fieldValidation['unit']                       = ['required'];
         $errorMessages                                 = [];
