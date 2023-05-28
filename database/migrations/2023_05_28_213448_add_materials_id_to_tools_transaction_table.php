@@ -13,7 +13,7 @@ class AddMaterialsIdToToolsTransactionTable extends Migration
      */
     public function up()
     {
-        Schema::table('tools_transaction', function (Blueprint $table) {
+        Schema::table('tools_transactions', function (Blueprint $table) {
              $table->integer('materials_id')->default('0');
         });
     }
@@ -25,7 +25,7 @@ class AddMaterialsIdToToolsTransactionTable extends Migration
      */
     public function down()
     {
-        Schema::table('tools_transaction', function (Blueprint $table) {
+        Schema::table('tools_transactions', function (Blueprint $table) {
             $table->dropColumn("materials_id");
         });
     }
