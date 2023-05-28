@@ -39,10 +39,12 @@ Route::group(['prefix' => 'appview/','namespace'=>'appview','middleware' => ['au
 	});
 	Route::group(['prefix' => 'centering-movement/'], function () use ($router) {
 	    $router->get('create', 'MaterialsController@centering_movement')->name('create-centering-movement');
+	    $router->post('store', 'MaterialsController@centering_store');
 	});
 
 	Route::group(['prefix' => 'tools-movement/'], function () use ($router) {
 	    $router->get('create', 'MaterialsController@tools_movement')->name('create-tools-movement');
+	    $router->post('store', 'MaterialsController@tools_store');
 	});
 
 	Route::group(['prefix' => 'task-movement/'], function () use ($router) {
