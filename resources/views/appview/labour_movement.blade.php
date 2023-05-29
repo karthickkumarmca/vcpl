@@ -6,7 +6,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-sm-12">
-			<form id="admin-form" method="post" enctype="multipart/form-data" action="{{URL::to('appview/labour-movement/store')}}">
+			<form id="labour-form" method="post" enctype="multipart/form-data" action="{{URL::to('appview/labour-movement/store')}}">
 				@csrf
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -14,12 +14,27 @@
 					</div>
 
 					<div class="box-body">
-						
-
+						@if(session()->has('message'))
+				      		@if(session()->has('class')=='success')
+								<div class="alert alert-success appview_notification_alert" role="alert">
+									<strong>Success : </strong> {{ session()->get('message') }}.
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							@else
+							   	<div class="alert alert-danger appview_notification_alert" role="alert">
+									<strong>Error : </strong> {{ session()->get('message') }}.
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+						    @endif
+						@endif
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Subcontractor List <span class="text-danger"> *</span></label>
-								<select name="subcontractor_id" class="form-control pos_validate" id="subcontractor_id">
+								<select name="subcontractor_id" class="form-control pos_validate" id="subcontractor_id" >
 									<option value="">Select Subcontractor List</option>
 									@isset($subcontractors)
 										@foreach($subcontractors as $s)
@@ -36,7 +51,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Shift <span class="text-danger"> *</span></label>
-								<select name="shift_id" class="form-control pos_validate" id="shift_id">
+								<select name="shift_id" class="form-control pos_validate" id="shift_id" >
 									<option value="">Select Shift</option>
 									<option value="1">Day Shift</option>
 									<option value="2">Night Shift</option>
@@ -50,7 +65,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Date <span class="text-danger"> *</span></label>
-								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Date" name="labour_date" value="{{ date('Y-m-d')}}" data-rule="admin" id="labour_date" minlength="1" maxlength="128"/>
+								<input type="text" class="form-control pos_validate" autocomplete="off" placeholder="Enter Date" name="labour_date" value="{{ date('Y-m-d')}}" data-rule="admin" id="labour_date" minlength="1" maxlength="128" readonly/>
 								<span class="validation_error"></span>
 								@if($errors->has('labour_date'))
 								<div class="error">{{ $errors->first('labour_date') }}</div>
@@ -73,7 +88,7 @@
 												<tr>
 		        									<td>{{$k+1}}</td>
 		        									<td>{{$l['category_name']}}</td>
-		        									<td><span ><input type="text" name="number_of_labour[{{$l['id']}}]" value=""></span></td>
+		        									<td><span ><input type="text" name="number_of_labour[{{$l['id']}}]" value="" onkeypress="return isNumberKey(event)" /></span></td>
 	        									</tr>
 												@endforeach
 											@endisset
@@ -90,7 +105,7 @@
 							<button type="submit" id="categories-submit" class="btn btn-success">
 								Save
 							</button>
-							<a href="{{url(route('vehicle-materials-list'))}}" class="btn btn-default">
+							<a href="{{url(route('create-labour-movement'))}}" class="btn btn-default">
 								Back
 							</a>
 						</div>
@@ -106,6 +121,7 @@
 <script src="{{asset('js/custom/formValidation.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('plugins/jquery-validation/additional-methods.min.js')}}"></script>
+<script src="{{asset('js/labour_script.js')}}"></script>
 
     @include('master.vehicle_materials.script')
      <script type="text/javascript">
@@ -121,36 +137,7 @@
 	}).on('changeDate', function(){
 	    // set the "toDate" start to not be later than "fromDate" ends:
 	    $('#to_date').datepicker('setStartDate', new Date($(this).val()));
-	}); 
-
-	$(document).ready(function () {
-
-	    $("#admin-form").validate({
-	    	ignore: [],
-	        rules: {
-	            "group_name": {
-	                required: true,
-	                minlength: 1,
-	                maxlength: 100,
-	                normalizer:function( value ) {
-	               		return $.trim(value);
-	                },
-	            },
-	        },
-	        messages: {
-	            "group_name": {
-	                required: "Please enter a group name",
-	                minlength: "Enter group name minimum 1 character",
-	                maxlength: "Enter group name maximum 100 character",
-	            },
-	        },
-	        submitHandler: function (form) {
-	           form.submit();
-	        }
-	    });
-
 	});
-
 </script>
 
     @stop

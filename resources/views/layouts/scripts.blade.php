@@ -75,4 +75,8 @@
             this.value = this.value.replace(regexp, '');
         }
     });
+
+
+    $('.appview_notification_alert').show('slow').delay(5000).hide('slow');
+    
 </script>

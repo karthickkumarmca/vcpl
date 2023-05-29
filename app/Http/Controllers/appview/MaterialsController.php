@@ -17,8 +17,10 @@ use App\Models\Siteinfo;
 use App\Models\Labour_categories;
 use App\Models\appview\Labour_transactions;
 use App\Models\appview\LorryMaterialsMovement;
+use App\Models\appview\ShopMaterialsMovement;
 use App\Models\appview\Centering_transactions;
 use App\Models\appview\Tools_transactions;
+use App\Models\Units;
 
 
 class MaterialsController extends Controller
@@ -192,15 +194,21 @@ class MaterialsController extends Controller
         
     }
     public function shop_movement(Request $request){
-
-        return view('appview.shop_movement');
-    }
-    public function lorry_movement(Request $request) {
-        $search           = ['status' => 1,'category_id'=>6];
+        $search           = ['status' => 1,'category_id'=>5];
         $fields           = ['id','uuid','product_name'];
         $Productdetails   = Productdetails::getAll($fields,$search);
+        $units            = Units::getAll(['id','unit_name'],['status'=>1]);
         $supplyScope      = [["id"=>1,"name"=>"VCPL"],["id"=>2,"name"=>"SUPPLIER"],["id"=>3,"name"=>"CLIENT"]];
-        $data             = ["productdetails"=>$Productdetails,"supply_scope"=>$supplyScope];
+        $data             = ["productdetails"=>$Productdetails,"supply_scope"=>$supplyScope,"units"=>$units];
+        return view('appview.shop_movement',$data);
+    }
+    public function lorry_movement(Request $request) {
+        $search           = ['status' => 1,'category_id'=>3];
+        $fields           = ['id','uuid','product_name'];
+        $Productdetails   = Productdetails::getAll($fields,$search);
+        $units            = Units::getAll(['id','unit_name'],['status'=>1]);
+        $supplyScope      = [["id"=>1,"name"=>"VCPL"],["id"=>2,"name"=>"SUPPLIER"],["id"=>3,"name"=>"CLIENT"]];
+        $data             = ["productdetails"=>$Productdetails,"supply_scope"=>$supplyScope,"units"=>$units];
         return view('appview.lorry_movement',$data);
     }
     public function labour_movement(Request $request){
@@ -504,8 +512,8 @@ class MaterialsController extends Controller
             Session::flash('message', 'Labour recorded has been successfully');
             Session::flash('class', 'success');
         } else {
-            Session::flash('message', 'Labour recorded has been successfully');
-            Session::flash('class', 'success');
+            Session::flash('message', 'Oops something went wrong,Please try again');
+            Session::flash('class', 'error');
         }
         return redirect('appview/labour-movement/create'); 
     }
@@ -513,26 +521,47 @@ class MaterialsController extends Controller
     {
         $fieldValidation['material_id']                = ['required'];
         $fieldValidation['supply_score']               = ['required'];
-        //$fieldValidation['delivery_chellan_number']    = ['required','min:2','max:15','unique:lorry_materials_movement_list,delivery_chellan_number' ];
+        $fieldValidation['delivery_chellan_number']    = ['required','min:2','max:15','unique:lorry_materials_movement_list,delivery_chellan_number' ];
         $fieldValidation['quantity']                   = ['required'];
         $fieldValidation['unit']                       = ['required'];
         $errorMessages                                 = [];
-
         $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
 
         if ($validator->fails()) {
             return Redirect::back()->withInput($request->input())->withErrors($validator);
         }
-       
         $response   = LorryMaterialsMovement::storeRecords($request);
         if($response>0){
-            Session::flash('message', 'Labour recorded has been successfully');
+            Session::flash('message', 'Lorry movement recorded has been successfully');
             Session::flash('class', 'success');
         } else {
-            Session::flash('message', 'Labour recorded has been successfully');
-            Session::flash('class', 'success');
+            Session::flash('message', 'Oops something went wrong,Please try again');
+            Session::flash('class', 'error');
         }
-        return redirect('appview/labour-movement/create'); 
+        return redirect('appview/lorry-movement/create'); 
+    }
+    public function shop_store(Request $request)
+    {
+        $fieldValidation['material_id']                = ['required'];
+        $fieldValidation['supply_score']               = ['required'];
+        $fieldValidation['delivery_chellan_number']    = ['required','min:2','max:15','unique:lorry_materials_movement_list,delivery_chellan_number' ];
+        $fieldValidation['quantity']                   = ['required'];
+        $fieldValidation['unit']                       = ['required'];
+        $errorMessages                                 = [];
+        $validator = app('validator')->make($request->all(), $fieldValidation, $errorMessages);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput($request->input())->withErrors($validator);
+        }
+        $response   = ShopMaterialsMovement::storeRecords($request);
+        if($response>0){
+            Session::flash('message', 'Shop movement recorded has been successfully');
+            Session::flash('class', 'success');
+        } else {
+            Session::flash('message', 'Oops something went wrong,Please try again');
+            Session::flash('class', 'error');
+        }
+        return redirect('appview/shop-movement/create'); 
     }
    
 }

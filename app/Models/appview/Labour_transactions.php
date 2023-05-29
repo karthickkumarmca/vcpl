@@ -33,11 +33,7 @@ class Labour_transactions extends Model
 		        $data->save();
 	        }
 	        return 1;
-        } else {
-        	return 0;
         }
-
-        $response['status_code'] = '200';
-        return $response;
+        return 0;
     }
 }
