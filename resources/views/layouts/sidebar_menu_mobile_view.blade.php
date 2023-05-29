@@ -22,11 +22,11 @@
 		<i class="fa fa-bolt"></i> <span>TOOLS AND PLANTS </span>
 	</a>
 </li>
-<li class="{{ Request::is('appview/workout-movement/*') ? 'active' : '' }}">
+<!-- <li class="{{ Request::is('appview/workout-movement/*') ? 'active' : '' }}">
 	<a href="{!! url(route('create-workout-movement')) !!}">
 		<i class="fa fa-id-card-o"></i> <span>WORK OUT TURN AT SITE </span>
 	</a>
-</li>
+</li> -->
 <li class="{{ Request::is('appview/lorry-movement/*') ? 'active' : '' }}">
 	<a href="{!! url(route('create-lorry-movement')) !!}">
 		<i class="fa fa-truck"></i> <span>LORRY MOVEMENT </span>
