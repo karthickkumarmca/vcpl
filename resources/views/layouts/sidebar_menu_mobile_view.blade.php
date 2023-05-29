@@ -7,7 +7,7 @@
 
 <li class="{{ Request::is('appview/labour-movement/*') ? 'active' : '' }}">
 	<a href="{!! url(route('create-labour-movement')) !!}">
-		<i class="fa fa-building-o"></i> <span>Labours </span>
+		<i class="fa fa-building-o"></i> <span>LABOURS</span>
 	</a>
 </li>
 
