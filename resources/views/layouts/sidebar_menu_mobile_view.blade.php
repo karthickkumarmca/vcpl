@@ -29,7 +29,7 @@
 </li>
 <li class="{{ Request::is('appview/lorry-movement/*') ? 'active' : '' }}">
 	<a href="{!! url(route('create-lorry-movement')) !!}">
-		<i class="fa fa-truck"></i> <span>Lorry MOVEMENT </span>
+		<i class="fa fa-truck"></i> <span>LORRY MOVEMENT </span>
 	</a>
 </li>
 <li class="{{ Request::is('appview/shop-movement/*') ? 'active' : '' }}">
