@@ -157,6 +157,18 @@ class Staffdetails extends Model
         return $query->get()
         ->toArray();
     }
+    public static function Siteengineer(array $fields, array $filter = [],array $Siteengineer=[]): array
+    {
+        $query = self::select($fields)
+        ->where($filter);
+
+        if(count($Siteengineer)>0){
+            $query->whereNotIn('id',$Siteengineer);
+        }
+        
+        return $query->get()
+        ->toArray();
+    }
     public static function getStaffGroupDetails($id){
     	$fields = [
             'staff_details.id',

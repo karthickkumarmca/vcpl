@@ -130,9 +130,9 @@ class SiteinfoController extends Controller
             $fields = ['site_engineer_id'];
             $site_engineer_id = Siteinfo::where('status', 1)->pluck('site_engineer_id')->toArray();
 
-            $search = ['status' => 1];//,'user_groups_ids'=>2
+            $search = ['status' => 1,'user_groups_ids'=>4];
             $fields = ['id','name'];
-            $Siteengineer = Staffdetails::getAll($fields,$search,$site_engineer_id);
+            $Siteengineer = Staffdetails::Siteengineer($fields,$search,$site_engineer_id);
 
             $search = ['status' => 1,'user_groups_ids'=>6];
             $fields = ['id','name'];
@@ -249,9 +249,13 @@ class SiteinfoController extends Controller
 
         	$site_info_details  = Siteinfo::where(['uuid' => $id])->first();
         	if($site_info_details) {
-	        	$search = ['status' => 1];//,'user_groups_ids'=>2
-	            $fields = ['id','name'];
-	            $Siteengineer = Staffdetails::getAll($fields,$search);
+	        	 $search = ['status' => 1];//,'user_groups_ids'=>2
+            $fields = ['site_engineer_id'];
+            $site_engineer_id = Siteinfo::where('status', 1)->pluck('site_engineer_id')->toArray();
+
+            $search = ['status' => 1,'user_groups_ids'=>4];
+            $fields = ['id','name'];
+            $Siteengineer = Staffdetails::Siteengineer($fields,$search,$site_engineer_id);
 
 	            $search1 = ['status' => 1,'user_groups_ids'=>6];
 	            $fields1 = ['id','name'];
